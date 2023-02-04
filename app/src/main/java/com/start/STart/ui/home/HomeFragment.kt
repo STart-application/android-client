@@ -44,7 +44,10 @@ class HomeFragment : Fragment() {
 
         binding.btnSetting.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+        }
 
+        binding.btnEvent.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_eventFragment)
         }
     }
 
