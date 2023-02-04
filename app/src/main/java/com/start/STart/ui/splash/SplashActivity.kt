@@ -1,12 +1,18 @@
 package com.start.STart.ui.splash
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import com.start.STart.R
+import androidx.appcompat.app.AppCompatActivity
+import com.start.STart.databinding.ActivitySplashBinding
+import com.start.STart.ui.MainActivity
 
 class SplashActivity : AppCompatActivity() {
+    private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(binding.root)
+        binding.btnMove.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }

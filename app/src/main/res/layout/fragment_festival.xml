@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:id="@+id/fragmentMap"
     android:name="com.google.android.gms.maps.SupportMapFragment"
-    tools:context=".ui.home.festival.FestivalActivity">
+    tools:context=".ui.home.festival.FestivalFragment">
 
 </fragment>
