@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_homeFragment_to_festivalFragment"
             app:destination="@id/festivalFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/festivalFragment"
         android:name="com.start.STart.ui.home.festival.FestivalFragment"
         android:label="fragment_festival"
         tools:layout="@layout/fragment_festival" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.start.STart.ui.home.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

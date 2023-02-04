@@ -41,6 +41,11 @@ class HomeFragment : Fragment() {
         binding.btnFestival.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_festivalFragment)
         }
+
+        binding.btnSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+
+        }
     }
 
     override fun onCreateView(
