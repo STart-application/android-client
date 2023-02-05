@@ -7,7 +7,7 @@
     android:background="@color/main_green_1"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.HomeActivity">
 
     <TextView
         android:id="@+id/textTitle"
@@ -94,15 +94,18 @@
             android:id="@+id/divider_top"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/layoutMenu"
-            app:layout_constraintEnd_toEndOf="@id/layoutMenu"
-            app:layout_constraintStart_toStartOf="@id/layoutMenu">
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/layoutTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_gravity="start"
-                android:background="@drawable/background_circle"
+                android:background="@drawable/background_home_dot"
                 android:backgroundTint="@color/main_yellow" />
 
             <View
@@ -118,32 +121,26 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_gravity="end"
-                android:background="@drawable/background_circle"
+                android:background="@drawable/background_home_dot"
                 android:backgroundTint="@color/main_yellow" />
         </FrameLayout>
 
-        <GridLayout
-            android:id="@+id/layoutMenu"
+        <LinearLayout
+            android:id="@+id/layoutTop"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:columnCount="3"
             android:orientation="horizontal"
-            android:rowCount="2"
-            app:layout_constraintBottom_toTopOf="@+id/divider_bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/layoutBottom"
+            app:layout_constraintEnd_toEndOf="@id/layoutBottom"
+            app:layout_constraintStart_toStartOf="@id/layoutBottom">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -161,13 +158,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btnSchedule"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -187,11 +183,9 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -208,14 +202,25 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutBottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/divider_bottom"
+            app:layout_constraintEnd_toEndOf="@id/divider_bottom"
+            app:layout_constraintStart_toStartOf="@id/divider_bottom">
+
             <LinearLayout
+                android:id="@+id/btnRent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -236,11 +241,9 @@
                 android:id="@+id/btnFestival"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -261,11 +264,9 @@
                 android:id="@+id/btnEvent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -281,22 +282,25 @@
                     android:textColor="@color/text_green_1"
                     android:textSize="12sp" />
             </LinearLayout>
-        </GridLayout>
+
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/divider_bottom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/layoutMenu"
-            app:layout_constraintStart_toStartOf="@id/layoutMenu">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_gravity="start"
-                android:background="@drawable/background_circle"
+                android:background="@drawable/background_home_dot"
                 android:backgroundTint="@color/main_yellow" />
 
             <View
@@ -312,7 +316,7 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_gravity="end"
-                android:background="@drawable/background_circle"
+                android:background="@drawable/background_home_dot"
                 android:backgroundTint="@color/main_yellow" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

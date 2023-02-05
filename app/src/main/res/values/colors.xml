@@ -18,6 +18,7 @@
     <color name="text_black">@color/black</color>
     <color name="text_white">@color/white</color>
     <color name="text_green_1">#222E2D</color>
+    <color name="text_gray">#D8E8E7</color>
 
     <!--메인-->
     <color name="main_white">#F3F3F3</color>

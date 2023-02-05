@@ -1,30 +1,24 @@
 package com.start.STart.ui.home
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
-import com.start.STart.R
-import com.start.STart.databinding.FragmentHomeBinding
+import com.start.STart.databinding.ActivityHomeBinding
+import com.start.STart.ui.home.event.EventActivity
+import com.start.STart.ui.home.festival.FestivalActivity
+import com.start.STart.ui.home.setting.SettingActivity
 
-class HomeFragment : Fragment() {
+class HomeActivity : AppCompatActivity() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-
+    private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private val sliderAdapter by lazy { SliderAdapter() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        /*Glide.with(this)
-            .load()
-            .into(binding.slider)*/
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
         binding.slider.offscreenPageLimit = 1
         binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         binding.slider.adapter = sliderAdapter.apply {
@@ -35,32 +29,19 @@ class HomeFragment : Fragment() {
             )
         }
 
-        TabLayoutMediator(binding.indicator, binding.slider) { tab, position ->
+        TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
         }.attach()
 
         binding.btnFestival.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_festivalFragment)
+            startActivity(Intent(this, FestivalActivity::class.java))
         }
 
         binding.btnSetting.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+            startActivity(Intent(this, SettingActivity::class.java))
         }
 
         binding.btnEvent.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_eventFragment)
+            startActivity(Intent(this, EventActivity::class.java))
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
