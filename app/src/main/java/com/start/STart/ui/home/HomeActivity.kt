@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
+import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.ui.home.setting.SettingActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -31,6 +32,10 @@ class HomeActivity : AppCompatActivity() {
 
         TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
         }.attach()
+
+        binding.btnInfo.setOnClickListener {
+            startActivity(Intent(this, InfoActivity::class.java))
+        }
 
         binding.btnFestival.setOnClickListener {
             startActivity(Intent(this, FestivalActivity::class.java))

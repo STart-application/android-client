@@ -31,7 +31,7 @@
     <!--서브-->
     <color name="sub_green_1">#5E756D</color>
     <color name="sub_green_2">#9AA695</color>
-    <color name="sub_greej_3">#B2BFB6</color>
+    <color name="sub_green_3">#B2BFB6</color>
     <color name="sub_peach_4">#F9B7A9</color>
     <color name="sub_peach_5">#F8EAE1</color>
 </resources>
