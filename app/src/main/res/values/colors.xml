@@ -34,4 +34,13 @@
     <color name="sub_green_3">#B2BFB6</color>
     <color name="sub_peach_4">#F9B7A9</color>
     <color name="sub_peach_5">#F8EAE1</color>
+
+    <!--Version 1.1.0-->
+    <color name="dream_main">#6659FF</color>
+    <color name="dream_sub">#A9ACFF</color>
+
+    <color name="dream_black">@color/black</color>
+    <color name="dream_gray">#979797</color>
+    <color name="dream_white">#E9E9E9</color>
+
 </resources>

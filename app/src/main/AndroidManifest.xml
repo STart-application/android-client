@@ -16,6 +16,21 @@
         android:theme="@style/Theme.STart"
         tools:targetApi="31">
         <activity
+            android:name=".ui.auth.signup.SignUpActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.signin.SignInActivity"
+            android:theme="@style/Theme.Dream.LightStatusBar"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.home.info.InfoActivity"
             android:exported="false">
             <meta-data

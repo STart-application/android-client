@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <dimen name="dream_button_corner_radius">5dp</dimen>
+    <dimen name="dream_button_text_size">16sp</dimen>
+    <dimen name="dream_button_text_size_small">12sp</dimen>
+
+    <dimen name="dream_input_height">40dp</dimen>
+    <dimen name="dream_input_text_size">15sp</dimen>
+    <dimen name="dream_input_margin_horizontal">14dp</dimen>
+    <dimen name="dream_input_corner_radius">5dp</dimen>
+    
+    <dimen name="dream_layout_margin_horizontal">20dp</dimen>
+    <dimen name="dream_layout_margin_vertical">30dp</dimen>
+</resources>

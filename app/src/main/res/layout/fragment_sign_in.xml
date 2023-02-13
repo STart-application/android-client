@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.signin.SignInFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/logo_dream"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_student_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="학번"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_logo"
+        app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+
+    <TextView
+        android:id="@+id/text_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/password"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_input_student_id"
+        app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/layout_input_student_id"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dream_input_height"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/input_dream"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_student_id">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/input_student_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:fontFamily="@font/pretendard_regular"
+            android:hint="@string/hint_student_id"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:textColorHint="@color/dream_gray"
+            android:textSize="@dimen/dream_input_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_input_password"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dream_input_height"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/input_dream"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_password">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/input_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:fontFamily="@font/pretendard_regular"
+            android:hint="@string/hint_password"
+            android:maxLines="1"
+            android:textColorHint="@color/dream_gray"
+            android:textSize="@dimen/dream_input_text_size" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/check_auto_login"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginTop="16dp"
+        android:button="@drawable/check_dream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_input_password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="자동 로그인"
+        android:textColor="@color/dream_black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/check_auto_login"
+        app:layout_constraintStart_toEndOf="@id/check_auto_login"
+        app:layout_constraintTop_toTopOf="@id/check_auto_login" />
+
+    <TextView
+        android:id="@+id/text_sign_in_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="@string/sign_in_fail"
+        android:textColor="#ff0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/btn_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_in"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginEnd="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/button_dream_main"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dream_button_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_reset_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="비밀번호 재설정"
+        android:textColor="@color/dream_black"
+        app:layout_constraintStart_toStartOf="@id/btn_sign_in"
+        app:layout_constraintTop_toBottomOf="@id/btn_sign_in" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/sign_up"
+        android:textColor="@color/dream_black"
+        app:layout_constraintEnd_toEndOf="@id/btn_sign_in"
+        app:layout_constraintTop_toBottomOf="@id/btn_sign_in" />
+</androidx.constraintlayout.widget.ConstraintLayout>
