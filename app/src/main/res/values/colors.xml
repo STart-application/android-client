@@ -40,9 +40,11 @@
     <color name="dream_purple">#6659FF</color>
     <color name="dream_purple_ghost">#A9ACFF</color>
 
+
     <color name="dream_black">@color/black</color>
     <color name="dream_gray">#979797</color>
     <color name="dream_white">#E9E9E9</color>
+    <color name="dream_red">#FF3845</color>
 
     <!--Text-->
     <color name="dream_text_caption">@color/dream_gray</color>

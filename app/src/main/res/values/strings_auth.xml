@@ -8,7 +8,7 @@
     <string name="hint_student_id">학번 입력</string>
     <string name="hint_password">비밀번호 입력</string>
 
-    <string name="sign_in_fail">로그인에 실패하였습니다.\n정보를 다시 입력해주세요.</string>
+    <string name="sign_in_fail">로그인에 실패하였습니다. 정보를 다시 입력해주세요.</string>
 
 
 </resources>
