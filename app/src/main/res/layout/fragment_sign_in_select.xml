@@ -7,10 +7,10 @@
     tools:context=".ui.auth.signin.SignInSelectFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="157dp"
+        android:layout_height="76dp"
         android:src="@drawable/logo_dream"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,9 +19,9 @@
         android:id="@+id/btnSignIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/button_dream_main"
-        android:backgroundTint="@color/dream_main"
+        android:backgroundTint="@color/dream_purple"
         android:fontFamily="@font/pretendard_bold"
         android:text="로그인"
         android:textColor="@color/white"
@@ -38,7 +38,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_dream_main"
-        android:backgroundTint="@color/dream_sub"
+        android:backgroundTint="@color/dream_purple_ghost"
         android:fontFamily="@font/pretendard_bold"
         android:text="로그인 없이 이용하기"
         android:textColor="@color/white"

@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <!--기본-->
     <color name="base_yellow">#FDBD33</color>
@@ -36,11 +37,16 @@
     <color name="sub_peach_5">#F8EAE1</color>
 
     <!--Version 1.1.0-->
-    <color name="dream_main">#6659FF</color>
-    <color name="dream_sub">#A9ACFF</color>
+    <color name="dream_purple">#6659FF</color>
+    <color name="dream_purple_ghost">#A9ACFF</color>
 
     <color name="dream_black">@color/black</color>
     <color name="dream_gray">#979797</color>
     <color name="dream_white">#E9E9E9</color>
 
+    <!--Text-->
+    <color name="dream_text_caption">@color/dream_gray</color>
+    
+    <!--Dialog-->
+    <color name="dream_dialog_background">#88ffffff</color>
 </resources>

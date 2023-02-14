@@ -5,7 +5,7 @@
             <size android:width="15dp"
                 android:height="15dp"/>
             <corners android:radius="999dp"/>
-            <solid android:color="@color/dream_main"/>
+            <solid android:color="@color/dream_purple"/>
         </shape>
     </item>
     <item android:state_checked="false">
@@ -14,7 +14,7 @@
                 android:height="15dp"/>
             <corners android:radius="999dp"/>
             <stroke android:width="1dp"
-                android:color="@color/dream_main"/>
+                android:color="@color/dream_purple"/>
         </shape>
     </item>
 </selector>

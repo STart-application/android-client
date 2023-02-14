@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.start.STart.databinding.FragmentSignInBinding
+import com.start.STart.ui.auth.signup.SignUpActivity
 import com.start.STart.ui.home.HomeActivity
+import com.start.STart.util.Constants
 
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
@@ -22,11 +24,16 @@ class SignInFragment : Fragment() {
         binding.btnSignIn.setOnClickListener {
             signIn()
         }
+        binding.textSignUp.setOnClickListener {
+            startActivity(Intent(context, SignUpActivity::class.java))
+        }
     }
 
     private fun signIn() {
         if (isInputValid) {
-            startActivity(Intent(context, HomeActivity::class.java))
+            startActivity(Intent(context, HomeActivity::class.java).apply {
+                putExtra(Constants.SIGN_IN, true)
+            })
             activity?.finish()
         } else {
             showSignInFailText()

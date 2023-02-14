@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Dream.Button_Purple">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_dream_main</item>
+    </style>
+    <style name="Theme.Dream.Button_Purple_Ghost">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_dream_main</item>
+        <item name="android:backgroundTint">@color/dream_purple_ghost</item>
+    </style>
+</resources>

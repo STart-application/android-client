@@ -10,6 +10,7 @@ import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.ui.home.setting.SettingActivity
+import com.start.STart.util.Constants
 
 class HomeActivity : AppCompatActivity() {
 
