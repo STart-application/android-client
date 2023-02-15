@@ -30,6 +30,8 @@ class SignInSelectFragment : Fragment() {
             //startActivity(Intent(context , HomeActivity::class.java))
             //activity?.finish()
         }
+
+
     }
 
     private fun showNoSignInDialog() {

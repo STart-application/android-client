@@ -17,6 +17,10 @@ class ConfirmNoSignInDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.composeView.setContent {
+            BlurScreen()
+        }
+
         binding.btnConfirm.setOnClickListener {
             startActivity(Intent(context, HomeActivity::class.java))
             activity?.finish()
