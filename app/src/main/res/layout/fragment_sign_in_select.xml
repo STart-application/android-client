@@ -1,58 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.signin.SignInSelectFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.auth.signin.SignInSelectFragment">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="157dp"
+        android:layout_height="76dp"
+        android:src="@drawable/logo_dream"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="157dp"
-            android:layout_height="76dp"
-            android:src="@drawable/logo_dream"
-            app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSignIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button_dream_main"
+        android:backgroundTint="@color/dream_purple"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/btnNoSignIn"
+        app:layout_constraintEnd_toEndOf="@id/btnNoSignIn"
+        app:layout_constraintStart_toStartOf="@id/btnNoSignIn" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSignIn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/button_dream_main"
-            android:backgroundTint="@color/dream_purple"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="로그인"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/btnNoSignIn"
-            app:layout_constraintEnd_toEndOf="@id/btnNoSignIn"
-            app:layout_constraintStart_toStartOf="@id/btnNoSignIn" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNoSignIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_dream_main"
+        android:backgroundTint="@color/dream_purple_ghost"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="로그인 없이 이용하기"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnNoSignIn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_dream_main"
-            android:backgroundTint="@color/dream_purple_ghost"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="로그인 없이 이용하기"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        app:layout_constraintGuide_percent="0.23"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</FrameLayout>

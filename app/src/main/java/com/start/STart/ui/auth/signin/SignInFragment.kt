@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.start.STart.databinding.FragmentSignInBinding
 import com.start.STart.ui.auth.signup.SignUpActivity
 import com.start.STart.ui.home.HomeActivity
@@ -21,6 +22,9 @@ class SignInFragment : Fragment() {
     }
 
     private fun initViewListeners() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.btnSignIn.setOnClickListener {
             signIn()
         }

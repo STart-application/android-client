@@ -1,4 +1,4 @@
-package com.start.STart.ui.ui.theme
+package com.start.STart.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
