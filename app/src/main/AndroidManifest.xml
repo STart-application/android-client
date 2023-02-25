@@ -15,30 +15,68 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.STart"
         tools:targetApi="31">
+
+        <!-- 로그인 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.auth.login.LoginActivity"
             android:exported="false"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.STart">
+            android:theme="@style/Theme.Dream">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.auth.signup.SignUpActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.auth.signin.SignInActivity"
+            android:name=".ui.auth.login.LoginOrSkipActivity"
             android:exported="false"
             android:theme="@style/Theme.Dream.LightStatusBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <!-- 회원가입 -->
+        <activity
+            android:name=".ui.auth.register.PolicyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dream">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.register.ValidateStudentInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dream">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.register.ValidatePasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dream">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.register.ValidateStudentCardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dream">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.register.RegisterCompleteActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dream.Background">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <!-- 홈 -->
         <activity
             android:name=".ui.home.info.InfoActivity"
             android:exported="false">

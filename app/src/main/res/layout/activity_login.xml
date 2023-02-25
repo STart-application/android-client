@@ -4,17 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.signin.SignInFragment">
+    tools:context=".ui.auth.login.LoginActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_back"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dream_action_bar_height"
+        android:background="@color/dream_action_bar_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_dream_back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:srcCompat="@drawable/ic_dream_back"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_logo"
@@ -23,7 +54,7 @@
         android:src="@drawable/logo_dream"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:id="@+id/text_student_id"
@@ -32,7 +63,7 @@
         android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="11dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="학번"
+        android:text="@string/student_id"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
@@ -126,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="자동 로그인"
+        android:text="@string/auto_login"
         app:layout_constraintBottom_toBottomOf="@id/check_auto_login"
         app:layout_constraintStart_toEndOf="@id/check_auto_login"
         app:layout_constraintTop_toTopOf="@id/check_auto_login" />
@@ -154,7 +185,7 @@
         android:layout_marginBottom="57dp"
         android:background="@drawable/button_dream_main"
         android:fontFamily="@font/pretendard_bold"
-        android:text="@string/sign_in"
+        android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="@dimen/dream_button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +198,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:fontFamily="@font/pretendard_regular"
-        android:text="비밀번호 재설정"
+        android:text="@string/reset_password"
         android:textColor="@color/dream_gray"
         app:layout_constraintStart_toStartOf="@id/btn_sign_in"
         app:layout_constraintTop_toBottomOf="@id/btn_sign_in" />
@@ -177,15 +208,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:text="@string/sign_up"
+        android:text="@string/register"
         android:textColor="@color/dream_gray"
         app:layout_constraintEnd_toEndOf="@id/btn_sign_in"
         app:layout_constraintTop_toBottomOf="@id/btn_sign_in" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.162" />
 </androidx.constraintlayout.widget.ConstraintLayout>

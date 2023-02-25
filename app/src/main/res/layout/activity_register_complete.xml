@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dream_purple_background"
+    tools:context=".ui.auth.register.RegisterCompleteActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Large_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✔" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Large_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="회원가입 완료" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:gravity="center_horizontal"
+            android:text="24시간 내 학생증 인증이 완료된 후\n로그인 가능합니다." />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="행사 기간에는 빠른 처리가 진행될 예정입니다."
+            android:textColor="@color/dream_purple" />
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_dream_main"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="완료"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</FrameLayout>

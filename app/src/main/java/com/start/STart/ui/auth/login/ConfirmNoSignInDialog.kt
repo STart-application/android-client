@@ -1,11 +1,13 @@
-package com.start.STart.ui.auth.signin
+package com.start.STart.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.Composable
 import androidx.fragment.app.DialogFragment
+import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogNoSignInBinding
 import com.start.STart.ui.home.HomeActivity
 
@@ -27,6 +29,14 @@ class ConfirmNoSignInDialog : DialogFragment() {
         }
         binding.btnCancel.setOnClickListener {
             dismiss()
+        }
+
+    }
+
+    @Composable
+    fun BlurScreen() {
+        Cloudy(radius = 20) {
+
         }
     }
 
