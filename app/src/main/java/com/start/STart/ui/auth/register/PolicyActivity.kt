@@ -23,6 +23,9 @@ class PolicyActivity : AppCompatActivity() {
     private fun initViewListeners() {
         updateCheckAllCheckBox()
         linkPolicy()
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this, ValidateStudentInfoActivity::class.java))
         }

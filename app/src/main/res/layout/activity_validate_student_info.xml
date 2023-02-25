@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_back"
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
@@ -148,8 +148,9 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="학번 8자리를 입력하세요."
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:inputType="number"
+            android:maxLength="8"
             android:maxLines="1"
             android:textColorHint="@color/dream_gray" />
     </LinearLayout>
@@ -166,19 +167,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.skydoves.powerspinner.PowerSpinnerView
             android:id="@+id/input_department"
             style="@style/Theme.Dream.Typeface_Body_1"
             android:layout_width="0dp"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
-            android:layout_weight="1"
-            android:background="@null"
             android:hint="학과를 입력하세요."
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColorHint="@color/dream_gray" />
+            android:textColorHint="@color/dream_gray"
+            android:layout_gravity="center"
+            app:spinner_arrow_tint="@color/dream_purple"
+            app:spinner_popup_padding="8dp"
+            app:spinner_popup_height="130dp"
+            app:spinner_popup_background="@drawable/input_dream"
+            app:spinner_item_array="@array/department"
+            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
