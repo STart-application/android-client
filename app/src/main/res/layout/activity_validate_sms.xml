@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.register.ValidateStudentInfoActivity">
+    tools:context=".ui.auth.register.ValidateSmsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolBar"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_bold"
-            android:text="@string/register"
+            android:text="휴대폰 인증"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -57,61 +57,47 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/text_name"
+        android:id="@+id/text_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="11dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="이름"
+        android:text="휴대폰번호"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_input_name"
+        app:layout_constraintBottom_toTopOf="@+id/layout_input_phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
     <TextView
-        android:id="@+id/text_student_id"
+        android:id="@+id/text_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="11dp"
         android:fontFamily="@font/pretendard_bold"
-        android:text="학번"
+        android:text="인증번호"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
-
-    <TextView
-        android:id="@+id/text_department"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="11dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="학과"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_input_department"
+        app:layout_constraintBottom_toTopOf="@+id/layout_input_code"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
     <LinearLayout
-        android:id="@+id/layout_input_name"
+        android:id="@+id/layout_input_phone"
         android:layout_width="0dp"
         android:layout_height="@dimen/dream_input_height"
         android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="20dp"
         android:background="@drawable/input_dream"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/text_student_id"
+        app:layout_constraintBottom_toTopOf="@+id/text_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/input_name"
+            android:id="@+id/input_phone"
             style="@style/Theme.Dream.Typeface_Body_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -119,47 +105,27 @@
             android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="이름을 입력하세요."
+            android:hint="-없이 번호 입력"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="phone"
             android:maxLines="1"
             android:textColorHint="@color/dream_gray" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_input_student_id"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dream_input_height"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/input_dream"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/text_department"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/input_student_id"
-            style="@style/Theme.Dream.Typeface_Body_1"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_request"
+            style="@style/Theme.Dream.Button_Input"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="학번 8자리를 입력하세요."
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:maxLines="1"
-            android:textColorHint="@color/dream_gray" />
+            android:enabled="false"
+            android:text="인증 요청" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_input_department"
+        android:id="@+id/layout_input_code"
         android:layout_width="0dp"
         android:layout_height="@dimen/dream_input_height"
         android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="88dp"
         android:background="@drawable/input_dream"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/btnNext"
@@ -167,7 +133,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/input_department"
+            android:id="@+id/input_code"
             style="@style/Theme.Dream.Typeface_Body_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -175,15 +141,26 @@
             android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="학과를 입력하세요."
-            android:inputType="text"
+            android:hint="인증번호 입력"
+            android:inputType="number"
             android:maxLines="1"
             android:textColorHint="@color/dream_gray" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_validate"
+            style="@style/Theme.Dream.Button_Input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="확인" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         style="@style/Theme.Dream.Button_Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="30dp"
         android:enabled="false"
         android:text="@string/next"

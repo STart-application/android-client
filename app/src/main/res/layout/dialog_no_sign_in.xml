@@ -59,7 +59,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_confirm"
-                style="@style/Theme.Dream.Button_Purple_Ghost"
+                style="@style/Theme.Dream.Button_Secondary"
                 android:layout_width="121dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="16dp"
@@ -75,7 +75,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cancel"
-                style="@style/Theme.Dream.Button_Purple"
+                style="@style/Theme.Dream.Button_Primary"
                 android:layout_width="121dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="10dp"

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Theme.Dream.Typeface_Logo">
+        <item name="android:textColor">@color/dream_typeface_navy</item>
+        <item name="android:fontFamily">@font/esamanru_light</item>
+        <item name="android:letterSpacing">0.39</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:text">우리가 함께 이뤄가는 꿈</item>
+    </style>
+    
     <style name="Theme.Dream.Typeface_Large_Title">
         <item name="android:textColor">@color/dream_typeface_black</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
@@ -12,16 +20,14 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="Theme.Dream.Typeface_Title_Body">
-        <item name="android:textColor">@color/dream_typeface_black</item>
-        <item name="android:fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
     <style name="Theme.Dream.Typeface_Body_1">
         <item name="android:textColor">@color/dream_typeface_black</item>
         <item name="android:fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Theme.Dream.Typeface_Body_1_Bold" parent="Theme.Dream.Typeface_Body_1">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
     </style>
 
     <style name="Theme.Dream.Typeface_Caption">

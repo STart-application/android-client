@@ -24,6 +24,7 @@ android {
 
     buildTypes {
         debug {
+            // 디버그 시 패키지명에 접미사가 붙어 플레이스토어 앱과 동시 사용 가능
             applicationIdSuffix = ".debug"
         }
         release {
