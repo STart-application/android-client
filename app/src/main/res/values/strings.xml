@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">STart</string>
+
+    <string name="privacy_policy_link">https://suee97.notion.site/suee97/2022-09-04-a48b73c5ed6a43068286d8f2d6adab05</string>
+    <string name="service_and_term_link">https://suee97.notion.site/2022-09-04-f4d6b4b0db614adba75d4c619371aea9</string>
+
     <string name="seoultech_council">서울과학기술대학교 총학생회</string>
 
     <string name="info1_1">총학생회는 학생회칙이 정하는 바에 따라 입후보한 자에 대해 재학중인 전체학생들의 직접선거에 의해 선출되며, 성실, 협동, 창의를 교훈으로 민주적인 학생 자치활동을 통하여 민주시민으로서 자질을 함양하고 대학문화를 창출하여 자율적 발전을 도모하며 사회와 민주국가발전에 기여할 수 있는 능력 배양을 목적으로 한다.</string>

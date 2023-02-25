@@ -1,9 +1,14 @@
 package com.start.STart.ui.auth.register
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.CheckBox
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import com.start.STart.R
 import com.start.STart.databinding.ActivityPolicyBinding
 
 class PolicyActivity : AppCompatActivity() {
@@ -17,12 +22,30 @@ class PolicyActivity : AppCompatActivity() {
 
     private fun initViewListeners() {
         updateCheckAllCheckBox()
+        linkPolicy()
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this, ValidateStudentInfoActivity::class.java))
         }
         binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
             binding.btnNext.isEnabled = isChecked
         }
+    }
+
+    private fun linkPolicy() {
+        binding.textMorePrivacy.setOnClickListener {
+            openCustomTab(resources.getString(R.string.privacy_policy_link))
+        }
+
+        binding.textMoreService.setOnClickListener {
+            openCustomTab(resources.getString(R.string.service_and_term_link))
+        }
+    }
+
+    private fun openCustomTab(url: String) {
+        CustomTabsIntent.Builder()
+            .setInitialActivityHeightPx(500)
+            .build()
+            .launchUrl(this, Uri.parse(url))
     }
 
     private fun updateCheckAllCheckBox() {

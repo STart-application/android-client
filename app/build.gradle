@@ -96,4 +96,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     implementation "com.github.skydoves:cloudy:0.1.2"
+
+    // 커스텀 탭
+    implementation "androidx.browser:browser:1.5.0"
 }
