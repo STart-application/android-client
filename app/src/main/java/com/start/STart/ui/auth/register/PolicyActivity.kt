@@ -1,11 +1,9 @@
 package com.start.STart.ui.auth.register
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.CheckBox
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import com.start.STart.R
@@ -27,7 +25,7 @@ class PolicyActivity : AppCompatActivity() {
             finish()
         }
         binding.btnNext.setOnClickListener {
-            startActivity(Intent(this, ValidateStudentInfoActivity::class.java))
+            startActivity(Intent(this, StudentInfoInputActivity::class.java))
         }
         binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
             binding.btnNext.isEnabled = isChecked

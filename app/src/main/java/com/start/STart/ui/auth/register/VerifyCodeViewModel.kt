@@ -1,0 +1,57 @@
+package com.start.STart.ui.auth.register
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonSyntaxException
+import com.start.STart.api.ApiClient
+import com.start.STart.api.ApiError
+import com.start.STart.api.ApiResponse
+import com.start.STart.api.auth.request.SendSmsCodeRequest
+import com.start.STart.api.auth.request.VerifySmsCodeRequest
+import com.start.STart.model.ResultLiveDataModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.IOException
+
+class VerifyCodeViewModel: ViewModel() {
+
+    private val _sendCodeResult: MutableLiveData<Boolean> = MutableLiveData()
+    val sendCodeResult: LiveData<Boolean> get() = _sendCodeResult
+
+    private val _verifyCodeResult: MutableLiveData<ResultLiveDataModel> = MutableLiveData()
+    val verifyCodeResult: LiveData<ResultLiveDataModel> get() = _verifyCodeResult
+
+    // SMS 전송
+    fun sendCode(phone: String) = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            val res = ApiClient.authService.sendSmsCode(SendSmsCodeRequest(phone))
+            if(res.code() == 200) {
+                // 전송 성공
+                _sendCodeResult.postValue(true)
+            } else {
+            }
+        } catch (e: JsonSyntaxException) {
+
+        } catch (e: IOException) {
+
+        }
+    }
+
+    // SMS 코드 검증
+    fun verifyCode(phone: String, code: String) = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            val res = ApiClient.authService.verifySmsCode(VerifySmsCodeRequest(phone, code))
+
+            if(res.code() == 200) {
+                _verifyCodeResult.postValue(ResultLiveDataModel(true))
+            } else {
+                val errorBody = ApiClient.gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
+                _verifyCodeResult.postValue(ResultLiveDataModel(false, ApiError.getErrorMessage(errorBody.errorCode!!)))
+            }
+        } catch(e: Exception) {
+            _verifyCodeResult.postValue(ResultLiveDataModel(false, e.message))
+        }
+    }
+}

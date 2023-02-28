@@ -1,7 +1,7 @@
 package com.start.STart.api
 
 enum class ApiError(val code: String, val message: String) {
-    ST001("ST001", "ST001: "),
+    ST001("ST001", "ST001: 잘못된 정보로 요청하였습니다."), // 값 검증 실패
     ST002("ST002", "ST002: "),
     ST010("ST010", "ST010: "),
     ST011("ST011", "ST011: 토큰이 만료되었습니다."),
@@ -24,7 +24,18 @@ enum class ApiError(val code: String, val message: String) {
     ST063("ST063", "ST063: (?) 이미 상품을 수령하였습니다."),
     ST064("ST064", "ST064: (인증) 사용중인 전화번호 입니다."),
     ST065("ST065", "ST065: (인증) 인증 요청 횟수를 초과하였습니다.\n10분 후 다시 시도해 주세요."),
-    ST066("ST066", "ST066: (인증) 인증 정보가 없습니다."),
-    ST067("ST067", "ST067: (인증) 인증 확인 시간이 만료되었습니다."),
-    ST999("ST999", "ST999: 서버 에러"),
+    ST066("ST066", "인증 정보가 일치하지 않습니다."), // 휴대폰 인증
+    ST067("ST067", "인증 시간이 만료되었습니다."), // 휴대폰 인증
+    ST999("ST999", "ST999: 서버 에러");
+
+    companion object {
+        fun getErrorMessage(code: String): String {
+            return try {
+                val enumConstant = ApiError.valueOf(code)
+                enumConstant.message
+            } catch (e: IllegalArgumentException) {
+                "Unknown error code: $code"
+            }
+        }
+    }
 }

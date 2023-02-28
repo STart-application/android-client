@@ -3,7 +3,6 @@ package com.start.STart.ui.auth.register
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonSyntaxException
 import com.start.STart.api.ApiClient
@@ -13,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class ValidateStudentInfoViewModel : ViewModel() {
+class StudentInfoInputViewModel : ViewModel() {
 
     private val _isDuplicate: MutableLiveData<Boolean> = MutableLiveData()
     val isDuplicate: LiveData<Boolean> get() = _isDuplicate

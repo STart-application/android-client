@@ -3,11 +3,10 @@ package com.start.STart.ui.auth.register
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.start.STart.databinding.ActivityValidatePasswordBinding
+import com.start.STart.databinding.ActivityValidateStudentCardBinding
 
-class ValidatePasswordActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityValidatePasswordBinding.inflate(layoutInflater) }
-
+class StudentCardUploadActivity : AppCompatActivity() {
+    private val binding by lazy { ActivityValidateStudentCardBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -16,7 +15,7 @@ class ValidatePasswordActivity : AppCompatActivity() {
 
     private fun initViewListeners() {
         binding.btnNext.setOnClickListener {
-            startActivity(Intent(this, ValidateSmsActivity::class.java))
+            startActivity(Intent(this, RegisterCompleteActivity::class.java))
         }
     }
 }
