@@ -116,6 +116,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/check_service" />
 
+        <!-- TODO: 위치 정보 제거, 지도 사용 시 요청-->
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/check_location"
             style="@style/Theme.Dream.CheckBox"

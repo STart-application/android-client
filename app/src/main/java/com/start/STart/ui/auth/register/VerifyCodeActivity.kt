@@ -8,20 +8,30 @@ import androidx.core.widget.addTextChangedListener
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
 import com.start.STart.R
+import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateSmsBinding
 import com.start.STart.util.AppRegex
+import com.start.STart.util.Constants
+import com.start.STart.util.getParcelableExtra
 
 class VerifyCodeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityValidateSmsBinding.inflate(layoutInflater) }
     private val viewModel by viewModels<VerifyCodeViewModel>()
 
+    private lateinit var registerData: RegisterData
+
     private var isCodeSent = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        init()
         initView()
         initViewListeners()
         initViewModelListeners()
+    }
+
+    private fun init() {
+        registerData = intent.getParcelableExtra(key = Constants.KEY_REGISTER_DATA)!!
     }
 
     private fun initView() {
@@ -51,7 +61,12 @@ class VerifyCodeActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            startActivity(Intent(this, StudentCardUploadActivity::class.java))
+            startActivity(Intent(this, StudentCardUploadActivity::class.java).apply {
+                putExtra(Constants.KEY_REGISTER_DATA, registerData.also {
+                    it.phoneNo = Regex(AppRegex.PHONE_VALIDATE)
+                        .replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
+                })
+            })
         }
     }
 

@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
 import com.start.STart.R
+import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentInfoBinding
+import com.start.STart.util.Constants
 import com.start.STart.util.InputTextWater
 
 class StudentInfoInputActivity : AppCompatActivity() {
@@ -39,6 +41,7 @@ class StudentInfoInputActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
         binding.btnNext.setOnClickListener {
             if(checkInputValid()) {
                 viewModel.checkDuplicate(binding.inputStudentId.text.toString())
@@ -49,7 +52,13 @@ class StudentInfoInputActivity : AppCompatActivity() {
     private fun initViewModelListeners() {
         viewModel.isDuplicate.observe(this) { isDuplicate ->
             if(!isDuplicate) {
-                startActivity(Intent(this, PasswordInputActivity::class.java))
+                startActivity(Intent(this, PasswordInputActivity::class.java).apply {
+                    putExtra(Constants.KEY_REGISTER_DATA, RegisterData(
+                        studentNo = binding.inputStudentId.text.toString(),
+                        name = binding.inputName.text.toString(),
+                        department = resources.getStringArray(R.array.department)[binding.inputDepartment.selectedIndex]
+                    ))
+                })
             } else {
                 Balloon.Builder(this)
                     .setText("같은 학번으로 가입된 계정이 존재합니다.")

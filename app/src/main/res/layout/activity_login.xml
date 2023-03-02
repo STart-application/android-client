@@ -141,6 +141,7 @@
             android:textSize="@dimen/dream_input_text_size" />
     </LinearLayout>
 
+    <!-- TODO: 자동 로그인 제거 (항상 활성화) -->
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/check_auto_login"
         android:layout_width="15dp"
