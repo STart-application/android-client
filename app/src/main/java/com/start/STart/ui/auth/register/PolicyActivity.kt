@@ -50,7 +50,7 @@ class PolicyActivity : AppCompatActivity() {
     }
 
     private fun updateCheckAllCheckBox() {
-        val checkBoxList = listOf(binding.checkPrivacyPolicy, binding.checkService, binding.checkLocation)
+        val checkBoxList = listOf(binding.checkPrivacyPolicy, binding.checkService)
 
         binding.checkAll.setOnClickListener {
             checkAllCheckBoxes(checkBoxList, binding.checkAll.isChecked)

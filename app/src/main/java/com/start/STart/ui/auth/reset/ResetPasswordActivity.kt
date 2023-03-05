@@ -8,5 +8,6 @@ class ResetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
+        // TODO: 비밀번호 재설정 Api 로직 작성
     }
 }

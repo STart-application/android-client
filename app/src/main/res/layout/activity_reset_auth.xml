@@ -182,7 +182,7 @@
             android:textColorHint="@color/dream_gray" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btn_auth_confirm"
             style="@style/Theme.Dream.Button_Input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
