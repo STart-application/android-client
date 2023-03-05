@@ -6,6 +6,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.databinding.ActivityLoginBinding
 import com.start.STart.ui.auth.register.PolicyActivity
+import com.start.STart.ui.auth.reset.ResetPasswordActivity
+import com.start.STart.ui.auth.reset.ResetPasswordAuthActivity
 import com.start.STart.ui.home.HomeActivity
 import com.start.STart.util.Constants
 
@@ -24,6 +26,9 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.textSignUp.setOnClickListener {
             startActivity(Intent(this, PolicyActivity::class.java))
+        }
+        binding.textResetPassword.setOnClickListener {
+            startActivity(Intent(this, ResetPasswordAuthActivity::class.java))
         }
     }
 

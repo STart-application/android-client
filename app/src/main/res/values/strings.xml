@@ -12,25 +12,43 @@
 
     <!--Version 1.1.0-->
     <string name="next">다음</string>
+    <string name="confirm">확인</string>
+
+    <!-- 학번 -->
+    <string name="student_id">학번</string>
+
+    <string name="hint_student_id">학번 8자리를 입력하세요.</string>
+
+    <!-- 로그인 -->
     <string name="login">로그인</string>
     <string name="register">회원가입</string>
-    <string name="password">비밀번호</string>
-    <string name="request">인증요청</string>
-
-    <string name="hint_student_id">학번 입력</string>
-    <string name="hint_password">비밀번호 입력</string>
-
     <string name="sign_in_fail">로그인에 실패하였습니다. 정보를 다시 입력해주세요.</string>
-    <string name="student_id">학번</string>
     <string name="auto_login">자동 로그인</string>
-    <string name="reset_password">비밀번호 재설정</string>
     <string name="agree_to_terms_and_conditions">약관동의</string>
 
     <!-- 비밀번호 -->
+    <string name="password">비밀번호</string>
+    <string name="password_confirm">비밀번호 확인</string>
     <string name="password_description">비밀번호를 설정해주세요.\n(특수문자, 대소문자, 숫자 포함 8자 이상 16자 이내)</string>
     <string name="password_format_fail">비밀번호 형식이 올바르지 않습니다.</string>
     <string name="password_format_success">올바른 형식의 비밀번호가 입력되었습니다.</string>
     <string name="password_equal_fail">동일한 비밀번호를 입력해주세요.</string>
     <string name="password_equal_success">동일한 비밀번호가 입력되었습니다.</string>
+
+    <string name="hint_password">비밀번호를 입력하세요.</string>
+    <string name="hint_password_confirm">비밀번호를 다시 입력하세요.</string>
+
+    <!-- 비밀번호 재설정 -->
+    <string name="reset_password">비밀번호 재설정</string>
+    <string name="reset_password_auth_description_1">가입된 계정의 학번을 입력해주세요.</string>
+    <string name="reset_password_auth_description_2">인증요청을 누르면 학번으로 가입된 계정의 휴대폰번호로 인증코드가 발송됩니다. 인증코드는 3분 내로 입력해주세요.</string>
+
+    <string name="reset_password_description">비밀번호를 재설정해주세요.\n(특수문자, 대소문자, 숫자 포함 8자 이상 16자 이내)</string>
+
+    <!-- 인증 -->
+    <string name="auth_code">인증코드</string>
+    <string name="auth_request">인증요청</string>
+
+    <string name="hint_auth_code">인증코드 입력</string>
 
 </resources>
