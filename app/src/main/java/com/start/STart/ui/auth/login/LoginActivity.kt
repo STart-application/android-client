@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.btnSignIn.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             signIn()
         }
         binding.textSignUp.setOnClickListener {

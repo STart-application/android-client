@@ -51,4 +51,6 @@
 
     <string name="hint_auth_code">인증코드 입력</string>
 
+    <string name="auth_sms_success">SMS가 전송되었습니다.</string>
+
 </resources>

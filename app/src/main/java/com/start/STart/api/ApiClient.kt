@@ -27,7 +27,7 @@ object ApiClient {
     private val retrofit: Retrofit by lazy {
         Log.d("Retrofit", "${BuildConfig.DEV_SERVER_URL}")
         Retrofit.Builder()
-            .baseUrl(BuildConfig.DEV_SERVER_URL)
+            .baseUrl(BuildConfig.DEV_SERVER_URL) // 주소 끝에 반드시 슬래시 / 로 끝나야 함
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()

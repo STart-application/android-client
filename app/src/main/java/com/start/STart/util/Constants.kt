@@ -5,7 +5,10 @@ object Constants {
 
     const val KEY_REGISTER_DATA = "key_register_data"
 
-    // API: 변경 금지
+    // Intent, SharedPreference
+    const val KEY_STUDENT_ID = "key_student_id"
+
+    // API: *변경 금지*
     const val KEY_API_STUDENT_NO = "studentNo"
     const val KEY_API_PASSWORD = "appPassword"
     const val KEY_API_NAME = "name"
