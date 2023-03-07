@@ -8,6 +8,7 @@ import com.google.gson.JsonSyntaxException
 import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiError
 import com.start.STart.api.ApiResponse
+import com.start.STart.util.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -29,7 +30,7 @@ class StudentInfoInputViewModel : ViewModel() {
                 if(res.code() == 404) {
                     _errorMessage.postValue("404")
                 } else {
-                    val body = ApiClient.gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
+                    val body = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
                     when(body.errorCode) {
                         ApiError.ST053.code -> _isDuplicate.postValue(true)
                         else -> {

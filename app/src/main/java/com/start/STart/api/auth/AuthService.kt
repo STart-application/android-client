@@ -3,10 +3,7 @@ package com.start.STart.api.auth
 import com.start.STart.api.ApiResponse
 import com.start.STart.api.auth.request.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface AuthService {
 
@@ -44,5 +41,16 @@ interface AuthService {
     @POST("auth/sms/password/check")
     suspend fun verifyResetPasswordCode(
         @Body request: VerifyResetPasswordCode
+    ): Response<ApiResponse>
+
+    // AccessToken 확인
+    @GET("auth")
+    suspend fun verifyAccessToken(
+        @Header("Authorization") token: String,
+    ): Response<ApiResponse>
+
+    @GET("auth/refresh")
+    suspend fun issueAccessToken(
+        @Header("refresh") token: String,
     ): Response<ApiResponse>
 }

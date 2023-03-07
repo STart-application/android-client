@@ -7,6 +7,7 @@
 
     <!-- TODO: 화면 방향 고정 및 키보드 관련 설정 -->
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

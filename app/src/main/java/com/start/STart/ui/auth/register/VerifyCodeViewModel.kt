@@ -10,7 +10,8 @@ import com.start.STart.api.ApiError
 import com.start.STart.api.ApiResponse
 import com.start.STart.api.auth.request.SendSmsCodeRequest
 import com.start.STart.api.auth.request.VerifySmsCodeRequest
-import com.start.STart.model.ResultLiveDataModel
+import com.start.STart.model.LiveDataResult
+import com.start.STart.util.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -20,8 +21,8 @@ class VerifyCodeViewModel: ViewModel() {
     private val _sendCodeResult: MutableLiveData<Boolean> = MutableLiveData()
     val sendCodeResult: LiveData<Boolean> get() = _sendCodeResult
 
-    private val _verifyCodeResult: MutableLiveData<ResultLiveDataModel> = MutableLiveData()
-    val verifyCodeResult: LiveData<ResultLiveDataModel> get() = _verifyCodeResult
+    private val _verifyCodeResult: MutableLiveData<LiveDataResult> = MutableLiveData()
+    val verifyCodeResult: LiveData<LiveDataResult> get() = _verifyCodeResult
 
     // SMS 전송
     fun sendCode(phone: String) = viewModelScope.launch(Dispatchers.IO) {
@@ -45,13 +46,13 @@ class VerifyCodeViewModel: ViewModel() {
             val res = ApiClient.authService.verifySmsCode(VerifySmsCodeRequest(phone, code))
 
             if(res.code() == 200) {
-                _verifyCodeResult.postValue(ResultLiveDataModel(true))
+                _verifyCodeResult.postValue(LiveDataResult(true))
             } else {
-                val errorBody = ApiClient.gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
-                _verifyCodeResult.postValue(ResultLiveDataModel(false, ApiError.getErrorMessage(errorBody.errorCode!!)))
+                val errorBody = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
+                _verifyCodeResult.postValue(LiveDataResult(false, ApiError.getErrorMessage(errorBody.errorCode!!)))
             }
         } catch(e: Exception) {
-            _verifyCodeResult.postValue(ResultLiveDataModel(false, e.message))
+            _verifyCodeResult.postValue(LiveDataResult(false, e.message))
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.start.STart.model
 
-data class ResultLiveDataModel(
+data class LiveDataResult(
     val isSuccessful: Boolean,
     val message: String? = null
 )

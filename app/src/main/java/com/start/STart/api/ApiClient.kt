@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder
 import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
 import com.start.STart.api.member.MemberService
+import com.start.STart.util.TokenHelper
+import com.start.STart.util.gson
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,16 +14,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    val gson = GsonBuilder()
-        .setLenient()
-        .create()
-
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
+    private val tokenInterceptor = TokenInterceptor()
+
     val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
+        .addInterceptor(tokenInterceptor)
         .build()
 
     private val retrofit: Retrofit by lazy {
@@ -35,4 +36,9 @@ object ApiClient {
 
     val authService = retrofit.create(AuthService::class.java)
     val memberService = retrofit.create(MemberService::class.java)
+
+    fun enableToken(token: String) {
+        tokenInterceptor.enableToken(token)
+    }
+    fun disableToken() = tokenInterceptor.disableToken()
 }

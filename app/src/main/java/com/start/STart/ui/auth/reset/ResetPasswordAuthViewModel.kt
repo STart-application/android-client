@@ -8,23 +8,24 @@ import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiResponse
 import com.start.STart.api.auth.request.SendResetPasswordCodeRequest
 import com.start.STart.api.auth.request.VerifyResetPasswordCode
-import com.start.STart.model.ResultLiveDataModel
+import com.start.STart.model.LiveDataResult
+import com.start.STart.util.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ResetPasswordAuthViewModel : ViewModel() {
 
-    private val _sendAuthCodeResult: MutableLiveData<ResultLiveDataModel> = MutableLiveData()
-    val sendAuthCodeResult: LiveData<ResultLiveDataModel> get() = _sendAuthCodeResult
+    private val _sendAuthCodeResult: MutableLiveData<LiveDataResult> = MutableLiveData()
+    val sendAuthCodeResult: LiveData<LiveDataResult> get() = _sendAuthCodeResult
 
     fun sendAuthCodeForResetPassword(studentId: String) = viewModelScope.launch(Dispatchers.IO) {
         try {
             val res = ApiClient.authService.sendResetPasswordCode(SendResetPasswordCodeRequest(studentId))
             if(res.isSuccessful) {
-                _sendAuthCodeResult.postValue(ResultLiveDataModel(true))
+                _sendAuthCodeResult.postValue(LiveDataResult(true))
             } else {
-                val errorBody = ApiClient.gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
-                _sendAuthCodeResult.postValue(ResultLiveDataModel(false, "${errorBody.errorCode}: ${errorBody.message}"))
+                val errorBody = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
+                _sendAuthCodeResult.postValue(LiveDataResult(false, "${errorBody.errorCode}: ${errorBody.message}"))
                 /*
                     ST041: 찾을 수 없는 회원
                     ST057: 학생증 인증 중인 회원
@@ -37,17 +38,17 @@ class ResetPasswordAuthViewModel : ViewModel() {
         }
     }
 
-    private val _verifyAuthCodeResult: MutableLiveData<ResultLiveDataModel> = MutableLiveData()
-    val verifyAuthCodeResult: LiveData<ResultLiveDataModel> get() = _verifyAuthCodeResult
+    private val _verifyAuthCodeResult: MutableLiveData<LiveDataResult> = MutableLiveData()
+    val verifyAuthCodeResult: LiveData<LiveDataResult> get() = _verifyAuthCodeResult
 
     fun verifyAuthCode(studentId: String, authCode: String) = viewModelScope.launch(Dispatchers.IO) {
         try {
             val res = ApiClient.authService.verifyResetPasswordCode(VerifyResetPasswordCode(studentId, authCode))
             if(res.isSuccessful) {
-                _verifyAuthCodeResult.postValue(ResultLiveDataModel(true))
+                _verifyAuthCodeResult.postValue(LiveDataResult(true))
             } else {
-                val errorBody = ApiClient.gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
-                _verifyAuthCodeResult.postValue(ResultLiveDataModel(false, "${errorBody.errorCode}: ${errorBody.message}"))
+                val errorBody = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
+                _verifyAuthCodeResult.postValue(LiveDataResult(false, "${errorBody.errorCode}: ${errorBody.message}"))
                 /*
                     ST066: 인증 정보 불일치
                     ST077: 기간 만료

@@ -5,11 +5,14 @@ import android.os.Build
 import android.os.Parcelable
 import android.view.View
 import android.widget.TextView
+import com.google.gson.Gson
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
 import com.start.STart.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+
+val gson = Gson()
 
 fun TextView.setSuccessText(text: String) {
     this.text = text
