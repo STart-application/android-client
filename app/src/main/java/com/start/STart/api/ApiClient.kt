@@ -37,8 +37,10 @@ object ApiClient {
     val authService = retrofit.create(AuthService::class.java)
     val memberService = retrofit.create(MemberService::class.java)
 
-    fun enableToken(token: String) {
+    fun enableToken(token: String) { // TokenHelper에서만 호출
         tokenInterceptor.enableToken(token)
     }
-    fun disableToken() = tokenInterceptor.disableToken()
+    fun disableToken() { // TokenHelper에서만 호출
+        tokenInterceptor.disableToken()
+    }
 }

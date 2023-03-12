@@ -39,8 +39,7 @@ object TokenHelper {
     }
 
     suspend fun clearToken() {
-        putToken(Constants.KEY_ACCESS_TOKEN, "")
-        putToken(Constants.KEY_REFRESH_TOKEN, "")
+        PreferenceManager.clear()
         ApiClient.disableToken()
     }
 

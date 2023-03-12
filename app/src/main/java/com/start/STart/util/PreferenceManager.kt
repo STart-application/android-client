@@ -33,4 +33,9 @@ object PreferenceManager {
         return pref.getString(key, "") ?: ""
     }
 
+    suspend fun clear() {
+        pref.edit()
+            .clear()
+            .apply()
+    }
 }
