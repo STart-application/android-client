@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.STart"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.home.setting.updatehistory.UpdateHistoryActivity"
+            android:theme="@style/Theme.Dream"
+            android:exported="false" />
         <!-- 로그인 -->
         <activity
             android:name=".ui.auth.login.LoginActivity"
@@ -33,9 +35,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-
-        <!-- 회원가입 -->
+        </activity> <!-- 회원가입 -->
         <activity
             android:name=".ui.auth.register.PolicyActivity"
             android:exported="false"
@@ -83,9 +83,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-
-        <!-- 홈 -->
+        </activity> <!-- 홈 -->
         <activity
             android:name=".ui.home.info.InfoActivity"
             android:exported="false">
@@ -130,12 +128,12 @@
         </activity>
         <activity
             android:name=".ui.home.setting.SettingActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.Dream">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- Google Maps API Key (local.properties 파일에 선언됨) -->
+        </activity> <!-- Google Maps API Key (local.properties 파일에 선언됨) -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />

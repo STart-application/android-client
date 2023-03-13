@@ -1,8 +1,10 @@
 package com.start.STart.ui.home.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.databinding.ActivitySettingBinding
+import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
 
 class SettingActivity : AppCompatActivity() {
 
@@ -15,7 +17,11 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.btnBack.setOnClickListener {
+        binding.textUpdateLog.setOnClickListener {
+            startActivity(Intent(this, UpdateHistoryActivity::class.java))
+        }
+
+        binding.icBack.setOnClickListener {
             finish()
         }
     }
