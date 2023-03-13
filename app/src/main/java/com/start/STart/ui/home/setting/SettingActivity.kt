@@ -19,7 +19,12 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initView()
         initViewListeners()
+    }
+
+    private fun initView() {
+        binding.toolbar.textTitle.text = "설정"
     }
 
     private fun initViewListeners() {
@@ -28,9 +33,6 @@ class SettingActivity : AppCompatActivity() {
         }
         binding.textDevInfo.setOnClickListener {
             startActivity(Intent(this, DevInfoActivity::class.java))
-        }
-        binding.icBack.setOnClickListener {
-            finish()
         }
         binding.textLogout.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {

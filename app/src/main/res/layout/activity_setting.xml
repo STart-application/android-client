@@ -7,39 +7,8 @@
     android:orientation="vertical">
 
     <!-- ToolBar -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dream_action_bar_height"
-        android:background="@color/dream_action_bar_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_dream_back"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="@string/setting"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
