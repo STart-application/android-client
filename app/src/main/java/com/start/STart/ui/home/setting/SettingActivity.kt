@@ -10,7 +10,8 @@ import com.start.STart.util.TokenHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
+import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
+import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
 class SettingActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
@@ -22,7 +23,13 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.btnBack.setOnClickListener {
+        binding.textUpdateLog.setOnClickListener {
+            startActivity(Intent(this, UpdateHistoryActivity::class.java))
+        }
+        binding.textDevInfo.setOnClickListener {
+            startActivity(Intent(this, DevInfoActivity::class.java))
+        }
+        binding.icBack.setOnClickListener {
             finish()
         }
         binding.textLogout.setOnClickListener {

@@ -29,6 +29,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:dialogTheme">@style/Theme.Dream.LightStatusBar.Dialog</item>
     </style>
 
@@ -46,6 +47,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:dialogTheme">@style/Theme.Dream.LightStatusBar.Dialog</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
