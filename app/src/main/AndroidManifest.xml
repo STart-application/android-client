@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- TODO: 화면 방향 고정 및 키보드 관련 설정 -->
+    <!-- TODO: (고정) 화면 방향 고정 및 키보드 관련 설정 -->
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -18,19 +18,24 @@
         <!-- 비밀번호 재설정 -->
         <activity
             android:name=".ui.auth.reset.ResetPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.auth.reset.ResetPasswordAuthActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.setting.devinfo.DevInfoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.setting.updatehistory.UpdateHistoryActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream" /> <!-- 로그인 -->
         <activity
             android:name=".ui.auth.login.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -38,6 +43,7 @@
         </activity>
         <activity
             android:name=".ui.auth.login.LoginOrSkipActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:theme="@style/Theme.Dream.LightStatusBar">
             <meta-data
@@ -46,6 +52,7 @@
         </activity>
         <activity
             android:name=".ui.auth.register.PolicyActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -53,6 +60,7 @@
         </activity>
         <activity
             android:name=".ui.auth.register.StudentInfoInputActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -60,6 +68,7 @@
         </activity>
         <activity
             android:name=".ui.auth.register.PasswordInputActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -67,6 +76,7 @@
         </activity>
         <activity
             android:name=".ui.auth.register.VerifyCodeActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -74,6 +84,7 @@
         </activity>
         <activity
             android:name=".ui.auth.register.StudentCardUploadActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -81,6 +92,7 @@
         </activity>
         <activity
             android:name=".ui.auth.register.RegisterCompleteActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:theme="@style/Theme.Dream.Background">
             <meta-data
@@ -89,6 +101,7 @@
         </activity>
         <activity
             android:name=".ui.home.info.InfoActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -96,6 +109,7 @@
         </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -109,6 +123,7 @@
         </activity>
         <activity
             android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -116,6 +131,7 @@
         </activity>
         <activity
             android:name=".ui.home.event.EventActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:theme="@style/Theme.STart.LightStatusBar">
             <meta-data
@@ -124,6 +140,7 @@
         </activity>
         <activity
             android:name=".ui.home.festival.FestivalActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -131,6 +148,7 @@
         </activity>
         <activity
             android:name=".ui.home.setting.SettingActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:theme="@style/Theme.Dream">
             <meta-data
