@@ -134,8 +134,7 @@
         <activity
             android:name=".ui.home.event.EventActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.STart.LightStatusBar">
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

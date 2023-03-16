@@ -28,6 +28,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignIn"
         style="@style/Theme.Dream.Button_Primary"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="12dp"
         android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@id/btnNoSignIn"
@@ -37,6 +38,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNoSignIn"
         style="@style/Theme.Dream.Button_Secondary"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="30dp"
         android:text="로그인 없이 이용하기"
         app:layout_constraintBottom_toBottomOf="parent"

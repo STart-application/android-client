@@ -171,6 +171,7 @@
         android:layout_marginBottom="57dp"
         android:enabled="false"
         android:text="@string/login"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

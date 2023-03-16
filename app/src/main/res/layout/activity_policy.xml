@@ -137,6 +137,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         style="@style/Theme.Dream.Button_Primary"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="@dimen/dream_layout_margin_vertical"
         android:enabled="false"
         android:text="@string/next"
