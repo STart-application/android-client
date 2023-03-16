@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.start.STart.api.ApiClient
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
+import com.start.STart.util.PreferenceManager
 import com.start.STart.util.TokenHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +38,10 @@ class SettingActivity : AppCompatActivity() {
         }
         binding.textLogout.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                TokenHelper.clearToken()
+
+                ApiClient.disableToken()
+                PreferenceManager.clear()
+
                 withContext(Dispatchers.Main) {
                     startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
                         addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)

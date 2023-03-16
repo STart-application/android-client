@@ -49,8 +49,10 @@ interface AuthService {
         @Header("Authorization") token: String,
     ): Response<ApiResponse>
 
+    // AccessToken 재발급 -> 만료된 AccessToken과 함께 호출해야 함
     @GET("auth/refresh")
     suspend fun issueAccessToken(
-        @Header("refresh") token: String,
+        @Header("Authorization") accessToken: String,
+        @Header("refresh") refreshToken: String,
     ): Response<ApiResponse>
 }

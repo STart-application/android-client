@@ -10,6 +10,7 @@ import com.start.STart.api.auth.request.LoginRequest
 import com.start.STart.api.auth.response.TokenData
 import com.start.STart.model.LiveDataResult
 import com.start.STart.util.Constants
+import com.start.STart.util.PreferenceManager
 import com.start.STart.util.TokenHelper
 import com.start.STart.util.gson
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +27,8 @@ class LoginViewModel : ViewModel() {
             if(res.isSuccessful) {
                 val tokenData = res.body()?.parseData(TokenData::class.java)
                 tokenData?.let {
-                    TokenHelper.putToken(Constants.KEY_REFRESH_TOKEN, it.refreshToken!!)
-                    TokenHelper.putToken(Constants.KEY_ACCESS_TOKEN, it.accessToken!!)
+                    PreferenceManager.putString(Constants.KEY_REFRESH_TOKEN, it.refreshToken!!)
+                    PreferenceManager.putString(Constants.KEY_ACCESS_TOKEN, it.accessToken!!)
                 }
 
                 if(TokenHelper.tryLoginWithAccessToken()) {
