@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
+import com.start.STart.ui.home.setting.suggest.SuggestActivity
 import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
 class SettingActivity : AppCompatActivity() {
 
@@ -34,6 +35,10 @@ class SettingActivity : AppCompatActivity() {
         binding.textDevInfo.setOnClickListener {
             startActivity(Intent(this, DevInfoActivity::class.java))
         }
+        binding.textFeatureSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_FEATURE)}
+        binding.textErrorSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ERROR)}
+        binding.textEtcSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ETC)}
+
         binding.textLogout.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 TokenHelper.clearToken()
@@ -45,5 +50,11 @@ class SettingActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun startSuggestActivity(type: String) {
+        startActivity(Intent(this, SuggestActivity::class.java).apply {
+            putExtra(SuggestActivity.TYPE_SUGGEST, type)
+        })
     }
 }

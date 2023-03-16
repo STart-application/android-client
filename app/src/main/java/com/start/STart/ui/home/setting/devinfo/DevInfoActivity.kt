@@ -147,6 +147,7 @@ class DevInfoActivity : AppCompatActivity() {
                     end.linkTo(parent.end)
                 },
                 textAlign = TextAlign.Center,
+                fontSize = 12.sp,
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                         append("서버 ")
