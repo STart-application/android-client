@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dream_purple_background"
+    android:orientation="vertical"
+    tools:context=".ui.home.setting.suggest.SuggestActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_dream"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/pretendard"
+                android:hint="제목을 입력하세요."
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12.5dp"
+                android:textColorHint="@color/dream_gray"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/Theme.Dream.Typeface_Body_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_dream"
+                android:backgroundTint="@color/white"
+                android:gravity="start"
+                android:hint="문의내용을 입력하세요."
+                android:inputType="textMultiLine"
+                android:minHeight="260dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12.5dp"
+                android:textColorHint="@color/dream_gray" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_round_22_5"
+                android:orientation="horizontal"
+                android:paddingVertical="6dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_photo" />
+
+                <TextView
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="사진 추가"
+                    android:textColor="@color/dream_gray" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -336,12 +336,14 @@
                         android:background="@color/dream_gray_light" />
 
                     <TextView
+                        android:id="@+id/text_feature_suggest"
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="기능 개선 제안" />
 
                     <TextView
+                        android:id="@+id/text_error_suggest"
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -349,6 +351,7 @@
                         android:text="오류 신고" />
 
                     <TextView
+                        android:id="@+id/text_etc_suggest"
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

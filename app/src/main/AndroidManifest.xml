@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- TODO: 화면 방향 고정 및 키보드 관련 설정 -->
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -15,23 +14,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.home.setting.suggest.SuggestActivity"
+            android:exported="false" />
         <!-- 비밀번호 재설정 -->
         <activity
             android:name=".ui.auth.reset.ResetPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.auth.reset.ResetPasswordAuthActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.setting.devinfo.DevInfoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.setting.updatehistory.UpdateHistoryActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream" /> <!-- 로그인 -->
         <activity
             android:name=".ui.auth.login.LoginActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -39,6 +46,7 @@
         <activity
             android:name=".ui.auth.login.LoginOrSkipActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream.LightStatusBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -46,35 +54,40 @@
         </activity>
         <activity
             android:name=".ui.auth.register.PolicyActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.auth.register.StudentInfoInputActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.auth.register.PasswordInputActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.auth.register.VerifyCodeActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.auth.register.StudentCardUploadActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -82,6 +95,7 @@
         <activity
             android:name=".ui.auth.register.RegisterCompleteActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream.Background">
             <meta-data
                 android:name="android.app.lib_name"
@@ -89,14 +103,16 @@
         </activity>
         <activity
             android:name=".ui.home.info.InfoActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -109,7 +125,8 @@
         </activity>
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -117,6 +134,7 @@
         <activity
             android:name=".ui.home.event.EventActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.STart.LightStatusBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -124,7 +142,8 @@
         </activity>
         <activity
             android:name=".ui.home.festival.FestivalActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -132,6 +151,7 @@
         <activity
             android:name=".ui.home.setting.SettingActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream">
             <meta-data
                 android:name="android.app.lib_name"
