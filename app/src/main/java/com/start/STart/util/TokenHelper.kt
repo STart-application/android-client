@@ -22,25 +22,18 @@ object TokenHelper {
             return false
         }
 
-        val isSuccessful = issueAccessToken(accessToken) // 토큰 발급
-        if(!isSuccessful) {
-            Log.d(TAG, "tryLoginWithAccessToken: AT 발급 실패")
-            return false
-        }
-
-        // 토큰 발급 후 업데이트
-        accessToken = PreferenceManager.getString(Constants.KEY_ACCESS_TOKEN)
         return verifyToken(accessToken)
     }
 
-    private suspend fun verifyToken(token: String): Boolean {
+    private suspend fun verifyToken(accessToken: String): Boolean {
         try {
-            val res = ApiClient.authService.verifyAccessToken("Bearer $token")
+            val res = ApiClient.authService.verifyAccessToken("Bearer $accessToken")
             if(res.isSuccessful) {
                 Log.d(TAG, "verifyToken: 인증 성공")
-                enableToken(token)
+                enableToken(accessToken)
             } else {
                 Log.d(TAG, "verifyToken: ${res.errorBody()?.string()}")
+                issueAccessToken(accessToken) // 토큰 발급
             }
             return res.isSuccessful
         } catch (e: Exception) {
@@ -63,7 +56,7 @@ object TokenHelper {
                 val newAccessToken = res.body()?.parseData(TokenData::class.java)?.accessToken!!
                 PreferenceManager.putString(Constants.KEY_ACCESS_TOKEN, newAccessToken)
                 Log.d(TAG, "issueAccessToken: AT $newAccessToken")
-                return true
+                return verifyToken(newAccessToken)
             } else {
                 Log.d(TAG, "issueAccessToken: ${res.errorBody()?.string()}")
                 return false

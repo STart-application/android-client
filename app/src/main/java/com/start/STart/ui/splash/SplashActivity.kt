@@ -29,12 +29,12 @@ class SplashActivity : AppCompatActivity() {
     }
     
     private fun tryLogin() = lifecycleScope.launch(Dispatchers.IO) {
+        ApiClient.disableToken()
         val isSuccessful = TokenHelper.tryLoginWithAccessToken()
         if(isSuccessful) {
             startActivity(Intent(applicationContext, HomeActivity::class.java))
             finish()
         } else {
-            ApiClient.disableToken()
             startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java))
             finish()
         }

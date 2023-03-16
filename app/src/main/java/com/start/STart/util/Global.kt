@@ -1,10 +1,13 @@
 package com.start.STart.util
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import android.view.View
 import android.widget.TextView
+import androidx.browser.customtabs.CustomTabsIntent
 import com.google.gson.Gson
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
@@ -44,4 +47,10 @@ fun View.showRightBalloon(message: String?) {
         .setArrowPosition(0.5f)
         .build()
         .showAlignRight(this)
+}
+
+fun Context.openCustomTab(url: String) {
+    CustomTabsIntent.Builder()
+        .build()
+        .launchUrl(this, Uri.parse(url))
 }

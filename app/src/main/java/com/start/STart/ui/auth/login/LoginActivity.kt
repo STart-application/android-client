@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginResult.observe(this) {
             if(it.isSuccessful) {
                 startActivity(Intent(this, HomeActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 })
             } else {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()

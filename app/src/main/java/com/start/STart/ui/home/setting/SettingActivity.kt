@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.start.STart.R
 import com.start.STart.api.ApiClient
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
@@ -15,6 +16,8 @@ import kotlinx.coroutines.withContext
 import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
 import com.start.STart.ui.home.setting.suggest.SuggestActivity
 import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
+import com.start.STart.util.openCustomTab
+
 class SettingActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
@@ -37,6 +40,13 @@ class SettingActivity : AppCompatActivity() {
         binding.textDevInfo.setOnClickListener {
             startActivity(Intent(this, DevInfoActivity::class.java))
         }
+        // SNS
+        binding.layoutInstagram.setOnClickListener { openCustomTab(resources.getString(R.string.link_instagram)) }
+        binding.layoutHomePage.setOnClickListener { openCustomTab(resources.getString(R.string.link_st_home)) }
+        binding.layoutYoutube.setOnClickListener { openCustomTab(resources.getString(R.string.link_youtube)) }
+        binding.layoutKakaoTalk.setOnClickListener { openCustomTab(resources.getString(R.string.link_kakao_talk)) }
+
+        // 제안사항
         binding.textFeatureSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_FEATURE)}
         binding.textErrorSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ERROR)}
         binding.textEtcSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ETC)}
@@ -49,7 +59,7 @@ class SettingActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.Main) {
                     startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     })
                     finish()
                 }

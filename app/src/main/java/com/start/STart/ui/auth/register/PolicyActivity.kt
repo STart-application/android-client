@@ -1,13 +1,12 @@
 package com.start.STart.ui.auth.register
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabsIntent
 import com.start.STart.R
 import com.start.STart.databinding.ActivityPolicyBinding
+import com.start.STart.util.openCustomTab
 
 class PolicyActivity : AppCompatActivity() {
     private val binding by lazy { ActivityPolicyBinding.inflate(layoutInflater) }
@@ -34,19 +33,12 @@ class PolicyActivity : AppCompatActivity() {
 
     private fun linkPolicy() {
         binding.textMorePrivacy.setOnClickListener {
-            openCustomTab(resources.getString(R.string.privacy_policy_link))
+            openCustomTab(resources.getString(R.string.link_privacy_policy))
         }
 
         binding.textMoreService.setOnClickListener {
-            openCustomTab(resources.getString(R.string.service_and_term_link))
+            openCustomTab(resources.getString(R.string.link_service_and_term))
         }
-    }
-
-    private fun openCustomTab(url: String) {
-        CustomTabsIntent.Builder()
-            .setInitialActivityHeightPx(500)
-            .build()
-            .launchUrl(this, Uri.parse(url))
     }
 
     private fun updateCheckAllCheckBox() {

@@ -2,6 +2,9 @@ package com.start.STart.ui.home.setting.suggest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import com.skydoves.balloon.ArrowOrientation
+import com.skydoves.balloon.Balloon
 import com.start.STart.R
 import com.start.STart.databinding.ActivitySuggestBinding
 
@@ -19,11 +22,14 @@ class SuggestActivity : AppCompatActivity() {
     private lateinit var type: String
 
     private val binding by lazy { ActivitySuggestBinding.inflate(layoutInflater) }
+    private val viewModel: SuggestViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
         initView()
+        initViewListeners()
     }
 
     private fun init() {
@@ -38,4 +44,25 @@ class SuggestActivity : AppCompatActivity() {
             else -> ""
         }
     }
+
+    private fun initViewListeners() {
+        binding.btnSend.setOnClickListener {
+            if(isInputValid) {
+                viewModel.sendSuggestion()
+            } else {
+                Balloon.Builder(this)
+                    .setText("모든 입력칸을 채워주세요!")
+                    .setPadding(8)
+                    .setBackgroundColor(resources.getColor(R.color.dream_purple))
+                    .build()
+                    .showAlignTop(binding.btnSend)
+            }
+        }
+        binding.btnCancel.setOnClickListener { finish() }
+        binding.toolbar.icBack.setOnClickListener { finish() }
+    }
+
+    private val isInputValid: Boolean
+        get() = binding.inputTitle.text.toString().isNotBlank() &&
+                binding.inputContent.text.toString().isNotBlank()
 }

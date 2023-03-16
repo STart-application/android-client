@@ -22,6 +22,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
@@ -38,6 +39,7 @@
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_content"
                 style="@style/Theme.Dream.Typeface_Body_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,15 +102,18 @@
                 android:textColor="@color/dream_gray" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_add_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginTop="57dp"
+                android:layout_marginBottom="38dp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
                     style="@style/Theme.Dream.Button_Primary"
                     android:layout_width="0dp"
+                    android:id="@+id/btn_send"
                     android:layout_height="32dp"
                     android:layout_weight="1"
                     android:text="보내기" />
@@ -116,6 +121,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     style="@style/Theme.Dream.Button_Secondary"
                     android:layout_width="0dp"
+                    android:id="@+id/btn_cancel"
                     android:layout_height="32dp"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
