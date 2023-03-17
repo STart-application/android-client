@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 class SuggestViewModel: ViewModel() {
     fun sendSuggestion() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            // TODO: 제안사항 API 연결
+            // TODO: 제안사항 API 연결 (디자인 완성된 이후)
         } catch (e: Exception) {
 
         }

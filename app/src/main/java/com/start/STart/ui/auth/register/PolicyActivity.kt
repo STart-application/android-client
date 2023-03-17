@@ -37,7 +37,7 @@ class PolicyActivity : AppCompatActivity() {
         }
 
         binding.textMoreService.setOnClickListener {
-            openCustomTab(resources.getString(R.string.link_service_and_term))
+            openCustomTab(resources.getString(R.string.link_terms_of_service))
         }
     }
 

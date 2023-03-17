@@ -13,8 +13,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dream_purple_background"
-        android:overScrollMode="never">
+        android:background="@color/dream_purple_background">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -382,31 +381,41 @@
                         android:background="@color/dream_gray_light" />
 
                     <TextView
+                        android:id="@+id/text_terms_of_service"
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="서비스 이용약관" />
 
-                    <TextView
+                    <!--TextView
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="위치기반서비스 이용약관" />
+                        android:text="위치기반서비스 이용약관" /-->
 
                     <TextView
+                        android:id="@+id/text_privacy_policy"
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="개인정보처리방침" />
 
-                    <TextView
+                    <!--TextView
                         style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="정보제공처" />
+                        android:text="정보제공처" /-->
+
+                    <TextView
+                        android:id="@+id/text_open_source_license"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="오픈소스 라이선스" />
                 </LinearLayout>
 
                 <TextView

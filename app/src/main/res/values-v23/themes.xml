@@ -1,40 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Dream" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dream_purple</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/dream_purple_ghost</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/dream_action_bar_background</item>
-        <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/pretendard</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:dialogTheme">@style/Theme.Dream.LightStatusBar.Dialog</item>
-    </style>
-
-    <style name="Theme.Dream.Background" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dream_purple</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/dream_purple_ghost</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/dream_purple_background</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/pretendard</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:dialogTheme">@style/Theme.Dream.LightStatusBar.Dialog</item>
-    </style>
-
     <style name="Theme.Dream.LightStatusBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dream_purple</item>
