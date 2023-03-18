@@ -23,7 +23,8 @@
 
     <!--메인-->
     <color name="main_white">#F3F3F3</color>
-    <color name="main_green_1">#425C5A</color>
+    <color name="main_navy_1">#464D87</color>
+
     <color name="main_green_2">#5C7775</color>
     <color name="main_green_3">#92AEAC</color>
     <color name="main_orange">#EE795F</color>

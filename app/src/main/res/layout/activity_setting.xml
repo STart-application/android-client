@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_green_1"
+    android:background="@color/main_navy_1"
     android:overScrollMode="never">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,7 +120,7 @@
                     android:layout_height="17dp"
                     android:fontFamily="@font/sc_dream_5"
                     android:text="계정 관리"
-                    android:textColor="@color/main_green_1"
+                    android:textColor="@color/main_navy_1"
                     android:textSize="14sp" />
 
                 <TextView
@@ -167,7 +167,7 @@
                     android:layout_height="17dp"
                     android:fontFamily="@font/sc_dream_5"
                     android:text="총학생회 SNS 바로가기"
-                    android:textColor="@color/main_green_1"
+                    android:textColor="@color/main_navy_1"
                     android:textSize="14sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sc_dream_5"
                     android:text="정보"
-                    android:textColor="@color/main_green_1"
+                    android:textColor="@color/main_navy_1"
                     android:textSize="14sp" />
 
                 <TextView
@@ -277,7 +277,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sc_dream_5"
                     android:text="제안사항"
-                    android:textColor="@color/main_green_1"
+                    android:textColor="@color/main_navy_1"
                     android:textSize="14sp" />
 
                 <TextView
@@ -324,7 +324,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sc_dream_5"
                     android:text="약관 및 정책"
-                    android:textColor="@color/main_green_1"
+                    android:textColor="@color/main_navy_1"
                     android:textSize="14sp" />
 
                 <TextView
