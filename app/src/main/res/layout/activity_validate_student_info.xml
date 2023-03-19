@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.register.ValidateStudentInfoActivity">
+    tools:context=".ui.auth.register.StudentInfoInputActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolBar"
@@ -171,23 +171,24 @@
             android:id="@+id/input_department"
             style="@style/Theme.Dream.Typeface_Body_1"
             android:layout_width="0dp"
-            android:gravity="center_vertical"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:hint="학과를 입력하세요."
             android:textColorHint="@color/dream_gray"
-            android:layout_gravity="center"
             app:spinner_arrow_tint="@color/dream_purple"
-            app:spinner_popup_padding="8dp"
-            app:spinner_popup_height="130dp"
-            app:spinner_popup_background="@drawable/input_dream"
             app:spinner_item_array="@array/department"
-            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
-            android:layout_weight="1" />
+            app:spinner_popup_background="@drawable/input_dream"
+            app:spinner_popup_height="130dp"
+            app:spinner_popup_padding="8dp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         style="@style/Theme.Dream.Button_Primary"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
         android:layout_marginBottom="30dp"
         android:enabled="false"
         android:text="@string/next"

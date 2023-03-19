@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 android {
@@ -13,7 +15,7 @@ android {
         applicationId "com.start.STart"
         minSdk 21
         targetSdk 33
-        versionCode 1
+        versionCode 11
         versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -21,6 +23,7 @@ android {
             useSupportLibrary true
         }
     }
+
 
     buildTypes {
         debug {
@@ -58,6 +61,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+    implementation "com.google.accompanist:accompanist-drawablepainter:0.28.0"
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
@@ -76,6 +81,9 @@ dependencies {
     // room database
     implementation 'androidx.room:room-ktx:2.5.0'
     kapt 'androidx.room:room-compiler:2.5.0'
+
+    // EncryptedSharedPreference
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha05'
 
     // fragment-ktx
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
@@ -105,4 +113,7 @@ dependencies {
 
     // 커스텀 탭
     implementation "androidx.browser:browser:1.5.0"
+
+    // 오픈소스 라이선스
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 }

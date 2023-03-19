@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.register.ValidateSmsActivity">
+    tools:context=".ui.auth.register.VerifyCodeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolBar"
@@ -143,6 +143,7 @@
             android:background="@null"
             android:hint="인증번호 입력"
             android:inputType="number"
+            android:maxLength="6"
             android:maxLines="1"
             android:textColorHint="@color/dream_gray" />
 

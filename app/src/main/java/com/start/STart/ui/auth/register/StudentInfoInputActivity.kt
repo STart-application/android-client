@@ -3,25 +3,21 @@ package com.start.STart.ui.auth.register
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.unit.dp
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.Balloon
-import com.skydoves.balloon.TextForm
 import com.start.STart.R
+import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentInfoBinding
+import com.start.STart.util.Constants
+import com.start.STart.util.InputTextWater
 
-class ValidateStudentInfoActivity : AppCompatActivity() {
+class StudentInfoInputActivity : AppCompatActivity() {
     private val binding by lazy { ActivityValidateStudentInfoBinding.inflate(layoutInflater) }
-    private val viewModel: ValidateStudentInfoViewModel by viewModels()
-    private val textWater = object: TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
+    private val viewModel: StudentInfoInputViewModel by viewModels()
+    private val textWater = object: InputTextWater() {
         override fun afterTextChanged(p0: Editable?) {
             val allNotBlank = listOf(binding.inputName, binding.inputStudentId).all { it.text.toString().isNotBlank() }
             binding.btnNext.isEnabled = allNotBlank
@@ -45,6 +41,7 @@ class ValidateStudentInfoActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
         binding.btnNext.setOnClickListener {
             if(checkInputValid()) {
                 viewModel.checkDuplicate(binding.inputStudentId.text.toString())
@@ -55,7 +52,13 @@ class ValidateStudentInfoActivity : AppCompatActivity() {
     private fun initViewModelListeners() {
         viewModel.isDuplicate.observe(this) { isDuplicate ->
             if(!isDuplicate) {
-                startActivity(Intent(this, ValidatePasswordActivity::class.java))
+                startActivity(Intent(this, PasswordInputActivity::class.java).apply {
+                    putExtra(Constants.KEY_REGISTER_DATA, RegisterData(
+                        studentNo = binding.inputStudentId.text.toString(),
+                        name = binding.inputName.text.toString(),
+                        department = resources.getStringArray(R.array.department)[binding.inputDepartment.selectedIndex]
+                    ))
+                })
             } else {
                 Balloon.Builder(this)
                     .setText("같은 학번으로 가입된 계정이 존재합니다.")

@@ -4,322 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_navy_1"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.home.HomeActivity">
 
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:fontFamily="@font/sc_dream_6"
-        android:gravity="center"
-        android:text="@string/seoultech_council"
-        android:textColor="@color/text_white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+    <include android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_slider"
+        android:layout_width="254dp"
+        android:layout_height="254dp"
+        android:layout_marginTop="22dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/slider"
+            android:layout_width="254dp"
+            android:layout_height="254dp"
+            android:orientation="horizontal"
+            tools:foreground="@color/dream_gray" />
 
-    <ImageView
-        android:id="@+id/btnSetting"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="17dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toBottomOf="@id/textTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textTitle" />
+    </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/main_white"
+        app:layout_constraintEnd_toEndOf="@id/card_slider"
+        app:layout_constraintStart_toStartOf="@id/card_slider"
+        app:layout_constraintTop_toBottomOf="@id/card_slider"
+        app:tabBackground="@drawable/tab_indicator"
+        app:tabGravity="center"
+        app:tabIndicator="@null"
+        app:tabPaddingEnd="9dp"
+        app:tabPaddingStart="9dp"
+        app:tabRippleColor="@color/main_white" />
+
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_menu"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/background_home"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="290dp"
-            android:layout_height="290dp"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/slider"
-                android:layout_width="290dp"
-                android:layout_height="290dp"
-                android:orientation="horizontal"
-                tools:foreground="@color/base_gray_1" />
-
-        </androidx.cardview.widget.CardView>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/main_white"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardView"
-            app:tabBackground="@drawable/tab_indicator"
-            app:tabGravity="center"
-            app:tabIndicator="@null"
-            app:tabPaddingEnd="9dp"
-            app:tabPaddingStart="9dp"
-            app:tabRippleColor="@color/main_white" />
-
-        <FrameLayout
-            android:id="@+id/divider_top"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-            <View
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_gravity="start"
-                android:background="@drawable/background_home_dot"
-                android:backgroundTint="@color/main_yellow" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@color/main_yellow"
-                android:backgroundTint="@color/main_yellow" />
-
-            <View
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_gravity="end"
-                android:background="@drawable/background_home_dot"
-                android:backgroundTint="@color/main_yellow" />
-        </FrameLayout>
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="33dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:layout_constraintVertical_bias="1.0">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/btnInfo"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_home_btn1"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/com1" />
-
-                    <TextView
-                        style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="총학생회 설명"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnPartner"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_home"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/com2" />
-
-                    <TextView
-                        style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="제휴 사업"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnFee"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_home_btn2"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="15sp"
-                        android:src="@drawable/com3" />
-
-                    <TextView
-                        style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="자치회비\n납부 확인"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/btnReservation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_home_btn3"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/com4" />
-
-                    <TextView
-                        style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="상시사업 예약"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnFestival"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_home"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/com5" />
-
-                    <TextView
-                        style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="축제 이벤트"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnEvent"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_home_btn4"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/com6" />
-
-                    <TextView
-                        style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="이벤트 참여"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

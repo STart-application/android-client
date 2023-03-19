@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">STart</string>
 
-    <string name="privacy_policy_link">https://suee97.notion.site/suee97/2022-09-04-a48b73c5ed6a43068286d8f2d6adab05</string>
-    <string name="service_and_term_link">https://suee97.notion.site/2022-09-04-f4d6b4b0db614adba75d4c619371aea9</string>
+    <!-- 외부 링크 TODO: 인스타 링크는 아이디 변경 시 매 번 업데이트 해야함 -->
+    <string name="link_instagram">https://www.instagram.com/seoultech__39/</string>
+    <string name="link_youtube">https://www.youtube.com/channel/UCLYljVZiYHeJxaHTbRpVauQ</string>
+    <string name="link_kakao_talk">https://pf.kakao.com/_yxatCV</string>
+    <string name="link_st_home">https://gwack2.seoultech.ac.kr/</string>
+    <string name="link_privacy_policy">https://suee97.notion.site/suee97/2022-09-04-a48b73c5ed6a43068286d8f2d6adab05</string>
+    <string name="link_terms_of_service">https://suee97.notion.site/2022-09-04-f4d6b4b0db614adba75d4c619371aea9</string>
 
     <string name="seoultech_council">서울과학기술대학교 총학생회</string>
 
@@ -12,18 +17,58 @@
 
     <!--Version 1.1.0-->
     <string name="next">다음</string>
+    <string name="confirm">확인</string>
+
+    <!-- 학번 -->
+    <string name="student_id">학번</string>
+
+    <string name="hint_student_id">학번 8자리를 입력하세요.</string>
+
+    <!-- 로그인 -->
     <string name="login">로그인</string>
     <string name="register">회원가입</string>
-    <string name="password">비밀번호</string>
-    <string name="request">인증요청</string>
-
-    <string name="hint_student_id">학번 입력</string>
-    <string name="hint_password">비밀번호 입력</string>
-
     <string name="sign_in_fail">로그인에 실패하였습니다. 정보를 다시 입력해주세요.</string>
-    <string name="student_id">학번</string>
     <string name="auto_login">자동 로그인</string>
-    <string name="reset_password">비밀번호 재설정</string>
     <string name="agree_to_terms_and_conditions">약관동의</string>
+
+
+    <!-- 비밀번호 -->
+    <string name="password">비밀번호</string>
+    <string name="password_confirm">비밀번호 확인</string>
+    <string name="password_description">비밀번호를 설정해주세요.\n(특수문자, 대소문자, 숫자 포함 8자 이상 16자 이내)</string>
+    <string name="password_format_fail">비밀번호 형식이 올바르지 않습니다.</string>
+    <string name="password_format_success">올바른 형식의 비밀번호가 입력되었습니다.</string>
+    <string name="password_equal_fail">동일한 비밀번호를 입력해주세요.</string>
+    <string name="password_equal_success">동일한 비밀번호가 입력되었습니다.</string>
+
+    <string name="hint_password">비밀번호를 입력하세요.</string>
+    <string name="hint_password_confirm">비밀번호를 다시 입력하세요.</string>
+
+    <!-- 비밀번호 재설정 -->
+    <string name="reset_password">비밀번호 재설정</string>
+    <string name="reset_password_auth_description_1">가입된 계정의 학번을 입력해주세요.</string>
+    <string name="reset_password_auth_description_2">인증요청을 누르면 학번으로 가입된 계정의 휴대폰번호로 인증코드가 발송됩니다. 인증코드는 3분 내로 입력해주세요.</string>
+
+    <string name="reset_password_description">비밀번호를 재설정해주세요.\n(특수문자, 대소문자, 숫자 포함 8자 이상 16자 이내)</string>
+
+    <!-- 인증 -->
+    <string name="auth_code">인증코드</string>
+    <string name="auth_request">인증요청</string>
+
+    <string name="hint_auth_code">인증코드 입력</string>
+
+    <string name="auth_sms_success">SMS가 전송되었습니다.</string>
+
+    <!-- 설정 -->
+    <string name="setting">설정</string>
+    <string name="account_management">계정 관리</string>
+    <string name="logout">로그아웃</string>
+    <string name="instagram">인스타그램</string>
+    <string name="youtube">유튜브</string>
+    <string name="kakao_talk">카카오톡</string>
+    <string name="home_page">홈페이지</string>
+
+    <!-- 상시사업 -->
+    <string name="rent_description">1. 대여 물품이 파손되었을 시, 수리 비용의 80%를 대여인(또는 대여 기구) 측에서 비용하고 나머지 20%는 총학생회 자치회비에서 부담한다. \n2. 파손에 대해 수리가 불가하다고 판단될 시, 대여인(또는 대여 기구)에서 같은 제품 또는 그에 걸맞는 비용을 부담하여야 한다.</string>
 
 </resources>

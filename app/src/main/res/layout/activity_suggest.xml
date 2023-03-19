@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dream_purple_background"
+    android:orientation="vertical"
+    tools:context=".ui.home.setting.suggest.SuggestActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_dream"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/pretendard"
+                android:hint="제목을 입력하세요."
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12.5dp"
+                android:textColorHint="@color/dream_gray"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_content"
+                style="@style/Theme.Dream.Typeface_Body_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/input_dream"
+                android:backgroundTint="@color/white"
+                android:gravity="start"
+                android:hint="문의내용을 입력하세요."
+                android:inputType="textMultiLine"
+                android:minHeight="260dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="12.5dp"
+                android:textColorHint="@color/dream_gray" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_round_22_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="6dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_photo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="사진 추가"
+                    android:textColor="@color/dream_gray"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="주의사항"
+                android:textColor="@color/dream_red"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="1. 모든 문의는 익명입니다.\n2. 답변을 받으시려면 연락처(이메일, 휴대전화)를 남겨주세요."
+                android:textColor="@color/dream_gray" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_add_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="57dp"
+                android:layout_marginBottom="38dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Theme.Dream.Button_Primary"
+                    android:layout_width="0dp"
+                    android:id="@+id/btn_send"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:text="보내기" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Theme.Dream.Button_Secondary"
+                    android:layout_width="0dp"
+                    android:id="@+id/btn_cancel"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:text="취소" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

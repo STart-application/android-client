@@ -1,404 +1,454 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_navy_1"
-    android:overScrollMode="never">
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- ToolBar -->
+    <include android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.home.setting.SettingActivity">
+        android:layout_height="match_parent"
+        android:background="@color/dream_purple_background">
 
-        <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:layout_marginTop="17dp"
-            android:fontFamily="@font/sc_dream_6"
-            android:gravity="center"
-            android:text="설정"
-            android:textColor="@color/text_white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="18dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="@id/textTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textTitle"
-            app:tint="@color/white" />
-
-        <ImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="21dp"
-            android:src="@drawable/ic_profile"
-            app:layout_constraintStart_toStartOf="@+id/btnBack"
-            app:layout_constraintTop_toBottomOf="@id/textTitle" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/imageProfile"
-            app:layout_constraintStart_toEndOf="@id/imageProfile"
-            app:layout_constraintTop_toTopOf="@id/imageProfile">
+            tools:context=".ui.home.setting.SettingActivity">
 
-            <TextView
-                android:id="@+id/textName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sc_dream_6"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                tools:text="이름" />
-
-            <TextView
-                android:id="@+id/textStudentId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/sc_dream_5"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                tools:text="학번" />
-
-            <TextView
-                android:id="@+id/textCollege"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sc_dream_5"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                tools:text="단과대" />
-
-            <TextView
-                android:id="@+id/textDepartment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sc_dream_5"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                tools:text="학과" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/itemList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="vertical"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageProfile">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_group_big" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/layout_profile"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_setting_item"
+                android:layout_marginStart="17dp"
                 android:orientation="vertical"
-                android:paddingStart="20dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="15dp">
+                app:layout_constraintBottom_toBottomOf="@id/imageProfile"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toTopOf="@id/imageProfile">
 
                 <TextView
+                    android:id="@+id/textName"
+                    style="@style/Theme.Dream.Typeface_Title"
                     android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:fontFamily="@font/sc_dream_5"
-                    android:text="계정 관리"
-                    android:textColor="@color/main_navy_1"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content"
+                    tools:text="이름" />
 
                 <TextView
+                    android:id="@+id/textStudentId"
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="로그아웃"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    tools:text="학번" />
 
                 <TextView
+                    android:id="@+id/textCollege"
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="비밀번호 재설정"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    tools:text="단과대" />
 
                 <TextView
+                    android:id="@+id/textDepartment"
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="회원탈퇴"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    tools:text="학과" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/itemList"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/background_setting_item"
+                android:layout_marginTop="25dp"
                 android:orientation="vertical"
-                android:paddingStart="20dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="15dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageProfile">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="17dp"
-                    android:fontFamily="@font/sc_dream_5"
-                    android:text="총학생회 SNS 바로가기"
-                    android:textColor="@color/main_navy_1"
-                    android:textSize="14sp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!-- 계정 관리 -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp">
+                    android:background="@drawable/background_round_10"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
 
-                    <ImageView
-                        android:id="@+id/btnInstagram"
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_instagram"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btnYoutube"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:text="@string/account_management" />
 
-                    <ImageView
-                        android:id="@+id/btnYoutube"
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="@color/dream_gray_light" />
+
+                    <TextView
+                        android:id="@+id/text_logout"
+                        style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_youtube"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btnKakaoTalk"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/btnInstagram"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:text="@string/logout" />
 
-                    <ImageView
-                        android:id="@+id/btnKakaoTalk"
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_kakao_talk"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btnInternet"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/btnYoutube"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginTop="10dp"
+                        android:text="@string/reset_password" />
 
-                    <ImageView
-                        android:id="@+id/btnInternet"
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Body_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_internet"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/btnKakaoTalk"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginTop="10dp"
+                        android:text="회원탈퇴" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 총학생회 SNS 바로가기 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/background_round_10"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="총학생회 SNS 바로가기" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="@color/dream_gray_light" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/layout_instagram"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/layout_youtube"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image_instagram"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_instagram"
+                                app:tint="@color/dream_purple" />
+
+                            <TextView
+                                android:id="@+id/text_instagram"
+                                style="@style/Theme.Dream.Typeface_Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/instagram"
+                                android:textColor="@color/dream_purple" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/layout_youtube"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/layout_kakao_talk"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/layout_instagram">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image_youtube"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_youtube"
+                                app:tint="@color/dream_purple" />
+
+                            <TextView
+                                android:id="@+id/text_youtube"
+                                style="@style/Theme.Dream.Typeface_Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/youtube"
+                                android:textColor="@color/dream_purple" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/layout_kakao_talk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/layout_home_page"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/layout_youtube">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image_kakao_talk"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_kakao_talk"
+                                app:tint="@color/dream_purple" />
+
+                            <TextView
+                                android:id="@+id/text_kakao_talk"
+                                style="@style/Theme.Dream.Typeface_Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/kakao_talk"
+                                android:textColor="@color/dream_purple" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/layout_home_page"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/layout_kakao_talk">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image_home_page"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_internet"
+                                app:tint="@color/dream_purple" />
+
+                            <TextView
+                                android:id="@+id/text_hone_page"
+                                style="@style/Theme.Dream.Typeface_Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/home_page"
+                                android:textColor="@color/dream_purple" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <!-- 정보 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/background_round_10"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="정보" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="@color/dream_gray_light" />
+
+                    <TextView
+                        android:id="@+id/text_update_log"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="업데이트 내역" />
+
+                    <TextView
+                        android:id="@+id/text_dev_info"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="개발 관련 정보 및 문의" />
+                </LinearLayout>
+
+                <!-- 제안사항 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/background_round_10"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="제안사항" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="@color/dream_gray_light" />
+
+                    <TextView
+                        android:id="@+id/text_feature_suggest"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="기능 개선 제안" />
+
+                    <TextView
+                        android:id="@+id/text_error_suggest"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="오류 신고" />
+
+                    <TextView
+                        android:id="@+id/text_etc_suggest"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="기타 제안" />
+                </LinearLayout>
+
+                <!-- 약관 및 정책 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/background_round_10"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="약관 및 정책" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:background="@color/dream_gray_light" />
+
+                    <TextView
+                        android:id="@+id/text_terms_of_service"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="서비스 이용약관" />
+
+                    <!--TextView
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="위치기반서비스 이용약관" /-->
+
+                    <TextView
+                        android:id="@+id/text_privacy_policy"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="개인정보처리방침" />
+
+                    <!--TextView
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="정보제공처" /-->
+
+                    <TextView
+                        android:id="@+id/text_open_source_license"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="오픈소스 라이선스" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/sc_dream_3"
+                    android:gravity="center_horizontal"
+                    android:text="Tel. 02) 970-7012"
+                    android:textColor="@color/dream_gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="서울특별시 노원구 공릉로 232 제 1학생회관 226호"
+                    android:textColor="@color/dream_gray" />
+
+                <TextView
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center_horizontal"
+                    android:text="ⓒSeoul National University of Science and Technology.\n All Rights Reserved."
+                    android:textColor="@color/dream_gray" />
             </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/background_setting_item"
-                android:orientation="vertical"
-                android:paddingStart="20dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sc_dream_5"
-                    android:text="정보"
-                    android:textColor="@color/main_navy_1"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="업데이트 내역"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="개발 관련 정보 및 문의"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/background_setting_item"
-                android:orientation="vertical"
-                android:paddingStart="20dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sc_dream_5"
-                    android:text="제안사항"
-                    android:textColor="@color/main_navy_1"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="기능 개선 제안"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="오류 신고"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="기타 제안"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/background_setting_item"
-                android:orientation="vertical"
-                android:paddingStart="20dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sc_dream_5"
-                    android:text="약관 및 정책"
-                    android:textColor="@color/main_navy_1"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="서비스 이용약관"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="위치기반서비스 이용약관"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="개인정보처리방침"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/sc_dream_3"
-                    android:text="정보제공처"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/sc_dream_3"
-                android:gravity="center_horizontal"
-                android:text="Tel : 02-970-7012"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/sc_dream_3"
-                android:gravity="center_horizontal"
-                android:text="서울시 노원구 공릉로 232 제 1학생회관(37호관) 226호"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/sc_dream_3"
-                android:gravity="center_horizontal"
-                android:text="COPYRIGHT SEOUL NATIONAL UNIVERSITY OF SCIENCE AND TECHNOLOGY. All Rights Reserved."
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
