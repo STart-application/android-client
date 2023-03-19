@@ -6,6 +6,7 @@ import com.google.gson.JsonParser
 import com.google.gson.JsonSyntaxException
 import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiClient.enableToken
+import com.start.STart.api.ApiError
 import com.start.STart.api.auth.response.TokenData
 import java.nio.charset.StandardCharsets
 
@@ -31,11 +32,14 @@ object TokenHelper {
             if(res.isSuccessful) {
                 Log.d(TAG, "verifyToken: 인증 성공")
                 enableToken(accessToken)
+                return true
             } else {
                 Log.d(TAG, "verifyToken: ${res.errorBody()?.string()}")
-                issueAccessToken(accessToken) // 토큰 발급
+                if(ApiClient.parseErrorBody(res.errorBody()).errorCode == ApiError.ST011.code) {
+                    return issueAccessToken(accessToken) // 토큰 발급
+                }
+                return false
             }
-            return res.isSuccessful
         } catch (e: Exception) {
             Log.d(TAG, "verifyToken: ${e.message}")
             return false

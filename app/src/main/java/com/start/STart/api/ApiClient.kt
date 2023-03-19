@@ -43,4 +43,11 @@ object ApiClient {
     fun disableToken() { // TokenHelper에서만 호출
         tokenInterceptor.disableToken()
     }
+
+    fun parseErrorBody(errorBody: ResponseBody?): ApiResponse {
+        val body = gson.fromJson(errorBody?.string(), ApiResponse::class.java)
+        return body
+    }
+
+
 }
