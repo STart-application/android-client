@@ -9,6 +9,7 @@ import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
+import com.start.STart.ui.home.rent.RentActivity
 import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.util.Constants
 
@@ -44,6 +45,10 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnSetting.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
+        }
+
+        binding.btnRent.setOnClickListener {
+            startActivity(Intent(this, RentActivity::class.java))
         }
 
         binding.btnEvent.setOnClickListener {

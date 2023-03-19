@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dream_purple_background"
+    android:orientation="vertical"
+    tools:context=".ui.home.rent.RentActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/background_round_10">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_my_rent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_group_big" />
+
+        <LinearLayout
+            android:id="@+id/layout_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/imageProfile"
+            app:layout_constraintStart_toEndOf="@id/imageProfile"
+            app:layout_constraintTop_toTopOf="@id/imageProfile">
+
+            <TextView
+                android:id="@+id/textName"
+                style="@style/Theme.Dream.Typeface_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="이름" />
+
+            <TextView
+                android:id="@+id/textStudentId"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                tools:text="학번" />
+
+            <TextView
+                android:id="@+id/textCollege"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                tools:text="단과대" />
+
+            <TextView
+                android:id="@+id/textDepartment"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                tools:text="학과" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_my_rent"
+            style="@style/Theme.Dream.Button_Primary"
+            android:text="내 예약 확인하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRentItem"
+        android:layout_marginTop="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        tools:itemCount="7"
+        tools:listitem="@layout/item_rent" />
+
+    <TextView
+        style="@style/Theme.Dream.Typeface_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:text="안내사항" />
+
+    <TextView
+        android:id="@+id/text_description"
+        style="@style/Theme.Dream.Typeface_Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/rent_description"
+        android:textColor="@color/dream_gray" />
+</LinearLayout>

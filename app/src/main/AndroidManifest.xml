@@ -20,7 +20,12 @@
         <activity android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.Dream.ActionBar"/>
         <activity
+            android:name=".ui.home.rent.RentActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.setting.suggest.SuggestActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.auth.reset.ResetPasswordActivity"
@@ -159,7 +164,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- Google Maps API Key (local.properties 파일에 선언됨) -->
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
