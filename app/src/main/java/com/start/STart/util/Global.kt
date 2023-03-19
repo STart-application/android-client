@@ -2,9 +2,11 @@ package com.start.STart.util
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
+import android.util.DisplayMetrics
 import android.view.View
 import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
@@ -53,4 +55,10 @@ fun Context.openCustomTab(url: String) {
     CustomTabsIntent.Builder()
         .build()
         .launchUrl(this, Uri.parse(url))
+}
+
+fun Context.dp2px(dp: Float): Float {
+    val resources: Resources = this.resources
+    val metrics: DisplayMetrics = resources.displayMetrics
+    return dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }

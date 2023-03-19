@@ -15,9 +15,13 @@
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
         <activity
-            android:name=".ui.home.setting.suggest.SuggestActivity"
+            android:name=".ui.home.rent.RentActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
-        <!-- 비밀번호 재설정 -->
+        <activity
+            android:name=".ui.home.setting.suggest.SuggestActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity
             android:name=".ui.auth.reset.ResetPasswordActivity"
             android:exported="false"
@@ -155,7 +159,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- Google Maps API Key (local.properties 파일에 선언됨) -->
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
