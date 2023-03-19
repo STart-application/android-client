@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.oss.licenses.OssLicensesActivity
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.start.STart.R
 import com.start.STart.api.ApiClient
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.util.PreferenceManager
-import com.start.STart.util.TokenHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,7 +41,7 @@ class SettingActivity : AppCompatActivity() {
         binding.textDevInfo.setOnClickListener {
             startActivity(Intent(this, DevInfoActivity::class.java))
         }
-        // SNS
+        // SNS 연결
         binding.layoutInstagram.setOnClickListener { openCustomTab(resources.getString(R.string.link_instagram)) }
         binding.layoutHomePage.setOnClickListener { openCustomTab(resources.getString(R.string.link_st_home)) }
         binding.layoutYoutube.setOnClickListener { openCustomTab(resources.getString(R.string.link_youtube)) }
@@ -51,6 +52,14 @@ class SettingActivity : AppCompatActivity() {
         binding.textErrorSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ERROR)}
         binding.textEtcSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ETC)}
 
+        binding.textPrivacyPolicy.setOnClickListener { openCustomTab(resources.getString(R.string.link_privacy_policy)) }
+        binding.textTermsOfService.setOnClickListener { openCustomTab(resources.getString(R.string.link_terms_of_service)) }
+        binding.textOpenSourceLicense.setOnClickListener {
+            OssLicensesMenuActivity.setActivityTitle("오픈소스 라이선스")
+            startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+        }
+
+        // 로그아웃
         binding.textLogout.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
 
@@ -65,6 +74,8 @@ class SettingActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.toolbar.icBack.setOnClickListener { finish() }
     }
 
     private fun startSuggestActivity(type: String) {

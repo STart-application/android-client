@@ -7,17 +7,21 @@
 
     <application
         android:name=".MyApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
+        <activity android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.Dream.ActionBar"/>
+        <activity android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.Dream.ActionBar"/>
         <activity
             android:name=".ui.home.setting.suggest.SuggestActivity"
             android:exported="false" />
-        <!-- 비밀번호 재설정 -->
         <activity
             android:name=".ui.auth.reset.ResetPasswordActivity"
             android:exported="false"
@@ -34,7 +38,7 @@
             android:name=".ui.home.setting.updatehistory.UpdateHistoryActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream" /> <!-- 로그인 -->
+            android:theme="@style/Theme.Dream" />
         <activity
             android:name=".ui.auth.login.LoginActivity"
             android:exported="false"
