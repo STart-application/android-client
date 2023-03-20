@@ -34,14 +34,14 @@ object TokenHelper {
                 enableToken(accessToken)
                 return true
             } else {
-                Log.d(TAG, "verifyToken: ${res.errorBody()?.string()}")
-                // TODO 오류 처리 verifyToken: body must not be null
-                if(ApiClient.parseErrorBody(res.errorBody()).errorCode == ApiError.ST011.code) {
+                val errorBodyString = res.errorBody()?.string()
+                if(ApiClient.parseErrorBody(errorBodyString).errorCode == ApiError.ST011.code) {
                     return issueAccessToken(accessToken) // 토큰 발급
                 }
                 return false
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             Log.d(TAG, "verifyToken: ${e.message}")
             return false
         }

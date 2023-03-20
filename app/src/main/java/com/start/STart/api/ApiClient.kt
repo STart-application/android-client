@@ -44,8 +44,8 @@ object ApiClient {
         tokenInterceptor.disableToken()
     }
 
-    fun parseErrorBody(errorBody: ResponseBody?): ApiResponse {
-        val body = gson.fromJson(errorBody?.string(), ApiResponse::class.java)
+    fun parseErrorBody(errorBodyString: String?): ApiResponse {
+        val body = gson.fromJson(errorBodyString, ApiResponse::class.java)
         return body
     }
 
