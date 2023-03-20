@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="10dp"
         android:layout_marginTop="12dp"
-        android:background="@color/main_white"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="@id/card_slider"
         app:layout_constraintStart_toStartOf="@id/card_slider"
         app:layout_constraintTop_toBottomOf="@id/card_slider"
