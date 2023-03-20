@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -21,10 +22,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.motion.widget.MotionScene.Transition.TransitionOnClick
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
 import com.start.STart.databinding.ActivityHomeBinding
+import com.start.STart.ui.home.event.EventActivity
+import com.start.STart.ui.home.festival.FestivalActivity
+import com.start.STart.ui.home.info.InfoActivity
+import com.start.STart.ui.home.rent.RentActivity
 import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
 import com.start.STart.ui.theme.shadow
@@ -85,24 +91,39 @@ class HomeActivity : AppCompatActivity() {
                     MenuItem(
                         title = "총학생회 설명",
                         drawable = R.drawable.ic_home_menu_1,
-                        topStartRadius = 20.dp
+                        topStartRadius = 20.dp,
+                        onClick = {
+                            startActivity(Intent(applicationContext, InfoActivity::class.java))
+                        }
                     )
                     MenuItem(
                         title = "제휴사업",
-                        drawable = R.drawable.ic_home_menu_2
+                        drawable = R.drawable.ic_home_menu_2,
+                        onClick = {
+                            //startActivity(Intent(applicationContext, InfoActivity::class.java))
+                        }
                     )
                     MenuItem(
                         title = "자취회비\n납부 확인",
                         drawable = R.drawable.ic_home_menu_3,
-                        topEndRadius = 20.dp
+                        topEndRadius = 20.dp,
+                        onClick = {
+                            //startActivity(Intent(applicationContext, InfoActivity::class.java))
+                        }
                     )
                 }
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    MenuItem(title = "상시사업 예약", drawable = R.drawable.ic_home_menu_4, bottomStartRadius = 20.dp)
-                    MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5)
-                    MenuItem(title = "이벤트 참여", drawable = R.drawable.ic_home_menu_6, bottomEndRadius = 20.dp)
+                    MenuItem(title = "상시사업 예약", drawable = R.drawable.ic_home_menu_4, bottomStartRadius = 20.dp) {
+                        startActivity(Intent(applicationContext, RentActivity::class.java))
+                    }
+                    MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5) {
+                        startActivity(Intent(applicationContext, FestivalActivity::class.java))
+                    }
+                    MenuItem(title = "이벤트 참여", drawable = R.drawable.ic_home_menu_6, bottomEndRadius = 20.dp) {
+                        startActivity(Intent(applicationContext, EventActivity::class.java))
+                    }
                 }
             }
         }
@@ -115,7 +136,8 @@ class HomeActivity : AppCompatActivity() {
         topStartRadius: Dp = 0.dp,
         topEndRadius: Dp = 0.dp,
         bottomEndRadius: Dp = 0.dp,
-        bottomStartRadius: Dp = 0.dp
+        bottomStartRadius: Dp = 0.dp,
+        onClick: () -> Unit
     ) {
         ConstraintLayout(
             modifier = Modifier
@@ -130,6 +152,7 @@ class HomeActivity : AppCompatActivity() {
                 )
                 .clip(RoundedCornerShape(topStartRadius, topEndRadius, bottomEndRadius, bottomStartRadius))
                 .background(Color.White)
+                .clickable { onClick() }
                 .size(100.dp),
         ) {
             val (menuRef, titleRef) = createRefs()
@@ -156,7 +179,6 @@ class HomeActivity : AppCompatActivity() {
                     }
             )
         }
-
     }
 
     @Preview
