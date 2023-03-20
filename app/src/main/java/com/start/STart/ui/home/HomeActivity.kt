@@ -1,22 +1,21 @@
 package com.start.STart.ui.home
 
 import android.os.Bundle
-import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -70,27 +69,72 @@ class HomeActivity : AppCompatActivity() {
         }.attach()
 
         binding.composeMenu.setContent {
-            Menu()
+            MenuLayout()
         }
     }
 
     @Composable
-    fun Menu() {
+    fun MenuLayout() {
         DreamTheme {
-            MenuItem(title = "총학생회 설명", drawable = R.drawable.ic_home_menu_1)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(space = 10.dp)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(
+                        space = 10.dp,
+                        alignment = Alignment.CenterHorizontally
+                    )
+                ) {
+                    MenuItem(
+                        title = "총학생회 설명",
+                        drawable = R.drawable.ic_home_menu_1,
+                        topStartRadius = 20.dp
+                    )
+                    MenuItem(
+                        title = "제휴사업",
+                        drawable = R.drawable.ic_home_menu_2
+                    )
+                    MenuItem(
+                        title = "자취회비\n납부 확인",
+                        drawable = R.drawable.ic_home_menu_3,
+                        topEndRadius = 20.dp
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    MenuItem(title = "상시사업 예약", drawable = R.drawable.ic_home_menu_4, bottomStartRadius = 20.dp)
+                    MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5)
+                    MenuItem(title = "이벤트 참여", drawable = R.drawable.ic_home_menu_6, bottomEndRadius = 20.dp)
+                }
+            }
         }
     }
 
     @Composable
-    fun MenuItem(title: String, drawable: Int) {
+    fun MenuItem(
+        title: String,
+        drawable: Int,
+        topStartRadius: Dp = 0.dp,
+        topEndRadius: Dp = 0.dp,
+        bottomEndRadius: Dp = 0.dp,
+        bottomStartRadius: Dp = 0.dp
+    ) {
         ConstraintLayout(
             modifier = Modifier
                 .shadow(
                     color = Color(0f, 0f, 0f, 0.25f),
-                    borderRadius = 10f.dp,
+                    topStartRadius,
+                    topEndRadius,
+                    bottomEndRadius,
+                    bottomStartRadius,
                     spread = 0f.dp,
-                    blurRadius = 6f.dp
+                    blurRadius = 4f.dp
                 )
+                .clip(RoundedCornerShape(topStartRadius, topEndRadius, bottomEndRadius, bottomStartRadius))
                 .background(Color.White)
                 .size(100.dp),
         ) {
@@ -124,8 +168,6 @@ class HomeActivity : AppCompatActivity() {
     @Preview
     @Composable
     fun MenuItemPreview() {
-        DreamTheme {
-            MenuItem(title = "총학생회 설명", drawable = R.drawable.ic_home_menu_1)
-        }
+        MenuLayout()
     }
 }

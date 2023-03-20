@@ -27,7 +27,7 @@
             android:layout_width="254dp"
             android:layout_height="254dp"
             android:orientation="horizontal"
-            tools:foreground="@color/dream_gray" />
+            android:background="@color/dream_gray" />
 
     </androidx.cardview.widget.CardView>
 

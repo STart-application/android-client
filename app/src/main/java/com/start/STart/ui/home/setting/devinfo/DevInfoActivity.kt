@@ -84,7 +84,10 @@ class DevInfoActivity : AppCompatActivity() {
                         .padding(20.dp, 10.dp)
                         .shadow(
                             color = Color(0f, 0f, 0f, 0.25f),
-                            borderRadius = 10f.dp,
+                            10f.dp,
+                            10f.dp,
+                            10f.dp,
+                            10f.dp,
                             spread = 0f.dp,
                             blurRadius = 6f.dp
                         )
@@ -116,7 +119,10 @@ class DevInfoActivity : AppCompatActivity() {
                         .padding(20.dp, 10.dp)
                         .shadow(
                             color = Color(0f, 0f, 0f, 0.25f),
-                            borderRadius = 10f.dp,
+                            10f.dp,
+                            10f.dp,
+                            10f.dp,
+                            10f.dp,
                             spread = 0f.dp,
                             blurRadius = 6f.dp
                         )
