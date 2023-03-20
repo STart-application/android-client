@@ -1,6 +1,8 @@
 package com.start.STart.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,30 +25,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
 import com.start.STart.databinding.ActivityHomeBinding
+import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
 import com.start.STart.ui.theme.shadow
 
 class HomeActivity : AppCompatActivity() {
-
-    companion object {
-        val menuNames = listOf(
-            "총학생회 설명",
-            "제휴사업",
-            "자치회비\n납부 확인",
-            "상시사업 예약",
-            "축제 이벤트",
-            "이벤트 참여",
-        )
-
-        val menuDrawables = listOf(
-            R.drawable.ic_home_menu_1,
-            R.drawable.ic_home_menu_2,
-            R.drawable.ic_home_menu_3,
-            R.drawable.ic_home_menu_4,
-            R.drawable.ic_home_menu_5,
-            R.drawable.ic_home_menu_6,
-        )
-    }
 
     private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private val sliderAdapter by lazy { SliderAdapter() }
@@ -54,6 +37,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        initToolbar()
 
         binding.slider.offscreenPageLimit = 1
         binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
@@ -70,6 +55,15 @@ class HomeActivity : AppCompatActivity() {
 
         binding.composeMenu.setContent {
             MenuLayout()
+        }
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = resources.getString(R.string.seoultech_council)
+        binding.toolbar.icBack.visibility = View.INVISIBLE
+        binding.toolbar.icSetting.visibility = View.VISIBLE
+        binding.toolbar.icSetting.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
         }
     }
 

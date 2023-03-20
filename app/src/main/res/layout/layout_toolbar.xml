@@ -7,7 +7,8 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ic_back"
@@ -32,4 +33,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ic_setting"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_dream_setting"
+        app:tint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
