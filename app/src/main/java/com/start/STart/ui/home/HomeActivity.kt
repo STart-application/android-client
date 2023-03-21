@@ -49,6 +49,7 @@ class HomeActivity : AppCompatActivity() {
         binding.slider.offscreenPageLimit = 1
         binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         binding.slider.adapter = sliderAdapter.apply {
+            // TODO: 배너 받아오는 API 추가하고 불러오기
             list = listOf(
                 "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/307460857_451409030280466_4565862306706252028_n.jpg?stp=dst-jpg_e35&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=110&_nc_ohc=RHMYwcmGWMwAX_8Goax&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC2Sr_hDh011V23nS2prWhhRBpXE5DYELbQ_BMsncOdww&oe=63E15BED&_nc_sid=8fd12b",
                 "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/307460857_451409030280466_4565862306706252028_n.jpg?stp=dst-jpg_e35&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=110&_nc_ohc=RHMYwcmGWMwAX_8Goax&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC2Sr_hDh011V23nS2prWhhRBpXE5DYELbQ_BMsncOdww&oe=63E15BED&_nc_sid=8fd12b",
@@ -88,29 +89,15 @@ class HomeActivity : AppCompatActivity() {
                         alignment = Alignment.CenterHorizontally
                     )
                 ) {
-                    MenuItem(
-                        title = "총학생회 설명",
-                        drawable = R.drawable.ic_home_menu_1,
-                        topStartRadius = 20.dp,
-                        onClick = {
-                            startActivity(Intent(applicationContext, InfoActivity::class.java))
-                        }
-                    )
-                    MenuItem(
-                        title = "제휴사업",
-                        drawable = R.drawable.ic_home_menu_2,
-                        onClick = {
-                            //startActivity(Intent(applicationContext, InfoActivity::class.java))
-                        }
-                    )
-                    MenuItem(
-                        title = "자취회비\n납부 확인",
-                        drawable = R.drawable.ic_home_menu_3,
-                        topEndRadius = 20.dp,
-                        onClick = {
-                            //startActivity(Intent(applicationContext, InfoActivity::class.java))
-                        }
-                    )
+                    MenuItem(title = "총학생회 설명", drawable = R.drawable.ic_home_menu_1, topStartRadius = 20.dp,) {
+                        startActivity(Intent(applicationContext, InfoActivity::class.java))
+                    }
+                    MenuItem(title = "제휴사업", drawable = R.drawable.ic_home_menu_2) {
+                        // TODO: 액티비티 이동 추가
+                    }
+                    MenuItem(title = "자취회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
+                        // TODO: 액티비티 이동 추가
+                    }
                 }
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
