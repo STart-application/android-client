@@ -46,7 +46,7 @@ interface AuthService {
     // AccessToken 확인
     @GET("auth")
     suspend fun verifyAccessToken(
-        @Header("Authorization") token: String,
+        @Header("Authorization") accessToken: String,
     ): Response<ApiResponse>
 
     // AccessToken 재발급 -> 만료된 AccessToken과 함께 호출해야 함

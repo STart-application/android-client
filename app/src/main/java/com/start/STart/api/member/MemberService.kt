@@ -23,4 +23,9 @@ interface MemberService {
         @PartMap data: HashMap<String, RequestBody>,
         @Part file: MultipartBody.Part
     ): Response<ApiResponse>
+
+    @GET("member")
+    suspend fun readMember(
+
+    ): Response<ApiResponse>
 }
