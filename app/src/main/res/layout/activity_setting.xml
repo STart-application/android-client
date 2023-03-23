@@ -7,7 +7,8 @@
     android:orientation="vertical">
 
     <!-- ToolBar -->
-    <include android:id="@+id/toolbar"
+    <include
+        android:id="@+id/toolbar"
         layout="@layout/layout_toolbar" />
 
     <ScrollView
@@ -104,28 +105,33 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="3dp"
                         android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_logout"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="@string/logout" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="@string/reset_password" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="회원탈퇴" />
                 </LinearLayout>
 
@@ -148,7 +154,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="3dp"
                         android:background="@color/dream_gray_light" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -158,14 +165,17 @@
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/layout_instagram"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:background="@drawable/ripple_dream_text_main"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
+                            android:padding="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/layout_youtube"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintHorizontal_chainStyle="spread"
-                            app:layout_constraintStart_toStartOf="parent">
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/image_instagram"
@@ -188,18 +198,21 @@
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/layout_youtube"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:background="@drawable/ripple_dream_text_main"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
+                            android:padding="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/layout_kakao_talk"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/layout_instagram">
+                            app:layout_constraintStart_toEndOf="@+id/layout_instagram"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/image_youtube"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
                                 app:srcCompat="@drawable/ic_youtube"
                                 app:tint="@color/dream_purple" />
 
@@ -217,13 +230,16 @@
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/layout_kakao_talk"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:background="@drawable/ripple_dream_text_main"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
+                            android:padding="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/layout_home_page"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/layout_youtube">
+                            app:layout_constraintStart_toEndOf="@+id/layout_youtube"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/image_kakao_talk"
@@ -246,13 +262,16 @@
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/layout_home_page"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="61dp"
+                            android:background="@drawable/ripple_dream_text_main"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
+                            android:padding="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/layout_kakao_talk">
+                            app:layout_constraintStart_toEndOf="@+id/layout_kakao_talk"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/image_home_page"
@@ -294,22 +313,26 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="3dp"
                         android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_update_log"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="업데이트 내역" />
 
                     <TextView
                         android:id="@+id/text_dev_info"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="개발 관련 정보 및 문의" />
                 </LinearLayout>
 
@@ -332,30 +355,35 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="3dp"
                         android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_feature_suggest"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="기능 개선 제안" />
 
                     <TextView
                         android:id="@+id/text_error_suggest"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="오류 신고" />
 
                     <TextView
                         android:id="@+id/text_etc_suggest"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="기타 제안" />
                 </LinearLayout>
 
@@ -371,21 +399,26 @@
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Title"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="약관 및 정책" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="3dp"
                         android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_terms_of_service"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="서비스 이용약관" />
 
                     <!--TextView
@@ -398,9 +431,10 @@
                     <TextView
                         android:id="@+id/text_privacy_policy"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="개인정보처리방침" />
 
                     <!--TextView
@@ -413,9 +447,10 @@
                     <TextView
                         android:id="@+id/text_open_source_license"
                         style="@style/Theme.Dream.Typeface_Body_1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ripple_dream_text_main"
+                        android:paddingVertical="5dp"
                         android:text="오픈소스 라이선스" />
                 </LinearLayout>
 
