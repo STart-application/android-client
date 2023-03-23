@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityLoginBinding
 import com.start.STart.ui.auth.register.PolicyActivity
 import com.start.STart.ui.auth.reset.ResetPasswordAuthActivity
@@ -42,11 +44,18 @@ class LoginActivity : AppCompatActivity() {
     private fun initViewModelListeners() {
         viewModel.loginResult.observe(this) {
             if(it.isSuccessful) {
+                viewModel.loadMember()
+
+            } else {
+                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+        viewModel.loadMemberResult.observe(this) {
+            if(it.isSuccessful) {
+                Toast.makeText(this, "${it.data as MemberData}", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, HomeActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 })
-            } else {
-                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
