@@ -2,7 +2,9 @@ package com.start.STart.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,6 +28,7 @@ import androidx.constraintlayout.motion.widget.MotionScene.Transition.Transition
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
+import com.start.STart.api.banner.BannerModel
 import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
@@ -38,6 +41,7 @@ import com.start.STart.ui.theme.shadow
 class HomeActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
+    private val viewModel: HomeViewModel by viewModels()
     private val sliderAdapter by lazy { SliderAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,23 +49,32 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initToolbar()
+        initViewModelListeners()
 
         binding.slider.offscreenPageLimit = 1
         binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-        binding.slider.adapter = sliderAdapter.apply {
-            // TODO: 배너 받아오는 API 추가하고 불러오기
-            list = listOf(
-                "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/307460857_451409030280466_4565862306706252028_n.jpg?stp=dst-jpg_e35&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=110&_nc_ohc=RHMYwcmGWMwAX_8Goax&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC2Sr_hDh011V23nS2prWhhRBpXE5DYELbQ_BMsncOdww&oe=63E15BED&_nc_sid=8fd12b",
-                "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/307460857_451409030280466_4565862306706252028_n.jpg?stp=dst-jpg_e35&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=110&_nc_ohc=RHMYwcmGWMwAX_8Goax&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC2Sr_hDh011V23nS2prWhhRBpXE5DYELbQ_BMsncOdww&oe=63E15BED&_nc_sid=8fd12b",
-                "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/307460857_451409030280466_4565862306706252028_n.jpg?stp=dst-jpg_e35&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=110&_nc_ohc=RHMYwcmGWMwAX_8Goax&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfC2Sr_hDh011V23nS2prWhhRBpXE5DYELbQ_BMsncOdww&oe=63E15BED&_nc_sid=8fd12b",
-            )
-        }
+        binding.slider.adapter = sliderAdapter
 
         TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
         }.attach()
 
         binding.composeMenu.setContent {
             MenuLayout()
+        }
+
+        viewModel.loadBanner()
+    }
+
+    private fun initViewModelListeners() {
+        viewModel.loadBannerResult.observe(this) {
+            if(it.isSuccessful) {
+                sliderAdapter.list = it.data as List<BannerModel>
+                Log.d(null, "initViewModelListeners: ${it.data.joinToString { "" }}")
+
+            } else {
+
+            }
+            // 로딩 종료
         }
     }
 
@@ -137,7 +150,14 @@ class HomeActivity : AppCompatActivity() {
                     spread = 0f.dp,
                     blurRadius = 4f.dp
                 )
-                .clip(RoundedCornerShape(topStartRadius, topEndRadius, bottomEndRadius, bottomStartRadius))
+                .clip(
+                    RoundedCornerShape(
+                        topStartRadius,
+                        topEndRadius,
+                        bottomEndRadius,
+                        bottomStartRadius
+                    )
+                )
                 .background(Color.White)
                 .clickable { onClick() }
                 .size(100.dp),
