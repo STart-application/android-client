@@ -54,13 +54,14 @@ class StudentInfoInputActivity : AppCompatActivity() {
     private fun initViewModelListeners() {
         viewModel.verifyDuplicateResult.observe(this) { resultModel ->
             if(resultModel.isSuccessful) {
-                startActivity(Intent(this, PasswordInputActivity::class.java).apply {
+                // TODO: 부서 수정
+                /*startActivity(Intent(this, PasswordInputActivity::class.java).apply {
                     putExtra(Constants.KEY_REGISTER_DATA, RegisterData(
                         studentNo = binding.inputStudentId.text.toString(),
                         name = binding.inputName.text.toString(),
                         department = resources.getStringArray(R.array.department)[binding.inputDepartment.selectedIndex]
                     ))
-                })
+                })*/
             } else {
                 CustomAlertDialog()
                     .setTitle(resultModel.exception?.title)

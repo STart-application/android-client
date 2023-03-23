@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesActivity
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
@@ -96,8 +97,15 @@ class SettingActivity : AppCompatActivity() {
                     binding.textDepartment.text = it.department
                 }
             } else {
-                logout()
+                disableAuthManagement()
             }
+        }
+    }
+
+    private fun disableAuthManagement() {
+        binding.layoutAuthManagement.alpha = 0.7f
+        binding.layoutAuthManagement.children.forEach {
+            it.isEnabled = false
         }
     }
 
