@@ -21,12 +21,18 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initView()
-        initViewListeners()
         initViewModelListeners()
     }
 
     private fun initView() {
         binding.btnLogin.isEnabled = true // TODO: 유효성 검증 필요
+        initToolbar()
+        initViewListeners()
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "로그인"
+        binding.toolbar.icBack.setOnClickListener { finish() }
     }
 
     private fun initViewListeners() {
