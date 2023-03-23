@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
+import com.start.STart.api.banner.BannerService
 import com.start.STart.api.member.MemberService
 import com.start.STart.util.TokenHelper
 import com.start.STart.util.gson
@@ -36,6 +37,7 @@ object ApiClient {
 
     val authService = retrofit.create(AuthService::class.java)
     val memberService = retrofit.create(MemberService::class.java)
+    val bannerService = retrofit.create(BannerService::class.java)
 
     fun enableToken(token: String) { // TokenHelper에서만 호출
         tokenInterceptor.enableToken(token)

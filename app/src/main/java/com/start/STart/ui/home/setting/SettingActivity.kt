@@ -2,6 +2,7 @@ package com.start.STart.ui.home.setting
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesActivity
@@ -22,12 +23,19 @@ import com.start.STart.util.openCustomTab
 class SettingActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
+    private val viewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        init()
         initView()
         initViewListeners()
+        initViewModelListeners()
+    }
+
+    private fun init() {
+        viewModel.loadMemberData()
     }
 
     private fun initView() {
@@ -61,21 +69,36 @@ class SettingActivity : AppCompatActivity() {
 
         // 로그아웃
         binding.textLogout.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-
-                ApiClient.disableToken()
-                PreferenceManager.clear()
-
-                withContext(Dispatchers.Main) {
-                    startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
-                    finish()
-                }
-            }
+            logout()
         }
 
         binding.toolbar.icBack.setOnClickListener { finish() }
+    }
+
+    private fun logout() = lifecycleScope.launch(Dispatchers.IO) {
+
+        ApiClient.disableToken()
+        PreferenceManager.clear()
+
+        withContext(Dispatchers.Main) {
+            startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            })
+            finish()
+        }
+    }
+    private fun initViewModelListeners() {
+        viewModel.memberData.observe(this) { memberData ->
+            if(memberData != null){
+                memberData.let {
+                    binding.textName.text = it.name
+                    binding.textStudentId.text = it.studentNo
+                    binding.textDepartment.text = it.department
+                }
+            } else {
+                logout()
+            }
+        }
     }
 
     private fun startSuggestActivity(type: String) {

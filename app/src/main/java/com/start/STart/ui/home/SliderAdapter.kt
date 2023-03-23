@@ -4,19 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.start.STart.api.banner.BannerModel
 import com.start.STart.databinding.ItemSliderBinding
 
 class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
-    var list: List<String> = listOf()
+    var list: List<BannerModel> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     inner class SliderViewHolder(var binding: ItemSliderBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(url: String){
+        fun bind(bannerModel: BannerModel){
             Glide.with(binding.root)
-                .load(url)
+                .load(bannerModel.imageUrl)
                 .into(binding.imageView)
         }
     }

@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object PreferenceManager {
 
@@ -21,6 +24,33 @@ object PreferenceManager {
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
         )
+    }
+
+    suspend fun <T> saveToPreferences(
+        key: String,
+        dataClass: T,
+    ) {
+        val gson = Gson()
+        val json = gson.toJson(dataClass)
+
+        withContext(Dispatchers.IO) {
+            putString(key, json)
+        }
+    }
+
+    suspend inline fun <reified T> loadFromPreferences(
+        key: String,
+    ): T? {
+        val gson = Gson()
+        val json = getString(key)
+
+        return withContext(Dispatchers.IO) {
+            if (json.isNotBlank()) {
+                gson.fromJson(json, T::class.java)
+            } else {
+                null
+            }
+        }
     }
 
     suspend fun putString(key: String, value: String) {
