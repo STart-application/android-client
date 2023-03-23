@@ -1,5 +1,7 @@
 package com.start.STart.util
 
+import java.net.SocketTimeoutException
+
 object Constants {
     // Flags
     const val SIGN_IN = "no_sign_in"
@@ -23,4 +25,10 @@ object Constants {
     const val KEY_API_PHONE_NO = "phoneNo"
 
     const val KEY_AUTHORIZATION = "Authorization"
+
+    // 예외 처리
+    const val EXCEPTION_TIME_OUT = "timeout"
+    const val EXCEPTION_CONNECTION = "connection"
+    const val EXCEPTION_IOEXCEPTION = "io_exception"
+    const val EXCEPTION_UNEXPECTED = "unexpected"
 }

@@ -1,5 +1,6 @@
 package com.start.STart.ui.auth.register
 
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import com.skydoves.balloon.Balloon
 import com.start.STart.R
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentInfoBinding
+import com.start.STart.ui.auth.CustomAlertDialog
 import com.start.STart.util.Constants
 import com.start.STart.util.InputTextWater
 
@@ -50,8 +52,8 @@ class StudentInfoInputActivity : AppCompatActivity() {
     }
 
     private fun initViewModelListeners() {
-        viewModel.isDuplicate.observe(this) { isDuplicate ->
-            if(!isDuplicate) {
+        viewModel.verifyDuplicateResult.observe(this) { resultModel ->
+            if(resultModel.isSuccessful) {
                 startActivity(Intent(this, PasswordInputActivity::class.java).apply {
                     putExtra(Constants.KEY_REGISTER_DATA, RegisterData(
                         studentNo = binding.inputStudentId.text.toString(),
@@ -60,14 +62,11 @@ class StudentInfoInputActivity : AppCompatActivity() {
                     ))
                 })
             } else {
-                Balloon.Builder(this)
-                    .setText("같은 학번으로 가입된 계정이 존재합니다.")
-                    .build()
-                    .showAlignTop(binding.inputStudentId)
+                CustomAlertDialog()
+                    .setTitle(resultModel.exception?.title)
+                    .setCaption(resultModel.exception?.sub)
+                    .show(supportFragmentManager, "Exception")
             }
-        }
-        viewModel.errorMessage.observe(this) {
-            Toast.makeText(this, "에러: $it", Toast.LENGTH_SHORT).show()
         }
     }
 
