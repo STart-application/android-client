@@ -45,6 +45,7 @@ class RentActivity : AppCompatActivity() {
                 RentItem("리드선", R.drawable.ic_lead_wire),
                 RentItem("L카", R.drawable.ic_cart),
                 RentItem("의자", R.drawable.ic_chair),
+                RentItem("돗자리", R.drawable.ic_chair),
             )
         }
         binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(10f).toInt()))
