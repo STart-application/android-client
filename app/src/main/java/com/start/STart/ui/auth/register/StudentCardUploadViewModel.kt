@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
 import com.start.STart.api.member.request.RegisterData
-import com.start.STart.model.LiveDataResult
+import com.start.STart.model.ResultModel
 import com.start.STart.util.Constants
 import com.start.STart.util.toPlainRequestBody
 import kotlinx.coroutines.Dispatchers
@@ -16,8 +16,8 @@ import java.io.IOException
 
 class StudentCardUploadViewModel: ViewModel() {
 
-    private val _registerResult: MutableLiveData<LiveDataResult> = MutableLiveData()
-    val registerResult: LiveData<LiveDataResult> get() = _registerResult
+    private val _registerResult: MutableLiveData<ResultModel> = MutableLiveData()
+    val registerResult: LiveData<ResultModel> get() = _registerResult
 
     fun register(registerData: RegisterData, filePart: MultipartBody.Part) = viewModelScope.launch(Dispatchers.IO) {
         try {
@@ -33,9 +33,9 @@ class StudentCardUploadViewModel: ViewModel() {
                 filePart,
             )
             if(res.code() == 201) {
-                _registerResult.postValue(LiveDataResult(true))
+                _registerResult.postValue(ResultModel(true))
             } else {
-                _registerResult.postValue(LiveDataResult(false, res.errorBody()?.string()))
+                _registerResult.postValue(ResultModel(false, res.errorBody()?.string()))
             }
         } catch(e: IOException) {
 
