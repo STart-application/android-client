@@ -74,6 +74,19 @@
                     tools:text="학과" />
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                style="@style/Theme.Dream.Button_Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/layout_profile"
+                app:layout_constraintTop_toTopOf="@+id/imageProfile"
+                tools:visibility="visible" />
+
             <LinearLayout
                 android:id="@+id/itemList"
                 android:layout_width="0dp"

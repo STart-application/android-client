@@ -2,6 +2,7 @@ package com.start.STart.ui.home.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -44,6 +45,18 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
+        binding.btnLogin.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                PreferenceManager.clear()
+                withContext(Dispatchers.Main) {
+                    startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
+                    finish()
+                }
+            }
+        }
+
         binding.textUpdateLog.setOnClickListener {
             startActivity(Intent(this, UpdateHistoryActivity::class.java))
         }
@@ -103,6 +116,7 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun disableAuthManagement() {
+        binding.btnLogin.visibility = View.VISIBLE
         binding.layoutAuthManagement.alpha = 0.7f
         binding.layoutAuthManagement.children.forEach {
             it.isEnabled = false
