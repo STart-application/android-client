@@ -8,29 +8,42 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeActivity">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_slider"
+    <FrameLayout
+        android:id="@+id/layout_banner"
         android:layout_width="254dp"
         android:layout_height="254dp"
         android:layout_marginTop="22dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/compose_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/slider"
-            android:layout_width="254dp"
-            android:layout_height="254dp"
-            android:background="@color/dream_gray"
-            android:orientation="horizontal" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
 
-    </androidx.cardview.widget.CardView>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/slider"
+                android:layout_width="254dp"
+                android:layout_height="254dp"
+                android:background="@color/dream_gray"
+                android:orientation="horizontal" />
+
+        </androidx.cardview.widget.CardView>
+
+        <ProgressBar
+            android:id="@+id/progressbar_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/indicator"
@@ -38,9 +51,9 @@
         android:layout_height="10dp"
         android:layout_marginTop="12dp"
         android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/card_slider"
-        app:layout_constraintStart_toStartOf="@id/card_slider"
-        app:layout_constraintTop_toBottomOf="@id/card_slider"
+        app:layout_constraintEnd_toEndOf="@id/layout_banner"
+        app:layout_constraintStart_toStartOf="@id/layout_banner"
+        app:layout_constraintTop_toBottomOf="@id/layout_banner"
         app:tabBackground="@drawable/tab_indicator"
         app:tabGravity="center"
         app:tabIndicator="@null"

@@ -69,12 +69,8 @@ class HomeActivity : AppCompatActivity() {
         viewModel.loadBannerResult.observe(this) {
             if(it.isSuccessful) {
                 sliderAdapter.list = it.data as List<BannerModel>
-                Log.d(null, "initViewModelListeners: ${it.data.joinToString { "" }}")
-
-            } else {
-
             }
-            // 로딩 종료
+            binding.progressbarBanner.visibility = View.INVISIBLE
         }
     }
 
