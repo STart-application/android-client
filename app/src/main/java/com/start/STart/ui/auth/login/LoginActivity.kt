@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "로그인"
-        binding.toolbar.icBack.setOnClickListener { finish() }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initViewListeners() {

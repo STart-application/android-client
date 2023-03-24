@@ -59,7 +59,7 @@ class SuggestActivity : AppCompatActivity() {
             }
         }
         binding.btnCancel.setOnClickListener { finish() }
-        binding.toolbar.icBack.setOnClickListener { finish() }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private val isInputValid: Boolean

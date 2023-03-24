@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = resources.getString(R.string.seoultech_council)
-        binding.toolbar.icBack.visibility = View.INVISIBLE
+        binding.toolbar.btnBack.visibility = View.INVISIBLE
         binding.toolbar.icSetting.visibility = View.VISIBLE
         binding.toolbar.icSetting.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))

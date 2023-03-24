@@ -20,7 +20,7 @@ class PolicyActivity : AppCompatActivity() {
     private fun initViewListeners() {
         updateCheckAllCheckBox()
         linkPolicy()
-        binding.btnBack.setOnClickListener {
+        binding.toolbar.btnBack.setOnClickListener {
             finish()
         }
         binding.btnNext.setOnClickListener {

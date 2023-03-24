@@ -31,7 +31,7 @@ class RentActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "상시사업 예약"
-        binding.toolbar.icBack.setOnClickListener {
+        binding.toolbar.btnBack.setOnClickListener {
             finish()
         }
     }

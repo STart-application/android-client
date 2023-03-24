@@ -21,7 +21,7 @@ class UpdateHistoryActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.icBack.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             finish()
         }
     }

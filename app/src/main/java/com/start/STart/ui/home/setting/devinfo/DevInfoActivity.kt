@@ -53,7 +53,7 @@ class DevInfoActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.toolbar.icBack.setOnClickListener {
+        binding.toolbar.btnBack.setOnClickListener {
             finish()
         }
     }

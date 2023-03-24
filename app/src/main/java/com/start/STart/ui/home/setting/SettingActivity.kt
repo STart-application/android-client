@@ -73,7 +73,7 @@ class SettingActivity : AppCompatActivity() {
             logout()
         }
 
-        binding.toolbar.icBack.setOnClickListener { finish() }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun logout() = lifecycleScope.launch(Dispatchers.IO) {
