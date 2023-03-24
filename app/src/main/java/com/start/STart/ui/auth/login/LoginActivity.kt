@@ -51,14 +51,10 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginResult.observe(this) {
             if(it.isSuccessful) {
                 viewModel.loadMember()
-
-            } else {
-                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.loadMemberResult.observe(this) {
             if(it.isSuccessful) {
-                Toast.makeText(this, "${it.data as MemberData}", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, HomeActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 })
@@ -69,10 +65,6 @@ class LoginActivity : AppCompatActivity() {
     private fun login(studentId: String, password: String) {
         if (isInputValid) {
             viewModel.login(studentId, password)
-//            startActivity(Intent(this, HomeActivity::class.java).apply {
-//                putExtra(Constants.SIGN_IN, true)
-//            })
-//            finish()
         } else {
             showSignInFailText()
         }

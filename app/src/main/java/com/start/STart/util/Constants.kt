@@ -16,6 +16,8 @@ object Constants {
     const val KEY_REFRESH_TOKEN = "key_refresh_token"
     const val KEY_MEMBER_DATA = "key_member_data"
 
+    const val KEY_AGREE_WITHOUT_LOGIN = "key_agree_without_login"
+
     // API: *변경 금지*
     const val KEY_API_STUDENT_NO = "studentNo"
     const val KEY_API_PASSWORD = "appPassword"

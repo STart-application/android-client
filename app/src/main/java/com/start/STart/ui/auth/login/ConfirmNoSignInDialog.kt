@@ -7,9 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withCreated
 import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogNoSignInBinding
 import com.start.STart.ui.home.HomeActivity
+import com.start.STart.util.Constants
+import com.start.STart.util.PreferenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ConfirmNoSignInDialog : DialogFragment() {
 
@@ -24,8 +31,13 @@ class ConfirmNoSignInDialog : DialogFragment() {
         }
 
         binding.btnConfirm.setOnClickListener {
-            startActivity(Intent(context, HomeActivity::class.java))
-            activity?.finish()
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    PreferenceManager.putBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN, true)
+                }
+                startActivity(Intent(context, HomeActivity::class.java))
+                activity?.finish()
+            }
         }
         binding.btnCancel.setOnClickListener {
             dismiss()

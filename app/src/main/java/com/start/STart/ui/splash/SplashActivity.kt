@@ -3,6 +3,7 @@ package com.start.STart.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.input.key.Key.Companion.I
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
@@ -16,6 +17,7 @@ import com.start.STart.util.PreferenceManager
 import com.start.STart.util.TokenHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
@@ -39,8 +41,7 @@ class SplashActivity : AppCompatActivity() {
         if(isSuccessful) {
             loadMember()
         } else {
-            startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java))
-            finish()
+            checkAgreeWithoutLogin()
         }
     }
 
@@ -48,8 +49,22 @@ class SplashActivity : AppCompatActivity() {
         val result = MemberDataHelper.readMember()
         if(result.isSuccessful) {
             PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, result.data as MemberData)
-            startActivity(Intent(applicationContext, HomeActivity::class.java))
-            finish()
+            withContext(Dispatchers.Main) {
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                finish()
+            }
+        } else {
+            checkAgreeWithoutLogin()
+        }
+    }
+
+    //
+    private suspend fun checkAgreeWithoutLogin() {
+        if(PreferenceManager.getBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN)) {
+            withContext(Dispatchers.Main) {
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                finish()
+            }
         } else {
             startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java))
             finish()

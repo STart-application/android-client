@@ -63,6 +63,16 @@ object PreferenceManager {
         return pref.getString(key, "") ?: ""
     }
 
+    suspend fun putBoolean(key: String, value: Boolean) {
+        pref.edit()
+            .putBoolean(key, value)
+            .apply()
+    }
+
+    suspend fun getBoolean(key: String): Boolean {
+        return pref.getBoolean(key, false)
+    }
+
     suspend fun clear() {
         pref.edit()
             .clear()
