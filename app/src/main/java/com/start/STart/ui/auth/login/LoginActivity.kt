@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityLoginBinding
 import com.start.STart.ui.auth.register.PolicyActivity
@@ -17,15 +18,26 @@ import com.start.STart.util.Constants
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel: LoginViewModel by viewModels()
+
+    private var flagRestPassword: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        init()
         initView()
         initViewModelListeners()
     }
 
+    private fun init(){
+        flagRestPassword = intent.getBooleanExtra(Constants.FLAG_RESET_PASSWORD, false)
+    }
+
     private fun initView() {
         binding.btnLogin.isEnabled = true // TODO: 유효성 검증 필요
+        if(flagRestPassword) {
+            binding.textResult.text = "비밀번호가 재설정되었습니다.\n다시 로그인 해주세요!"
+        }
         initToolbar()
         initViewListeners()
     }
@@ -51,6 +63,8 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginResult.observe(this) {
             if(it.isSuccessful) {
                 viewModel.loadMember()
+            } else {
+                binding.textResult.text = it.message
             }
         }
         viewModel.loadMemberResult.observe(this) {
@@ -66,19 +80,11 @@ class LoginActivity : AppCompatActivity() {
         if (isInputValid) {
             viewModel.login(studentId, password)
         } else {
-            showSignInFailText()
+            binding.textResult.text = resources.getString(R.string.sign_in_fail)
         }
     }
 
     private val isInputValid: Boolean
         get() = binding.inputStudentId.text.toString().isNotBlank() and
                 binding.inputPassword.text.toString().isNotBlank()
-
-    private fun showSignInFailText() {
-        binding.textSignInFail.visibility = View.VISIBLE
-    }
-
-    private fun hideSignInFailText() {
-        binding.textSignInFail.visibility = View.INVISIBLE
-    }
 }

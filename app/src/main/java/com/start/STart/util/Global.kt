@@ -51,6 +51,15 @@ fun View.showRightBalloon(message: String?) {
         .showAlignRight(this)
 }
 
+fun View.showTopBalloon(message: String?) {
+    Balloon.Builder(this.context)
+        .setText(message.toString())
+        .setPadding(8)
+        .setBackgroundColor(resources.getColor(R.color.dream_purple))
+        .build()
+        .showAlignTop(this)
+}
+
 fun Context.openCustomTab(url: String) {
     CustomTabsIntent.Builder()
         .build()
