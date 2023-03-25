@@ -44,12 +44,22 @@ class StudentCardUploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
-        initViewListeners()
-        initViewModelListeners()
+        initView()
     }
 
     private fun init() {
         registerData = intent.getParcelableExtra(key = Constants.KEY_REGISTER_DATA)!!
+    }
+
+    private fun initView() {
+        initToolbar()
+        initViewListeners()
+        initViewModelListeners()
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "학생증 인증"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initViewListeners() {

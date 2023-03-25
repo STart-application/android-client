@@ -14,20 +14,30 @@ class PolicyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initView()
+    }
+
+    private fun initView(){
+        initToolbar()
+
         initViewListeners()
     }
 
     private fun initViewListeners() {
         updateCheckAllCheckBox()
         linkPolicy()
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this, StudentInfoInputActivity::class.java))
         }
         binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
             binding.btnNext.isEnabled = isChecked
+        }
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "약관동의"
+        binding.toolbar.btnBack.setOnClickListener {
+            finish()
         }
     }
 

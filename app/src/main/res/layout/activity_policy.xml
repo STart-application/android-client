@@ -1,116 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.auth.register.PolicyActivity">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.16" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_logo"
-        android:layout_width="157dp"
-        android:layout_height="76dp"
-        android:src="@drawable/logo_dream"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/Theme.Dream.Typeface_Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginTop="69dp"
-        android:text="어플리케이션 사용을 위한 약관 동의가 필요해요."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_logo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_check"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_logo"
+                android:layout_width="157dp"
+                android:layout_height="76dp"
+                android:layout_marginBottom="@dimen/dream_logo_margin_bottom"
+                android:src="@drawable/logo_dream"
+                app:layout_constraintBottom_toTopOf="@id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_logo"
+                app:layout_constraintVertical_bias="0" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/check_all"
-            style="@style/Theme.Dream.CheckBox_Bold"
-            android:text="전체 동의하기"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/Theme.Dream.Typeface_Body_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="69dp"
+                android:text="어플리케이션 사용을 위한 약관 동의가 필요해요."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
-        <View
-            android:id="@+id/line_1"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="12dp"
-            android:background="#E9E9E9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/check_all" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_check"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/check_privacy_policy"
-            style="@style/Theme.Dream.CheckBox"
-            android:layout_marginTop="22dp"
-            android:text="개인정보처리방침"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line_1" />
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_all"
+                    style="@style/Theme.Dream.CheckBox_Bold"
+                    android:text="전체 동의하기"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/text_more_privacy"
-            style="@style/Theme.Dream.Typeface_Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="자세히 보기 >"
-            android:textColor="@color/dream_typeface_gray"
-            app:layout_constraintBottom_toBottomOf="@id/check_privacy_policy"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/check_privacy_policy" />
+                <View
+                    android:id="@+id/line_1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#E9E9E9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/check_all" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/check_service"
-            style="@style/Theme.Dream.CheckBox"
-            android:layout_marginTop="18dp"
-            android:text="서비스 이용약관"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/check_privacy_policy" />
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_privacy_policy"
+                    style="@style/Theme.Dream.CheckBox"
+                    android:layout_marginTop="22dp"
+                    android:text="개인정보처리방침"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line_1" />
 
-        <TextView
-            android:id="@+id/text_more_service"
-            style="@style/Theme.Dream.Typeface_Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="자세히 보기 >"
-            android:textColor="@color/dream_typeface_gray"
-            app:layout_constraintBottom_toBottomOf="@id/check_service"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/check_service" />
+                <TextView
+                    android:id="@+id/text_more_privacy"
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="자세히 보기 >"
+                    android:textColor="@color/dream_typeface_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/check_privacy_policy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/check_privacy_policy" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/check_service"
+                    style="@style/Theme.Dream.CheckBox"
+                    android:layout_marginTop="18dp"
+                    android:text="서비스 이용약관"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/check_privacy_policy" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_next"
-        style="@style/Theme.Dream.Button_Primary"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="@dimen/dream_layout_margin_vertical"
-        android:enabled="false"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_more_service"
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="자세히 보기 >"
+                    android:textColor="@color/dream_typeface_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/check_service"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/check_service" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next"
+                style="@style/Theme.Dream.Button_Primary"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="@dimen/dream_layout_margin_vertical"
+                android:enabled="false"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout>
