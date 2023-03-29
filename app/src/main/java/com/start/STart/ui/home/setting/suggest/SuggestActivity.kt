@@ -43,6 +43,12 @@ class SuggestActivity : AppCompatActivity() {
             TYPE_ETC -> "기타 제안"
             else -> ""
         }
+        
+        var state = false
+        binding.btnAddImage.setOnClickListener {
+            state = !state
+            onImageStateChanged(state)
+        }
     }
 
     private fun initViewListeners() {
@@ -60,6 +66,15 @@ class SuggestActivity : AppCompatActivity() {
         }
         binding.btnCancel.setOnClickListener { finish() }
         binding.toolbar.btnBack.setOnClickListener { finish() }
+    }
+
+    private fun onImageStateChanged(added: Boolean) {
+        binding.btnAddImage.setBackgroundResource(if(added) R.drawable.background_suggest_add_image else R.drawable.background_round_22_5)
+        val color = resources.getColor(if(added) R.color.dream_purple else R.color.dream_gray)
+        binding.imagePhoto.setColorFilter(color)
+        binding.textAddImage.setTextColor(color)
+        binding.textAddImage.text = if(added) "사진 추가됨" else "사진 추가"
+
     }
 
     private val isInputValid: Boolean

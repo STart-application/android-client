@@ -55,12 +55,14 @@
                 android:paddingVertical="12.5dp"
                 android:textColorHint="@color/dream_gray" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
+                android:id="@+id/btn_add_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginTop="9dp"
                 android:background="@drawable/background_round_22_5"
+                tools:background="@drawable/background_suggest_add_image"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingVertical="6dp"
@@ -68,11 +70,13 @@
                 android:paddingEnd="15dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/ic_photo" />
 
                 <TextView
+                    android:id="@+id/text_add_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -81,7 +85,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
