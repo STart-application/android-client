@@ -5,7 +5,6 @@ import android.util.Log
 import com.google.gson.JsonParser
 import com.google.gson.JsonSyntaxException
 import com.start.STart.api.ApiClient
-import com.start.STart.api.ApiClient.enableToken
 import com.start.STart.api.ApiError
 import com.start.STart.api.auth.response.TokenData
 import java.nio.charset.StandardCharsets
@@ -31,7 +30,7 @@ object TokenHelper {
             val res = ApiClient.authService.verifyAccessToken("Bearer $accessToken")
             if(res.isSuccessful) {
                 Log.d(TAG, "verifyToken: 인증 성공")
-                enableToken(accessToken)
+                ApiClient.enableToken(accessToken)
                 return true
             } else {
                 val errorBodyString = res.errorBody()?.string()

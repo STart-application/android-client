@@ -14,9 +14,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -61,13 +62,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginTop="9dp"
+                android:animateLayoutChanges="true"
                 android:background="@drawable/background_round_22_5"
-                tools:background="@drawable/background_suggest_add_image"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingVertical="6dp"
                 android:paddingStart="10dp"
-                android:paddingEnd="15dp">
+                android:paddingEnd="15dp"
+                tools:background="@drawable/background_suggest_add_image">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_photo"
@@ -84,6 +86,15 @@
                     android:textColor="@color/dream_gray"
                     android:textSize="12sp"
                     android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    app:srcCompat="@drawable/ic_delete" />
 
             </LinearLayout>
 
@@ -105,33 +116,33 @@
                 android:text="1. 모든 문의는 익명입니다.\n2. 답변을 받으시려면 연락처(이메일, 휴대전화)를 남겨주세요."
                 android:textColor="@color/dream_gray" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:id="@+id/layout_add_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-                android:layout_marginTop="57dp"
-                android:layout_marginBottom="38dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    style="@style/Theme.Dream.Button_Primary"
-                    android:layout_width="0dp"
-                    android:id="@+id/btn_send"
-                    android:layout_height="32dp"
-                    android:layout_weight="1"
-                    android:text="보내기" />
-
-                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_cancel"
                     style="@style/Theme.Dream.Button_Secondary"
                     android:layout_width="0dp"
-                    android:id="@+id/btn_cancel"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="10"
                     android:text="취소" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_send"
+                    style="@style/Theme.Dream.Button_Primary"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="21"
+                    android:text="보내기" />
+
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

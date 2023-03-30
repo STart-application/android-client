@@ -116,4 +116,17 @@ dependencies {
 
     // 오픈소스 라이선스
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+
+    // Toasty
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
+
+
+    // Kto
+    //implementation "io.ktor:ktor-client-core:1.6.3"
+    //implementation "io.ktor:ktor-client-android:1.6.3"
+    //implementation "io.ktor:ktor-client-serialization:1.6.3"
+    //implementation "io.ktor:ktor-client-logging:1.6.3"
+    //implementation "io.ktor:ktor-client-gson:1.6.3"
 }

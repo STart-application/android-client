@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.oss.licenses.OssLicensesActivity
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.start.STart.R
 import com.start.STart.api.ApiClient
@@ -125,7 +124,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun startSuggestActivity(type: String) {
         startActivity(Intent(this, SuggestActivity::class.java).apply {
-            putExtra(SuggestActivity.TYPE_SUGGEST, type)
+            putExtra(SuggestActivity.KEY_TYPE_SUGGEST, type)
         })
     }
 }

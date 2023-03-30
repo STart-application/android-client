@@ -26,6 +26,7 @@ class LoginViewModel : ViewModel() {
             val res = ApiClient.authService.login(LoginRequest(studentId, password))
             if(res.isSuccessful) {
                 val tokenData = res.body()?.parseData(TokenData::class.java)
+                Log.d(null, "login: $tokenData")
                 tokenData?.let {
                     PreferenceManager.putString(Constants.KEY_REFRESH_TOKEN, it.refreshToken!!)
                     PreferenceManager.putString(Constants.KEY_ACCESS_TOKEN, it.accessToken!!)

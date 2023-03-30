@@ -16,7 +16,7 @@ interface AuthService {
     // 로그아웃
     @GET("auth/logout")
     suspend fun logout(
-        @Header("refresh") token: String,
+        @Header("Refresh") token: String,
     ): Response<ApiResponse>
 
     // 휴대폰 인증 요청
@@ -53,6 +53,6 @@ interface AuthService {
     @GET("auth/refresh")
     suspend fun issueAccessToken(
         @Header("Authorization") accessToken: String,
-        @Header("refresh") refreshToken: String,
+        @Header("Refresh") refreshToken: String,
     ): Response<ApiResponse>
 }

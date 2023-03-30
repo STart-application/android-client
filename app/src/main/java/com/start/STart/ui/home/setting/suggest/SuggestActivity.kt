@@ -1,22 +1,38 @@
 package com.start.STart.ui.home.setting.suggest
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
 import com.start.STart.R
+import com.start.STart.api.suggestion.request.SuggestRequest
 import com.start.STart.databinding.ActivitySuggestBinding
+import com.start.STart.util.AppException
+import com.start.STart.util.getPart
+import com.start.STart.util.px2dp
+import com.start.STart.util.uriToFile
+import es.dmoral.toasty.Toasty
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.FileOutputStream
 
 class SuggestActivity : AppCompatActivity() {
 
     companion object {
 
-        const val TYPE_SUGGEST = "type_suggest"
+        const val KEY_TYPE_SUGGEST = "key_type_suggest"
 
-        const val TYPE_FEATURE = "feature"
-        const val TYPE_ERROR = "error"
-        const val TYPE_ETC = "etc"
+        const val TYPE_FEATURE = "FEATURE"
+        const val TYPE_ERROR = "ERROR"
+        const val TYPE_ETC = "ETC"
     }
 
     private lateinit var type: String
@@ -24,16 +40,25 @@ class SuggestActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySuggestBinding.inflate(layoutInflater) }
     private val viewModel: SuggestViewModel by viewModels()
 
+    private var imageUploadState = false
+    private var uploadedImage: Uri? = null
+    private val imageUploadLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uploadedImage = uri
+        imageUploadState = uri != null
+        updateUploadButton()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         init()
         initView()
         initViewListeners()
+        initViewModelListeners()
     }
 
     private fun init() {
-        type = intent?.getStringExtra(TYPE_SUGGEST) ?: ""
+        type = intent?.getStringExtra(KEY_TYPE_SUGGEST) ?: ""
     }
 
     private fun initView() {
@@ -43,37 +68,76 @@ class SuggestActivity : AppCompatActivity() {
             TYPE_ETC -> "기타 제안"
             else -> ""
         }
-        
-        var state = false
+        initUploadButton()
+    }
+
+    private fun initUploadButton() {
         binding.btnAddImage.setOnClickListener {
-            state = !state
-            onImageStateChanged(state)
+            if(!imageUploadState) {
+                imageUploadLauncher.launch("image/*")
+            }
+        }
+
+        binding.btnDelete.setOnClickListener {
+            uploadedImage = null
+
+            imageUploadState = false
+            updateUploadButton()
         }
     }
 
     private fun initViewListeners() {
         binding.btnSend.setOnClickListener {
             if(isInputValid) {
-                viewModel.sendSuggestion()
+                val request = SuggestRequest(
+                    binding.inputTitle.text.toString(),
+                    binding.inputContent.text.toString(),
+                    type,
+                    getPart(this, uploadedImage)
+                )
+
+                viewModel.sendSuggestion(request)
             } else {
                 Balloon.Builder(this)
                     .setText("모든 입력칸을 채워주세요!")
                     .setPadding(8)
+                    .setWidth(px2dp(binding.btnSend.width.toFloat()).toInt())
+                    .setBalloonAnimation(BalloonAnimation.ELASTIC)
+                    .setAutoDismissDuration(1000L)
                     .setBackgroundColor(resources.getColor(R.color.dream_purple))
                     .build()
                     .showAlignTop(binding.btnSend)
+
             }
         }
         binding.btnCancel.setOnClickListener { finish() }
         binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
-    private fun onImageStateChanged(added: Boolean) {
-        binding.btnAddImage.setBackgroundResource(if(added) R.drawable.background_suggest_add_image else R.drawable.background_round_22_5)
-        val color = resources.getColor(if(added) R.color.dream_purple else R.color.dream_gray)
+    private fun initViewModelListeners() {
+        viewModel.suggestionResult.observe(this) {
+            // TODO: 토스트 메세지 수정
+            if(it.isSuccessful) {
+                Toasty.success(this, "성공적으로 전달하였습니다!", 10000).show()
+                finish()
+            } else {
+                Toasty.success(this, AppException.UNEXPECTED.title, 10000).show()
+            }
+        }
+    }
+
+    private fun updateUploadButton() {
+
+        binding.btnAddImage.setBackgroundResource(if(imageUploadState) R.drawable.background_suggest_add_image else R.drawable.background_round_22_5)
+
+        binding.btnDelete.visibility = if(imageUploadState) View.VISIBLE else View.GONE
+
+
+        val color = resources.getColor(if(imageUploadState) R.color.dream_purple else R.color.dream_gray)
         binding.imagePhoto.setColorFilter(color)
         binding.textAddImage.setTextColor(color)
-        binding.textAddImage.text = if(added) "사진 추가됨" else "사진 추가"
+
+        binding.textAddImage.text = if(imageUploadState) "사진 추가됨" else "사진 추가"
 
     }
 
