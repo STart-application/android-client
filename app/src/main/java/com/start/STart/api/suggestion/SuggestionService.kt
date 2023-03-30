@@ -14,6 +14,6 @@ interface SuggestionService {
     @Multipart
     suspend fun suggest(
         @PartMap data: HashMap<String, RequestBody>,
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part?
     ): Response<ApiResponse>
 }
