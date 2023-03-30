@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.rent
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -17,6 +18,11 @@ class RentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
+
+        // TODO: 테스트
+        binding.imageProfile.setOnClickListener {
+            startActivity(Intent(this, RentCalendarActivity::class.java))
+        }
     }
 
     private fun initView() {
