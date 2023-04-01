@@ -49,11 +49,10 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
             val dateList = mutableListOf<RentDateItem>()
             var currentDate = startDate
 
-            val random = Random()
             while (!currentDate.isAfter(endDate)) {
                 val calendar = Calendar.getInstance()
                 calendar.set(currentDate.year, currentDate.monthValue - 1, currentDate.dayOfMonth)
-                dateList.add(RentDateItem(calendar, random.nextInt(70), 100))
+                dateList.add(RentDateItem(calendar, 0, 0))
                 currentDate = currentDate.plusDays(1)
             }
 

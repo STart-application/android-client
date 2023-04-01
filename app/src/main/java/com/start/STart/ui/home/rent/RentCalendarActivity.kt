@@ -12,6 +12,7 @@ import com.start.STart.databinding.ActivityRentCalendarBinding
 import com.start.STart.ui.home.rent.calendar.RentCalendarAdapter
 import com.start.STart.ui.home.rent.calendar.RentDateItem
 import com.start.STart.ui.home.rent.calendar.RentViewPagerAdapter
+import com.start.STart.util.DateFormatter
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.TemporalAdjusters
@@ -62,9 +63,9 @@ class RentCalendarActivity : AppCompatActivity() {
 
     @Suppress("unchecked_cast")
     private fun initViewModelListeners() {
-        viewModel.loadCalendarResult.observe(this) {
-            val viewPagerIndex = it.first
-            val resultModel = it.second
+        viewModel.loadCalendarResult.observe(this) { pair ->
+            val viewPagerIndex = pair.first
+            val resultModel = pair.second
 
             if(resultModel.isSuccessful) {
                 val list = resultModel.data as List<RentData>
@@ -72,32 +73,31 @@ class RentCalendarActivity : AppCompatActivity() {
                 if(list.isNotEmpty()) {
                     val viewHolder  = (binding.monthViewPager.getChildAt(0) as RecyclerView?)?.findViewHolderForAdapterPosition(viewPagerIndex) as RentViewPagerAdapter.RentViewPagerViewHolder?
 
+                    val sortedList = list.sortedBy { it.startTime }
+
+                    val rentDataByDate = sortedList.groupBy { rentData ->
+                        rentData.startTime
+                    }
+
                     viewHolder?.calendarAdapter?.list?.let { it ->
-                        it.forEach { rentDateItem ->
-                            rentDateItem.count = list.filter {  rentData ->
-                                Log.d(null, "initViewModelListeners: ${rentData.startTime}, ${rentData.endTime}, ${SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(rentDateItem.date.time)} ${isDateBetween(rentData.startTime, rentData.endTime, rentDateItem.date)}")
-                                isDateBetween(rentData.startTime, rentData.endTime, rentDateItem.date)
-                            }.sumOf { rentData ->
-                                rentData.account
+                        it.forEachIndexed { index, rentDateItem ->
+                            val dateKey = DateFormatter.format(rentDateItem.date.time)
+                            val rentDataList = rentDataByDate[dateKey]
+                            if (rentDataList != null) {
+                                rentDateItem.count = rentDataList.sumOf { rentData -> rentData.account }
+                            } else {
+                                rentDateItem.count = 0
                             }
                             rentDateItem.total = 10
+                            viewHolder.calendarAdapter.notifyItemChanged(index)
                         }
                     }
-                    viewHolder?.calendarAdapter?.notifyDataSetChanged()
+
                 }
                 Log.d(null, "initViewModelListeners: $list")
             } else {
                 Log.d(null, "initViewModelListeners: false")
             }
         }
-    }
-
-    fun isDateBetween(startDate: String, endDate: String, targetDate: Calendar): Boolean {
-        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val start = format.parse(startDate)
-        val end = format.parse(endDate)
-        val target = format.parse(format.format(targetDate.time))
-
-        return target in start..end
     }
 }
