@@ -28,9 +28,4 @@ object Constants {
 
     const val KEY_AUTHORIZATION = "Authorization"
 
-    // 예외 처리
-    const val EXCEPTION_TIME_OUT = "timeout"
-    const val EXCEPTION_CONNECTION = "connection"
-    const val EXCEPTION_IOEXCEPTION = "io_exception"
-    const val EXCEPTION_UNEXPECTED = "unexpected"
 }

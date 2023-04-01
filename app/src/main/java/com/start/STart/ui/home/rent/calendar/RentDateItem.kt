@@ -4,6 +4,6 @@ import java.util.*
 
 data class RentDateItem(
     val date: Calendar,
-    val count: Int,
-    val total: Int,
+    var count: Int,
+    var total: Int,
 )

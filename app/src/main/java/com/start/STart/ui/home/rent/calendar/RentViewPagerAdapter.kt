@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
+import com.start.STart.api.rent.response.RentData
 import com.start.STart.databinding.FragmentMonthBinding
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
@@ -35,6 +36,7 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
 
         fun updateCalendar(calendar: Calendar) {
             calendarAdapter.list = getDateList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1)
+            binding.root.requestLayout()
         }
 
 
@@ -43,6 +45,7 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
             val startDate = realStartDate
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
             val endDate = realStartDate.with(TemporalAdjusters.lastDayOfMonth())
+                .with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY))
             val dateList = mutableListOf<RentDateItem>()
             var currentDate = startDate
 
@@ -58,8 +61,13 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
         }
     }
 
+    fun update(list: List<RentData>) {
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RentViewPagerAdapter.RentViewPagerViewHolder {
         val binding = FragmentMonthBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return RentViewPagerViewHolder(binding)
     }
 

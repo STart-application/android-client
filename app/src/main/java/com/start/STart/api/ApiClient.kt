@@ -6,6 +6,7 @@ import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
 import com.start.STart.api.banner.BannerService
 import com.start.STart.api.member.MemberService
+import com.start.STart.api.rent.RentService
 import com.start.STart.api.suggestion.SuggestionService
 import com.start.STart.util.TokenHelper
 import com.start.STart.util.gson
@@ -36,10 +37,11 @@ object ApiClient {
             .build()
     }
 
-    val authService = retrofit.create(AuthService::class.java)
-    val memberService = retrofit.create(MemberService::class.java)
-    val bannerService = retrofit.create(BannerService::class.java)
-    val suggestionService = retrofit.create(SuggestionService::class.java)
+    val authService: AuthService = retrofit.create(AuthService::class.java)
+    val memberService: MemberService = retrofit.create(MemberService::class.java)
+    val bannerService: BannerService = retrofit.create(BannerService::class.java)
+    val suggestionService: SuggestionService = retrofit.create(SuggestionService::class.java)
+    val rentService: RentService = retrofit.create(RentService::class.java)
 
     fun enableToken(token: String) { // TokenHelper에서만 호출
         tokenInterceptor.enableToken(token)

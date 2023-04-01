@@ -45,13 +45,13 @@ class RentActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         binding.rvRentItem.adapter = rentItemAdapter.apply {
             list = listOf(
-                RentItem("캐노피", R.drawable.ic_canopy),
-                RentItem("듀라테이블", R.drawable.ic_dura_table),
-                RentItem("앰프&마이크", R.drawable.ic_amp),
-                RentItem("리드선", R.drawable.ic_lead_wire),
-                RentItem("L카", R.drawable.ic_cart),
-                RentItem("의자", R.drawable.ic_chair),
-                RentItem("돗자리", R.drawable.ic_chair),
+                RentItem("CANOPY", "캐노피", R.drawable.ic_canopy),
+                RentItem("TABLE", "듀라테이블", R.drawable.ic_dura_table),
+                RentItem("AMP", "앰프&마이크", R.drawable.ic_amp),
+                RentItem("WIRE", "리드선", R.drawable.ic_lead_wire),
+                RentItem("CART","L카", R.drawable.ic_cart),
+                RentItem("CHAIR", "의자", R.drawable.ic_chair),
+                RentItem("", "돗자리", R.drawable.ic_chair),// TODO: 대여 아이템 추가
             )
         }
         binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(10f).toInt()))

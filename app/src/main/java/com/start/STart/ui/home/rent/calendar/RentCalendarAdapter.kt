@@ -40,7 +40,6 @@ class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendar
                 it.progressbar.visibility = View.VISIBLE
 
                 val percent = ((item.count.toFloat() / item.total) * 100).toInt()
-                Log.d(null, "onBindViewHolder: $percent")
                 it.progressbar.progress = percent
             }
 
