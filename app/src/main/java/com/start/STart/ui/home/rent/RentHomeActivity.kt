@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.rent
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityRentHomeBinding
+import com.start.STart.ui.home.rent.myrent.MyRentActivity
 import com.start.STart.util.IndentLeadingMarginSpan
 import com.start.STart.util.dp2px
 
@@ -36,6 +38,10 @@ class RentHomeActivity : AppCompatActivity() {
             setSpan(IndentLeadingMarginSpan(), 0, length, 0)
         }
 
+        binding.btnMyRent.setOnClickListener {
+            startActivity(Intent(this, MyRentActivity::class.java))
+        }
+
         initViewModelListeners()
     }
 
@@ -49,16 +55,17 @@ class RentHomeActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         binding.rvRentItem.adapter = rentItemAdapter.apply {
             list = listOf(
-                RentItem("CANOPY", "캐노피", R.drawable.ic_canopy),
-                RentItem("TABLE", "듀라테이블", R.drawable.ic_dura_table),
-                RentItem("AMP", "앰프&마이크", R.drawable.ic_amp),
-                RentItem("WIRE", "리드선", R.drawable.ic_lead_wire),
-                RentItem("CART","L카", R.drawable.ic_cart),
-                RentItem("CHAIR", "의자", R.drawable.ic_chair),
-                RentItem("", "돗자리", R.drawable.ic_chair),// TODO: 대여 아이템 추가
+                RentItem.MAT,
+                RentItem.SIMPLE_TABLE,
+                RentItem.TABLE,
+                RentItem.AMP,
+                RentItem.CANOPY,
+                RentItem.WIRE,
+                RentItem.CART,
+                RentItem.CHAIR,
             )
         }
-        binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(10f).toInt()))
+        binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(6f).toInt()))
     }
 
     private fun initViewModelListeners() {

@@ -129,8 +129,9 @@
                 android:nestedScrollingEnabled="false"
                 android:paddingHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:scrollbars="none"
+                android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3"
+                app:spanCount="4"
                 tools:itemCount="7"
                 tools:listitem="@layout/item_rent" />
 
@@ -138,6 +139,7 @@
                 style="@style/Theme.Dream.Typeface_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dream_red"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="안내사항" />
@@ -151,7 +153,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/rent_description"
-                android:textColor="@color/dream_gray" />
+                android:textColor="@color/dream_typeface_navy" />
 
         </LinearLayout>
 

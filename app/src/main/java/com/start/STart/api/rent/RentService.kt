@@ -19,4 +19,9 @@ interface RentService {
     suspend fun getItemCount(
         @Query("category") category: String,
     ): Response<ApiResponse>
+
+    @GET("rent")
+    suspend fun getMyRent(
+
+    ): Response<ApiResponse>
 }
