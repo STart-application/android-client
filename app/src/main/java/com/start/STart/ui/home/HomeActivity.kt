@@ -33,6 +33,7 @@ import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
+import com.start.STart.ui.home.membership.MemberShipActivity
 import com.start.STart.ui.home.rent.RentActivity
 import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
@@ -106,6 +107,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     MenuItem(title = "자취회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
                         // TODO: 액티비티 이동 추가
+                        startActivity(Intent(applicationContext, MemberShipActivity::class.java))
                     }
                 }
                 Row(
