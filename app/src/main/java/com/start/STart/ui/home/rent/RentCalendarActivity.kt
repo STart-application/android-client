@@ -33,10 +33,9 @@ class RentCalendarActivity : AppCompatActivity() {
         binding.monthViewPager.adapter = rentViewPagerAdapter
         binding.monthViewPager.offscreenPageLimit = 3
         binding.monthViewPager.setCurrentItem(rentViewPagerAdapter.baseIndex, false)
+        updateCalendar()
+
         binding.monthViewPager.setPageTransformer { page, position ->
-            val calendar = Calendar.getInstance()
-            calendar.add(Calendar.MONTH, binding.monthViewPager.currentItem - rentViewPagerAdapter.baseIndex)
-            binding.textMonthTitle.text = "${calendar.get(Calendar.MONTH) + 1}월 예약 현황"
 
         }
 
@@ -44,9 +43,13 @@ class RentCalendarActivity : AppCompatActivity() {
         binding.monthViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                val calendar = Calendar.getInstance()
-                calendar.add(Calendar.MONTH, binding.monthViewPager.currentItem - rentViewPagerAdapter.baseIndex)
-                viewModel.loadCalendar(position, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, "CANOPY")
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                if(state == ViewPager2.SCROLL_STATE_IDLE) {
+                    updateCalendar()
+                }
             }
         })
 
@@ -59,6 +62,14 @@ class RentCalendarActivity : AppCompatActivity() {
         }
 
         initViewModelListeners()
+    }
+
+    private fun updateCalendar(){
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MONTH, binding.monthViewPager.currentItem - rentViewPagerAdapter.baseIndex)
+
+        binding.textMonthTitle.text = "${calendar.get(Calendar.MONTH) + 1}월 예약 현황"
+        viewModel.loadCalendar(binding.monthViewPager.currentItem, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, "CANOPY")
     }
 
     @Suppress("unchecked_cast")
