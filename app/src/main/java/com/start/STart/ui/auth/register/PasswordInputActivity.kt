@@ -30,6 +30,7 @@ class PasswordInputActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        initToolbar()
         binding.inputPassword.addTextChangedListener {
             checkPassword()
         }
@@ -37,6 +38,13 @@ class PasswordInputActivity : AppCompatActivity() {
 
         binding.inputConfirmPassword.addTextChangedListener {
             checkPasswordConfirm()
+        }
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "비밀번호"
+        binding.toolbar.btnBack.setOnClickListener {
+            finish()
         }
     }
 

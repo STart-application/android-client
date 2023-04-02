@@ -34,6 +34,7 @@ class ResetPasswordAuthViewModel : ViewModel() {
                 */
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             // TODO: 에러 처리
         }
     }
@@ -56,6 +57,7 @@ class ResetPasswordAuthViewModel : ViewModel() {
             }
 
         } catch(e: Exception) {
+            e.printStackTrace()
             // TODO: 에러 처리
         }
     }

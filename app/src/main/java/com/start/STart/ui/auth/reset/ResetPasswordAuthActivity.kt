@@ -18,6 +18,11 @@ class ResetPasswordAuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initView()
+    }
+
+    private fun initView(){
+        initToolbar()
         initViewListeners()
         initViewModelListeners()
     }
@@ -40,6 +45,11 @@ class ResetPasswordAuthActivity : AppCompatActivity() {
             // TODO: 인증 코드 6자리 검증 절차 추가
             viewModel.verifyAuthCode(sentStudentId, binding.inputAuthCode.text.toString())
         }
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "비밀번호 재설정"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initViewModelListeners() {

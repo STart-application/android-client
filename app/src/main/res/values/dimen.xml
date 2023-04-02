@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <dimen name="dream_logo_margin_bottom">30dp</dimen>
+
     <dimen name="dream_button_corner_radius">5dp</dimen>
     <dimen name="dream_button_text_size">16sp</dimen>
     <dimen name="dream_button_text_size_small">12sp</dimen>

@@ -1,199 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.auth.register.StudentInfoInputActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolBar"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dream_action_bar_height"
-        android:background="@color/dream_action_bar_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_dream_back"
-            app:tint="@color/white" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="@string/register"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_logo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.16" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_logo"
+                android:layout_width="157dp"
+                android:layout_height="76dp"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginBottom="@dimen/dream_logo_margin_bottom"
+                android:src="@drawable/logo_dream"
+                app:layout_constraintBottom_toTopOf="@id/text_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_logo" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_logo"
-        android:layout_width="157dp"
-        android:layout_height="76dp"
-        android:src="@drawable/logo_dream"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="11dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/layout_input_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
-    <TextView
-        android:id="@+id/text_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="11dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="이름"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_input_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+            <TextView
+                android:id="@+id/text_student_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="11dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="학번"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
-    <TextView
-        android:id="@+id/text_student_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="11dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="학번"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+            <TextView
+                android:id="@+id/text_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="11dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="학과"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/layout_input_department"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
-    <TextView
-        android:id="@+id/text_department"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="11dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:text="학과"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_input_department"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+            <LinearLayout
+                android:id="@+id/layout_input_name"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dream_input_height"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/input_dream"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/text_student_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:id="@+id/layout_input_name"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dream_input_height"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/input_dream"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/text_student_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/input_name"
+                    style="@style/Theme.Dream.Typeface_Body_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="이름을 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColorHint="@color/dream_gray" />
+            </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/input_name"
-            style="@style/Theme.Dream.Typeface_Body_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="이름을 입력하세요."
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColorHint="@color/dream_gray" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_input_student_id"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dream_input_height"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/input_dream"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/text_department"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:id="@+id/layout_input_student_id"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dream_input_height"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/input_dream"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/text_department"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/input_student_id"
+                    style="@style/Theme.Dream.Typeface_Body_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="학번 8자리를 입력하세요."
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="8"
+                    android:maxLines="1"
+                    android:textColorHint="@color/dream_gray" />
+            </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/input_student_id"
-            style="@style/Theme.Dream.Typeface_Body_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="학번 8자리를 입력하세요."
-            android:imeOptions="actionDone"
-            android:inputType="number"
-            android:maxLength="8"
-            android:maxLines="1"
-            android:textColorHint="@color/dream_gray" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_input_department"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dream_input_height"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/input_dream"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/btnNext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:id="@+id/layout_input_department"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/dream_input_height"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/input_dream"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/btnNext"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+                <com.skydoves.powerspinner.PowerSpinnerView
+                    android:id="@+id/input_department"
+                    style="@style/Theme.Dream.Typeface_Body_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:hint="학과를 입력하세요."
+                    android:textColorHint="@color/dream_gray"
+                    app:spinner_arrow_tint="@color/dream_purple"
+                    app:spinner_item_array="@array/department_1"
+                    app:spinner_popup_background="@drawable/input_dream"
+                    app:spinner_popup_height="130dp"
+                    app:spinner_popup_padding="8dp" />
+            </LinearLayout>
 
-        <com.skydoves.powerspinner.PowerSpinnerView
-            android:id="@+id/input_department"
-            style="@style/Theme.Dream.Typeface_Body_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:hint="학과를 입력하세요."
-            android:textColorHint="@color/dream_gray"
-            app:spinner_arrow_tint="@color/dream_purple"
-            app:spinner_item_array="@array/department_1"
-            app:spinner_popup_background="@drawable/input_dream"
-            app:spinner_popup_height="130dp"
-            app:spinner_popup_padding="8dp" />
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNext"
+                style="@style/Theme.Dream.Button_Primary"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="30dp"
+                android:enabled="false"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnNext"
-        style="@style/Theme.Dream.Button_Primary"
-        android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-        android:layout_marginBottom="30dp"
-        android:enabled="false"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout>

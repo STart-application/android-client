@@ -26,8 +26,6 @@ class VerifyCodeActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
         initView()
-        initViewListeners()
-        initViewModelListeners()
     }
 
     private fun init() {
@@ -35,11 +33,19 @@ class VerifyCodeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        initToolbar()
         binding.btnNext.isEnabled = true // TODO: 테스트 끝나면 삭제
 
         binding.inputPhone.addTextChangedListener {
             binding.btnRequest.isEnabled = Regex(AppRegex.PHONE_VALIDATE).matches(it.toString())
         }
+        initViewListeners()
+        initViewModelListeners()
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "휴대폰 인증"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initViewListeners() {
