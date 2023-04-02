@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.membership.MemberShipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.rent.RentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.rent.RentCalendarActivity"
             android:exported="false" />
         <activity
@@ -25,10 +31,6 @@
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.Dream.ActionBar" />
-        <activity
-            android:name=".ui.home.rent.RentActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.setting.suggest.SuggestActivity"
             android:exported="false"
