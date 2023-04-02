@@ -36,12 +36,18 @@
 
                 android:textColor="@color/dream_purple_ghost" />
 
-            <View
-                android:id="@+id/tab_1"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
                 android:layout_gravity="bottom"
-                android:background="@color/dream_purple_ghost" />
+                android:layout_height="5dp">
+                <View
+                    android:id="@+id/tab_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/dream_purple_ghost" />
+            </FrameLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -62,13 +68,17 @@
                 android:text="FAQ"
                 android:textColor="@color/dream_purple_ghost" />
 
-            <View
-                android:id="@+id/tab_2"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
                 android:layout_gravity="bottom"
-                android:background="@color/dream_purple_ghost" />
-
+                android:layout_height="5dp">
+                <View
+                    android:id="@+id/tab_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/dream_purple_ghost" />
+            </FrameLayout>
         </LinearLayout>
 
 
@@ -91,12 +101,17 @@
                 android:text="학생회 구성/기능"
                 android:textColor="@color/dream_purple_ghost" />
 
-            <View
-                android:id="@+id/tab_3"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
                 android:layout_gravity="bottom"
-                android:background="@color/dream_purple_ghost" />
+                android:layout_height="5dp">
+                <View
+                    android:id="@+id/tab_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/dream_purple_ghost" />
+            </FrameLayout>
         </LinearLayout>
 
 

@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.festival
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,9 +24,19 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         (supportFragmentManager.findFragmentById(R.id.fragmentMap) as SupportMapFragment)
             .getMapAsync(this)
 
-        binding.btnBack.setOnClickListener {
-            finish()
+        initToolbar()
+        initMenu()
+    }
+
+    private fun initMenu() {
+        binding.menu2.setOnClickListener {
+            startActivity(Intent(this, FestivalInfoActivity::class.java))
         }
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.btnBack.setOnClickListener { finish() }
+        binding.toolbar.textTitle.text = "어의대동제"
     }
 
     override fun onMapReady(map: GoogleMap) {
