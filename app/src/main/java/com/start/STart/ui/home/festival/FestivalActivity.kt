@@ -6,6 +6,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.start.STart.R
@@ -21,17 +22,21 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
         (supportFragmentManager.findFragmentById(R.id.fragmentMap) as SupportMapFragment)
             .getMapAsync(this)
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(sydney)
-                .title("시드니 마커")
-        )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val latLng = LatLng(37.6333, 127.0778)
+        val position = CameraPosition.Builder()
+            .target(latLng)
+            .zoom(17f)
+            .build()
+
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
     }
 }
