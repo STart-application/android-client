@@ -31,6 +31,7 @@ class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendar
 
     override fun onBindViewHolder(holder: RentCalendarViewHolder, position: Int) {
         val item = list[position]
+        Log.d(null, "onBindViewHolder: 호출")
 
         holder.binding.let {
             it.textDate.text = item.date.get(Calendar.DATE).toString()
@@ -40,7 +41,6 @@ class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendar
                 it.progressbar.visibility = View.VISIBLE
 
                 val percent = ((item.count.toFloat() / item.total) * 100).toInt()
-                Log.d(null, "onBindViewHolder: $percent")
                 it.progressbar.progress = percent
             }
 

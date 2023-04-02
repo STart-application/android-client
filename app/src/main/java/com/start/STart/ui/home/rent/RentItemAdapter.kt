@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.rent
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +15,15 @@ class RentItemAdapter : RecyclerView.Adapter<RentItemAdapter.RentItemViewHolder>
 
     inner class RentItemViewHolder(val binding: ItemRentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RentItem) {
-            binding.textItemName.text = item.name
+            binding.textItemName.text = item.category
             binding.imageItem.setImageResource(item.drawable)
+
+            binding.root.setOnClickListener {
+                val context = binding.root.context
+                context.startActivity(Intent(context, RentCalendarActivity::class.java).apply {
+                    putExtra(RentItem.KEY_RENT_ITEM_TYPE, item.category)
+                })
+            }
         }
     }
 

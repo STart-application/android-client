@@ -7,7 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RentItemDecoration(var spanCount: Int = 3, var spacing: Int) : RecyclerView.ItemDecoration() {
+class RentItemDecoration(var spanCount: Int = 4, var spacing: Int) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
         view: View,

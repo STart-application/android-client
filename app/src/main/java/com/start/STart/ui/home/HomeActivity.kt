@@ -2,7 +2,6 @@ package com.start.STart.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.motion.widget.MotionScene.Transition.TransitionOnClick
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
@@ -33,6 +31,7 @@ import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
+import com.start.STart.ui.home.rent.RentHomeActivity
 import com.start.STart.ui.home.membership.MemberShipActivity
 import com.start.STart.ui.home.rent.RentActivity
 import com.start.STart.ui.home.setting.SettingActivity
@@ -114,7 +113,7 @@ class HomeActivity : AppCompatActivity() {
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     MenuItem(title = "상시사업 예약", drawable = R.drawable.ic_home_menu_4, bottomStartRadius = 20.dp) {
-                        startActivity(Intent(applicationContext, RentActivity::class.java))
+                        startActivity(Intent(applicationContext, RentHomeActivity::class.java))
                     }
                     MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5) {
                         startActivity(Intent(applicationContext, FestivalActivity::class.java))
