@@ -1,16 +1,21 @@
 package com.start.STart.ui.home.rent
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.view.View
+import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.start.STart.R
-import com.start.STart.databinding.ActivityRentBinding
+import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityRentHomeBinding
 import com.start.STart.util.IndentLeadingMarginSpan
 import com.start.STart.util.dp2px
 
 class RentHomeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRentHomeBinding.inflate(layoutInflater) }
+    private val viewModel: RentHomeViewModel by viewModels()
 
     private val rentItemAdapter by lazy { RentItemAdapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +23,8 @@ class RentHomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
+
+        viewModel.loadMemberData()
     }
 
     private fun initView() {
@@ -28,6 +35,8 @@ class RentHomeActivity : AppCompatActivity() {
         binding.textDescription.text = SpannableStringBuilder(resources.getString(R.string.rent_description)).apply {
             setSpan(IndentLeadingMarginSpan(), 0, length, 0)
         }
+
+        initViewModelListeners()
     }
 
     private fun initToolbar() {
@@ -50,5 +59,35 @@ class RentHomeActivity : AppCompatActivity() {
             )
         }
         binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(10f).toInt()))
+    }
+
+    private fun initViewModelListeners() {
+        viewModel.memberData.observe(this) {
+            if(it.isSuccessful) {
+                bindMemberData(it.data as MemberData)
+            } else {
+                enableNotLogin()
+            }
+        }
+    }
+
+    private fun enableNotLogin() {
+        binding.layoutProfile.visibility = View.GONE
+        binding.layoutLogin.visibility = View.VISIBLE
+
+        binding.imageProfile.setColorFilter(ContextCompat.getColor(this, R.color.dream_gray_light))
+        binding.btnMyRent.backgroundTintList = ContextCompat.getColorStateList(this, R.color.dream_gray_light_d)
+        binding.btnMyRent.setTextColor(ContextCompat.getColor(this, R.color.dream_gray))
+        binding.btnMyRent.isEnabled = false
+    }
+
+    private fun bindMemberData(memberData: MemberData) {
+        binding.layoutProfile.visibility = View.VISIBLE
+        binding.layoutLogin.visibility = View.GONE
+
+        binding.textName.text= memberData.name
+        binding.textStudentId.text = memberData.studentNo
+        binding.textDepartment.text = memberData.department
+        binding.textCollege.text = "찾아"
     }
 }
