@@ -9,9 +9,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
+import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 
 class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 

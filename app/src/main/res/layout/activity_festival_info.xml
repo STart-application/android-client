@@ -6,11 +6,88 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/dream_purple_background"
-    tools:context=".ui.home.festival.FestivalInfoActivity">
+    tools:context=".ui.home.festival.info.FestivalInfoActivity">
 
     <include android:id="@+id/toolbar"
         layout="@layout/layout_toolbar"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
 
+        <LinearLayout
+            android:id="@+id/tabLayout1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text_tab1"
+                style="@style/Theme.Dream.Typeface_Title"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
+                android:includeFontPadding="false"
+                android:text="콘텐츠"
+
+                android:textColor="@color/dream_purple_ghost" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_height="5dp">
+                <View
+                    android:id="@+id/tab_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/dream_purple_ghost" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tabLayout2"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text_tab2"
+                style="@style/Theme.Dream.Typeface_Title"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="3dp"
+                android:gravity="top|center_horizontal"
+                android:includeFontPadding="false"
+                android:text="무대라인업"
+                android:textColor="@color/dream_purple_ghost" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_height="5dp">
+                <View
+                    android:id="@+id/tab_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/dream_purple_ghost" />
+            </FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" />
 
 </LinearLayout>

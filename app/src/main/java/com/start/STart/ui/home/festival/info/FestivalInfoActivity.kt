@@ -1,6 +1,6 @@
-package com.start.STart.ui.home.info
+package com.start.STart.ui.home.festival.info
 
-import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,26 +8,25 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
-import com.start.STart.databinding.ActivityInfoBinding
+import com.start.STart.databinding.ActivityFestivalBinding
+import com.start.STart.databinding.ActivityFestivalInfoBinding
 import com.start.STart.util.dp2px
 
-class InfoActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityInfoBinding.inflate(layoutInflater) }
-    private val infoAdapter by lazy { InfoAdapter() }
-
+class FestivalInfoActivity : AppCompatActivity() {
+    private val binding by lazy { ActivityFestivalInfoBinding.inflate(layoutInflater) }
+    private val festivalInfoAdapter by lazy { FestivalInfoAdapter(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val tabLayoutList = listOf(binding.tabLayout1, binding.tabLayout2, binding.tabLayout3)
-        val tabTextList = listOf(binding.textTab1, binding.textTab2, binding.textTab3)
-        val tabViewList = listOf(binding.tab1, binding.tab2, binding.tab3)
+        val tabLayoutList = listOf(binding.tabLayout1, binding.tabLayout2)
+        val tabTextList = listOf(binding.textTab1, binding.textTab2)
+        val tabViewList = listOf(binding.tab1, binding.tab2)
 
         binding.viewPager.offscreenPageLimit = 1
         binding.viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-        binding.viewPager.adapter = infoAdapter
+        binding.viewPager.adapter = festivalInfoAdapter
         updateTab(binding.viewPager.currentItem, tabTextList, tabViewList)
 
         binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
@@ -44,12 +43,13 @@ class InfoActivity : AppCompatActivity() {
                 binding.viewPager.setCurrentItem(index, true)
             }
         }
+
         initToolbar()
     }
 
     private fun initToolbar() {
         binding.toolbar.btnBack.setOnClickListener { finish() }
-        binding.toolbar.textTitle.text = "총학생회 설명"
+        binding.toolbar.textTitle.text = "축제 정보"
     }
 
     fun updateTab(enabledIndex: Int, textList: List<TextView>, viewList: List<View>) {
