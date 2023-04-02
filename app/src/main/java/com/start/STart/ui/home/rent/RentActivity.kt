@@ -18,11 +18,6 @@ class RentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
-
-        // TODO: 테스트
-        binding.imageProfile.setOnClickListener {
-            startActivity(Intent(this, RentCalendarActivity::class.java))
-        }
     }
 
     private fun initView() {

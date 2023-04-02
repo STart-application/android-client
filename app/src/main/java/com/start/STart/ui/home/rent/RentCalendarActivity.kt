@@ -24,11 +24,14 @@ class RentCalendarActivity : AppCompatActivity() {
     private val viewModel: RentCalendarViewModel by viewModels()
 
     private val rentViewPagerAdapter by lazy { RentViewPagerAdapter() }
+
+
+    private lateinit var type: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
+        type = intent.getStringExtra(RentItem.KEY_RENT_ITEM_TYPE)!!
 
         binding.monthViewPager.adapter = rentViewPagerAdapter
         binding.monthViewPager.offscreenPageLimit = 3
@@ -69,7 +72,7 @@ class RentCalendarActivity : AppCompatActivity() {
         calendar.add(Calendar.MONTH, binding.monthViewPager.currentItem - rentViewPagerAdapter.baseIndex)
 
         binding.textMonthTitle.text = "${calendar.get(Calendar.MONTH) + 1}월 예약 현황"
-        viewModel.loadCalendar(binding.monthViewPager.currentItem, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, "CANOPY")
+        viewModel.loadCalendar(binding.monthViewPager.currentItem, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, type)
     }
 
     @Suppress("unchecked_cast")
