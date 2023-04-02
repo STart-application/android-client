@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.rent.RentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.rent.RentCalendarActivity"
             android:exported="false" />
         <activity
@@ -26,7 +29,7 @@
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.Dream.ActionBar" />
         <activity
-            android:name=".ui.home.rent.RentActivity"
+            android:name=".ui.home.rent.RentHomeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

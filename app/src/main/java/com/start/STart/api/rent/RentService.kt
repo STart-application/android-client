@@ -13,4 +13,10 @@ interface RentService {
         @Query("year") year: Int,
         @Query("category") category: String,
     ): Response<ApiResponse>
+
+
+    @GET("rent/item/calendar")
+    suspend fun getItemCount(
+        @Query("category") category: String,
+    ): Response<ApiResponse>
 }

@@ -1,22 +1,16 @@
 package com.start.STart.ui.home.rent
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.start.STart.api.rent.response.RentData
 import com.start.STart.databinding.ActivityRentCalendarBinding
-import com.start.STart.ui.home.rent.calendar.RentCalendarAdapter
-import com.start.STart.ui.home.rent.calendar.RentDateItem
 import com.start.STart.ui.home.rent.calendar.RentViewPagerAdapter
 import com.start.STart.util.DateFormatter
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.temporal.TemporalAdjusters
-import java.text.SimpleDateFormat
 import java.util.*
 
 class RentCalendarActivity : AppCompatActivity() {
@@ -64,6 +58,10 @@ class RentCalendarActivity : AppCompatActivity() {
             binding.monthViewPager.currentItem += 1
         }
 
+        binding.btnRent.setOnClickListener {
+            startActivity(Intent(this, RentActivity::class.java))
+        }
+
         initViewModelListeners()
     }
 
@@ -82,33 +80,32 @@ class RentCalendarActivity : AppCompatActivity() {
             val resultModel = pair.second
 
             if(resultModel.isSuccessful) {
-                val list = resultModel.data as List<RentData>
+                val rentDataMap = resultModel.data as Map<String, List<RentData>>?
 
-                if(list.isNotEmpty()) {
+                if(rentDataMap?.isNotEmpty() == true) {
                     val viewHolder  = (binding.monthViewPager.getChildAt(0) as RecyclerView?)?.findViewHolderForAdapterPosition(viewPagerIndex) as RentViewPagerAdapter.RentViewPagerViewHolder?
-
-                    val sortedList = list.sortedBy { it.startTime }
-
-                    val rentDataByDate = sortedList.groupBy { rentData ->
-                        rentData.startTime
-                    }
 
                     viewHolder?.calendarAdapter?.list?.let { it ->
                         it.forEachIndexed { index, rentDateItem ->
                             val dateKey = DateFormatter.format(rentDateItem.date.time)
-                            val rentDataList = rentDataByDate[dateKey]
+
+                            val rentDataList = rentDataMap[dateKey]
+
+
                             if (rentDataList != null) {
-                                rentDateItem.count = rentDataList.sumOf { rentData -> rentData.account }
+                                //rentDateItem.count = rentDataList.first
                             } else {
                                 rentDateItem.count = 0
                             }
-                            rentDateItem.total = 10
+                            //rentDateItem.total = rentDataList?.second ?: 0
                             viewHolder.calendarAdapter.notifyItemChanged(index)
                         }
                     }
 
+                } else {
+
                 }
-                Log.d(null, "initViewModelListeners: $list")
+                Log.d(null, "initViewModelListeners: $rentDataMap")
             } else {
                 Log.d(null, "initViewModelListeners: false")
             }
