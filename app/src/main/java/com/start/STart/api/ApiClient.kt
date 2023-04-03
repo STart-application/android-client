@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
 import com.start.STart.api.banner.BannerService
+import com.start.STart.api.festival.FestivalService
 import com.start.STart.api.member.MemberService
 import com.start.STart.api.rent.RentService
 import com.start.STart.api.suggestion.SuggestionService
@@ -42,6 +43,7 @@ object ApiClient {
     val bannerService: BannerService = retrofit.create(BannerService::class.java)
     val suggestionService: SuggestionService = retrofit.create(SuggestionService::class.java)
     val rentService: RentService = retrofit.create(RentService::class.java)
+    val festivalService: FestivalService = retrofit.create(FestivalService::class.java)
 
     fun enableToken(token: String) { // TokenHelper에서만 호출
         tokenInterceptor.enableToken(token)

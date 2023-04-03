@@ -13,8 +13,8 @@
         <item name="android:statusBarColor">@color/dream_action_bar_background</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:dialogTheme">@style/Theme.Dream.Dialog</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:dialogTheme">@style/Theme.Dream.LightStatusBar.Dialog</item>
     </style>
 
     <style name="Theme.Dream.ActionBar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -47,7 +47,6 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:dialogTheme">@style/Theme.Dream.LightStatusBar.Dialog</item>
     </style>
 
     <style name="Theme.Dream.LightStatusBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
