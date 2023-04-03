@@ -14,6 +14,7 @@ import com.start.STart.databinding.ActivityRentHomeBinding
 import com.start.STart.ui.home.rent.myrent.MyRentActivity
 import com.start.STart.util.IndentLeadingMarginSpan
 import com.start.STart.util.dp2px
+import com.start.STart.util.getCollegeByDepartment
 
 class RentHomeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRentHomeBinding.inflate(layoutInflater) }
@@ -95,6 +96,6 @@ class RentHomeActivity : AppCompatActivity() {
         binding.textName.text= memberData.name
         binding.textStudentId.text = memberData.studentNo
         binding.textDepartment.text = memberData.department
-        binding.textCollege.text = "찾아"
+        binding.textCollege.text = getCollegeByDepartment(memberData.department)
     }
 }

@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
 import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
 import com.start.STart.ui.home.setting.suggest.SuggestActivity
 import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
+import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
 
 class SettingActivity : AppCompatActivity() {
@@ -106,6 +107,7 @@ class SettingActivity : AppCompatActivity() {
                 memberData.let {
                     binding.textName.text = it.name
                     binding.textStudentId.text = it.studentNo
+                    binding.textCollege.text = getCollegeByDepartment(it.department)
                     binding.textDepartment.text = it.department
                 }
             } else {

@@ -3,7 +3,7 @@
     <!-- 공과대학 -->
     <string-array name="department_1">
         <item>기계시스템디자인공학과</item>
-        <item>기계·자동차공학과</item>
+        <item>기계자동차공학과</item>
         <item>안전공학과</item>
         <item>신소재공학과</item>
         <item>건설시스템공학과</item>
@@ -15,7 +15,7 @@
     <!-- 정보통신대학 -->
     <string-array name="department_2">
         <item>전기정보공학과</item>
-        <item>전자공학과</item>
+        <item>전자IT미디어공학과</item>
         <item>컴퓨터공학과</item>
         <item>스마트ICT융합공학과</item>
     </string-array>
@@ -48,11 +48,11 @@
 
     <!-- 기술경영융합대학 -->
     <string-array name="department_6">
-        <item>산업공학과(산업정보시스템전공)</item>
-        <item>산업공학과(ITM전공)</item>
+        <item>산업정보시스템전공</item>
+        <item>ITM전공</item>
         <item>MSDE학과</item>
-        <item>경영학과(경영학전공)</item>
-        <item>경영학과(글로벌테크노경영전공)</item>
+        <item>경영학전공</item>
+        <item>글로벌테크노경영전공</item>
     </string-array>
 
     <!-- 미래융합대학 -->
@@ -70,5 +70,12 @@
         <item>인공지능응용학과</item>
         <item>지능형반도체공학과</item>
         <item>미래에너지융합학과</item>
+    </string-array>
+
+    <!-- 교양대학 -->
+    <string-array name="department_9">
+        <item>인문사회교양학부</item>
+        <item>자연과학부</item>
+        <item>융합교양학부부</item>
     </string-array>
 </resources>
