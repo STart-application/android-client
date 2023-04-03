@@ -47,7 +47,7 @@
     <color name="dream_gray_light">#E9E9E9</color>
     <color name="dream_orange">#FFAD00</color>
     <color name="dream_red">#FF3845</color>
-    <color name="dream_green">#2AE187</color>
+    <color name="dream_green">#27CD7B</color>
     
     <!-- TypeFace -->
     <color name="dream_typeface_black">@color/black</color>
@@ -60,5 +60,6 @@
     <color name="dream_action_bar_background">#4B5288</color>
     
     <!--Dialog-->
-    <color name="dream_dialog_background">#88ffffff</color>
+    <color name="dream_dialog_background">#4D000000</color>
+    <color name="dream_dialog_status_bar">#B3B3B3</color>
 </resources>

@@ -3,8 +3,13 @@ package com.start.STart.ui.home.festival
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,6 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.skydoves.cloudy.Cloudy
+import com.skydoves.cloudy.CloudyState
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
@@ -33,7 +39,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         initToolbar()
         initMenu()
         binding.composeView.setContent {
-            Cloudy(radius = 20) {
+            Cloudy(radius = 10){
 
             }
         }

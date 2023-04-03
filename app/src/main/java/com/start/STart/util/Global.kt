@@ -141,3 +141,16 @@ fun getFileNameFromUri(context: Context, uri: Uri): String? {
     }
     return fileName
 }
+
+fun View.contains(x: Int, y: Int): Boolean {
+    val l = this.left
+    val t = this.top
+    val r = this.right
+    val b = this.bottom
+    return x in l..r && y in t..b
+}
+
+
+
+
+

@@ -4,17 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/compose_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/cardView"
+        android:layout_width="285dp"
+        android:layout_height="215dp"
         android:layout_gravity="center"
-        app:cardCornerRadius="@dimen/dream_dialog_corner_radius"
-        app:cardElevation="@dimen/dream_dialog_elevation">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
