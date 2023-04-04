@@ -14,7 +14,7 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
     inner class EventViewHolder(var binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event){
             binding.textEventName.text = event.name
-            binding.textDate.text = event.date
+            binding.textPeriod.text = event.date
         }
     }
 

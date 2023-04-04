@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    android:background="@color/main_navy_1">
+    android:background="@drawable/background_round_10">
 
-    <ImageView
-        android:layout_width="325dp"
-        android:layout_height="80dp"
-        android:layout_gravity="end"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/ticket" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@id/text_event_name"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="115dp"
-            android:src="@drawable/background_ticket_left"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/dream_gray_light_d" />
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/textEventName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/sc_dream_2"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="이벤트 항목" />
+    <TextView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="11dp"
+        android:background="@drawable/background_circle"
+        android:gravity="center"
+        android:text="진행중"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:backgroundTint="@color/dream_purple"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textDate"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sc_dream_7"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="D-1" />
+    <TextView
+        android:id="@+id/text_event_name"
+        style="@style/Theme.Dream.Typeface_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="9dp"
+        android:textColor="@color/dream_purple"
+        app:layout_constraintBottom_toTopOf="@id/text_period"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="이벤트 항목\n두줄까지?" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+    <TextView
+        android:id="@+id/text_period"
+        style="@style/Theme.Dream.Typeface_Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="9dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/dream_typeface_navy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="00/00 ~ 00/00" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
