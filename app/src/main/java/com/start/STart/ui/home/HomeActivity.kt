@@ -2,6 +2,8 @@ package com.start.STart.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Slide
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -38,11 +40,13 @@ import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
 import com.start.STart.ui.theme.shadow
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
 
     private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by viewModels()
-    private val sliderAdapter by lazy { SliderAdapter() }
+    private val sliderAdapter by lazy { SliderAdapter(this) }
+
+    private val photoView by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +67,16 @@ class HomeActivity : AppCompatActivity() {
         }
 
         viewModel.loadBanner()
+    }
+
+    override fun onClick() {
+        Log.d(null, "onClick: showPhotoView")
+        photoView.show(supportFragmentManager, ".PhotoView")
+
+    }
+
+    fun setImage() {
+        photoView.setImage(sliderAdapter.list[binding.slider.currentItem].imageUrl)
     }
 
     private fun initViewModelListeners() {
@@ -190,4 +204,6 @@ class HomeActivity : AppCompatActivity() {
     fun MenuItemPreview() {
         MenuLayout()
     }
+
+
 }

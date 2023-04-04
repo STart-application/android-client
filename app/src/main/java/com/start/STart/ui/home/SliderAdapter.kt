@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.start.STart.api.banner.BannerModel
 import com.start.STart.databinding.ItemSliderBinding
 
-class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+class SliderAdapter(val listener: OnItemClickListener) : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
     var list: List<BannerModel> = listOf()
         set(value) {
             field = value
@@ -19,6 +19,8 @@ class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
             Glide.with(binding.root)
                 .load(bannerModel.imageUrl)
                 .into(binding.imageView)
+
+            binding.root.setOnClickListener { listener.onClick() }
         }
     }
 
@@ -32,4 +34,8 @@ class SliderAdapter : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
     }
 
     override fun getItemCount() = list.size
+
+    interface OnItemClickListener {
+        fun onClick()
+    }
 }
