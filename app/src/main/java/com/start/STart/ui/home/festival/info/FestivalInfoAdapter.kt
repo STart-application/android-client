@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.start.STart.ui.home.festival.info.contents.ContentsFragment
+import com.start.STart.ui.home.festival.info.lineup.LineUpFragment
 
 class FestivalInfoAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {
     override fun getItemCount() = 2

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:background="@color/dream_purple_background">
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="40dp"
+        app:markerPaddingTop="15dp"
+        app:markerInCenter="false"
+        android:layout_marginStart="26dp"
+        android:layout_height="match_parent"
+        app:endLineColor="@color/dream_purple"
+        app:lineStyle="normal"
+        app:lineWidth="1dp"
+        app:markerSize="13dp"
+        app:startLineColor="@color/dream_purple" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/background_round_10"
+        android:orientation="vertical"
+        android:paddingHorizontal="14dp"
+        android:layout_marginBottom="17dp"
+        android:paddingVertical="6dp">
+
+        <TextView
+            android:id="@+id/text_time"
+            style="@style/Theme.Dream.Typeface_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@color/dream_purple" />
+
+        <TextView
+            android:id="@+id/text_description"
+            style="@style/Theme.Dream.Typeface_Body_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="X맨: 니가 왜 거기서 나와\n내용은 두줄까지~~" />
+
+    </LinearLayout>
+
+</LinearLayout>
