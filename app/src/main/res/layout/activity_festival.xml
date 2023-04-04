@@ -44,9 +44,11 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginEnd="@dimen/dream_layout_margin_horizontal"
+                android:background="@drawable/background_circle"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_alert" />
+                app:srcCompat="@drawable/ic_festival_info" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/menu_2"
@@ -54,9 +56,11 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/dream_layout_margin_horizontal"
+                android:background="@drawable/background_circle"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/menu_1"
-                app:srcCompat="@drawable/ic_alert" />
+                app:srcCompat="@drawable/ic_stamp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/menu_3"
@@ -64,9 +68,11 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/dream_layout_margin_horizontal"
+                android:background="@drawable/background_circle"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/menu_2"
-                app:srcCompat="@drawable/ic_alert" />
+                app:srcCompat="@drawable/ic_food_truck" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/menu_4"
@@ -74,18 +80,20 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/dream_layout_margin_horizontal"
+                android:background="@drawable/background_circle"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/menu_3"
-                app:srcCompat="@drawable/ic_alert" />
+                app:srcCompat="@drawable/ic_photo_zone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/composeView"
-            android:visibility="gone"
-            android:background="@color/dream_dialog_background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/dream_dialog_background"
+            android:visibility="gone" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
