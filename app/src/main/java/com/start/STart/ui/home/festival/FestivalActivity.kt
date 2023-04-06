@@ -2,15 +2,21 @@ package com.start.STart.ui.home.festival
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.BlurMaskFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.*
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,6 +28,10 @@ import com.skydoves.cloudy.CloudyState
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -38,21 +48,41 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
         initToolbar()
         initMenu()
+
+        showIntroDialog()
+    }
+
+    private fun showIntroDialog() = lifecycleScope.launch(Dispatchers.Default) {
+        delay(500)
+        withContext(Dispatchers.Main) {
+            FestivalIntroDialog().show(supportFragmentManager, ".FestivalInfoDialog")
+        }
+    }
+    
+    fun showBlur() {
         binding.composeView.setContent {
-            Cloudy(radius = 10){
+            var radius by remember { mutableStateOf(0) }
+            LaunchedEffect(Unit) {
+                radius = 20
+                (supportFragmentManager.findFragmentByTag(".FestivalInfoDialog") as FestivalIntroDialog?)?.load()
+                (supportFragmentManager.findFragmentByTag(".StampDialog") as StampStatusDialog?)?.load()
+                binding.composeView.visibility = View.VISIBLE
+            }
+            Cloudy(radius = radius) {
 
             }
         }
+
     }
 
     fun hideCompose() {
         binding.composeView.visibility = View.GONE
+        binding.composeView.setContent{ }
     }
 
     private fun initMenu() {
         binding.menu1.setOnClickListener {
-            binding.composeView.visibility = View.VISIBLE
-            stampDialog.show(supportFragmentManager, ".FestivalActivity")
+            stampDialog.show(supportFragmentManager, ".StampDialog")
         }
         binding.menu2.setOnClickListener {
             startActivity(Intent(this, FestivalInfoActivity::class.java))
@@ -74,5 +104,6 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             .build()
 
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
+
     }
 }

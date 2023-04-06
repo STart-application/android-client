@@ -48,6 +48,7 @@
     <color name="dream_orange">#FFAD00</color>
     <color name="dream_red">#FF3845</color>
     <color name="dream_green">#27CD7B</color>
+    <color name="dream_pink">#F4649F</color>
     
     <!-- TypeFace -->
     <color name="dream_typeface_black">@color/black</color>
