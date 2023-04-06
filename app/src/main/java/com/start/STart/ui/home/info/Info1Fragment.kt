@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.start.STart.R
+import com.start.STart.databinding.FragmentInfo1Binding
 
 class Info1Fragment : Fragment() {
 
@@ -13,7 +15,15 @@ class Info1Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info1, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Glide.with(this)
+            .load(R.drawable.organization)
+            .thumbnail(0.3f)
+            .into(view.findViewById(R.id.organization))
     }
 }

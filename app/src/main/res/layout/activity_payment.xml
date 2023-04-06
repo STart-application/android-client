@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.pay.PaymentActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/dream_purple_background"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            app:cardCornerRadius="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_round_30"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:background="@drawable/background_round_30top" />
+
+
+                <TextView
+                    android:id="@+id/payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="32dp"
+                    android:text="자치회비 납부자"
+                    style="@style/Theme.Dream.Typeface_Title" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="18dp"
+                    android:text="이름"
+                    style="@style/Theme.Dream.Typeface_Title" />
+
+                <TextView
+                    android:id="@+id/studentId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="7dp"
+                    android:text="학번"
+                    style="@style/Theme.Dream.Typeface_Caption" />
+                <TextView
+                    android:id="@+id/college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="3dp"
+                    android:text="단과대"
+                    style="@style/Theme.Dream.Typeface_Caption" />
+                <TextView
+                    android:id="@+id/department"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="26dp"
+                    android:text="학과"
+                    style="@style/Theme.Dream.Typeface_Caption" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

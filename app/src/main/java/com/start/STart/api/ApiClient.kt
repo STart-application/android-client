@@ -1,12 +1,11 @@
 package com.start.STart.api
 
 import android.util.Log
-import com.google.gson.GsonBuilder
 import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
 import com.start.STart.api.banner.BannerService
+import com.start.STart.api.banner.EventService
 import com.start.STart.api.member.MemberService
-import com.start.STart.util.TokenHelper
 import com.start.STart.util.gson
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,7 +25,7 @@ object ApiClient {
         .addInterceptor(tokenInterceptor)
         .build()
 
-    private val retrofit: Retrofit by lazy {
+     private val retrofit: Retrofit by lazy {
         Log.d("Retrofit", "${BuildConfig.DEV_SERVER_URL}")
         Retrofit.Builder()
             .baseUrl(BuildConfig.DEV_SERVER_URL) // 주소 끝에 반드시 슬래시 / 로 끝나야 함
@@ -38,6 +37,8 @@ object ApiClient {
     val authService = retrofit.create(AuthService::class.java)
     val memberService = retrofit.create(MemberService::class.java)
     val bannerService = retrofit.create(BannerService::class.java)
+    val eventService = retrofit.create(EventService::class.java)
+
 
     fun enableToken(token: String) { // TokenHelper에서만 호출
         tokenInterceptor.enableToken(token)

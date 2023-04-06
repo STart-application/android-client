@@ -44,7 +44,7 @@
     <color name="dream_purple_ghost">#BEC5FF</color>
     <color name="dream_gray">#979797</color>
     <color name="dream_gray_light">#E9E9E9</color>
-    <color name="dream_orange">#FFAD00</color>
+    <color name="dream_yellow">#FFAD00</color>
     <color name="dream_red">#FF3845</color>
     <!-- TypeFace -->
     <color name="dream_typeface_black">@color/black</color>
