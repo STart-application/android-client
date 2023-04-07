@@ -112,7 +112,8 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(space = 10.dp)
+                verticalArrangement = Arrangement.spacedBy(space = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(
