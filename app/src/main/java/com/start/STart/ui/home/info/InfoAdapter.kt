@@ -2,38 +2,22 @@ package com.start.STart.ui.home.info
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.start.STart.databinding.LayoutInfo1Binding
 import com.start.STart.databinding.LayoutInfo2Binding
 import com.start.STart.databinding.LayoutInfo3Binding
 
-class InfoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    inner class Info1ViewHolder(val binding: LayoutInfo1Binding): RecyclerView.ViewHolder(binding.root)
-    inner class Info2ViewHolder(val binding: LayoutInfo2Binding): RecyclerView.ViewHolder(binding.root)
-    inner class Info3ViewHolder(val binding: LayoutInfo3Binding): RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
-            0 -> {
-                Info1ViewHolder(LayoutInfo1Binding.inflate(LayoutInflater.from(parent.context), parent, false))
-            }
-            1 -> {
-                Info2ViewHolder(LayoutInfo2Binding.inflate(LayoutInflater.from(parent.context), parent, false))
-            }
-            else -> {
-                Info3ViewHolder(LayoutInfo3Binding.inflate(LayoutInflater.from(parent.context), parent, false))
-            }
-        }
-    }
-
+class InfoAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {
     override fun getItemCount() = 3
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return position
+    override fun createFragment(position: Int): Fragment {
+        return when(position) {
+            0 -> Info1Fragment()
+            1 -> Info2Fragment()
+            else -> Info3Fragment()
+        }
     }
 }

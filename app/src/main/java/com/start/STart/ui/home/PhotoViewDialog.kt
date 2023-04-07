@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IntegerRes
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import com.start.STart.databinding.DialogPhotoViewBinding
 import com.start.STart.databinding.DialogStampStatusBinding
 import com.start.STart.ui.home.HomeActivity
 import com.start.STart.ui.home.festival.FestivalActivity
+import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
 import com.start.STart.util.contains
@@ -51,6 +53,12 @@ class PhotoViewDialog : DialogFragment() {
             .into(binding.photoView)
     }
 
+    fun setImage(resourceId: Int) {
+        Glide.with(binding.root)
+            .load(resourceId)
+            .into(binding.photoView)
+    }
+
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
 
@@ -58,7 +66,11 @@ class PhotoViewDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        (activity as HomeActivity).setImage()
+        if(activity is HomeActivity) {
+            (activity as HomeActivity).setImage()
+        } else if(activity is InfoActivity) {
+            (activity as InfoActivity).setImage()
+        }
     }
 
     override fun onCreateView(

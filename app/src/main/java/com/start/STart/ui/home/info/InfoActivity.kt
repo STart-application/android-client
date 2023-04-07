@@ -11,11 +11,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
 import com.start.STart.databinding.ActivityInfoBinding
+import com.start.STart.ui.home.PhotoViewDialog
 import com.start.STart.util.dp2px
 
 class InfoActivity : AppCompatActivity() {
     private val binding by lazy { ActivityInfoBinding.inflate(layoutInflater) }
-    private val infoAdapter by lazy { InfoAdapter() }
+    private val infoAdapter by lazy { InfoAdapter(this) }
+
+    private val photoView by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,5 +73,13 @@ class InfoActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    fun showPhotoView() {
+        photoView.show(supportFragmentManager, ".PhotoView")
+    }
+
+    fun setImage() {
+        photoView.setImage(R.drawable.organization)
     }
 }
