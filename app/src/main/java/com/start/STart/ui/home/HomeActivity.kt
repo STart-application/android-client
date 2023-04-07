@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.transition.Slide
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -25,10 +26,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
 import com.start.STart.api.banner.BannerModel
+import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
@@ -40,6 +43,11 @@ import com.start.STart.ui.home.rent.RentActivity
 import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
 import com.start.STart.ui.theme.shadow
+import com.start.STart.util.Constants
+import com.start.STart.util.PreferenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
 
@@ -120,7 +128,17 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                         // TODO: 액티비티 이동 추가
                     }
                     MenuItem(title = "자치회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
-                        startActivity(Intent(applicationContext, PaymentActivity::class.java))
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            if(PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA) != null) {
+                                withContext(Dispatchers.Main) {
+                                    startActivity(Intent(applicationContext, PaymentActivity::class.java))
+                                }
+                            } else {
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(this@HomeActivity, "로그인하자", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
                     }
                 }
                 Row(

@@ -4,6 +4,7 @@ import android.graphics.Rect
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.api.ApiClient

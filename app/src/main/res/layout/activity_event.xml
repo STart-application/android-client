@@ -14,9 +14,8 @@
 
     <LinearLayout
         android:id="@+id/layoutContent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/dream_purple_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,4 +70,4 @@
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
