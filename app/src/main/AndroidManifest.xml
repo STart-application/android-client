@@ -24,8 +24,23 @@
             android:name=".ui.home.rent.myrent.MyRentActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.home.pay.PaymentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.home.event.DetailEventActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.home.rent.RentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.membership.MemberShipActivity"
             android:exported="false" />

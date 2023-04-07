@@ -12,18 +12,63 @@
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEvent"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/layoutContent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginVertical="2dp"
-        android:layout_weight="1"
-        android:overScrollMode="never"
-        android:padding="20dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:listitem="@layout/item_event" />
+        android:layout_marginTop="44dp"
+        android:background="@color/dream_purple_background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:id="@+id/noEvent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_round_10"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="29dp"
+                    android:src="@drawable/ic_internet" />
+
+                <TextView
+                    style="@style/Theme.Dream.Typeface_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="진행 중인 이벤트가 없습니다."
+                    android:textColor="@color/dream_purple" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_event" />
+
+        </FrameLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

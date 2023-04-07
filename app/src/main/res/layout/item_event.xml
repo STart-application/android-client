@@ -2,69 +2,83 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_round_10">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@id/text_event_name"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/background_round_10"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/dream_gray_light_d" />
-    </androidx.cardview.widget.CardView>
+            android:layout_height="155dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
 
-    <TextView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="11dp"
-        android:background="@drawable/background_circle"
-        android:gravity="center"
-        android:text="진행중"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        android:backgroundTint="@color/dream_purple"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="155dp">
 
-    <TextView
-        android:id="@+id/text_event_name"
-        style="@style/Theme.Dream.Typeface_Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="9dp"
-        android:textColor="@color/dream_purple"
-        app:layout_constraintBottom_toTopOf="@id/text_period"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="이벤트 항목\n두줄까지?" />
+                <ImageView
+                    android:id="@+id/eventImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:layout_marginBottom="5dp"
+                    tools:background="@drawable/background_round_10"
+                    tools:backgroundTint="@color/dream_gray" />
 
-    <TextView
-        android:id="@+id/text_period"
-        style="@style/Theme.Dream.Typeface_Caption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="9dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="@color/dream_typeface_navy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="00/00 ~ 00/00" />
+                <LinearLayout
+                    android:id="@+id/eventStatus"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="115dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/background_circle"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/statusText"
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_white"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/textEventName"
+            style="@style/Theme.Dream.Typeface_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="2dp"
+            android:lines="2"
+            android:text="test"
+            android:textColor="@color/dream_purple" />
+
+        <TextView
+            android:id="@+id/textDate"
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="4dp"
+            android:text="00/00 ~ 00/00"
+            android:textColor="@color/dream_typeface_navy" />
+
+
+    </LinearLayout>
+</FrameLayout>
