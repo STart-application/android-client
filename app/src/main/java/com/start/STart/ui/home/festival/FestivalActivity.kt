@@ -82,7 +82,9 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun initMenu() {
         binding.menu1.setOnClickListener {
-            stampDialog.show(supportFragmentManager, ".StampDialog")
+            if(!stampDialog.isAdded) {
+                stampDialog.show(supportFragmentManager, ".StampDialog")
+            }
         }
         binding.menu2.setOnClickListener {
             startActivity(Intent(this, FestivalInfoActivity::class.java))

@@ -15,15 +15,11 @@ class Info3Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_info1, container, false)
+        return inflater.inflate(R.layout.fragment_info3, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(this)
-            .load(R.drawable.organization)
-            .thumbnail(0.3f)
-            .into(view.findViewById(R.id.organization))
     }
 }

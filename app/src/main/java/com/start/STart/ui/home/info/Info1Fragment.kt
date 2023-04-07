@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.info
 
+import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

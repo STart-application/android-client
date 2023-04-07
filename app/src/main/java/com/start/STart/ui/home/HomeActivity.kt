@@ -78,9 +78,9 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
     }
 
     override fun onClick() {
-        Log.d(null, "onClick: showPhotoView")
-        photoView.show(supportFragmentManager, ".PhotoView")
-
+        if(!photoView.isAdded) {
+            photoView.show(supportFragmentManager, ".PhotoView")
+        }
     }
 
     fun setImage() {

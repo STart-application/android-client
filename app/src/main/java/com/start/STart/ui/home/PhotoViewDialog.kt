@@ -2,32 +2,20 @@ package com.start.STart.ui.home
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
-import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.IntegerRes
-import androidx.compose.runtime.Composable
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withCreated
 import com.bumptech.glide.Glide
-import com.skydoves.cloudy.Cloudy
-import com.start.STart.databinding.DialogNoSignInBinding
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.davemorrissey.labs.subscaleview.ImageSource
 import com.start.STart.databinding.DialogPhotoViewBinding
-import com.start.STart.databinding.DialogStampStatusBinding
-import com.start.STart.ui.home.HomeActivity
-import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
-import com.start.STart.util.Constants
-import com.start.STart.util.PreferenceManager
 import com.start.STart.util.contains
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PhotoViewDialog : DialogFragment() {
 
@@ -39,7 +27,7 @@ class PhotoViewDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.root.setOnClickListener {
-            if(binding.photoView.contains(it.x.toInt(), it.y.toInt())){
+            if(binding.photoView2.contains(it.x.toInt(), it.y.toInt())){
                 return@setOnClickListener
             }
 
@@ -49,19 +37,26 @@ class PhotoViewDialog : DialogFragment() {
 
     fun setImage(url: String) {
         Glide.with(binding.root)
+            .asBitmap()
             .load(url)
-            .into(binding.photoView)
+            .into(object: CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    binding.photoView2.setImage(ImageSource.bitmap(resource))
+
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+
+                }
+            })
     }
 
     fun setImage(resourceId: Int) {
-        Glide.with(binding.root)
-            .load(resourceId)
-            .into(binding.photoView)
+        binding.photoView2.setImage(ImageSource.resource(resourceId))
     }
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-
     }
 
     override fun onStart() {

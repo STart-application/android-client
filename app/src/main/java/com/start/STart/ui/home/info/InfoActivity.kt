@@ -1,6 +1,5 @@
 package com.start.STart.ui.home.info
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,7 +7,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayoutMediator
 import com.start.STart.R
 import com.start.STart.databinding.ActivityInfoBinding
 import com.start.STart.ui.home.PhotoViewDialog
@@ -18,7 +16,7 @@ class InfoActivity : AppCompatActivity() {
     private val binding by lazy { ActivityInfoBinding.inflate(layoutInflater) }
     private val infoAdapter by lazy { InfoAdapter(this) }
 
-    private val photoView by lazy { PhotoViewDialog() }
+    private val photoViewDialog by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,10 +74,12 @@ class InfoActivity : AppCompatActivity() {
     }
 
     fun showPhotoView() {
-        photoView.show(supportFragmentManager, ".PhotoView")
+        if(!photoViewDialog.isAdded) {
+            photoViewDialog.show(supportFragmentManager, ".PhotoView")
+        }
     }
 
     fun setImage() {
-        photoView.setImage(R.drawable.organization)
+        photoViewDialog.setImage(R.drawable.organization)
     }
 }
