@@ -2,15 +2,14 @@ package com.start.STart.ui.home.pay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityPaymentBinding
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
+import com.start.STart.util.getCollegeByDepartment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,33 +28,32 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
+        binding.toolbar.btnBack.setOnClickListener { finish() }
         binding.toolbar.textTitle.text = "자치회비 납부 확인"
-        binding.toolbar.btnBack.visibility = View.VISIBLE
-        binding.toolbar.icSetting.visibility = View.INVISIBLE
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
     }
 
     private fun loadMember() = lifecycleScope.launch(Dispatchers.IO) {
         val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
         withContext(Dispatchers.Main) {
-            binding.name.text = memberData?.name
-            binding.studentId.text = memberData?.studentNo
-            binding.department.text = memberData?.department
-
-            if(!memberData!!.memberShip) {
-                binding.payment.text = "자치회비 미납부자"
-                binding.payment.setTextColor(ContextCompat.getColor(this@PaymentActivity, R.color.dream_yellow))
-
-                binding.image.setImageResource(R.drawable.membershipnono)
+            if(memberData != null) {
+                setMemberData(memberData)
             } else {
-                binding.payment.text = "자치회비 납부자"
-                binding.payment.setTextColor(ContextCompat.getColor(this@PaymentActivity, R.color.dream_purple))
-
-                binding.image.setImageResource(R.drawable.membership)
+                finish()
             }
-
         }
+    }
+
+    private fun setMemberData(memberData: MemberData) {
+        binding.name.text = memberData.name
+        binding.studentId.text = memberData.studentNo
+        binding.department.text = memberData.department
+        binding.college.text = getCollegeByDepartment(memberData.department)
+
+        binding.payment.text = if(memberData.memberShip) "자치회비 납부자" else "자취회비 미납부자"
+        binding.payment.setTextColor(ContextCompat.getColor(this@PaymentActivity,
+            if(memberData.memberShip) R.color.dream_purple else R.color.dream_yellow)
+        )
+
+        binding.image.setImageResource(if(memberData.memberShip) R.drawable.membership else R.drawable.membershipnono)
     }
 }
