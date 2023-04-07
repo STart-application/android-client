@@ -24,7 +24,7 @@
             android:background="@color/white">
 
             <TextView
-                android:background="@color/dream_typeface_navy"
+                android:background="@color/dream_navy"
                 android:layout_width="match_parent"
                 android:textStyle="bold"
                 android:gravity="center"

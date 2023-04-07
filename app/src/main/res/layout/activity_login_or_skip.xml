@@ -15,16 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <!--TextView
-        android:id="@+id/text_logo"
-        style="@style/Theme.Dream.Typeface_Logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-11dp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_logo"
-        app:layout_constraintEnd_toEndOf="@+id/image_logo"
-        app:layout_constraintStart_toStartOf="@+id/image_logo" /-->
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignIn"
         style="@style/Theme.Dream.Button_Primary"

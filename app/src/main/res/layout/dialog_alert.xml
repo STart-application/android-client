@@ -52,7 +52,7 @@
                 android:layout_marginTop="22dp"
                 android:gravity="center_horizontal"
                 android:text="로그인을 하지 않을 시\n 어플 사용에 제한이 있을 수 있습니다."
-                android:textColor="@color/dream_typeface_gray"
+                android:textColor="@color/dream_gray"
                 app:layout_constraintEnd_toEndOf="@id/text_title"
                 app:layout_constraintStart_toStartOf="@id/text_title"
                 app:layout_constraintTop_toBottomOf="@id/text_title" />

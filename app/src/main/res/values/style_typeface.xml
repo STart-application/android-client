@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Dream.Typeface_Logo">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/dream_typeface_navy</item>
-        <item name="android:fontFamily">@font/esamanru_light</item>
-        <item name="android:letterSpacing">0.39</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:text">우리가 함께 이뤄가는 꿈</item>
-    </style>
-    
     <style name="Theme.Dream.Typeface_Large_Title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/dream_typeface_black</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textSize">25sp</item>
@@ -22,7 +12,7 @@
     <style name="Theme.Dream.Typeface_Title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/dream_typeface_black</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
@@ -31,7 +21,7 @@
     <style name="Theme.Dream.Typeface_Body_1">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/dream_typeface_black</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textSize">15sp</item>
     </style>
@@ -43,7 +33,7 @@
     <style name="Theme.Dream.Typeface_Caption">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/dream_typeface_black</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textSize">12sp</item>
     </style>
@@ -52,7 +42,7 @@
     <style name="Theme.Dream.Typeface_Title_Input">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/dream_typeface_black</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>

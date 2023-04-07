@@ -58,8 +58,7 @@
         app:tabGravity="center"
         app:tabIndicator="@null"
         app:tabPaddingEnd="9dp"
-        app:tabPaddingStart="9dp"
-        app:tabRippleColor="@color/main_white" />
+        app:tabPaddingStart="9dp" />
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/compose_menu"

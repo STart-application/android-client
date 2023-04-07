@@ -5,37 +5,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#C62828</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
-
-    <!--기본-->
-    <color name="base_yellow">#FDBD33</color>
-    <color name="base_red">#B90005</color>
-    <color name="base_blue">#0A1F62</color>
-    <color name="base_gray_1">#8F8F8F</color>
-    <color name="base_gray_2">#464646</color>
-
-    <color name="text_black">@color/black</color>
-    <color name="text_white">@color/white</color>
-    <color name="text_green_1">#222E2D</color>
-    <color name="text_gray">#D8E8E7</color>
-
-    <!--메인-->
-    <color name="main_white">#F3F3F3</color>
-    <color name="main_navy_1">#464D87</color>
-
-    <color name="main_green_2">#5C7775</color>
-    <color name="main_green_3">#92AEAC</color>
-    <color name="main_orange">#EE795F</color>
-    <color name="main_yellow">#FFCEA2</color>
-
-    <!--서브-->
-    <color name="sub_green_1">#5E756D</color>
-    <color name="sub_green_2">#9AA695</color>
-    <color name="sub_green_3">#B2BFB6</color>
-    <color name="sub_peach_4">#F9B7A9</color>
-    <color name="sub_peach_5">#F8EAE1</color>
 
     <!--Version 1.1.0-->
     <!-- Main -->
@@ -49,12 +22,7 @@
     <color name="dream_red">#FF3845</color>
     <color name="dream_green">#27CD7B</color>
     <color name="dream_pink">#F4649F</color>
-    
-    <!-- TypeFace -->
-    <color name="dream_typeface_black">@color/black</color>
-    <color name="dream_typeface_gray">@color/dream_gray</color>
-    <color name="dream_typeface_gray_light">@color/dream_gray_light</color>
-    <color name="dream_typeface_navy">#464D87</color>
+    <color name="dream_navy">#464D87</color>
     <color name="dream_white">#E9E9E9</color>
     
     <!-- Action Bar -->

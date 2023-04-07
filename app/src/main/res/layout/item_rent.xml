@@ -32,7 +32,7 @@
             android:layout_height="27dp"
             android:background="@color/dream_purple_ghost"
             android:gravity="center"
-            android:textColor="@color/dream_typeface_navy"
+            android:textColor="@color/dream_navy"
             android:textSize="12sp"
             android:textStyle="bold"
             tools:text="아이템" />
