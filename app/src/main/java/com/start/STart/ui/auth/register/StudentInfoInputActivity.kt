@@ -25,6 +25,8 @@ class StudentInfoInputActivity : AppCompatActivity() {
         }
     }
 
+    private val selectCollegeDialog by lazy { SelectCollegeDialog() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -33,6 +35,7 @@ class StudentInfoInputActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.inputDepartment.selectItemByIndex(0)
+        binding.layoutInputCollege.setOnClickListener { selectCollegeDialog.show(supportFragmentManager, ".SelectCollegeDialog") }
         binding.inputName.addTextChangedListener(textWater)
         binding.inputStudentId.addTextChangedListener(textWater)
 

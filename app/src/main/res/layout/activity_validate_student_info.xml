@@ -34,13 +34,13 @@
                 android:id="@+id/image_logo"
                 android:layout_width="157dp"
                 android:layout_height="76dp"
-                app:layout_constraintVertical_bias="0"
                 android:layout_marginBottom="@dimen/dream_logo_margin_bottom"
                 android:src="@drawable/logo_dream"
                 app:layout_constraintBottom_toTopOf="@id/text_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/guide_logo" />
+                app:layout_constraintTop_toTopOf="@id/guide_logo"
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
                 android:id="@+id/text_name"
@@ -67,6 +67,20 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+
+            <TextView
+                android:id="@+id/text_college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="11dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="단과대학"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/layout_input_college"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
@@ -120,7 +134,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/input_dream"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/text_department"
+                app:layout_constraintBottom_toTopOf="@+id/text_college"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -139,6 +153,32 @@
                     android:maxLength="8"
                     android:maxLines="1"
                     android:textColorHint="@color/dream_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_input_college"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dream_input_height"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/input_dream"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/text_department"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/input_student_college"
+                    style="@style/Theme.Dream.Typeface_Body_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:text="단과대학을 선택하세요"
+                    android:textColor="@color/dream_gray" />
             </LinearLayout>
 
             <LinearLayout
