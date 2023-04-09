@@ -39,6 +39,7 @@
             </RadioGroup>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
                 style="@style/Theme.Dream.Button_Primary"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"

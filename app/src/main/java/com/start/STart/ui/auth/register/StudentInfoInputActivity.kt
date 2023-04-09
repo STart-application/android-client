@@ -76,6 +76,10 @@ class StudentInfoInputActivity : AppCompatActivity() {
                 // TODO: 처리
             }
         }
+
+        viewModel.registerLiveData.observe(this) {
+            binding.inputStudentCollege.text = it?.college
+        }
     }
 
     private fun checkInputValid(): Boolean { // TODO: 에러 표시 뷰 XML에 추가해야 함

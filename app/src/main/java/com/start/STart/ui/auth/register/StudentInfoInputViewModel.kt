@@ -8,6 +8,7 @@ import com.google.gson.JsonSyntaxException
 import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiError
 import com.start.STart.api.ApiResponse
+import com.start.STart.api.member.request.RegisterData
 import com.start.STart.model.ResultModel
 import com.start.STart.util.AppException
 import com.start.STart.util.Constants
@@ -58,5 +59,13 @@ class StudentInfoInputViewModel : ViewModel() {
                 ResultModel(false, exception = AppException.UNEXPECTED)
             )
         }
+    }
+
+
+    private val _registerModelLiveData: MutableLiveData<RegisterData?> = MutableLiveData()
+    val registerLiveData: LiveData<RegisterData?> get() = _registerModelLiveData
+
+    fun updateData(registerData: RegisterData?) {
+        _registerModelLiveData.value = registerData
     }
 }
