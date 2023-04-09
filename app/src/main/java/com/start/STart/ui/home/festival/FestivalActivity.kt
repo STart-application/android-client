@@ -1,37 +1,29 @@
 package com.start.STart.ui.home.festival
 
-import android.content.DialogInterface
+import android.content.Context
 import android.content.Intent
-import android.graphics.BlurMaskFilter
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.runtime.*
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.*
 import com.skydoves.cloudy.Cloudy
-import com.skydoves.cloudy.CloudyState
-import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.start.STart.R
 import kotlinx.coroutines.withContext
+
 
 class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -105,7 +97,38 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             .zoom(17f)
             .build()
 
+        addMakers(listOf(
+            MarkerModel("동심오락관", LatLng(37.6319, 127.079)),
+            MarkerModel("마당사업", LatLng(37.632310, 127.077111)),
+            MarkerModel("붕어방컨텐츠", LatLng(37.633061, 127.078598)),
+            MarkerModel("무대", LatLng(37.6294, 127.0787)),
+            MarkerModel("포토존", LatLng(37.633930, 127.077845)),
+        ))
+
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
 
     }
+
+    private fun addMakers(markerModels: List<MarkerModel>) {
+        markerModels.forEach {
+            googleMap.addMarker(MarkerOptions()
+                .position(it.latLng)
+                .title(it.title)
+                .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this, R.drawable.marker_food_truck)))
+            )
+        }
+    }
+
+    private fun getBitmapFromVectorDrawable(context: Context?, drawableId: Int): Bitmap {
+        val drawable = ContextCompat.getDrawable(context!!, drawableId)
+        val bitmap = Bitmap.createBitmap(
+            drawable!!.intrinsicWidth,
+            drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
 }
