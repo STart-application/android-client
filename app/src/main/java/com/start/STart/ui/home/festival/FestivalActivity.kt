@@ -15,6 +15,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.maps.android.clustering.Cluster
+import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
@@ -29,6 +32,8 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val binding by lazy { ActivityFestivalBinding.inflate(layoutInflater) }
     private lateinit var googleMap: GoogleMap
+    private lateinit var clusterManager: ClusterManager<MarkerModel>
+
 
     private val stampDialog by lazy { StampStatusDialog()}
 
@@ -91,6 +96,8 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
+        setUpClusterer()
+
         val latLng = LatLng(37.6333, 127.0778)
         val position = CameraPosition.Builder()
             .target(latLng)
@@ -109,13 +116,48 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    private fun setUpClusterer() {
+        clusterManager = ClusterManager<MarkerModel>(this, googleMap)
+        clusterManager.renderer = object: DefaultClusterRenderer<MarkerModel>(this@FestivalActivity, googleMap, clusterManager
+        ) {
+            override fun onBeforeClusterRendered(
+                cluster: Cluster<MarkerModel>,
+                markerOptions: MarkerOptions
+            ) {
+                super.onBeforeClusterRendered(cluster, markerOptions)
+                //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
+            }
+
+            override fun getColor(clusterSize: Int): Int {
+                return ContextCompat.getColor(this@FestivalActivity, R.color.dream_yellow)
+            }
+
+            override fun onClusterUpdated(cluster: Cluster<MarkerModel>, marker: Marker) {
+                super.onClusterUpdated(cluster, marker)
+                //marker.setIcon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
+            }
+
+            override fun onBeforeClusterItemRendered(
+                item: MarkerModel,
+                markerOptions: MarkerOptions
+            ) {
+                super.onBeforeClusterItemRendered(item, markerOptions)
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
+
+            }
+        }
+        googleMap.setOnCameraIdleListener(clusterManager)
+        googleMap.setOnMarkerClickListener(clusterManager)
+    }
+
     private fun addMakers(markerModels: List<MarkerModel>) {
         markerModels.forEach {
-            googleMap.addMarker(MarkerOptions()
+            clusterManager.addItems(markerModels)
+            /*googleMap.addMarker(MarkerOptions()
                 .position(it.latLng)
                 .title(it.title)
                 .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this, R.drawable.marker_food_truck)))
-            )
+            )*/
         }
     }
 
