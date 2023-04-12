@@ -4,35 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.skydoves.cloudy.Cloudy
-import com.start.STart.R
-import com.start.STart.databinding.DialogSelectCollegeBinding
 import com.start.STart.databinding.DialogSelectPhotoBinding
-import com.start.STart.databinding.ItemDepartmentBinding
-import com.start.STart.databinding.LayoutDividerBinding
-import com.start.STart.ui.auth.register.SelectCollegeOrDepartmentDialog.Companion.TYPE_COLLEGE
-import com.start.STart.ui.auth.register.SelectCollegeOrDepartmentDialog.Companion.TYPE_DEPARTMENT
 import com.start.STart.util.contains
-import com.start.STart.util.departments
-import com.start.STart.util.dp2px
-import es.dmoral.toasty.Toasty
 
 class SelectPhotoDialog: DialogFragment() {
     private var _binding: DialogSelectPhotoBinding? = null
@@ -62,11 +40,13 @@ class SelectPhotoDialog: DialogFragment() {
         }
 
         binding.btnGallery.setOnClickListener {
-
+            (requireActivity() as StudentCardUploadActivity).galleryLauncher.launch("image/*")
+            dismiss()
         }
 
         binding.btnCamera.setOnClickListener {
-            
+            (requireActivity() as StudentCardUploadActivity).startCamera()
+            dismiss()
         }
     }
 
