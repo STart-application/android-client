@@ -27,6 +27,8 @@ class StudentCardUploadActivity : AppCompatActivity() {
     private val binding by lazy { ActivityValidateStudentCardBinding.inflate(layoutInflater) }
     private val viewModel: StudentCardUploadViewModel by viewModels()
 
+    private val selectPhotoDialog by lazy { SelectPhotoDialog() }
+
     private lateinit var registerData: RegisterData
     private lateinit var studentCardUri: Uri
 
@@ -64,7 +66,8 @@ class StudentCardUploadActivity : AppCompatActivity() {
 
     private fun initViewListeners() {
         binding.layoutInputStudentCard.setOnClickListener {
-            imageLauncher.launch("image/*")
+            //imageLauncher.launch("image/*")
+            selectPhotoDialog.show(supportFragmentManager, null)
         }
         binding.btnNext.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
