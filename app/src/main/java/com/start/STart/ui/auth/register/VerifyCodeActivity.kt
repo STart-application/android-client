@@ -13,6 +13,7 @@ import com.start.STart.databinding.ActivityValidateSmsBinding
 import com.start.STart.util.AppRegex
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
+import es.dmoral.toasty.Toasty
 
 class VerifyCodeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityValidateSmsBinding.inflate(layoutInflater) }
@@ -78,18 +79,14 @@ class VerifyCodeActivity : AppCompatActivity() {
 
     private fun initViewModelListeners() {
         viewModel.sendCodeResult.observe(this) { result ->
-            if(result) {
-                Balloon.Builder(this)
-                    .setText("SMS가 전송되었습니다.")
-                    .setPadding(8)
-                    .setBackgroundColor(resources.getColor(R.color.dream_purple))
-                    .setArrowOrientation(ArrowOrientation.START)
-                    .setArrowPosition(0.5f)
-                    .build()
-                    .showAlignRight(binding.textCode)
-
+            if(result.isSuccessful) {
+                Toasty.success(this, "SMS가 전송되었습니다.").show()
                 // 인증 버튼 업데이트
                 isCodeSent = true
+            } else {
+                result.message?.let {
+                    Toasty.error(this, it).show()
+                }
             }
         }
 

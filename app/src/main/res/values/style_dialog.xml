@@ -4,7 +4,9 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:statusBarColor">#34395F</item>
+        <!-- 상태바 반투명 -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!-- item name="android:statusBarColor">#34395F</item -->
         <item name="android:windowBackground">@color/transparent</item>
     </style>
     <style name="Theme.Dream.LightStatusBar.Dialog">

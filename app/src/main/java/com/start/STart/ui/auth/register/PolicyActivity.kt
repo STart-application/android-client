@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatCheckBox
 import com.start.STart.R
 import com.start.STart.databinding.ActivityPolicyBinding
 import com.start.STart.util.openCustomTab
@@ -19,29 +20,20 @@ class PolicyActivity : AppCompatActivity() {
 
     private fun initView(){
         initToolbar()
+        initPolicyCustomTab()
+        initCheckBox()
 
-        initViewListeners()
-    }
-
-    private fun initViewListeners() {
-        updateCheckAllCheckBox()
-        linkPolicy()
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this, StudentInfoInputActivity::class.java))
-        }
-        binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
-            binding.btnNext.isEnabled = isChecked
         }
     }
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "약관동의"
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
-    private fun linkPolicy() {
+    private fun initPolicyCustomTab() {
         binding.textMorePrivacy.setOnClickListener {
             openCustomTab(resources.getString(R.string.link_privacy_policy))
         }
@@ -51,13 +43,21 @@ class PolicyActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateCheckAllCheckBox() {
+    private fun initCheckBox() {
         val checkBoxList = listOf(binding.checkPrivacyPolicy, binding.checkService)
 
         binding.checkAll.setOnClickListener {
-            checkAllCheckBoxes(checkBoxList, binding.checkAll.isChecked)
+            updateSubCheckBox(checkBoxList, binding.checkAll.isChecked)
         }
 
+        binding.checkAll.setOnCheckedChangeListener { _, isChecked ->
+            binding.btnNext.isEnabled = isChecked
+        }
+
+        initSubCheckBox(checkBoxList)
+    }
+
+    private fun initSubCheckBox(checkBoxList: List<AppCompatCheckBox>) {
         checkBoxList.forEach {
             it.setOnCheckedChangeListener { _, _ ->
                 if (!it.isChecked) {
@@ -70,7 +70,7 @@ class PolicyActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkAllCheckBoxes(checkBoxList: List<CheckBox>, isChecked: Boolean) {
+    private fun updateSubCheckBox(checkBoxList: List<CheckBox>, isChecked: Boolean) {
         binding.checkAll.isChecked = isChecked
         checkBoxList.forEach { it.isChecked = isChecked }
     }

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.start.STart.databinding.DialogFestivalIntroBinding
-import com.start.STart.databinding.DialogStampStatusBinding
 import com.start.STart.util.contains
 
 class FestivalIntroDialog : DialogFragment() {

@@ -34,7 +34,7 @@ object TokenHelper {
                 return true
             } else {
                 val errorBodyString = res.errorBody()?.string()
-                if(ApiClient.parseErrorBody(errorBodyString).errorCode == ApiError.ST011.code) {
+                if(ApiClient.parseErrorBody(errorBodyString).errorCode == ApiError.ST011.name) {
                     return issueAccessToken(accessToken) // 토큰 발급
                 }
                 return false

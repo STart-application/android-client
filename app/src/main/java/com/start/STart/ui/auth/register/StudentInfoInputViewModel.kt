@@ -4,18 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.JsonSyntaxException
 import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiError
-import com.start.STart.api.ApiResponse
-import com.start.STart.api.member.request.RegisterData
 import com.start.STart.model.ResultModel
 import com.start.STart.util.AppException
-import com.start.STart.util.Constants
-import com.start.STart.util.gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.IOException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
@@ -33,7 +27,7 @@ class StudentInfoInputViewModel : ViewModel() {
             } else {
                 val body = ApiClient.parseErrorBody(res.errorBody()?.string())
                 when (body.errorCode) {
-                    ApiError.ST053.code -> { // 학번 중복
+                    ApiError.ST053.name -> { // 학번 중복
                         _verifyDuplicateResult.postValue(ResultModel(false, ApiError.ST053.message))
                     }
                     else -> { //
@@ -61,11 +55,17 @@ class StudentInfoInputViewModel : ViewModel() {
         }
     }
 
+    private val _collegeData: MutableLiveData<String> = MutableLiveData()
+    val collegeData: LiveData<String> get() = _collegeData
 
-    private val _registerModelLiveData: MutableLiveData<RegisterData?> = MutableLiveData()
-    val registerLiveData: LiveData<RegisterData?> get() = _registerModelLiveData
+    fun updateCollege(college: String) {
+        _collegeData.value = college
+    }
 
-    fun updateData(registerData: RegisterData?) {
-        _registerModelLiveData.value = registerData
+    private val _departmentData: MutableLiveData<String> = MutableLiveData()
+    val departmentData: LiveData<String> get() = _departmentData
+
+    fun updateDepartment(department: String) {
+        _departmentData.value = department
     }
 }

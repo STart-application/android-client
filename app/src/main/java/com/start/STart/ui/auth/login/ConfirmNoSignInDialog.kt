@@ -1,27 +1,18 @@
 package com.start.STart.ui.auth.login
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.runtime.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withCreated
-import com.skydoves.cloudy.Cloudy
-import com.skydoves.cloudy.CloudyState
 import com.start.STart.databinding.DialogNoSignInBinding
 import com.start.STart.ui.home.HomeActivity
-import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
 import com.start.STart.util.contains
@@ -47,8 +38,6 @@ class ConfirmNoSignInDialog : DialogFragment() {
                 activity?.finish()
             }
         }
-
-
 
         binding.cardView.setOnTouchListener { view, motionEvent ->
             motionEvent.action == MotionEvent.ACTION_DOWN
