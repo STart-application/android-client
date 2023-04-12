@@ -34,6 +34,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@color/dream_navy"

@@ -88,7 +88,7 @@ class SelectCollegeOrDepartmentDialog: DialogFragment() {
     private fun addRadioButton(department: String, checked: Boolean = false) {
         val radioButton = ItemDepartmentBinding.inflate(layoutInflater, binding.radioGroup, false).root
         radioButton.isChecked = checked
-        radioButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+        radioButton.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
             setMargins(
                 context?.dp2px(4f)?.toInt() ?: 0,
                 0,
@@ -110,11 +110,13 @@ class SelectCollegeOrDepartmentDialog: DialogFragment() {
         binding.radioGroup.removeAllViews()
         when(type) {
             TYPE_COLLEGE -> {
+                binding.textTitle.text = "단과대학 선택"
                 departments.keys.forEach {
                     addRadioButton(it, it == viewModel.collegeData.value)
                 }
             }
             TYPE_DEPARTMENT -> {
+                binding.textTitle.text = "학과 선택"
                 val department = departments[viewModel.collegeData.value]
                 if (department != null) {
                     resources.getStringArray(department).forEach {
