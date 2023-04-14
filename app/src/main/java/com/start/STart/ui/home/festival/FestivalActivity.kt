@@ -129,7 +129,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             override fun getColor(clusterSize: Int): Int {
-                return ContextCompat.getColor(this@FestivalActivity, R.color.dream_yellow)
+                return ContextCompat.getColor(this@FestivalActivity, R.color.dream_green)
             }
 
             override fun onClusterUpdated(cluster: Cluster<MarkerModel>, marker: Marker) {
@@ -142,7 +142,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
                 markerOptions: MarkerOptions
             ) {
                 super.onBeforeClusterItemRendered(item, markerOptions)
-                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_stamp_default)))
 
             }
         }
