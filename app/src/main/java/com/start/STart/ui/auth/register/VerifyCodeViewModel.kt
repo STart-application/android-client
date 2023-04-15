@@ -61,7 +61,7 @@ class VerifyCodeViewModel: ViewModel() {
                 _verifyCodeResult.postValue(ResultModel(false, ApiError.getErrorMessage(errorBody.errorCode!!)))
             }
         } catch(e: Exception) {
-            _verifyCodeResult.postValue(ResultModel(false, e.message))
+            _verifyCodeResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
     }
 }

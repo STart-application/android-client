@@ -2,9 +2,11 @@ package com.start.STart.ui.auth.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
 import com.start.STart.R
@@ -14,6 +16,16 @@ import com.start.STart.util.AppRegex
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
 import es.dmoral.toasty.Toasty
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDateTime
+import kotlin.concurrent.timer
+import kotlin.time.Duration
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
 class VerifyCodeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityValidateSmsBinding.inflate(layoutInflater) }
@@ -21,25 +33,18 @@ class VerifyCodeActivity : AppCompatActivity() {
 
     private lateinit var registerData: RegisterData
 
+    private val validateTimeMillis = 3000 * 60
+    private var timerJob: Job? = null
+    private var startTime = 0L
     private var isCodeSent = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        init()
-        initView()
-    }
 
-    private fun init() {
         registerData = intent.getParcelableExtra(key = Constants.KEY_REGISTER_DATA)!!
-    }
 
-    private fun initView() {
         initToolbar()
-        binding.btnNext.isEnabled = true // TODO: 테스트 끝나면 삭제
-
-        binding.inputPhone.addTextChangedListener {
-            binding.btnRequest.isEnabled = Regex(AppRegex.PHONE_VALIDATE).matches(it.toString())
-        }
         initViewListeners()
         initViewModelListeners()
     }
@@ -50,39 +55,47 @@ class VerifyCodeActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
+        binding.inputPhone.addTextChangedListener {
+            binding.btnRequest.isEnabled = Regex(AppRegex.PHONE_VALIDATE).matches(it.toString())
+        }
+
         binding.inputCode.addTextChangedListener {
-            binding.btnValidate.isEnabled = it.toString().length == 6 && isCodeSent
+            updateValidateButton()
         }
 
         binding.btnRequest.setOnClickListener {
-            viewModel.sendCode(Regex(AppRegex.PHONE_VALIDATE)
-                .replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
-            )
+            val phone = Regex(AppRegex.PHONE_VALIDATE).replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
+            viewModel.sendCode(phone)
+
         }
 
         binding.btnValidate.setOnClickListener {
             // TODO: 코드 유효성 검사 및 전송 번호 저장
-            viewModel.verifyCode(Regex(AppRegex.PHONE_VALIDATE)
-                .replace(binding.inputPhone.text.toString(), "01$1-$2-$3"),
-            binding.inputCode.text.toString())
+            val phone = Regex(AppRegex.PHONE_VALIDATE).replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
+            val code = binding.inputCode.text.toString()
+
+            viewModel.verifyCode(phone, code)
         }
 
         binding.btnNext.setOnClickListener {
-            startActivity(Intent(this, StudentCardUploadActivity::class.java).apply {
-                putExtra(Constants.KEY_REGISTER_DATA, registerData.also {
-                    it.phoneNo = Regex(AppRegex.PHONE_VALIDATE)
-                        .replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
-                })
-            })
+            moveNext()
         }
+    }
+
+    private fun moveNext() {
+        startActivity(Intent(this, StudentCardUploadActivity::class.java).apply {
+            putExtra(Constants.KEY_REGISTER_DATA, registerData.also {
+                it.phoneNo = Regex(AppRegex.PHONE_VALIDATE)
+                    .replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
+            })
+        })
     }
 
     private fun initViewModelListeners() {
         viewModel.sendCodeResult.observe(this) { result ->
             if(result.isSuccessful) {
                 Toasty.success(this, "SMS가 전송되었습니다.").show()
-                // 인증 버튼 업데이트
-                isCodeSent = true
+                startTimer()
             } else {
                 result.message?.let {
                     Toasty.error(this, it).show()
@@ -91,18 +104,75 @@ class VerifyCodeActivity : AppCompatActivity() {
         }
 
         viewModel.verifyCodeResult.observe(this) { result ->
-            // TODO: 사용자에게 명확히 인증 성공 알림 코드 필요
             binding.btnNext.isEnabled = result.isSuccessful
-            if(!result.isSuccessful) {
-                Balloon.Builder(this)
-                    .setText(result.message!!)
-                    .setPadding(8)
-                    .setBackgroundColor(resources.getColor(R.color.dream_purple))
-                    .setArrowOrientation(ArrowOrientation.START)
-                    .setArrowPosition(0.5f)
-                    .build()
-                    .showAlignRight(binding.textCode)
+            if(result.isSuccessful) {
+                moveNext()
+            } else {
+                Toasty.error(this, result.message!!).show()
             }
         }
+    }
+
+    private fun startTimer() {
+        binding.btnRequest.text = "재전송"
+        isCodeSent = true
+        updateValidateButton()
+
+        startTime = System.currentTimeMillis()
+        if(timerJob == null) {
+            timerJob = tickerFlow(100.toDuration(DurationUnit.MILLISECONDS))
+                .map { System.currentTimeMillis() }
+                .distinctUntilChanged { old, new -> old == new }
+                .onEach {
+                    val diff = it - startTime
+                    if(diff <= validateTimeMillis) {
+                        binding.textTimer.text = formatMilliseconds(validateTimeMillis - diff + 1000)
+                    } else {
+                        endTimer()
+                    }
+                }.launchIn(lifecycleScope)
+        } else {
+            if(!timerJob!!.isActive) {
+                timerJob = tickerFlow(100.toDuration(DurationUnit.MILLISECONDS))
+                    .map { System.currentTimeMillis() }
+                    .distinctUntilChanged { old, new -> old == new }
+                    .onEach {
+                        val diff = it - startTime
+                        if(diff <= validateTimeMillis) {
+                            binding.textTimer.text = formatMilliseconds(validateTimeMillis - diff + 1000)
+                        } else {
+                            endTimer()
+                        }
+                    }.launchIn(lifecycleScope)
+            }
+        }
+    }
+
+    private fun formatMilliseconds(milliseconds: Long): String {
+        val totalSeconds = milliseconds / 1000
+        val minutes = totalSeconds / 60
+        val seconds = totalSeconds % 60
+        return String.format("%d:%02d", minutes, seconds)
+    }
+
+    private fun tickerFlow(period: Duration, initialDelay: Duration = Duration.ZERO) = flow {
+        delay(initialDelay)
+        while (isCodeSent) {
+            emit(Unit)
+            delay(period)
+        }
+    }
+
+    private fun updateValidateButton() {
+        val code = binding.inputCode.text.toString()
+        binding.btnValidate.isEnabled = (code.length == 6) && isCodeSent
+    }
+
+    private fun endTimer() {
+        isCodeSent = false
+        binding.btnRequest.isEnabled = true
+
+        binding.textTimer.text = "0:00"
+        updateValidateButton()
     }
 }

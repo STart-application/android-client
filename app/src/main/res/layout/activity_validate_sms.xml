@@ -35,38 +35,34 @@
                 android:id="@+id/image_logo"
                 android:layout_width="157dp"
                 android:layout_height="76dp"
-                app:layout_constraintVertical_bias="0"
                 android:layout_marginBottom="@dimen/dream_logo_margin_bottom"
                 android:src="@drawable/logo_dream"
                 app:layout_constraintBottom_toTopOf="@id/text_phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/guide_logo" />
+                app:layout_constraintTop_toTopOf="@id/guide_logo"
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
                 android:id="@+id/text_phone"
+                style="@style/Theme.Dream.Typeface_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginBottom="11dp"
-                android:fontFamily="@font/pretendard_bold"
                 android:text="휴대폰번호"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_phone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
             <TextView
                 android:id="@+id/text_code"
+                style="@style/Theme.Dream.Typeface_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginBottom="11dp"
-                android:fontFamily="@font/pretendard_bold"
                 android:text="인증번호"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_code"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
@@ -101,9 +97,10 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_request"
                     style="@style/Theme.Dream.Button_Input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="66dp"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:minWidth="0dp"
                     android:text="인증 요청" />
             </LinearLayout>
 
@@ -134,12 +131,22 @@
                     android:maxLines="1"
                     android:textColorHint="@color/dream_gray" />
 
+                <TextView
+                    android:id="@+id/text_timer"
+                    style="@style/Theme.Dream.Typeface_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/dream_red"
+                    tools:text="3:00" />
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_validate"
                     style="@style/Theme.Dream.Button_Input"
-                    android:layout_width="wrap_content"
+                    android:layout_width="66dp"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:minWidth="0dp"
                     android:text="확인" />
             </LinearLayout>
 
