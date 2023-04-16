@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -115,9 +116,11 @@ class StudentCardUploadActivity : AppCompatActivity() {
             selectPhotoDialog.show(supportFragmentManager, null)
         }
         binding.btnNext.setOnClickListener {
+            binding.progressbar.visibility = View.VISIBLE
+            binding.btnNext.isEnabled = false
+
             lifecycleScope.launch(Dispatchers.IO) {
                 val part = getPart(applicationContext, studentCardUri)
-                Log.d(null, "initViewListeners: $registerData")
                 viewModel.register(registerData, part)
             }
         }
@@ -130,6 +133,9 @@ class StudentCardUploadActivity : AppCompatActivity() {
             } else {
                 Toasty.error(this, result.message!!).show()
             }
+
+            binding.progressbar.visibility = View.GONE
+            binding.btnNext.isEnabled = true
         }
     }
 

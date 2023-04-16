@@ -113,6 +113,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/progressbar"
+                app:layout_constraintTop_toTopOf="@id/btnNext"
+                app:layout_constraintStart_toStartOf="@id/btnNext"
+                app:layout_constraintEnd_toEndOf="@id/btnNext"
+                app:layout_constraintBottom_toBottomOf="@id/btnNext"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:indeterminateTint="@color/dream_purple"
+                android:layout_height="wrap_content"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
