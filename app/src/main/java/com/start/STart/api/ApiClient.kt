@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
+        level = HttpLoggingInterceptor.Level.BASIC
     }
 
     private val tokenInterceptor = TokenInterceptor()

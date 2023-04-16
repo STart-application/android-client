@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -115,40 +116,21 @@ class StudentCardUploadActivity : AppCompatActivity() {
         }
         binding.btnNext.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                val part = getPart(studentCardUri)
+                val part = getPart(applicationContext, studentCardUri)
+                Log.d(null, "initViewListeners: $registerData")
                 viewModel.register(registerData, part)
             }
         }
     }
 
     private fun initViewModelListeners() {
-        viewModel.registerResult.observe(this) {
-            if(it.isSuccessful) {
+        viewModel.registerResult.observe(this) { result ->
+            if (result.isSuccessful) {
                 startActivity(Intent(this, RegisterCompleteActivity::class.java))
             } else {
-                Balloon.Builder(this)
-                    .setText(it.message.toString())
-                    .setPadding(8)
-                    .setBackgroundColor(resources.getColor(R.color.dream_purple))
-                    .setArrowPosition(0.5f)
-                    .build()
-                    .showAlignTop(binding.btnNext)
+                Toasty.error(this, result.message!!).show()
             }
         }
-    }
-
-    private fun getPart(uri: Uri): MultipartBody.Part {
-        val inputStream = contentResolver.openInputStream(uri)
-        val file = File(externalCacheDir, "student_card.jpg")
-        val outputStream = FileOutputStream(file)
-
-        inputStream.use { input ->
-            outputStream.use { output ->
-                input?.copyTo(output)
-            }
-        }
-        val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-        return MultipartBody.Part.createFormData("file", file.name, requestFile)
     }
 
     private fun createCacheFile(): Uri {

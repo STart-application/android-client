@@ -66,13 +66,12 @@ class StudentInfoInputActivity : AppCompatActivity() {
     private fun initViewModelListeners() {
         viewModel.verifyDuplicateResult.observe(this) { resultModel ->
             if (resultModel.isSuccessful) {
-                // TODO: 부서 수정
                 startActivity(Intent(this, PasswordInputActivity::class.java).apply {
                     putExtra(
                         Constants.KEY_REGISTER_DATA, RegisterData(
                         studentNo = binding.inputStudentId.text.toString(),
                         name = binding.inputName.text.toString(),
-                        department = "임시부서"
+                        department = binding.inputDepartment.text.toString()
                     )
                     )
                 })

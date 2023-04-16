@@ -24,7 +24,7 @@ interface MemberService {
     @Multipart
     suspend fun register(
         @PartMap data: HashMap<String, RequestBody>,
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part?
     ): Response<ApiResponse>
 
     @GET("member")
