@@ -16,7 +16,11 @@ data class MarkerModel(
     }
 
     override fun getSnippet(): String? {
-        return "스니펫"
+        return null
+    }
+
+    override fun getZIndex(): Float? {
+        return 0f
     }
 
 }

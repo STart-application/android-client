@@ -21,6 +21,7 @@
     <color name="dream_yellow">#FFAD00</color>
     <color name="dream_red">#FF3845</color>
     <color name="dream_green">#27CD7B</color>
+    <color name="dream_green_transparent">#4427CD7B</color>
     <color name="dream_pink">#F4649F</color>
     <color name="dream_navy">#464D87</color>
     <color name="dream_white">#E9E9E9</color>

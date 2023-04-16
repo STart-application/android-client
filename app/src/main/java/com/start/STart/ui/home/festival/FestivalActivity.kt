@@ -19,12 +19,12 @@ import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.skydoves.cloudy.Cloudy
+import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.start.STart.R
 import kotlinx.coroutines.withContext
 
 
@@ -33,7 +33,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     private val binding by lazy { ActivityFestivalBinding.inflate(layoutInflater) }
     private lateinit var googleMap: GoogleMap
     private lateinit var clusterManager: ClusterManager<MarkerModel>
-
+    private val circleList = mutableListOf<Circle>()
 
     private val stampDialog by lazy { StampStatusDialog()}
 
@@ -125,6 +125,9 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
                 markerOptions: MarkerOptions
             ) {
                 super.onBeforeClusterRendered(cluster, markerOptions)
+                circleList.forEach {
+                    it.isVisible = false
+                }
                 //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
             }
 
@@ -143,7 +146,9 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             ) {
                 super.onBeforeClusterItemRendered(item, markerOptions)
                 markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_stamp_default)))
-
+                circleList.forEach {
+                    it.isVisible = true
+                }
             }
         }
         googleMap.setOnCameraIdleListener(clusterManager)
@@ -158,6 +163,17 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
                 .title(it.title)
                 .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this, R.drawable.marker_food_truck)))
             )*/
+            val circle: Circle = googleMap.addCircle(
+                CircleOptions()
+                    .center(it.latLng)
+                    .radius(50.0)
+                    .strokeColor(ContextCompat.getColor(this@FestivalActivity, R.color.dream_green))
+                    .fillColor(ContextCompat.getColor(this@FestivalActivity, R.color.dream_green_transparent))
+            )
+            circleList.add(circle)
+            circleList.forEach {
+                it.isVisible = false
+            }
         }
     }
 
