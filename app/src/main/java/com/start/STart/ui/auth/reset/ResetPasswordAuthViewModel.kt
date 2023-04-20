@@ -9,8 +9,14 @@ import com.start.STart.api.ApiResponse
 import com.start.STart.api.auth.request.SendResetPasswordCodeRequest
 import com.start.STart.api.auth.request.VerifyResetPasswordCode
 import com.start.STart.model.ResultModel
+import com.start.STart.util.AppException
+import com.start.STart.util.TIMER_ENDED
 import com.start.STart.util.gson
+import com.start.STart.util.timerFlow
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ResetPasswordAuthViewModel : ViewModel() {
@@ -25,7 +31,7 @@ class ResetPasswordAuthViewModel : ViewModel() {
                 _sendAuthCodeResult.postValue(ResultModel(true))
             } else {
                 val errorBody = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
-                _sendAuthCodeResult.postValue(ResultModel(false, "${errorBody.errorCode}: ${errorBody.message}"))
+                _sendAuthCodeResult.postValue(ResultModel(false, errorBody.message))
                 /*
                     ST041: 찾을 수 없는 회원
                     ST057: 학생증 인증 중인 회원
@@ -35,8 +41,33 @@ class ResetPasswordAuthViewModel : ViewModel() {
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            // TODO: 에러 처리
+            _sendAuthCodeResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
+    }
+
+    // 타이머 관련 코드
+    val timerLiveData = MutableLiveData<Long>()
+    private var timerTask: Job? = null
+
+    fun restartTimer() {
+        stopTimer()
+        startTimer()
+    }
+
+    fun startTimer() {
+        if(timerTask == null) {
+            timerTask = viewModelScope.launch(Dispatchers.IO) {
+                timerFlow().collect {
+                    timerLiveData.postValue(it)
+                }
+                timerLiveData.postValue(TIMER_ENDED)
+            }
+        }
+    }
+
+    fun stopTimer() {
+        timerTask?.cancel()
+        timerTask = null
     }
 
     private val _verifyAuthCodeResult: MutableLiveData<ResultModel> = MutableLiveData()
@@ -49,7 +80,7 @@ class ResetPasswordAuthViewModel : ViewModel() {
                 _verifyAuthCodeResult.postValue(ResultModel(true))
             } else {
                 val errorBody = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
-                _verifyAuthCodeResult.postValue(ResultModel(false, "${errorBody.errorCode}: ${errorBody.message}"))
+                _verifyAuthCodeResult.postValue(ResultModel(false, errorBody.message))
                 /*
                     ST066: 인증 정보 불일치
                     ST077: 기간 만료
@@ -58,7 +89,7 @@ class ResetPasswordAuthViewModel : ViewModel() {
 
         } catch(e: Exception) {
             e.printStackTrace()
-            // TODO: 에러 처리
+            _verifyAuthCodeResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
     }
 }

@@ -31,7 +31,7 @@
                 android:id="@+id/imageMemberShip"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/dream_gray_light"
+                android:background="@color/dream_white"
                 android:layout_weight="1"
                 android:scaleType="centerCrop" />
 

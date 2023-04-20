@@ -7,19 +7,19 @@
     android:orientation="vertical"
     tools:context=".ui.auth.reset.ResetPasswordAuthActivity">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -35,49 +35,49 @@
                 android:id="@+id/image_logo"
                 android:layout_width="157dp"
                 android:layout_height="76dp"
-                app:layout_constraintVertical_bias="0"
                 android:layout_marginBottom="@dimen/dream_logo_margin_bottom"
                 android:src="@drawable/logo_dream"
                 app:layout_constraintBottom_toTopOf="@id/text_description1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/guide_logo" />
+                app:layout_constraintTop_toTopOf="@id/guide_logo"
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
-                style="@style/Theme.Dream.Typeface_Body_1"
                 android:id="@+id/text_description1"
+                style="@style/Theme.Dream.Typeface_Body_1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
-                android:layout_width="0dp"
                 android:text="@string/reset_password_auth_description_1"
                 app:layout_constraintBottom_toTopOf="@id/text_description2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                style="@style/Theme.Dream.Typeface_Caption"
                 android:id="@+id/text_description2"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="38dp"
-                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                style="@style/Theme.Dream.Typeface_Caption"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="38dp"
                 android:text="@string/reset_password_auth_description_2"
                 app:layout_constraintBottom_toTopOf="@id/text_student_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                style="@style/Theme.Dream.Typeface_Title_Input"
                 android:id="@+id/text_student_id"
-                android:layout_marginBottom="11dp"
+                style="@style/Theme.Dream.Typeface_Title_Input"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="11dp"
                 android:text="@string/student_id"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                style="@style/Theme.Dream.Typeface_Caption"
                 android:id="@+id/text_student_id_caption"
+                style="@style/Theme.Dream.Typeface_Caption"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/text_student_id"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,18 +85,18 @@
                 tools:text="@string/password_format_fail" />
 
             <TextView
-                style="@style/Theme.Dream.Typeface_Title_Input"
                 android:id="@+id/text_auth_code"
-                android:layout_marginBottom="11dp"
+                style="@style/Theme.Dream.Typeface_Title_Input"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="11dp"
                 android:text="@string/auth_code"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_code"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
             <TextView
-                style="@style/Theme.Dream.Typeface_Caption"
                 android:id="@+id/text_code_caption"
+                style="@style/Theme.Dream.Typeface_Caption"
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/text_auth_code"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -104,86 +104,96 @@
                 tools:text="@string/password_equal_fail" />
 
             <LinearLayout
-                android:background="@drawable/input_dream"
                 android:id="@+id/layout_input_student_id"
-                android:layout_height="@dimen/dream_input_height"
-                android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_width="0dp"
+                android:layout_height="@dimen/dream_input_height"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/input_dream"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/text_auth_code"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    style="@style/Theme.Dream.Typeface_Body_1"
-                    android:background="@null"
-                    android:hint="@string/hint_student_id"
                     android:id="@+id/input_student_id"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:layout_gravity="center"
+                    style="@style/Theme.Dream.Typeface_Body_1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:background="@null"
+                    android:hint="@string/hint_student_id"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:maxLength="8"
                     android:maxLines="1"
                     android:textColorHint="@color/dream_gray" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    style="@style/Theme.Dream.Button_Input"
-                    android:enabled="false"
                     android:id="@+id/btn_auth_request"
+                    style="@style/Theme.Dream.Button_Input"
+                    android:layout_width="66dp"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:enabled="false"
+                    android:minWidth="0dp"
                     android:text="@string/auth_request" />
             </LinearLayout>
 
             <LinearLayout
-                android:background="@drawable/input_dream"
                 android:id="@+id/layout_input_code"
-                android:layout_height="@dimen/dream_input_height"
-                android:layout_marginBottom="50dp"
-                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_width="0dp"
+                android:layout_height="@dimen/dream_input_height"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/input_dream"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@id/btnNext"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/input_code"
                     style="@style/Theme.Dream.Typeface_Body_1"
-                    android:background="@null"
-                    android:hint="@string/hint_auth_code"
-                    android:id="@+id/input_auth_code"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:layout_gravity="center"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:background="@null"
+                    android:hint="인증번호 입력"
+                    android:inputType="number"
                     android:maxLength="6"
                     android:maxLines="1"
                     android:textColorHint="@color/dream_gray" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    style="@style/Theme.Dream.Button_Input"
-                    android:enabled="false"
-                    android:id="@+id/btn_auth_confirm"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/text_timer"
+                    style="@style/Theme.Dream.Typeface_Title"
                     android:layout_width="wrap_content"
-                    android:text="@string/confirm" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/dream_red"
+                    tools:text="3:00" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_validate"
+                    style="@style/Theme.Dream.Button_Input"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:minWidth="0dp"
+                    android:text="확인" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                style="@style/Theme.Dream.Button_Primary"
-                android:enabled="false"
                 android:id="@+id/btnNext"
-                android:layout_marginBottom="30dp"
-                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                style="@style/Theme.Dream.Button_Primary"
                 android:layout_width="0dp"
+                android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
+                android:layout_marginBottom="30dp"
+                android:enabled="false"
                 android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -14,6 +14,7 @@ import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateSmsBinding
 import com.start.STart.util.AppRegex
 import com.start.STart.util.Constants
+import com.start.STart.util.formatTimerMilliseconds
 import com.start.STart.util.getParcelableExtra
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
@@ -126,7 +127,7 @@ class VerifyCodeActivity : AppCompatActivity() {
                 .onEach {
                     val diff = it - startTime
                     if(diff <= validateTimeMillis) {
-                        binding.textTimer.text = formatMilliseconds(validateTimeMillis - diff + 1000)
+                        binding.textTimer.text = formatTimerMilliseconds(validateTimeMillis - diff + 1000)
                     } else {
                         endTimer()
                     }
@@ -139,20 +140,13 @@ class VerifyCodeActivity : AppCompatActivity() {
                     .onEach {
                         val diff = it - startTime
                         if(diff <= validateTimeMillis) {
-                            binding.textTimer.text = formatMilliseconds(validateTimeMillis - diff + 1000)
+                            binding.textTimer.text = formatTimerMilliseconds(validateTimeMillis - diff + 1000)
                         } else {
                             endTimer()
                         }
                     }.launchIn(lifecycleScope)
             }
         }
-    }
-
-    private fun formatMilliseconds(milliseconds: Long): String {
-        val totalSeconds = milliseconds / 1000
-        val minutes = totalSeconds / 60
-        val seconds = totalSeconds % 60
-        return String.format("%d:%02d", minutes, seconds)
     }
 
     private fun tickerFlow(period: Duration, initialDelay: Duration = Duration.ZERO) = flow {

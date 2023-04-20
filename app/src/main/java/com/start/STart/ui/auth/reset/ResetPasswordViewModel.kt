@@ -43,12 +43,6 @@ class ResetPasswordViewModel: ViewModel() {
                     }
                 }
             }
-        } catch (e: SocketTimeoutException) {
-            e.printStackTrace()
-            _resetPasswordResult.postValue(ResultModel(false, AppException.TIMEOUT.title))
-        } catch (e: ConnectException) {
-            e.printStackTrace()
-            _resetPasswordResult.postValue(ResultModel(false, AppException.CONNECTION.title))
         } catch (e: Exception) {
             e.printStackTrace()
             _resetPasswordResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
