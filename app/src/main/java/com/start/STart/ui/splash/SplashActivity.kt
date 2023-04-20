@@ -1,33 +1,37 @@
 package com.start.STart.ui.splash
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.content.IntentSender.SendIntentException
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.input.key.Key.Companion.I
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.start.STart.api.ApiClient
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivitySplashBinding
+import com.start.STart.model.ResultModel
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.ui.home.HomeActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.MemberDataHelper
 import com.start.STart.util.PreferenceManager
 import com.start.STart.util.TokenHelper
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.log
+import org.threeten.bp.Clock
+import org.threeten.bp.Instant
+import org.threeten.bp.temporal.ChronoUnit
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class SplashActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
@@ -37,20 +41,63 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val splashScreen = installSplashScreen()
         setContentView(binding.root)
 
-
-        
-        // 로그인 시도
         checkAppUpdate()
         lifecycleScope.launch(Dispatchers.IO) {
-            tryLogin()
+
+            val loginTask = async { tryLogin() }
+            val loadMemberTask = async(start = CoroutineStart.LAZY) { loadMember() }
+            val withOutLoginTask = async { checkAgreeWithoutLogin() }
+            val animationTask = launch { checkAnimation() }
+
+            var activity: Class<*>? = null
+
+            if (loginTask.await()) {
+                loadMemberTask.start()
+                if(loadMemberTask.await().isSuccessful) {
+                    PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, loadMemberTask.await().data as MemberData)
+                    activity = HomeActivity::class.java
+                } else {
+                    activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
+                }
+            } else {
+                activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
+            }
+
+
+            animationTask.join()
+            withContext(Dispatchers.Main) {
+                startActivity(Intent(applicationContext, activity))
+                finish()
+            }
         }
 
-        // TODO: 로그인 로직 정상 동작 확인 후 버튼 삭제
-        binding.btnMove.setOnClickListener {
-            startActivity(Intent(this, LoginOrSkipActivity::class.java))
-            finish()
+        splashScreen.setOnExitAnimationListener { vp ->
+            binding.lottieView.enableMergePathsForKitKatAndAbove(true)
+
+            val splashScreenAnimationEndTime =
+                Instant.ofEpochMilli(vp.iconAnimationStartMillis + vp.iconAnimationDurationMillis)
+            val delay = Instant.now(Clock.systemUTC()).until(
+                splashScreenAnimationEndTime,
+                ChronoUnit.MILLIS
+            )
+
+            binding.lottieView.postDelayed({
+                vp.view.alpha = 0f
+                vp.iconView.alpha = 0f
+                binding.lottieView.playAnimation()
+            }, delay)
+        }
+    }
+
+    private suspend fun checkAnimation() = suspendCoroutine<Unit> { continuation ->
+        binding.lottieView.addAnimatorUpdateListener { animation ->
+            if (animation.animatedValue as Float >= 0.6f) {
+                binding.lottieView.removeAllUpdateListeners()
+                continuation.resume(Unit)
+            }
         }
     }
 
@@ -82,39 +129,17 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun tryLogin()  {
+    private suspend fun tryLogin(): Boolean {
         ApiClient.disableToken()
-        val isSuccessful = TokenHelper.tryLoginWithAccessToken()
-        if(isSuccessful) {
-            loadMember()
-        } else {
-            checkAgreeWithoutLogin()
-        }
+        return TokenHelper.tryLoginWithAccessToken()
     }
 
-    private suspend fun loadMember()  {
-        val result = MemberDataHelper.readMember()
-        if(result.isSuccessful) {
-            PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, result.data as MemberData)
-            withContext(Dispatchers.Main) {
-                startActivity(Intent(applicationContext, HomeActivity::class.java))
-                finish()
-            }
-        } else {
-            checkAgreeWithoutLogin()
-        }
+    private suspend fun loadMember(): ResultModel {
+        return MemberDataHelper.readMember()
     }
 
     //
-    private suspend fun checkAgreeWithoutLogin() {
-        if(PreferenceManager.getBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN)) {
-            withContext(Dispatchers.Main) {
-                startActivity(Intent(applicationContext, HomeActivity::class.java))
-                finish()
-            }
-        } else {
-            startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java))
-            finish()
-        }
+    private suspend fun checkAgreeWithoutLogin(): Boolean {
+        return PreferenceManager.getBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN)
     }
 }
