@@ -6,6 +6,11 @@ import retrofit2.http.GET
 
 interface FestivalService {
 
+    @GET("festival")
+    suspend fun checkFestivalPeriod(
+
+    ): Response<ApiResponse>
+
     @GET("booth")
     suspend fun loadBooth(
 

@@ -7,17 +7,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.BannerModel
+import com.start.STart.api.festival.FestivalService
 import com.start.STart.model.ResultModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class HomeViewModel: ViewModel() {
+
+    init {
+        loadBanner()
+        loadFestivalEnabled()
+    }
 
     private val _loadBannerResult: MutableLiveData<ResultModel> = MutableLiveData()
     val loadBannerResult: LiveData<ResultModel>
         get() = _loadBannerResult
 
-    // 배너 API 연결: 에러 처리 필요 없음
+    // TODO 배너 API 대체 이미지 추가
     fun loadBanner() = viewModelScope.launch(Dispatchers.IO) {
         try {
             val res = ApiClient.bannerService.readBanner()
@@ -33,7 +40,18 @@ class HomeViewModel: ViewModel() {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            _loadBannerResult.postValue(ResultModel(false))
         }
         _loadBannerResult.postValue(ResultModel(false))
+    }
+
+    val festivalEnabledResult: MutableLiveData<ResultModel> = MutableLiveData()
+    fun loadFestivalEnabled() = viewModelScope.launch(Dispatchers.IO) {
+        try {
+            val res = ApiClient.festivalService.checkFestivalPeriod()
+            festivalEnabledResult.postValue(ResultModel(res.isSuccessful))
+        } catch (e: IOException) {
+            festivalEnabledResult.postValue(ResultModel(false))
+        }
     }
 }
