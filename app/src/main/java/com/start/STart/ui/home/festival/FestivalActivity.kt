@@ -1,15 +1,22 @@
 package com.start.STart.ui.home.festival
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,24 +29,42 @@ import com.skydoves.cloudy.Cloudy
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val binding by lazy { ActivityFestivalBinding.inflate(layoutInflater) }
+
+    private val locationManager by lazy { getSystemService(Context.LOCATION_SERVICE) as LocationManager }
+    private lateinit var fusedLocationProvider: FusedLocationProviderClient
+
+    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+        if(result.all { it.value }) {
+            // 권한 승인
+        } else {
+            Toasty.info(this, "위치권한을 거부하였습니다.").show()
+        }
+    }
+
     private lateinit var googleMap: GoogleMap
     private lateinit var clusterManager: ClusterManager<MarkerModel>
     private val circleList = mutableListOf<Circle>()
 
     private val stampDialog by lazy { StampStatusDialog()}
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
+
         (supportFragmentManager.findFragmentById(R.id.fragmentMap) as SupportMapFragment)
             .getMapAsync(this)
 
@@ -112,8 +137,61 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             MarkerModel("포토존", LatLng(37.633930, 127.077845)),
         ))
 
+        googleMap.setOnCircleClickListener { circle ->
+            lifecycleScope.launch {
+                val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
+
+                val circleCenter = circle.center
+                val circleRadius = circle.radius
+                val distance = FloatArray(1)
+                Location.distanceBetween(
+                    circleCenter.latitude,
+                    circleCenter.longitude,
+                    myLatLng.latitude,
+                    myLatLng.longitude,
+                    distance
+                )
+
+                if (distance[0] > circleRadius) {
+                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 없습니다.").show()
+                } else {
+                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 있습니다.").show()
+                }
+            }
+
+        }
+
+        googleMap.uiSettings
+            .isMyLocationButtonEnabled = false
+
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
 
+        binding.locationBtn.setOnClickListener {
+            enableLocation()
+        }
+    }
+
+    private fun enableLocation() {
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+            googleMap.isMyLocationEnabled = true
+            fusedLocationProvider.lastLocation.addOnSuccessListener {
+                val latLng = LatLng(it.latitude, it.longitude)
+                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17f)
+                googleMap.animateCamera(cameraUpdate)
+            }
+            return
+        }
+        permissionLauncher.launch(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
+    }
+
+    @SuppressLint("MissingPermission")
+    private suspend fun getMyLocation()  = suspendCoroutine { contination ->
+        fusedLocationProvider.lastLocation.addOnSuccessListener {
+            contination.resume(LatLng(it.latitude, it.longitude))
+        }
     }
 
     private fun setUpClusterer() {
@@ -167,6 +245,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
                 CircleOptions()
                     .center(it.latLng)
                     .radius(50.0)
+                    .clickable(true)
                     .strokeColor(ContextCompat.getColor(this@FestivalActivity, R.color.dream_green))
                     .fillColor(ContextCompat.getColor(this@FestivalActivity, R.color.dream_green_transparent))
             )

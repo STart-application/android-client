@@ -56,9 +56,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.home.membership.MemberShipActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.home.rent.RentCalendarActivity"
             android:exported="false" />
         <activity
