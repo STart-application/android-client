@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -29,6 +28,8 @@ import com.skydoves.cloudy.Cloudy
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
+import com.start.STart.ui.home.festival.maps.MarkerModel
+import com.start.STart.util.getBitmapFromVectorDrawable
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -121,53 +122,48 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
-        setUpClusterer()
+        googleMap.uiSettings
+            .isMyLocationButtonEnabled = false
 
+        initPosition()
+        setUpClusterManager()
+        initMarker()
+
+        binding.locationBtn.setOnClickListener {
+            enableLocation()
+        }
+    }
+
+    private fun initPosition() {
         val latLng = LatLng(37.6333, 127.0778)
         val position = CameraPosition.Builder()
             .target(latLng)
             .zoom(17f)
             .build()
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
+    }
 
+    private fun initMarker() {
         addMakers(listOf(
-            MarkerModel("동심오락관", LatLng(37.6319, 127.079)),
-            MarkerModel("마당사업", LatLng(37.632310, 127.077111)),
-            MarkerModel("붕어방컨텐츠", LatLng(37.633061, 127.078598)),
-            MarkerModel("무대", LatLng(37.6294, 127.0787)),
-            MarkerModel("포토존", LatLng(37.633930, 127.077845)),
+            MarkerModel(this, "동심오락관", LatLng(37.6319, 127.079), R.drawable.marker_game),
+            MarkerModel(this, "마당사업", LatLng(37.632310, 127.077111), R.drawable.marker_yard),
+            MarkerModel(this, "붕어방컨텐츠", LatLng(37.633061, 127.078598), R.drawable.marker_bungeobang),
+            MarkerModel(this, "무대", LatLng(37.6294, 127.0787), R.drawable.marker_stage),
+            MarkerModel(this, "포토존", LatLng(37.633930, 127.077845), R.drawable.marker_photo),
         ))
 
         googleMap.setOnCircleClickListener { circle ->
-            lifecycleScope.launch {
-                val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
+            if(circle.isVisible) {
+                lifecycleScope.launch {
+                    val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
 
-                val circleCenter = circle.center
-                val circleRadius = circle.radius
-                val distance = FloatArray(1)
-                Location.distanceBetween(
-                    circleCenter.latitude,
-                    circleCenter.longitude,
-                    myLatLng.latitude,
-                    myLatLng.longitude,
-                    distance
-                )
-
-                if (distance[0] > circleRadius) {
-                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 없습니다.").show()
-                } else {
-                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 있습니다.").show()
+                    if(checkInCircle(myLatLng, circle = circle)) {
+                        Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 있습니다.").show()
+                    } else {
+                        Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 없습니다.").show()
+                    }
                 }
             }
-
-        }
-
-        googleMap.uiSettings
-            .isMyLocationButtonEnabled = false
-
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position))
-
-        binding.locationBtn.setOnClickListener {
-            enableLocation()
         }
     }
 
@@ -194,7 +190,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun setUpClusterer() {
+    private fun setUpClusterManager() {
         clusterManager = ClusterManager<MarkerModel>(this, googleMap)
         clusterManager.renderer = object: DefaultClusterRenderer<MarkerModel>(this@FestivalActivity, googleMap, clusterManager
         ) {
@@ -206,16 +202,10 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
                 circleList.forEach {
                     it.isVisible = false
                 }
-                //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
             }
 
             override fun getColor(clusterSize: Int): Int {
-                return ContextCompat.getColor(this@FestivalActivity, R.color.dream_green)
-            }
-
-            override fun onClusterUpdated(cluster: Cluster<MarkerModel>, marker: Marker) {
-                super.onClusterUpdated(cluster, marker)
-                //marker.setIcon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_food_truck)))
+                return Color.parseColor("#502182")
             }
 
             override fun onBeforeClusterItemRendered(
@@ -223,49 +213,75 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
                 markerOptions: MarkerOptions
             ) {
                 super.onBeforeClusterItemRendered(item, markerOptions)
-                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, R.drawable.marker_stamp_default)))
+                markerOptions
+                    .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, item.drawableRes)))
+
                 circleList.forEach {
                     it.isVisible = true
                 }
             }
+
+            override fun setOnClusterItemClickListener(listener: ClusterManager.OnClusterItemClickListener<MarkerModel>?) {
+                super.setOnClusterItemClickListener(listener)
+            }
+        }
+
+        clusterManager.setOnClusterItemClickListener {
+            lifecycleScope.launch {
+                val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
+
+                if(checkInCircle(myLatLng, circleOptions = it.circleOptions)) {
+                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 있습니다.").show()
+                } else {
+                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 없습니다.").show()
+                }
+            }
+
+
+            true
         }
         googleMap.setOnCameraIdleListener(clusterManager)
-        googleMap.setOnMarkerClickListener(clusterManager)
     }
 
     private fun addMakers(markerModels: List<MarkerModel>) {
         markerModels.forEach {
             clusterManager.addItems(markerModels)
-            /*googleMap.addMarker(MarkerOptions()
-                .position(it.latLng)
-                .title(it.title)
-                .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this, R.drawable.marker_food_truck)))
-            )*/
-            val circle: Circle = googleMap.addCircle(
-                CircleOptions()
-                    .center(it.latLng)
-                    .radius(50.0)
-                    .clickable(true)
-                    .strokeColor(ContextCompat.getColor(this@FestivalActivity, R.color.dream_green))
-                    .fillColor(ContextCompat.getColor(this@FestivalActivity, R.color.dream_green_transparent))
-            )
-            circleList.add(circle)
-            circleList.forEach {
-                it.isVisible = false
+            val circle: Circle = googleMap.addCircle(it.circleOptions).apply {
+                isVisible = false
             }
+
+            circleList.add(circle)
         }
     }
 
-    private fun getBitmapFromVectorDrawable(context: Context?, drawableId: Int): Bitmap {
-        val drawable = ContextCompat.getDrawable(context!!, drawableId)
-        val bitmap = Bitmap.createBitmap(
-            drawable!!.intrinsicWidth,
-            drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        return bitmap
+    private fun moveCamera(latLng: LatLng) {
+        val cameraUpdate = CameraUpdateFactory.newLatLng(latLng)
+        googleMap.animateCamera(cameraUpdate)
     }
 
+    private fun checkInCircle(myLatLng: LatLng, circle: Circle? = null, circleOptions: CircleOptions? = null): Boolean {
+
+
+
+        /// 원의 중심과 반지름
+        val circleCenter = circle?.center ?: circleOptions?.center
+        val circleRadius = circle?.radius ?: circleOptions?.radius
+
+        val circleLatLng = LatLng(circleCenter!!.latitude , circleCenter.longitude)
+        moveCamera(circleLatLng)
+
+        // 결과를 담을 변수
+        val distance = FloatArray(1)
+
+        // 거리 측정
+        Location.distanceBetween(
+            circleLatLng.latitude ,
+            circleLatLng.longitude,
+            myLatLng.latitude,
+            myLatLng.longitude,
+            distance
+        )
+
+        return distance[0] <= circleRadius!!
+    }
 }
