@@ -2,8 +2,6 @@ package com.start.STart.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.transition.Slide
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -38,12 +36,12 @@ import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.ui.home.rent.RentHomeActivity
 import com.start.STart.ui.home.pay.PaymentActivity
-import com.start.STart.ui.home.rent.RentActivity
 import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
 import com.start.STart.ui.theme.shadow
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -61,20 +59,20 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
         setContentView(binding.root)
 
         initToolbar()
-        initViewModelListeners()
+        initLiveDataObservers()
 
         binding.slider.offscreenPageLimit = 1
         binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         binding.slider.adapter = sliderAdapter
 
+        // Slider와 Indicator를 연결
         TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
         }.attach()
 
+        // 메뉴 컴포즈로 구성
         binding.composeMenu.setContent {
             MenuLayout()
         }
-
-        viewModel.loadBanner()
     }
 
     override fun onClick() {
@@ -87,10 +85,12 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
         photoView.setImage(sliderAdapter.list[binding.slider.currentItem].imageUrl)
     }
 
-    private fun initViewModelListeners() {
+    private fun initLiveDataObservers() {
         viewModel.loadBannerResult.observe(this) {
             if(it.isSuccessful) {
                 sliderAdapter.list = it.data as List<BannerModel>
+            } else {
+                // TODO 요청 실패 이미지 추가
             }
             binding.progressbarBanner.visibility = View.INVISIBLE
         }
@@ -125,7 +125,7 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                         startActivity(Intent(applicationContext, InfoActivity::class.java))
                     }
                     MenuItem(title = "제휴사업", drawable = R.drawable.ic_home_menu_2) {
-                        // TODO: 액티비티 이동 추가
+                        Toasty.info(applicationContext, "준비중입니다!").show()
                     }
                     MenuItem(title = "자치회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
                         lifecycleScope.launch(Dispatchers.IO) {
@@ -135,7 +135,7 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                                 }
                             } else {
                                 withContext(Dispatchers.Main) {
-                                    Toast.makeText(this@HomeActivity, "로그인하자", Toast.LENGTH_SHORT).show()
+                                    Toasty.info(applicationContext, "로그인이 필요합니다!").show()
                                 }
                             }
                         }
@@ -148,7 +148,11 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                         startActivity(Intent(applicationContext, RentHomeActivity::class.java))
                     }
                     MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5) {
-                        startActivity(Intent(applicationContext, FestivalActivity::class.java))
+                        if(viewModel.festivalEnabledResult.value?.isSuccessful?:false) {
+                            startActivity(Intent(applicationContext, FestivalActivity::class.java))
+                        } else {
+                            Toasty.info(applicationContext, "축제 기간이 아닙니다!").show()
+                        }
                     }
                     MenuItem(title = "이벤트 참여", drawable = R.drawable.ic_home_menu_6, bottomEndRadius = 20.dp) {
                         startActivity(Intent(applicationContext, EventActivity::class.java))
@@ -158,70 +162,9 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
         }
     }
 
-    @Composable
-    fun MenuItem(
-        title: String,
-        drawable: Int,
-        topStartRadius: Dp = 0.dp,
-        topEndRadius: Dp = 0.dp,
-        bottomEndRadius: Dp = 0.dp,
-        bottomStartRadius: Dp = 0.dp,
-        onClick: () -> Unit
-    ) {
-        ConstraintLayout(
-            modifier = Modifier
-                .shadow(
-                    color = Color(0f, 0f, 0f, 0.25f),
-                    topStartRadius,
-                    topEndRadius,
-                    bottomEndRadius,
-                    bottomStartRadius,
-                    spread = 0f.dp,
-                    blurRadius = 4f.dp
-                )
-                .clip(
-                    RoundedCornerShape(
-                        topStartRadius,
-                        topEndRadius,
-                        bottomEndRadius,
-                        bottomStartRadius
-                    )
-                )
-                .background(Color.White)
-                .clickable { onClick() }
-                .size(100.dp),
-        ) {
-            val (menuRef, titleRef) = createRefs()
-            Image(
-                painterResource(drawable),
-                "",
-                modifier = Modifier
-                    .size(25.dp)
-                    .constrainAs(menuRef) {
-                        bottom.linkTo(titleRef.top, margin = 9.dp)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    }
-            )
-
-            Text(text = title,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .constrainAs(titleRef) {
-                        top.linkTo(parent.top, margin = 60.dp)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    }
-            )
-        }
-    }
-
     @Preview
     @Composable
     fun MenuItemPreview() {
         MenuLayout()
     }
-
-
 }

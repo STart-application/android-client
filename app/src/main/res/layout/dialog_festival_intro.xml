@@ -3,30 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:background="@color/dream_purple_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:background="@color/dream_purple_background">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="320dp"
-        android:visibility="invisible"
-        tools:visibility="visible"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="invisible"
         app:cardCornerRadius="10dp"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="247dp"
-                android:layout_height="69dp"
-                android:layout_gravity="center_horizontal"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                app:srcCompat="@drawable/festival_intro" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="55dp"
+                    android:layout_height="67dp"
+                    android:layout_gravity="bottom"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/dream_mascot" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="11dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/balloon_festival_intro_dialog" />
+
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="2dp"
+                        android:text="축제 장소를 찾아가\n도장을 모아보세요"
+                        android:textColor="@color/dream_navy" />
+                </FrameLayout>
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,8 +81,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -69,6 +101,12 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="14dp"
+                android:background="@color/dream_gray_light" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,26 +128,32 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="축제 정보"
-                        android:textColor="@color/dream_pink" />
+                        android:text="도장 현황"
+                        android:textColor="@color/dream_green" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="위치 / 요금 / 축제 일정" />
+                        android:text="지도에 표시된 5개의 장소에 방문하여\n마커를 클릭해보세요" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="14dp"
+                android:background="@color/dream_gray_light" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,26 +175,31 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="축제 정보"
-                        android:textColor="@color/dream_pink" />
+                        android:text="푸드 트럭"
+                        android:textColor="@color/dream_yellow" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="지도에 표시된 0개의 장소에 방문하여\n마커를 클릭해보세요." />
+                        android:text="푸드트럭 위치 / 업체" />
 
                 </LinearLayout>
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="14dp"
+                android:background="@color/dream_gray_light" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,22 +222,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="축제 정보"
-                        android:textColor="@color/dream_pink" />
+                        android:text="포토존"
+                        android:textColor="@color/dream_blue" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="위치 / 요금 / 축제 일정" />
+                        android:text="포토존 위치" />
 
                 </LinearLayout>
 
