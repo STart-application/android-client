@@ -5,19 +5,13 @@ import android.content.res.ColorStateList
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.start.STart.R
-import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.Event
-import com.start.STart.api.banner.EventModel
 import com.start.STart.databinding.ActivityDetailEventBinding
 import com.start.STart.util.getParcelableExtra
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailEventActivity : AppCompatActivity() {
 
@@ -55,7 +49,7 @@ class DetailEventActivity : AppCompatActivity() {
 
         val purple_ghost = ContextCompat.getColor(binding.button.context, R.color.dream_purple_ghost)
         val purple = ContextCompat.getColor(binding.button.context, R.color.dream_purple)
-        val gray = ContextCompat.getColor(binding.button.context, R.color.dream_gray)
+        val gray = ContextCompat.getColor(binding.button.context, R.color.text_caption)
 
 
 

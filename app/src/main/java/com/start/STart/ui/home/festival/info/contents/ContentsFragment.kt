@@ -1,12 +1,11 @@
 package com.start.STart.ui.home.festival.info.contents
 
-import android.graphics.Canvas
 import android.graphics.Rect
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
 import com.start.STart.api.festival.response.BoothData
@@ -21,11 +20,11 @@ class ContentsFragment : Fragment() {
         val contentsRecyclerView = view.findViewById<RecyclerView>(R.id.contenstRecyclerView)
         contentsRecyclerView.adapter = contentsAdapter.also {
             it.list = listOf(
-                BoothData(1, "", 1),
-                BoothData(1, "", 1),
-                BoothData(1, "", 1),
-                BoothData(1, "", 1),
-                BoothData(1, "", 1),
+                BoothData(1, "대형 캔버스", 1),
+                BoothData(2, "대형 캔버스", 2),
+                BoothData(3, "대형 캔버스", 3),
+                BoothData(4, "대형 캔버스", 1),
+                BoothData(5, "대형 캔버스", 2),
             )
         }
         contentsRecyclerView.addItemDecoration(object: RecyclerView.ItemDecoration() {

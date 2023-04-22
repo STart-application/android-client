@@ -82,9 +82,9 @@ class RentHomeActivity : AppCompatActivity() {
         binding.layoutProfile.visibility = View.GONE
         binding.layoutLogin.visibility = View.VISIBLE
 
-        binding.imageProfile.setColorFilter(ContextCompat.getColor(this, R.color.dream_gray_light))
-        binding.btnMyRent.backgroundTintList = ContextCompat.getColorStateList(this, R.color.dream_gray_light_d9)
-        binding.btnMyRent.setTextColor(ContextCompat.getColor(this, R.color.dream_gray))
+        binding.imageProfile.setColorFilter(ContextCompat.getColor(this, R.color.dream_gray))
+        binding.btnMyRent.backgroundTintList = ContextCompat.getColorStateList(this, R.color.dream_gray_d9)
+        binding.btnMyRent.setTextColor(ContextCompat.getColor(this, R.color.text_caption))
         binding.btnMyRent.isEnabled = false
     }
 

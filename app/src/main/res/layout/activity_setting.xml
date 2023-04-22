@@ -120,7 +120,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_gray_light" />
+                        android:background="@color/dream_gray" />
 
                     <TextView
                         android:id="@+id/text_logout"
@@ -169,7 +169,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_gray_light" />
+                        android:background="@color/dream_gray" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -328,7 +328,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_gray_light" />
+                        android:background="@color/dream_gray" />
 
                     <TextView
                         android:id="@+id/text_update_log"
@@ -370,7 +370,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_gray_light" />
+                        android:background="@color/dream_gray" />
 
                     <TextView
                         android:id="@+id/text_feature_suggest"
@@ -423,7 +423,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_gray_light" />
+                        android:background="@color/dream_gray" />
 
                     <TextView
                         android:id="@+id/text_terms_of_service"
@@ -475,7 +475,7 @@
                     android:fontFamily="@font/sc_dream_3"
                     android:gravity="center_horizontal"
                     android:text="Tel. 02) 970-7012"
-                    android:textColor="@color/dream_gray"
+                    android:textColor="@color/text_caption"
                     android:textSize="12sp" />
 
                 <TextView
@@ -485,7 +485,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:text="서울특별시 노원구 공릉로 232 제 1학생회관 226호"
-                    android:textColor="@color/dream_gray" />
+                    android:textColor="@color/text_caption" />
 
                 <TextView
                     style="@style/Theme.Dream.Typeface_Caption"
@@ -495,7 +495,7 @@
                     android:layout_marginBottom="32dp"
                     android:gravity="center_horizontal"
                     android:text="ⓒSeoul National University of Science and Technology.\n All Rights Reserved."
-                    android:textColor="@color/dream_gray" />
+                    android:textColor="@color/text_caption" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

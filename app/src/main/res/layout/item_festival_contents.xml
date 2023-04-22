@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    app:cardElevation="0dp"
+    android:layout_height="180dp"
     android:background="@color/white"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,21 +14,122 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="200dp"
+            android:id="@+id/image_title"
+            android:layout_width="160dp"
             android:layout_height="match_parent"
-            android:background="@color/dream_gray_light"
+            android:background="@color/dream_gray"
             android:scaleType="centerCrop" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="12dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:paddingHorizontal="13dp"
+            android:paddingVertical="15dp">
 
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/Theme.Dream.Typeface_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dream_purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="대형 캔버스" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/text_congestion"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:text="혼잡도"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_title" />
+
+            <TextView
+                android:id="@+id/text_period"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="운영시간"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_congestion" />
+
+            <TextView
+                android:id="@+id/text_period_value"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_period"
+                app:layout_constraintTop_toTopOf="@id/text_period"
+                tools:text="11:00 - 18:00" />
+
+            <TextView
+                android:id="@+id/text_description"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="설명"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_period" />
+
+            <TextView
+                android:id="@+id/text_description_value"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_description"
+                tools:text="자치회비 납부자 - 무료\n자치회비 미납부자 - 500원\n외부 참가자 - 2,000원" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="21dp"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/text_congestion"
+                app:layout_constraintStart_toEndOf="@id/text_congestion"
+                app:layout_constraintTop_toTopOf="@id/text_congestion">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/congestion_1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/dream_green" />
+
+                    <View
+                        android:id="@+id/congestion_2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="1.7dp"
+                        android:layout_weight="1"
+                        android:background="@color/dream_gray" />
+
+                    <View
+                        android:id="@+id/congestion_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/dream_gray" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

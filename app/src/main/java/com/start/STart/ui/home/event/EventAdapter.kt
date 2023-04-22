@@ -30,7 +30,7 @@ class EventAdapter() : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
 
             val purple_ghost = ContextCompat.getColor(binding.textEventName.context, R.color.dream_purple_ghost)
             val purple = ContextCompat.getColor(binding.textEventName.context, R.color.dream_purple)
-            val gray = ContextCompat.getColor(binding.textEventName.context, R.color.dream_gray)
+            val gray = ContextCompat.getColor(binding.textEventName.context, R.color.text_caption)
             val navy = ContextCompat.getColor(binding.textEventName.context, R.color.dream_navy)
 
             when(event.eventStatus) {

@@ -3,7 +3,6 @@ package com.start.STart.ui.home.setting.suggest
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -15,14 +14,7 @@ import com.start.STart.databinding.ActivitySuggestBinding
 import com.start.STart.util.AppException
 import com.start.STart.util.getPart
 import com.start.STart.util.px2dp
-import com.start.STart.util.uriToFile
 import es.dmoral.toasty.Toasty
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
-import java.io.FileOutputStream
 
 class SuggestActivity : AppCompatActivity() {
 
@@ -133,7 +125,7 @@ class SuggestActivity : AppCompatActivity() {
         binding.btnDelete.visibility = if(imageUploadState) View.VISIBLE else View.GONE
 
 
-        val color = resources.getColor(if(imageUploadState) R.color.dream_purple else R.color.dream_gray)
+        val color = resources.getColor(if(imageUploadState) R.color.dream_purple else R.color.text_caption)
         binding.imagePhoto.setColorFilter(color)
         binding.textAddImage.setTextColor(color)
 

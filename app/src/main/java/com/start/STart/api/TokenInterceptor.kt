@@ -59,7 +59,8 @@ class TokenInterceptor : Interceptor {
                     .method(original.method, original.body)
                     .build()
 
-                response = chain.proceed(request)
+                response.close() // 첫 번째 요청으로 받은 응답을 닫아준다.
+                response = chain.proceed(request) // 수정된 요청을 다시 보냄
             } else {
                 Log.d(TAG, "intercept: 토큰 만료료 인한 재요청 실패")
             }

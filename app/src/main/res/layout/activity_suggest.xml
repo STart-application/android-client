@@ -35,7 +35,7 @@
                 android:inputType="text"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="12.5dp"
-                android:textColorHint="@color/dream_gray"
+                android:textColorHint="@color/text_caption"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
                 android:minHeight="260dp"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="12.5dp"
-                android:textColorHint="@color/dream_gray" />
+                android:textColorHint="@color/text_caption" />
 
             <LinearLayout
                 android:id="@+id/btn_add_image"
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="사진 추가"
-                    android:textColor="@color/dream_gray"
+                    android:textColor="@color/text_caption"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                 android:layout_marginHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginTop="8dp"
                 android:text="1. 모든 문의는 익명입니다.\n2. 답변을 받으시려면 연락처(이메일, 휴대전화)를 남겨주세요."
-                android:textColor="@color/dream_gray" />
+                android:textColor="@color/text_caption" />
 
             <LinearLayout
                 android:id="@+id/layout_add_image"

@@ -12,10 +12,6 @@ import java.io.IOException
 
 class FestivalInfoViewModel: ViewModel() {
 
-    init {
-        loadFestivalInfo()
-    }
-
     val loadFestivalInfoResult: MutableLiveData<ResultModel> = MutableLiveData()
 
     fun loadFestivalInfo() = viewModelScope.launch(Dispatchers.IO) {

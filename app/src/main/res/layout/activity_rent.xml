@@ -45,7 +45,7 @@
                     android:layout_height="1px"
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginTop="13dp"
-                    android:background="@color/dream_gray_light" />
+                    android:background="@color/dream_gray" />
 
                 <TextView
                     style="@style/Theme.Dream.Typeface_Title"
@@ -71,7 +71,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:textColor="@color/dream_gray"
+                        android:textColor="@color/text_caption"
                         android:textSize="15sp"
                         tools:text="2000. 00. 00 - 00. 00" />
 
@@ -119,8 +119,8 @@
                         android:hint="물품 대여 목적을 적어주세요."
                         android:inputType="text"
                         android:maxLines="1"
-                        android:textColor="@color/dream_gray"
-                        android:textColorHint="@color/dream_gray"
+                        android:textColor="@color/text_caption"
+                        android:textColorHint="@color/text_caption"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -159,8 +159,8 @@
                         android:inputType="text"
                         android:maxLines="1"
                         android:text="0"
-                        android:textColor="@color/dream_gray"
-                        android:textColorHint="@color/dream_gray"
+                        android:textColor="@color/text_caption"
+                        android:textColorHint="@color/text_caption"
                         android:textSize="15sp" />
 
                     <androidx.appcompat.widget.AppCompatImageView

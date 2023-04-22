@@ -32,7 +32,7 @@
                 android:id="@+id/slider"
                 android:layout_width="254dp"
                 android:layout_height="254dp"
-                android:background="@color/dream_gray"
+                android:background="@color/text_caption"
                 android:orientation="horizontal" />
 
         </androidx.cardview.widget.CardView>

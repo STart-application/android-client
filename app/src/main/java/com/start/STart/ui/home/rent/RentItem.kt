@@ -1,6 +1,5 @@
 package com.start.STart.ui.home.rent
 
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.start.STart.R
@@ -25,7 +24,7 @@ enum class RentItem(
 
 enum class RentStatus(val description: String, @ColorRes val color: Int) {
     DENY("거절", R.color.dream_red),
-    DONE("반납완료", R.color.dream_gray),
+    DONE("반납완료", R.color.text_caption),
     WAIT( "승인대기", R.color.dream_purple_ghost),
     CONFIRM("승인", R.color.dream_green),
     RENT("대여중", R.color.dream_purple);

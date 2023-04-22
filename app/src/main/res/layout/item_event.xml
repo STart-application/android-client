@@ -28,7 +28,7 @@
                     android:layout_height="155dp"
                     android:layout_marginBottom="5dp"
                     tools:background="@drawable/background_round_10"
-                    tools:backgroundTint="@color/dream_gray" />
+                    tools:backgroundTint="@color/text_caption" />
 
                 <LinearLayout
                     android:id="@+id/eventStatus"

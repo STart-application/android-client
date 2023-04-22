@@ -13,6 +13,8 @@ import com.start.STart.api.festival.response.LineUpData
 import com.start.STart.databinding.FragmentLineUpBinding
 import com.start.STart.ui.home.festival.info.FestivalInfoViewModel
 import com.start.STart.util.showErrorToast
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 
 class LineUpFragment : Fragment() {
 
@@ -53,15 +55,16 @@ class LineUpFragment : Fragment() {
         })
 
         binding.btnPrevious.setOnClickListener {
-            if(binding.timeLineViewPager.currentItem > 0) {
-                binding.timeLineViewPager.currentItem -= 1
+            if (binding.timeLineViewPager.currentItem  == 0) {
+                binding.timeLineViewPager.currentItem = MAX_SIZE - 1
+            } else {
+                binding.timeLineViewPager.currentItem = (binding.timeLineViewPager.currentItem - 1) % MAX_SIZE
             }
         }
 
         binding.btnNext.setOnClickListener {
-            if(binding.timeLineViewPager.currentItem < MAX_SIZE) {
-                binding.timeLineViewPager.currentItem += 1
-            }
+            binding.timeLineViewPager.currentItem = (binding.timeLineViewPager.currentItem + 1) % MAX_SIZE
+
         }
     }
 
@@ -92,11 +95,26 @@ class LineUpFragment : Fragment() {
                 }
                 lineUpViewPagerAdapter.list = map.toList()
                 updateViewPager()
+
+                // 오늘 날짜로 이동
+                val todayIndex= lineUpViewPagerAdapter.list.indexOfFirst {
+                    it.first == getCurrentDate()
+                }
+                if(todayIndex != -1) {
+                    binding.timeLineViewPager.currentItem  = todayIndex
+                }
+
                 Log.d(null, "initLiveDataObservers: $map")
             } else {
                 showErrorToast(requireContext(), result.message!!)
             }
         }
+    }
+
+    fun getCurrentDate(): String {
+        val currentDate = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return currentDate.format(formatter)
     }
 
     override fun onCreateView(
