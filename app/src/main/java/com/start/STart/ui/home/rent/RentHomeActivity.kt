@@ -1,7 +1,6 @@
 package com.start.STart.ui.home.rent
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -83,8 +82,8 @@ class RentHomeActivity : AppCompatActivity() {
         binding.layoutProfile.visibility = View.GONE
         binding.layoutLogin.visibility = View.VISIBLE
 
-        binding.imageProfile.setColorFilter(ContextCompat.getColor(this, R.color.dream_gray_light))
-        binding.btnMyRent.backgroundTintList = ContextCompat.getColorStateList(this, R.color.dream_gray_light_d)
+        binding.imageProfile.setColorFilter(ContextCompat.getColor(this, R.color.dream_white))
+        binding.btnMyRent.backgroundTintList = ContextCompat.getColorStateList(this, R.color.dream_white_d9)
         binding.btnMyRent.setTextColor(ContextCompat.getColor(this, R.color.dream_gray))
         binding.btnMyRent.isEnabled = false
     }

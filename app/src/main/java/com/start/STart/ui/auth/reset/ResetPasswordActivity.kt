@@ -8,14 +8,15 @@ import androidx.core.widget.addTextChangedListener
 import com.start.STart.R
 import com.start.STart.databinding.ActivityResetPasswordBinding
 import com.start.STart.ui.auth.login.LoginActivity
-import com.start.STart.ui.home.HomeActivity
+import com.start.STart.ui.auth.util.setFailText
+import com.start.STart.ui.auth.util.setSuccessText
 import com.start.STart.util.*
 
 class ResetPasswordActivity : AppCompatActivity() {
     private val binding by lazy { ActivityResetPasswordBinding.inflate(layoutInflater) }
     private val viewModel: ResetPasswordViewModel by viewModels()
 
-    var studentId: String? = null
+    private var studentId: String? = null
 
     private var isPasswordValid = false
     private var isPasswordConfirmValid = false
@@ -23,44 +24,45 @@ class ResetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        init()
-        initView()
-    }
 
-    private fun init(){
         studentId = intent.getStringExtra(Constants.KEY_STUDENT_ID)
+
+        initToolbar()
+        initRestPasswordLogic()
     }
 
-    private fun initView() {
-        initToolbar()
+    fun initToolbar() {
+        binding.toolbar.textTitle.text = "비밀번호 재설정"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
+    }
 
+    private fun initRestPasswordLogic() {
+        // 비밀번호 입력 검증
         binding.inputPassword.addTextChangedListener {
             checkPassword()
         }
 
+        // 비밀번호 확인 입력 검증
         binding.inputPasswordConfirm.addTextChangedListener {
             checkPasswordConfirm()
         }
 
+        // 확인 버튼 클릭
         binding.btnConfirm.setOnClickListener {
             viewModel.resetPassword(studentId!!, binding.inputPassword.text.toString())
         }
 
         viewModel.resetPasswordResult.observe(this) {
             if(it.isSuccessful) {
+                // 로그인 선택 화면으로 이동
                 startActivity(Intent(this, LoginActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     putExtra(Constants.FLAG_RESET_PASSWORD, true)
                 })
             } else {
-                binding.btnConfirm.showTopBalloon(it.message)
+                showErrorToast(this, it.message!!)
             }
         }
-    }
-
-    fun initToolbar() {
-        binding.toolbar.textTitle.text = "비밀번호 재설정"
-        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun checkPassword() {

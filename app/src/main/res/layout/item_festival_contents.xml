@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:background="@color/dream_gray_light"
+            android:background="@color/dream_white"
             android:scaleType="centerCrop" />
 
         <LinearLayout

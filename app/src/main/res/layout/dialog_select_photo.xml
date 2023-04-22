@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="16dp"
-                android:background="@color/dream_gray_light" />
+                android:background="@color/dream_white" />
 
             <LinearLayout
                 android:id="@+id/btn_camera"

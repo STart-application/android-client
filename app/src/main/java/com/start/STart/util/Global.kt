@@ -29,16 +29,6 @@ import kotlin.reflect.jvm.isAccessible
 
 val gson = Gson()
 
-fun TextView.setSuccessText(text: String) {
-    this.text = text
-    this.setTextColor(resources.getColor(R.color.dream_purple))
-}
-
-fun TextView.setFailText(text: String) {
-    this.text = text
-    this.setTextColor(resources.getColor(R.color.dream_red))
-}
-
 fun String?.toPlainRequestBody() =
     requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
 
