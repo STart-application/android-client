@@ -8,10 +8,10 @@ import com.start.STart.api.banner.EventService
 import com.start.STart.api.festival.FestivalService
 import com.start.STart.api.member.MemberService
 import com.start.STart.api.rent.RentService
+import com.start.STart.api.stamp.StampService
 import com.start.STart.api.suggestion.SuggestionService
-import com.start.STart.util.TokenHelper
 import com.start.STart.util.gson
-import okhttp3.*
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -44,7 +44,8 @@ object ApiClient {
     val suggestionService: SuggestionService = retrofit.create(SuggestionService::class.java)
     val rentService: RentService = retrofit.create(RentService::class.java)
     val festivalService: FestivalService = retrofit.create(FestivalService::class.java)
-    val eventService = retrofit.create(EventService::class.java)
+    val eventService: EventService = retrofit.create(EventService::class.java)
+    val stampService: StampService = retrofit.create(StampService::class.java)
 
 
     fun enableToken(token: String) { // TokenHelper에서만 호출

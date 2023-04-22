@@ -8,7 +8,7 @@ data class ApiResponse(
     val status: Int,
     val message: String,
     val errorCode: String?,
-    private val data: List<*>? = null,
+    val data: List<*>? = null,
 ) {
     fun getErrorMessage(): String {
         return "$errorCode: $message"

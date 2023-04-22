@@ -3,22 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:background="@color/dream_purple_background">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:visibility="invisible"
-        tools:visibility="visible"
         android:layout_width="320dp"
         android:layout_height="350dp"
         android:layout_gravity="center"
+        android:visibility="invisible"
         app:cardCornerRadius="10dp"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dream_purple_background">
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/textView"
@@ -32,71 +33,71 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/stamp_2"
+                android:id="@+id/stamp_photo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="36dp"
-                app:layout_constraintEnd_toStartOf="@+id/stamp_3"
+                app:layout_constraintEnd_toStartOf="@+id/stamp_game"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/stamp_1"
+                app:layout_constraintStart_toEndOf="@+id/stamp_bungeobang"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:srcCompat="@drawable/background_circle" />
+                app:srcCompat="@drawable/stamp_photo" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/stamp_1"
+                android:id="@+id/stamp_bungeobang"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="17dp"
-                app:layout_constraintBottom_toBottomOf="@+id/stamp_2"
-                app:layout_constraintEnd_toStartOf="@+id/stamp_2"
+                app:layout_constraintBottom_toBottomOf="@+id/stamp_photo"
+                app:layout_constraintEnd_toStartOf="@+id/stamp_photo"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/stamp_2"
-                app:srcCompat="@drawable/background_circle" />
+                app:layout_constraintTop_toTopOf="@+id/stamp_photo"
+                app:srcCompat="@drawable/stamp_bungeobang" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/stamp_3"
+                android:id="@+id/stamp_game"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="17dp"
-                app:layout_constraintBottom_toBottomOf="@+id/stamp_2"
+                app:layout_constraintBottom_toBottomOf="@+id/stamp_photo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/stamp_2"
-                app:layout_constraintTop_toTopOf="@+id/stamp_2"
-                app:srcCompat="@drawable/background_circle" />
+                app:layout_constraintStart_toEndOf="@+id/stamp_photo"
+                app:layout_constraintTop_toTopOf="@+id/stamp_photo"
+                app:srcCompat="@drawable/stamp_game" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/stamp_4"
+                android:id="@+id/stamp_yard"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="17dp"
-                app:layout_constraintEnd_toStartOf="@+id/stamp_5"
+                app:layout_constraintEnd_toStartOf="@+id/stamp_stage"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stamp_2"
-                app:srcCompat="@drawable/background_circle" />
+                app:layout_constraintTop_toBottomOf="@+id/stamp_photo"
+                app:srcCompat="@drawable/stamp_yard" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/stamp_5"
+                android:id="@+id/stamp_stage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                app:layout_constraintBottom_toBottomOf="@+id/stamp_4"
+                app:layout_constraintBottom_toBottomOf="@+id/stamp_yard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/stamp_4"
-                app:layout_constraintTop_toTopOf="@+id/stamp_4"
-                app:srcCompat="@drawable/background_circle" />
+                app:layout_constraintStart_toEndOf="@+id/stamp_yard"
+                app:layout_constraintTop_toTopOf="@+id/stamp_yard"
+                app:srcCompat="@drawable/stamp_stage" />
 
             <TextView
                 style="@style/Theme.Dream.Typeface_Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:layout_marginBottom="25dp"
-                android:text="6개의 도장을 모두 모으면\n 자동으로 응모가 완료됩니다."
+                android:gravity="center_horizontal"
+                android:text="5개의 도장을 모두 모으면\n 자동으로 응모가 완료됩니다."
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
