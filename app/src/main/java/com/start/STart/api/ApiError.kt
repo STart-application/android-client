@@ -2,7 +2,7 @@ package com.start.STart.api
 
 enum class ApiError(val message: String) {
     ST001("잘못된 정보로 요청하였습니다."), // 값 검증 실패
-    ST002(""),
+    ST002("잘못된 Header Token 값 전송[Access]"),
     ST010(""),
     ST011("토큰이 만료되었습니다."),
     ST030("관리자 권한이 없습니다."),

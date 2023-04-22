@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
+        level = HttpLoggingInterceptor.Level.BODY
     }
 
     private val tokenInterceptor = TokenInterceptor()
@@ -55,7 +55,7 @@ object ApiClient {
         tokenInterceptor.disableToken()
     }
 
-    fun parseErrorBody(errorBodyString: String?): ApiResponse {
+    fun parseBody(errorBodyString: String?): ApiResponse {
         val body = gson.fromJson(errorBodyString, ApiResponse::class.java)
         return body
     }

@@ -34,7 +34,7 @@ object TokenHelper {
                 return true
             } else {
                 val errorBodyString = res.errorBody()?.string()
-                if(ApiClient.parseErrorBody(errorBodyString).errorCode == ApiError.ST011.name) {
+                if(ApiClient.parseBody(errorBodyString).errorCode == ApiError.ST011.name) {
                     return issueAccessToken(accessToken) // 토큰 발급
                 }
                 return false
@@ -46,7 +46,7 @@ object TokenHelper {
         }
     }
 
-    private suspend fun issueAccessToken(accessToken: String): Boolean {
+    suspend fun issueAccessToken(accessToken: String): Boolean {
         val refreshToken = PreferenceManager.getString(Constants.KEY_REFRESH_TOKEN)
         Log.d(TAG, "issueAccessToken: RT $refreshToken")
         if(refreshToken.isEmpty()) {
