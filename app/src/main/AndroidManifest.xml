@@ -16,6 +16,27 @@
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.event.DetailVoteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.home.event.VoteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.home.event.EscapeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.home.pay.PaymentActivity"
             android:exported="false">
             <meta-data

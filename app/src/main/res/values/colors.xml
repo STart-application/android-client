@@ -46,6 +46,7 @@
     <color name="dream_gray_light">#E9E9E9</color>
     <color name="dream_yellow">#FFAD00</color>
     <color name="dream_red">#FF3845</color>
+    <color name="dream_green">#27CD7B</color>
     <!-- TypeFace -->
     <color name="dream_typeface_black">@color/black</color>
     <color name="dream_typeface_gray">@color/dream_gray</color>

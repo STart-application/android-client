@@ -38,19 +38,18 @@ object PreferenceManager {
         }
     }
 
-    suspend inline fun <reified T> loadFromPreferences(
+    inline fun <reified T> loadFromPreferences(
         key: String,
     ): T? {
         val gson = Gson()
         val json = getString(key)
 
-        return withContext(Dispatchers.IO) {
-            if (json.isNotBlank()) {
+        return if (json.isNotBlank()) {
                 gson.fromJson(json, T::class.java)
             } else {
                 null
             }
-        }
+
     }
 
     suspend fun putString(key: String, value: String) {
@@ -59,7 +58,7 @@ object PreferenceManager {
             .apply()
     }
 
-    suspend fun getString(key: String): String {
+    fun getString(key: String): String {
         return pref.getString(key, "") ?: ""
     }
 

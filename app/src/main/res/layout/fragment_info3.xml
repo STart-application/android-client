@@ -8,18 +8,67 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="14dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/sc_dream_2"
-            android:text="frag3"
-            android:textColor="#B3000000"
-            android:textSize="11sp" />
+            android:text="@string/frag0" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag1"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag2" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag3"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag4" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag5"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag6" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag7"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/Theme.Dream.Typeface_Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag8" />
 
     </LinearLayout>
 </ScrollView>
