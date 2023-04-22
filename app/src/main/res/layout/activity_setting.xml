@@ -120,7 +120,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_white" />
+                        android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_logout"
@@ -169,7 +169,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_white" />
+                        android:background="@color/dream_gray_light" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -328,7 +328,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_white" />
+                        android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_update_log"
@@ -370,7 +370,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_white" />
+                        android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_feature_suggest"
@@ -423,7 +423,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="3dp"
-                        android:background="@color/dream_white" />
+                        android:background="@color/dream_gray_light" />
 
                     <TextView
                         android:id="@+id/text_terms_of_service"

@@ -32,7 +32,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="7dp"
         android:text="시작"
-        android:textColor="@color/dream_typeface_navy"
+        android:textColor="@color/dream_navy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
@@ -44,7 +44,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="7dp"
         android:text="00/00 00:00"
-        android:textColor="@color/dream_typeface_navy"
+        android:textColor="@color/dream_navy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -58,7 +58,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="5dp"
         android:text="종료"
-        android:textColor="@color/dream_typeface_navy"
+        android:textColor="@color/dream_navy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -72,7 +72,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="5dp"
         android:text="00/00 00:00"
-        android:textColor="@color/dream_typeface_navy"
+        android:textColor="@color/dream_navy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -94,7 +94,7 @@
         android:paddingHorizontal="11dp"
         android:paddingVertical="7dp"
         android:text="투표 가능"
-        android:textColor="@color/main_white"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

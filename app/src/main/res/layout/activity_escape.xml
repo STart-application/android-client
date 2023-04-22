@@ -136,7 +136,7 @@
                 android:background="@drawable/background_round_30"
                 android:enabled="false"
                 android:text="다음으로"
-                android:textColor="@color/main_white"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
