@@ -1,25 +1,36 @@
 package com.start.STart.ui.home.festival.info
 
-import android.content.ActivityNotFoundException
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.start.STart.R
-import com.start.STart.databinding.ActivityFestivalBinding
 import com.start.STart.databinding.ActivityFestivalInfoBinding
 import com.start.STart.util.dp2px
 
 class FestivalInfoActivity : AppCompatActivity() {
     private val binding by lazy { ActivityFestivalInfoBinding.inflate(layoutInflater) }
+    private val viewModel: FestivalInfoViewModel by viewModels()
     private val festivalInfoAdapter by lazy { FestivalInfoAdapter(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initToolbar()
+        initViewPager()
+
+    }
+
+    private fun initToolbar() {
+        binding.toolbar.btnBack.setOnClickListener { finish() }
+        binding.toolbar.textTitle.text = "축제 정보"
+    }
+
+    private fun initViewPager() {
         val tabLayoutList = listOf(binding.tabLayout1, binding.tabLayout2)
         val tabTextList = listOf(binding.textTab1, binding.textTab2)
         val tabViewList = listOf(binding.tab1, binding.tab2)
@@ -43,13 +54,6 @@ class FestivalInfoActivity : AppCompatActivity() {
                 binding.viewPager.setCurrentItem(index, true)
             }
         }
-
-        initToolbar()
-    }
-
-    private fun initToolbar() {
-        binding.toolbar.btnBack.setOnClickListener { finish() }
-        binding.toolbar.textTitle.text = "축제 정보"
     }
 
     fun updateTab(enabledIndex: Int, textList: List<TextView>, viewList: List<View>) {

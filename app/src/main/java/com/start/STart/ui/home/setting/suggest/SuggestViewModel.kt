@@ -5,14 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
-import com.start.STart.api.ApiError
 import com.start.STart.api.suggestion.request.SuggestRequest
 import com.start.STart.model.ResultModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class SuggestViewModel: ViewModel() {
@@ -32,7 +29,7 @@ class SuggestViewModel: ViewModel() {
             if(res.isSuccessful) {
                 _suggestionResult.postValue(ResultModel(true))
             } else {
-                val errorBody = ApiClient.parseErrorBody(res.errorBody()?.string())
+                val errorBody = ApiClient.parseBody(res.errorBody()?.string())
                 _suggestionResult.postValue(ResultModel(false))
             }
         } catch (e: Exception) {

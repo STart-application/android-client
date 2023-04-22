@@ -16,6 +16,11 @@
         <item name="android:backgroundTint">@color/dream_purple_ghost</item>
     </style>
 
+    <!-- 도장 찍기 버튼 -->
+    <style name="Theme.Dream.Button_Stamp" parent="@style/Theme.Dream.Button_Primary">
+        <item name="android:background">@drawable/ripple_dream_button_stamp</item>
+    </style>
+
     <!-- 입력 버튼 -->
     <style name="Theme.Dream.Button_Input" parent="@style/Theme.Dream.Typeface_Title">
         <item name="android:textColor">@color/white</item>

@@ -15,20 +15,63 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="13dp"
         android:background="@drawable/background_round_10"
-        android:backgroundTint="@color/dream_purple" >
+        android:backgroundTint="@color/dream_purple">
+
+        <FrameLayout
+            android:id="@+id/btn_previous"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="31dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_calendar_move_rectangle"
+                app:tint="@color/white" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/text_date"
+            style="@style/Theme.Dream.Typeface_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00월 00일"
+            android:textColor="@color/white" />
+
+        <FrameLayout
+            android:id="@+id/btn_next"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="31dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:rotation="180"
+                app:srcCompat="@drawable/ic_calendar_move_rectangle"
+                app:tint="@color/white" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/timeLineRecyclerView"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/timeLineViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="horizontal"
         android:overScrollMode="never"
         android:paddingHorizontal="20dp"
         android:paddingVertical="15dp"
-        android:scrollbars="none"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_line_up" />
+        android:scrollbars="none" />
 
 </LinearLayout>

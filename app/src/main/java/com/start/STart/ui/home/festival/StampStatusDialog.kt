@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.JsonParser
 import com.start.STart.databinding.DialogStampStatusBinding
 import com.start.STart.util.*
-import es.dmoral.toasty.Toasty
 
 class StampStatusDialog : DialogFragment() {
 
@@ -49,22 +48,22 @@ class StampStatusDialog : DialogFragment() {
 
         viewModel.loadStampResult.observe(this) {
             if(it.isSuccessful) {
-                val stampData = JsonParser.parseString(gson.toJson((it.data as List<*>).get(0))).asJsonObject
-                Log.d(null, "onViewCreated: $stampData")
-                for((idx, type) in StampEnum.values().withIndex()) {
-                    if(stampData.get(type.name).asBoolean) {
-                        Log.d(null, "onViewCreated: ${type.name}T")
+                val jsonData = JsonParser.parseString(gson.toJson((it.data as List<*>).get(0))).asJsonObject
+                Log.d(null, "onViewCreated: $jsonData")
+
+                for((idx, type) in StampData.values().withIndex()) {
+                    if(jsonData.get(type.name).asBoolean) {
                         stampImageViewList[idx].setImageResource(type.drawable_e)
                     } else {
-                        Log.d(null, "onViewCreated: ${type.name}")
                         stampImageViewList[idx].setImageResource(type.drawable)
                     }
 
                 }
 
             } else {
-                // TODO: 에러 메세지
-                Toasty.error(requireContext(), it.message!!).show()
+                viewModel.loadStamp()
+                showErrorToast(requireContext(), "잠시 후 다시 시도해 주세요.")
+                dismiss()
             }
         }
     }

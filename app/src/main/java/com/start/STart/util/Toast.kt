@@ -24,7 +24,7 @@ fun showErrorToast(context: Context, message: String) {
         context,
         message,
         ContextCompat.getDrawable(context, es.dmoral.toasty.R.drawable.ic_clear_white_24dp),
-        ContextCompat.getColor(context, R.color.dream_green),
+        ContextCompat.getColor(context, R.color.dream_red),
         ContextCompat.getColor(context, R.color.white),
         Toast.LENGTH_LONG,
         true,

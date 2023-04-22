@@ -36,7 +36,7 @@ class StudentCardUploadViewModel: ViewModel() {
             if(res.isSuccessful) {
                 _registerResult.postValue(ResultModel(true))
             } else {
-                val body = ApiClient.parseErrorBody(res.errorBody()?.string())
+                val body = ApiClient.parseBody(res.errorBody()?.string())
                 _registerResult.postValue(ResultModel(false, body.message))
             }
         } catch(e: IOException) {

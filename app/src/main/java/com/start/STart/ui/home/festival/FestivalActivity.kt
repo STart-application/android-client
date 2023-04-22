@@ -56,12 +56,13 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var clusterManager: ClusterManager<MarkerModel>
-    private val circleList = mutableListOf<Circle>()
+
+    private val markerList = mutableListOf<MarkerModel>()
 
     private val stampDialog by lazy { StampStatusDialog()}
     private val photoZoneDialog by lazy { PhotoZoneDialog()}
     private val foodTruckDialog by lazy { FoodTruckDialog()}
-
+    private val postStampDialog by lazy { PostStampDialog()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,8 +139,11 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             .isMyLocationButtonEnabled = false
 
         initPosition()
-        setUpClusterManager()
+
+
         initMarker()
+        setUpClusterManager()
+
 
         binding.locationBtn.setOnClickListener {
             enableLocation()
@@ -156,24 +160,16 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun initMarker() {
-        addMakers(listOf(
-            MarkerModel(this, "동심오락관", LatLng(37.6319, 127.079), R.drawable.marker_game),
-            MarkerModel(this, "마당사업", LatLng(37.632310, 127.077111), R.drawable.marker_yard),
-            MarkerModel(this, "붕어방컨텐츠", LatLng(37.633061, 127.078598), R.drawable.marker_bungeobang),
-            MarkerModel(this, "무대", LatLng(37.6294, 127.0787), R.drawable.marker_stage),
-            MarkerModel(this, "포토존", LatLng(37.633930, 127.077845), R.drawable.marker_photo),
-        ))
+
+        addMakers()
 
         googleMap.setOnCircleClickListener { circle ->
             if(circle.isVisible) {
                 lifecycleScope.launch {
                     val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
+                    val stampData = markerList.first { it.circle == circle }.stampData
 
-                    if(checkInCircle(myLatLng, circle = circle)) {
-                        Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 있습니다.").show()
-                    } else {
-                        Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 없습니다.").show()
-                    }
+                    openStampDialog(stampData)
                 }
             }
         }
@@ -203,16 +199,24 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setUpClusterManager() {
-        clusterManager = ClusterManager<MarkerModel>(this, googleMap)
+        clusterManager = ClusterManager<MarkerModel>(this, googleMap).apply {
+            addItems(markerList)
+        }
+
         clusterManager.renderer = object: DefaultClusterRenderer<MarkerModel>(this@FestivalActivity, googleMap, clusterManager
         ) {
+            init {
+                minClusterSize = StampData.values().size
+            }
+
             override fun onBeforeClusterRendered(
                 cluster: Cluster<MarkerModel>,
                 markerOptions: MarkerOptions
             ) {
                 super.onBeforeClusterRendered(cluster, markerOptions)
-                circleList.forEach {
-                    it.isVisible = false
+
+                markerList.forEach {
+                    it.circle.isVisible = false
                 }
             }
 
@@ -226,11 +230,9 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             ) {
                 super.onBeforeClusterItemRendered(item, markerOptions)
                 markerOptions
-                    .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, item.drawableRes)))
+                    .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromVectorDrawable(this@FestivalActivity, item.stampData.marker)))
 
-                circleList.forEach {
-                    it.isVisible = true
-                }
+                item.circle.isVisible = true
             }
 
             override fun setOnClusterItemClickListener(listener: ClusterManager.OnClusterItemClickListener<MarkerModel>?) {
@@ -241,12 +243,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         clusterManager.setOnClusterItemClickListener {
             lifecycleScope.launch {
                 val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
-
-                if(checkInCircle(myLatLng, circleOptions = it.circleOptions)) {
-                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 있습니다.").show()
-                } else {
-                    Toasty.info(this@FestivalActivity, "현재 위치가 Circle 내부에 없습니다.").show()
-                }
+                openStampDialog(it.stampData)
             }
 
 
@@ -255,32 +252,42 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         googleMap.setOnCameraIdleListener(clusterManager)
     }
 
-    private fun addMakers(markerModels: List<MarkerModel>) {
-        markerModels.forEach {
-            clusterManager.addItems(markerModels)
-            val circle: Circle = googleMap.addCircle(it.circleOptions).apply {
-                isVisible = false
+    private fun addMakers() {
+
+        StampData.values().forEach {
+            val markerModel = MarkerModel(this, it).apply {
+                buildCircle(googleMap)
             }
 
-            circleList.add(circle)
+            markerList.add(markerModel)
         }
     }
 
-    private fun moveCamera(latLng: LatLng) {
+    private fun moveCamera(latLng: LatLng, callback: GoogleMap.CancelableCallback) {
         val cameraUpdate = CameraUpdateFactory.newLatLng(latLng)
-        googleMap.animateCamera(cameraUpdate)
+        googleMap.animateCamera(cameraUpdate, 300, callback)
+    }
+
+    private fun openStampDialog(stampData: StampData) {
+        moveCamera(stampData.latLng, object: GoogleMap.CancelableCallback {
+            override fun onCancel() {  }
+
+            override fun onFinish() {
+                if(!postStampDialog.isAdded) {
+                    postStampDialog.setData(stampData)
+                    postStampDialog.show(supportFragmentManager, ".PostStampDialog")
+                }
+            }
+        })
     }
 
     private fun checkInCircle(myLatLng: LatLng, circle: Circle? = null, circleOptions: CircleOptions? = null): Boolean {
-
-
 
         /// 원의 중심과 반지름
         val circleCenter = circle?.center ?: circleOptions?.center
         val circleRadius = circle?.radius ?: circleOptions?.radius
 
         val circleLatLng = LatLng(circleCenter!!.latitude , circleCenter.longitude)
-        moveCamera(circleLatLng)
 
         // 결과를 담을 변수
         val distance = FloatArray(1)

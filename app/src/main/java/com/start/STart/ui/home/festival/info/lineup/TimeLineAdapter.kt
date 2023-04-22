@@ -1,7 +1,6 @@
 package com.start.STart.ui.home.festival.info.lineup
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +23,7 @@ class TimeLineAdapter: RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>(
 
         fun bind(lineUpData: LineUpData) {
             binding.timeline.marker = ContextCompat.getDrawable(binding.root.context, R.drawable.marker_line_up)
-            binding.textTime.text = lineUpData.lineUpTime
+            binding.textTime.text = lineUpData.lineUpTime.substring(11, 16)
             binding.textDescription.text = lineUpData.lineUpTitle
         }
     }

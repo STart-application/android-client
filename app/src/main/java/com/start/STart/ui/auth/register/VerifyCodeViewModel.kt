@@ -33,7 +33,7 @@ class VerifyCodeViewModel: ViewModel() {
                 // 전송 성공
                 _sendCodeResult.postValue(ResultModel(true))
             } else {
-                val body = ApiClient.parseErrorBody(res.errorBody()?.string())
+                val body = ApiClient.parseBody(res.errorBody()?.string())
                 when(body.errorCode) {
                     ApiError.ST064.name -> _sendCodeResult.postValue(ResultModel(false, ApiError.ST064.message))
                     else -> {

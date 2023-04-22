@@ -9,12 +9,8 @@ import com.start.STart.api.ApiError
 import com.start.STart.api.member.request.ResetPasswordWithoutLoginRequest
 import com.start.STart.model.ResultModel
 import com.start.STart.util.AppException
-import com.start.STart.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.IOException
-import java.net.ConnectException
-import java.net.SocketTimeoutException
 
 class ResetPasswordViewModel: ViewModel() {
 
@@ -33,7 +29,7 @@ class ResetPasswordViewModel: ViewModel() {
             if(res.isSuccessful) {
                 _resetPasswordResult.postValue(ResultModel(true))
             } else {
-                val errorBody = ApiClient.parseErrorBody(res.errorBody()?.string())
+                val errorBody = ApiClient.parseBody(res.errorBody()?.string())
                 when(errorBody.errorCode) {
                     ApiError.ST066.name -> { // 인증 정보 불일치
                         _resetPasswordResult.postValue(ResultModel(false, errorBody.message))
