@@ -8,87 +8,87 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"/>
+        layout="@layout/layout_toolbar" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="44dp"
         android:background="@color/dream_purple_background"
-        android:orientation="vertical"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            app:cardCornerRadius="30dp"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content">
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_round_30"
                 android:orientation="vertical">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"
-                    android:layout_width="match_parent"
+                    android:layout_width="320dp"
                     android:layout_height="320dp"
-                    android:background="@drawable/background_round_30top" />
+                    android:scaleType="centerCrop" />
 
 
                 <TextView
                     android:id="@+id/payment"
+                    style="@style/Theme.Dream.Typeface_Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
                     android:layout_marginStart="32dp"
-                    android:text="자치회비 납부자"
-                    style="@style/Theme.Dream.Typeface_Title" />
+                    android:layout_marginTop="18dp"
+                    android:text="자치회비 납부자" />
 
                 <TextView
                     android:id="@+id/name"
+                    style="@style/Theme.Dream.Typeface_Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="18dp"
-                    android:text="이름"
-                    style="@style/Theme.Dream.Typeface_Title" />
+                    android:text="이름" />
 
                 <TextView
                     android:id="@+id/studentId"
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="7dp"
-                    android:text="학번"
-                    style="@style/Theme.Dream.Typeface_Caption" />
+                    android:text="학번" />
+
                 <TextView
                     android:id="@+id/college"
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="3dp"
-                    android:text="단과대"
-                    style="@style/Theme.Dream.Typeface_Caption" />
+                    android:text="단과대" />
+
                 <TextView
                     android:id="@+id/department"
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="26dp"
-                    android:text="학과"
-                    style="@style/Theme.Dream.Typeface_Caption" />
+                    android:text="학과" />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-        
-
+        </com.google.android.material.card.MaterialCardView>
 
 
     </LinearLayout>

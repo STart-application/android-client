@@ -59,6 +59,8 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     private val circleList = mutableListOf<Circle>()
 
     private val stampDialog by lazy { StampStatusDialog()}
+    private val photoZoneDialog by lazy { PhotoZoneDialog()}
+    private val foodTruckDialog by lazy { FoodTruckDialog()}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +112,16 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.menu2.setOnClickListener {
             if(!stampDialog.isAdded) {
                 stampDialog.show(supportFragmentManager, ".StampDialog")
+            }
+        }
+        binding.menu3.setOnClickListener {
+            if(!foodTruckDialog.isAdded) {
+                foodTruckDialog.show(supportFragmentManager, ".FoodTruckDialog")
+            }
+        }
+        binding.menu4.setOnClickListener {
+            if(!photoZoneDialog.isAdded) {
+                photoZoneDialog.show(supportFragmentManager, ".PhotoZoneDialog")
             }
         }
     }
