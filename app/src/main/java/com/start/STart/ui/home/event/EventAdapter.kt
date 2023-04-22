@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.event
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -54,6 +55,13 @@ class EventAdapter() : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
                     binding.textEventName.setTextColor(purple_ghost)
                     binding.textDate.setTextColor(purple)
                 }
+            }
+
+            binding.root.setOnClickListener {
+                val context = binding.root.context
+                context.startActivity(Intent(context, DetailEventActivity::class.java).apply {
+                    putExtra("event", event)
+                })
             }
         }
     }

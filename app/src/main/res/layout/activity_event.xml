@@ -36,21 +36,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/background_round_10"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="29dp"
-                    android:src="@drawable/ic_internet" />
+                    android:src="@drawable/mascot"
+                    android:layout_gravity="center_horizontal"/>
 
                 <TextView
+                    android:id="@+id/noEventText"
                     style="@style/Theme.Dream.Typeface_Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="29dp"
                     android:text="진행 중인 이벤트가 없습니다."
-                    android:textColor="@color/dream_purple" />
+                    android:textColor="@color/dream_purple"
+                    android:layout_gravity="center_horizontal"/>
 
             </LinearLayout>
 

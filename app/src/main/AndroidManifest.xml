@@ -38,6 +38,27 @@
             android:name=".ui.home.rent.myrent.MyRentActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.home.event.DetailVoteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.home.event.VoteActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.home.event.EscapeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.home.pay.PaymentActivity"
             android:exported="false">
             <meta-data

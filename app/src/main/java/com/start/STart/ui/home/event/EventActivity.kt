@@ -1,7 +1,11 @@
 package com.start.STart.ui.home.event
 
+import android.content.Context
 import android.graphics.Rect
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -48,9 +52,12 @@ class EventActivity : AppCompatActivity() {
                     if(response.isSuccessful) {
                         var eventSize = response.body()?.data?.size
 
+
                         if(eventSize == 0) {
                             binding.noEvent.visibility = View.VISIBLE
                             binding.rvEvent.visibility = View.GONE
+                            binding.noEventText.text = "진행 중인 이벤트가 없습니다."
+                            Log.d("tag", "noEvent")
                         } else {
                             binding.rvEvent.visibility = View.VISIBLE
                             binding.noEvent.visibility = View.GONE
@@ -65,8 +72,14 @@ class EventActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<EventModel>, t: Throwable) {
                     Log.d("tag", t.message.toString())
-                    call.cancel()
+                    binding.noEvent.visibility = View.VISIBLE
+                    binding.rvEvent.visibility = View.GONE
+                    binding.noEventText.text = "이벤트를 불러오지 못했습니다."
+                    Log.d("tag", "네트워크통신")
                 }
             })
     }
+
+
+
 }
