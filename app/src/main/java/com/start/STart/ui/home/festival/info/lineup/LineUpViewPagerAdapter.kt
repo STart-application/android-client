@@ -8,9 +8,9 @@ import com.start.STart.databinding.LayoutLineUpBinding
 
 class LineUpViewPagerAdapter : RecyclerView.Adapter<LineUpViewPagerAdapter.LineUpViewPagerViewHolder>(){
 
-    var list: Map<String, MutableList<LineUpData>> = mapOf()
+    var list: List<Pair<String, MutableList<LineUpData>>> = listOf()
         set(value) {
-            field = value
+            field = value.sortedBy { (k, v) -> k }
             notifyDataSetChanged()
         }
 
@@ -25,8 +25,8 @@ class LineUpViewPagerAdapter : RecyclerView.Adapter<LineUpViewPagerAdapter.LineU
             binding.root.adapter = calendarAdapter
         }
 
-        fun bind(key: String) {
-            calendarAdapter.list = list[key]!!.toList()
+        fun bind(pair: Pair<String, MutableList<LineUpData>>) {
+            calendarAdapter.list = pair.second.sortedBy { it.lineUpTime }
         }
     }
 
@@ -38,11 +38,6 @@ class LineUpViewPagerAdapter : RecyclerView.Adapter<LineUpViewPagerAdapter.LineU
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: LineUpViewPagerViewHolder, position: Int) {
-        val iterator = list.entries.iterator()
-        for((idx, entry) in iterator.withIndex()) {
-            if(idx == position) {
-                holder.bind(entry.key)
-            }
-        }
+        holder.bind(list[position])
     }
 }

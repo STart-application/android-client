@@ -23,6 +23,7 @@ class FestivalInfoActivity : AppCompatActivity() {
         initToolbar()
         initViewPager()
 
+        viewModel.loadFestivalInfo()
     }
 
     private fun initToolbar() {

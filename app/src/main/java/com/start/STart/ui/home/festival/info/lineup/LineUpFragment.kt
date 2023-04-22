@@ -26,8 +26,6 @@ class LineUpFragment : Fragment() {
         ViewModelProvider(requireActivity()).get(FestivalInfoViewModel::class.java)
     }
 
-    private val lineUpAdapter by lazy { TimeLineAdapter() }
-
     private val lineUpViewPagerAdapter by lazy { LineUpViewPagerAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,8 +34,6 @@ class LineUpFragment : Fragment() {
         //initRecyclerView()
         initViewPager()
         initLiveDataObservers()
-
-        viewModel.loadFestivalInfo()
     }
 
     private fun initViewPager() {
@@ -70,13 +66,8 @@ class LineUpFragment : Fragment() {
     }
 
     private fun updateViewPager() {
-        val iterator = lineUpViewPagerAdapter.list.entries.iterator()
-        for((idx, entry) in iterator.withIndex()) {
-            Log.d(null, "updateViewPager: ${idx} ${entry.key}")
-            if(idx == binding.timeLineViewPager.currentItem) {
-                binding.textDate.text = entry.key
-            }
-        }
+        val pair = lineUpViewPagerAdapter.list[binding.timeLineViewPager.currentItem]
+        binding.textDate.text = pair.first
     }
 
     private fun initRecyclerView() {
@@ -99,7 +90,7 @@ class LineUpFragment : Fragment() {
                         getOrPut(lineup.lineUpDay) { mutableListOf() }.add(lineup)
                     }
                 }
-                lineUpViewPagerAdapter.list = map
+                lineUpViewPagerAdapter.list = map.toList()
                 updateViewPager()
                 Log.d(null, "initLiveDataObservers: $map")
             } else {
