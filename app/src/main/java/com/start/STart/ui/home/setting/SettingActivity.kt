@@ -12,15 +12,16 @@ import com.start.STart.R
 import com.start.STart.api.ApiClient
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
+import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
+import com.start.STart.ui.home.setting.reset.ResetPasswordWithLoginActivity
+import com.start.STart.ui.home.setting.suggest.SuggestActivity
+import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
 import com.start.STart.util.PreferenceManager
+import com.start.STart.util.getCollegeByDepartment
+import com.start.STart.util.openCustomTab
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
-import com.start.STart.ui.home.setting.suggest.SuggestActivity
-import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
-import com.start.STart.util.getCollegeByDepartment
-import com.start.STart.util.openCustomTab
 
 class SettingActivity : AppCompatActivity() {
 
@@ -30,18 +31,22 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        init()
-        initView()
+
+        initToolbar()
+
+        binding.textResetPassword.setOnClickListener {
+            startActivity(Intent(this, ResetPasswordWithLoginActivity::class.java))
+        }
+
         initViewListeners()
         initViewModelListeners()
-    }
 
-    private fun init() {
         viewModel.loadMemberData()
     }
 
-    private fun initView() {
+    private fun initToolbar() {
         binding.toolbar.textTitle.text = "설정"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initViewListeners() {
