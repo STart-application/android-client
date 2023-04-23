@@ -3,8 +3,10 @@ package com.start.STart.ui.home.setting
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
@@ -166,8 +168,13 @@ class SettingActivity : AppCompatActivity() {
 
     private fun disableAuthManagement() {
         binding.btnLogin.visibility = View.VISIBLE
-        binding.layoutAuthManagement.alpha = 0.7f
+        binding.textLoginRequired.visibility = View.VISIBLE
+
+        //binding.layoutAuthManagement.alpha = 0.7f
         binding.layoutAuthManagement.children.forEach {
+            if(it is TextView) {
+                it.setTextColor(ContextCompat.getColor(this, R.color.text_caption))
+            }
             it.isEnabled = false
         }
     }

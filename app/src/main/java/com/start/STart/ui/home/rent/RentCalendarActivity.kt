@@ -103,8 +103,9 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
         viewModel.loadItemCountResult.observe(this) {
             if(it.isSuccessful) {
                 binding.textMaxCountValue.text = "${it.data as Int}개"
+            } else {
+                binding.textMaxCountValue.text = "0개"
             }
-            //TODO: 예외 처리
         }
 
         viewModel.loadCalendarResult.observe(this) { pair ->

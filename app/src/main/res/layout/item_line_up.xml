@@ -10,7 +10,7 @@
     <com.github.vipulasri.timelineview.TimelineView
         android:id="@+id/timeline"
         android:layout_width="40dp"
-        app:markerPaddingTop="15dp"
+        app:markerPaddingTop="11dp"
         app:markerInCenter="false"
         android:layout_marginStart="26dp"
         android:layout_height="match_parent"
