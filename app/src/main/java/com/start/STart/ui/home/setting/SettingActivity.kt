@@ -19,6 +19,8 @@ import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
 import com.start.STart.util.PreferenceManager
 import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
+import com.start.STart.util.showErrorToast
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,15 +30,16 @@ class SettingActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySettingBinding.inflate(layoutInflater) }
     private val viewModel: SettingViewModel by viewModels()
 
+    private val confirmDialog by lazy { ConfirmDialog() }
+    var deleteMemberClickCnt = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         initToolbar()
 
-        binding.textResetPassword.setOnClickListener {
-            startActivity(Intent(this, ResetPasswordWithLoginActivity::class.java))
-        }
+
 
         initViewListeners()
         initViewModelListeners()
@@ -60,6 +63,10 @@ class SettingActivity : AppCompatActivity() {
                     finish()
                 }
             }
+        }
+
+        binding.textResetPassword.setOnClickListener {
+            startActivity(Intent(this, ResetPasswordWithLoginActivity::class.java))
         }
 
         binding.textUpdateLog.setOnClickListener {
@@ -88,7 +95,32 @@ class SettingActivity : AppCompatActivity() {
 
         // 로그아웃
         binding.textLogout.setOnClickListener {
-            logout()
+            if(!confirmDialog.isAdded) {
+                confirmDialog.setData("로그아웃 하시겠습니까?", onConfirm = {
+                    logout()
+                })
+                confirmDialog.show(supportFragmentManager, null)
+            }
+        }
+
+        // 회원탈퇴
+        binding.textDeleteMember.setOnClickListener {
+            if(!confirmDialog.isAdded) {
+                confirmDialog.setData("회원 탈퇴 시 재가입이 어려울 수 있습니다. (문의 : 02-970-7012)",
+                    onConfirm = {
+                        deleteMemberClickCnt += 1
+                        if(deleteMemberClickCnt == 2) {
+                            viewModel.deleteMember()
+                        } else {
+                            Toasty.info(this, "다시 한 번 클릭해주세요.").show()
+                        }
+                    }, onCancel = {
+                        deleteMemberClickCnt = 0
+                        confirmDialog.dismiss()
+                    }
+                )
+                confirmDialog.show(supportFragmentManager, null)
+            }
         }
 
         binding.toolbar.btnBack.setOnClickListener { finish() }
@@ -117,6 +149,17 @@ class SettingActivity : AppCompatActivity() {
                 }
             } else {
                 disableAuthManagement()
+            }
+        }
+
+        viewModel.deleteMemberResult.observe(this) { result ->
+            if(result.isSuccessful) {
+                startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                })
+                finish()
+            } else {
+                showErrorToast(this, result.message)
             }
         }
     }
