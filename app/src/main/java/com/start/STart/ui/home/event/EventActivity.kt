@@ -12,6 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.api.ApiClient
+import com.start.STart.api.banner.Event
 import com.start.STart.api.banner.EventModel
 import com.start.STart.databinding.ActivityEventBinding
 import com.start.STart.util.dp2px
@@ -52,7 +53,6 @@ class EventActivity : AppCompatActivity() {
                     if(response.isSuccessful) {
                         var eventSize = response.body()?.data?.size
 
-
                         if(eventSize == 0) {
                             binding.noEvent.visibility = View.VISIBLE
                             binding.rvEvent.visibility = View.GONE
@@ -63,9 +63,19 @@ class EventActivity : AppCompatActivity() {
                             binding.noEvent.visibility = View.GONE
                             Log.d("tag", eventSize.toString())
 
-                            eventAdapter.list = response.body()!!.data
+                            eventAdapter.list = response.body()!!.data as MutableList<Event>
                             eventAdapter.notifyDataSetChanged()
-                            Log.d("tag", eventAdapter.list.toString())
+
+                            eventAdapter.list
+                                .sortWith(compareBy<Event> { it ->
+                                    when(it.eventStatus) {
+                                        "PROCEEDING" -> 0
+                                        "BEFORE" -> 1
+                                        else -> 2
+                                    }
+                                }
+                                    .thenBy{it.startTime})
+
                         }
                     }
                 }
