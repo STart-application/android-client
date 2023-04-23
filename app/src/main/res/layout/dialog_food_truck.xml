@@ -31,67 +31,85 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_round_10"
+            android:backgroundTint="@color/dream_purple_background"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/btn_gallery"
-                android:layout_width="match_parent"
+            <TextView
+                style="@style/Theme.Dream.Typeface_Title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ripple_dream_text_main"
-                android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="13dp">
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="21dp"
+                android:text="푸드트럭" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_photo" />
-
-                <TextView
-                    style="@style/Theme.Dream.Typeface_Body_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="13dp"
-                    android:text="사진첩에서 선택"
-                    android:textColor="@color/dream_gray" />
-
-            </LinearLayout>
-
-            <View
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/dream_gray_light" />
+                android:layout_height="340dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
 
-            <LinearLayout
-                android:id="@+id/btn_camera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_dream_text_main"
-                android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="17dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_round_10"
+                    android:orientation="vertical"
+                    android:paddingVertical="24dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_camera" />
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="6dp"
+                        android:text="붕어방"
+                        android:textColor="@color/dream_purple" />
 
-                <TextView
-                    style="@style/Theme.Dream.Typeface_Body_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="13dp"
-                    android:text="직접 촬영"
-                    android:textColor="@color/dream_gray" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/food_lake"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_foodtruck" />
 
-            </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="11dp"
+                        android:background="@color/dream_gray_light" />
+
+                    <TextView
+                        style="@style/Theme.Dream.Typeface_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="6dp"
+                        android:text="운동장"
+                        android:textColor="@color/dream_purple" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/food_ground"
+                        style="@style/Theme.Dream.Typeface_Body_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="14dp"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_foodtruck" />
+
+                </LinearLayout>
+            </ScrollView>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

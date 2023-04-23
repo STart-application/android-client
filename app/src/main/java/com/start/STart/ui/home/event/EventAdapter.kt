@@ -11,12 +11,13 @@ import com.start.STart.R
 import com.start.STart.api.banner.Event
 import com.start.STart.databinding.ItemEventBinding
 
-class EventAdapter() : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
-    var list: List<Event> = mutableListOf()
+class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
+    var list: MutableList<Event> = mutableListOf()
 
         set(value) {
             field = value
         }
+
 
     inner class EventViewHolder(var binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event){
@@ -76,6 +77,5 @@ class EventAdapter() : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
     }
 
     override fun getItemCount() = list.size
-
 
 }

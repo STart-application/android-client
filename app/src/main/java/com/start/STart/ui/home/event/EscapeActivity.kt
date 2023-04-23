@@ -8,14 +8,22 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.*
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityEscapeBinding
+import com.start.STart.ui.home.festival.FestivalIntroDialog
+import com.start.STart.ui.home.festival.FoodTruckDialog
+import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,10 +37,7 @@ class EscapeActivity : AppCompatActivity() {
 
     lateinit var requestBody: AnswerRequest
 
-    companion object {
-        //var list = mutableListOf<Question>()
-
-    }
+    private val escapeEndDialog by lazy { EscapeEndDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,6 +113,10 @@ class EscapeActivity : AppCompatActivity() {
                         if(roomId == 8) {
                             binding.btnNext.text = "제출완료"
                             binding.btnNext.isEnabled = false
+
+                            if(!escapeEndDialog.isAdded) {
+                                escapeEndDialog.show(supportFragmentManager, ".EscapeEndDialog")
+                            }
                         } else {
                             setView()
                         }
@@ -121,6 +130,7 @@ class EscapeActivity : AppCompatActivity() {
             })
     }
 
+
     private fun loadAnswer(request: AnswerRequest) {
         ApiClient.eventService.loadAnswer(request)
             .enqueue(object : Callback<AnswerResponse> {
@@ -133,9 +143,10 @@ class EscapeActivity : AppCompatActivity() {
                         // 정답
                         if(body?.answer!!) {
                             if(roomId >=7) {
-                                // 다이얼로그 띄우기
-                                // 완료를 한 후 어떤 페이지를.?
-                                Toast.makeText(applicationContext, "roomId + $roomId+1", Toast.LENGTH_SHORT).show()
+                                if(!escapeEndDialog.isAdded) {
+                                    escapeEndDialog.show(supportFragmentManager, ".EscapeEndDialog")
+                                }
+
 
                             } else {
                                 roomId++

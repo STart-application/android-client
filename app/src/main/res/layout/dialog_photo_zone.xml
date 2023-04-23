@@ -31,67 +31,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@drawable/background_round_10"
+            android:backgroundTint="@color/dream_purple_background">
 
-            <LinearLayout
-                android:id="@+id/btn_gallery"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ripple_dream_text_main"
-                android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="13dp">
+                android:text="포토존"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="21dp"
+                style="@style/Theme.Dream.Typeface_Title" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_photo" />
 
-                <TextView
-                    style="@style/Theme.Dream.Typeface_Body_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="13dp"
-                    android:text="사진첩에서 선택"
-                    android:textColor="@color/dream_gray" />
-
-            </LinearLayout>
-
-            <View
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photoZone"
+                style="@style/Theme.Dream.Typeface_Body_1"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/dream_gray_light" />
-
-            <LinearLayout
-                android:id="@+id/btn_camera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_dream_text_main"
+                android:layout_height="340dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="17dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_camera" />
-
-                <TextView
-                    style="@style/Theme.Dream.Typeface_Body_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="13dp"
-                    android:text="직접 촬영"
-                    android:textColor="@color/dream_gray" />
-
-            </LinearLayout>
+                android:background="@drawable/background_round_10"
+                tools:listitem="@layout/item_photozone" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
