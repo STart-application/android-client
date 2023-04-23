@@ -10,17 +10,19 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.databinding.ActivityRentCalendarBinding
+import com.start.STart.ui.home.rent.calendar.RentCalendarAdapter
+import com.start.STart.ui.home.rent.calendar.RentDateItem
 import com.start.STart.ui.home.rent.calendar.RentViewPagerAdapter
 import com.start.STart.util.DateFormatter
 import com.start.STart.util.getParcelableExtra
 import org.threeten.bp.LocalDate
 import java.util.*
 
-class RentCalendarActivity : AppCompatActivity() {
+class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSelectedListener {
     private val binding by lazy { ActivityRentCalendarBinding.inflate(layoutInflater) }
     private val viewModel: RentCalendarViewModel by viewModels()
 
-    private val rentViewPagerAdapter by lazy { RentViewPagerAdapter() }
+    private val rentViewPagerAdapter by lazy { RentViewPagerAdapter(this) }
 
 
     private lateinit var rentItem: RentItem
@@ -131,12 +133,17 @@ class RentCalendarActivity : AppCompatActivity() {
                     }
 
                 } else {
-                    
+
                 }
                 Log.d(null, "initViewModelListeners: $rentDataMap")
             } else {
                 Log.d(null, "initViewModelListeners: false")
             }
         }
+    }
+
+    override fun onClick(rentDateItem: RentDateItem) {
+        binding.textSelectedDate.text = "선택한 날짜: ${rentDateItem.date.get(Calendar.DATE)}일"
+        binding.textValidCount.text = "${rentDateItem.total - rentDateItem.count}개 대여 가능"
     }
 }

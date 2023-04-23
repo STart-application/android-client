@@ -8,7 +8,7 @@ import com.start.STart.databinding.FragmentMonthBinding
 import com.start.STart.ui.home.rent.util.getDateList
 import java.util.Calendar
 
-class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
+class RentViewPagerAdapter(val onDateSelectedListener: RentCalendarAdapter.OnDataSelectedListener):  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
 
     var currentCalendar: Calendar = Calendar.getInstance()
 
@@ -16,7 +16,7 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
     val baseIndex = (maxIndex / 2)
 
     inner class RentViewPagerViewHolder(val binding: FragmentMonthBinding): RecyclerView.ViewHolder(binding.root) {
-        val calendarAdapter = RentCalendarAdapter()
+        val calendarAdapter = RentCalendarAdapter(onDateSelectedListener)
 
         init {
             initCalendarRecyclerView()
