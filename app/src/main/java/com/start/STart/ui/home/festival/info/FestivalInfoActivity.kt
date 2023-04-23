@@ -29,6 +29,15 @@ class FestivalInfoActivity : AppCompatActivity() {
     private fun initToolbar() {
         binding.toolbar.btnBack.setOnClickListener { finish() }
         binding.toolbar.textTitle.text = "축제 정보"
+
+        binding.toolbar.imageRight.apply {
+            setImageResource(R.drawable.ic_refresh)
+        }
+
+        binding.toolbar.btnEnd.visibility = View.VISIBLE
+        binding.toolbar.btnEnd.setOnClickListener {
+            viewModel.loadFestivalInfo()
+        }
     }
 
     private fun initViewPager() {

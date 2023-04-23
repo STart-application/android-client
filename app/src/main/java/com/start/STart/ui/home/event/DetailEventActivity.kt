@@ -3,9 +3,8 @@ package com.start.STart.ui.home.event
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.start.STart.R
@@ -31,8 +30,6 @@ class DetailEventActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.visibility = View.VISIBLE
-        binding.toolbar.icSetting.visibility = View.INVISIBLE
         binding.toolbar.btnBack.setOnClickListener {
             finish()
         }

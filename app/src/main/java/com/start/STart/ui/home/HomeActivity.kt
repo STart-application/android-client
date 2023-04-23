@@ -89,8 +89,8 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
     private fun initToolbar() {
         binding.toolbar.textTitle.text = resources.getString(R.string.seoultech_council)
         binding.toolbar.btnBack.visibility = View.INVISIBLE
-        binding.toolbar.icSetting.visibility = View.VISIBLE
-        binding.toolbar.icSetting.setOnClickListener {
+        binding.toolbar.btnEnd.visibility = View.VISIBLE
+        binding.toolbar.btnEnd.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
     }

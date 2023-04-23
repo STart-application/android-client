@@ -1,29 +1,24 @@
 package com.start.STart.ui.home.event
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.api.ApiClient
-import com.start.STart.api.banner.*
+import com.start.STart.api.banner.AnswerRequest
+import com.start.STart.api.banner.AnswerResponse
+import com.start.STart.api.banner.Question
+import com.start.STart.api.banner.QuestionModel
+import com.start.STart.api.banner.UserStatusModel
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityEscapeBinding
-import com.start.STart.ui.home.festival.FestivalIntroDialog
-import com.start.STart.ui.home.festival.FoodTruckDialog
-import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,8 +62,6 @@ class EscapeActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.visibility = View.VISIBLE
-        binding.toolbar.icSetting.visibility = View.INVISIBLE
         binding.toolbar.btnBack.setOnClickListener {
             finish()
         }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     app:cardCornerRadius="20dp"
     app:cardElevation="0dp">
@@ -17,8 +17,8 @@
             android:id="@+id/image_title"
             android:layout_width="160dp"
             android:layout_height="match_parent"
-            android:background="@color/dream_gray"
-            android:scaleType="centerCrop" />
+            tools:background="@color/dream_gray"
+            android:scaleType="centerInside" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:text="혼잡도"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_title" />
 
@@ -55,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="운영시간"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_congestion" />
 
@@ -75,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="설명"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_period" />
 
@@ -84,10 +87,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_description"
-                tools:text="자치회비 납부자 - 무료\n자치회비 미납부자 - 500원\n외부 참가자 - 2,000원" />
+                tools:text="자치회비 납부자 - 무료\n자치회비 미납부료\n자치회비 료\n자치회비 료\n자치회비 자 - 500원\n외부 참가자 - 2,000원" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="80dp"

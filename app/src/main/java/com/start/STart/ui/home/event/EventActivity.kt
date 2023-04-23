@@ -1,24 +1,16 @@
 package com.start.STart.ui.home.event
 
-import android.content.Context
-import android.graphics.Rect
-import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.Event
 import com.start.STart.api.banner.EventModel
 import com.start.STart.databinding.ActivityEventBinding
-import com.start.STart.util.dp2px
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Callback
+import retrofit2.Response
 
 
 class EventActivity : AppCompatActivity() {
@@ -39,8 +31,6 @@ class EventActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.visibility = View.VISIBLE
-        binding.toolbar.icSetting.visibility = View.INVISIBLE
         binding.toolbar.btnBack.setOnClickListener {
             finish()
         }

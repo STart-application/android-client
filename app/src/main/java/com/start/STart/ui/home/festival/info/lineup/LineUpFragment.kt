@@ -84,9 +84,6 @@ class LineUpFragment : Fragment() {
         viewModel.loadFestivalInfoResult.observe(viewLifecycleOwner) { result ->
             if(result.isSuccessful) {
                 val lineUpList = (result.data as List<FestivalInfoData>)[0].lineUpList
-//                val map = lineUpList.associateBy {
-//                    it.lineUpDay
-//                }
 
                 val map = mutableMapOf<String, MutableList<LineUpData>>().apply {
                     lineUpList.forEach { lineup ->

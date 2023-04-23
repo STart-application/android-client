@@ -1,9 +1,8 @@
 package com.start.STart.ui.home.event
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.VoteModel
 import com.start.STart.databinding.ActivityVoteBinding
@@ -27,8 +26,6 @@ class VoteActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.visibility = View.VISIBLE
-        binding.toolbar.icSetting.visibility = View.INVISIBLE
         binding.toolbar.btnBack.setOnClickListener {
             finish()
         }

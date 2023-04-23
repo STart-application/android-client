@@ -6,40 +6,44 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.start.STart.R
-import com.start.STart.api.festival.response.BoothData
 import com.start.STart.databinding.ItemFestivalContentsBinding
 
 class ContentsAdapter: RecyclerView.Adapter<ContentsAdapter.ContentsViewHolder>() {
-    var list: List<BoothData> = listOf()
+    var list: List<BoothEnum> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     inner class ContentsViewHolder(val binding: ItemFestivalContentsBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(boothData: BoothData) {
+        fun bind(boothEnum: BoothEnum) {
             // TODO: 부스 정해진 기획 내용 받아야 함
-            binding.textTitle.text = boothData.name
-            binding.textPeriodValue.text = "11:00 - 18:00"
-            binding.textDescriptionValue.text = "자치회비 납부자 - 무료\n자치회비 미납부자 - 500원\n외부 참가자 - 2,000원"
-            setCongestion(boothData.congestion)
+            binding.textTitle.text = boothEnum.boothName
+            binding.textPeriodValue.text = boothEnum.locationNPeriod
+            binding.textDescriptionValue.text = boothEnum.description
+            setCongestion(boothEnum.congestion)
 
-            val context = binding.root.context
             Glide.with(binding.root)
-                .load(context.getString(R.string.url_polar_bear))
-                .centerCrop()
+                .load(boothEnum.drawableRes)
+                .centerInside()
                 .into(binding.imageTitle)
         }
 
-        fun setCongestion(congestion: Int) {
+        private fun setCongestion(congestion: Int) {
             val context = binding.root.context
             val congestionViews = listOf(binding.congestion1, binding.congestion2, binding.congestion3)
 
+            val colors = listOf(
+                R.color.dream_gray,
+                R.color.dream_green,
+                R.color.dream_yellow,
+                R.color.dream_red
+            )
+
             for (i in congestionViews.indices) {
-                congestionViews[i].setBackgroundColor(
-                    if (i < congestion) ContextCompat.getColor(context, R.color.dream_green)
-                    else ContextCompat.getColor(context, R.color.dream_gray)
-                )
+                val colorIndex = if (i < congestion) congestion else 0
+                val color = ContextCompat.getColor(context, colors[colorIndex])
+                congestionViews[i].setBackgroundColor(color)
             }
         }
     }

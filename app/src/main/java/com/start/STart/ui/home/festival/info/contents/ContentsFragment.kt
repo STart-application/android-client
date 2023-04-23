@@ -6,26 +6,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
-import com.start.STart.api.festival.response.BoothData
+import com.start.STart.api.festival.response.FestivalInfoData
+import com.start.STart.ui.home.festival.info.FestivalInfoViewModel
 import com.start.STart.util.dp2px
 
 class ContentsFragment : Fragment() {
+
+    private val viewModel by lazy {
+        ViewModelProvider(requireActivity()).get(FestivalInfoViewModel::class.java)
+    }
+
+    private lateinit var contentsRecyclerView: RecyclerView
 
     private val contentsAdapter by lazy { ContentsAdapter() }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val contentsRecyclerView = view.findViewById<RecyclerView>(R.id.contenstRecyclerView)
+        contentsRecyclerView = view.findViewById(R.id.contenstRecyclerView)
+        initRecyclerView()
+
+        initLiveDataResults()
+    }
+
+    private fun initRecyclerView() {
         contentsRecyclerView.adapter = contentsAdapter.also {
-            it.list = listOf(
-                BoothData(1, "대형 캔버스", 1),
-                BoothData(2, "대형 캔버스", 2),
-                BoothData(3, "대형 캔버스", 3),
-                BoothData(4, "대형 캔버스", 1),
-                BoothData(5, "대형 캔버스", 2),
-            )
+            it.list = BoothEnum.values().toList()
         }
         contentsRecyclerView.addItemDecoration(object: RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
@@ -43,6 +51,19 @@ class ContentsFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun initLiveDataResults() {
+        viewModel.loadFestivalInfoResult.observe(viewLifecycleOwner) { result ->
+            if(result.isSuccessful) {
+                val boothList = (result.data as List<FestivalInfoData>)[0].boothList
+                boothList.forEach { boothData ->
+                    BoothEnum.values()[boothData.boothId - 1].congestion = boothData.congestion
+                }
+                contentsAdapter.notifyDataSetChanged()
+            }
+            // LineUpFragment 실패 토스트 띄움
+        }
     }
 
     override fun onCreateView(

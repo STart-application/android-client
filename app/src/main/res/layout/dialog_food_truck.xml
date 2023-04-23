@@ -85,7 +85,7 @@
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginBottom="11dp"
-                        android:background="@color/dream_gray_light" />
+                        android:background="@color/dream_purple" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Title"
