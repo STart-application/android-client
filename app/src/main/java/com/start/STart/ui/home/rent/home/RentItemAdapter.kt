@@ -1,11 +1,13 @@
-package com.start.STart.ui.home.rent
+package com.start.STart.ui.home.rent.home
 
 import android.content.Intent
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.start.STart.R
 import com.start.STart.databinding.ItemRentBinding
+import com.start.STart.ui.home.rent.RentCalendarActivity
+import com.start.STart.ui.home.rent.RentItem
 
 class RentItemAdapter : RecyclerView.Adapter<RentItemAdapter.RentItemViewHolder>() {
     var list: List<RentItem> = listOf()
@@ -21,7 +23,7 @@ class RentItemAdapter : RecyclerView.Adapter<RentItemAdapter.RentItemViewHolder>
             binding.root.setOnClickListener {
                 val context = binding.root.context
                 context.startActivity(Intent(context, RentCalendarActivity::class.java).apply {
-                    putExtra(RentItem.KEY_RENT_ITEM_TYPE, item.category)
+                    putExtra(RentItem.KEY_RENT_ITEM_TYPE, item as Parcelable)
                 })
             }
         }

@@ -52,11 +52,14 @@ class MyRentActivity : AppCompatActivity() {
     }
 
     private fun initLoadMyRentDataLiveData() {
-        viewModel.loadMyRentResult.observe(this) {
-            if(it.isSuccessful) {
-                myRentAdapter.list = it.data as List<MyRentData>
+        viewModel.loadMyRentResult.observe(this) { result ->
+            if(result.isSuccessful) {
+                myRentAdapter.list = (result.data as List<MyRentData>).sortedByDescending { it.rentId }
+                binding.myRentRecyclerView.visibility = View.VISIBLE
+                binding.layoutEmpty.visibility = View.GONE
             } else {
-                showErrorToast(this, it.message!!)
+                binding.textInfo.text = "잠시 후 다시 시도해주세요."
+                showErrorToast(this, result.message!!)
             }
         }
     }

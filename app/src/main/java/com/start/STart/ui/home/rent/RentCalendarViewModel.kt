@@ -8,10 +8,10 @@ import com.start.STart.api.ApiClient
 import com.start.STart.api.rent.response.RentData
 import com.start.STart.api.rent.response.RentItemCount
 import com.start.STart.model.ResultModel
+import com.start.STart.util.AppException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.threeten.bp.LocalDate
 
 class RentCalendarViewModel: ViewModel() {
 
@@ -57,15 +57,22 @@ class RentCalendarViewModel: ViewModel() {
         return null
     }
 
+    val loadItemCountResult: MutableLiveData<ResultModel> = MutableLiveData()
+
     private suspend fun loadItemCount(category: String) : Int? {
         try {
             val res = ApiClient.rentService.getItemCount(category)
             if(res.isSuccessful) {
                 val rentItemCount = res.body()?.parseData(RentItemCount::class.java)
+                loadItemCountResult.postValue(ResultModel(true, data = rentItemCount?.count))
                 return rentItemCount?.count
+            } else {
+                val errorBody = ApiClient.parseBody(res.errorBody()?.string())
+                loadItemCountResult.postValue(ResultModel(false, errorBody.message))
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            loadItemCountResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
         return 0
     }

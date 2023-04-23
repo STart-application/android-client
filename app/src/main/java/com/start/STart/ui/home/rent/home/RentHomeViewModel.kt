@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.rent
+package com.start.STart.ui.home.rent.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

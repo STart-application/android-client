@@ -157,6 +157,7 @@ A  : IT국은 총학생회 애플리케이션을 기획하고 제작하고 있�
 총출업준비위원회는 졸업과 사회진출에 관한 업무를 관할하는 상설특별기구이며 회원이 될 자격은 본회의 각과 졸업준비위원장과 졸업이 가능한 본회의 회원으로 구성한다.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    
+    <string name="url_polar_bear">"https://cdn.pixabay.com/photo/2023/03/06/13/57/polar-bear-7833514_1280.jpg"</string>
 
 </resources>

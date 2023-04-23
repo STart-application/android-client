@@ -24,8 +24,9 @@ class ContentsAdapter: RecyclerView.Adapter<ContentsAdapter.ContentsViewHolder>(
             binding.textDescriptionValue.text = "자치회비 납부자 - 무료\n자치회비 미납부자 - 500원\n외부 참가자 - 2,000원"
             setCongestion(boothData.congestion)
 
+            val context = binding.root.context
             Glide.with(binding.root)
-                .load("https://cdn.pixabay.com/photo/2023/03/06/13/57/polar-bear-7833514_1280.jpg")
+                .load(context.getString(R.string.url_polar_bear))
                 .centerCrop()
                 .into(binding.imageTitle)
         }
