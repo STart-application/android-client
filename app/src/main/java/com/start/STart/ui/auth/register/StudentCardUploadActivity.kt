@@ -2,22 +2,17 @@ package com.start.STart.ui.auth.register
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.skydoves.balloon.Balloon
 import com.start.STart.BuildConfig
-import com.start.STart.R
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentCardBinding
 import com.start.STart.util.Constants
@@ -26,11 +21,7 @@ import com.start.STart.util.getPart
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.File
-import java.io.FileOutputStream
 
 class StudentCardUploadActivity : AppCompatActivity() {
     private val binding by lazy { ActivityValidateStudentCardBinding.inflate(layoutInflater) }

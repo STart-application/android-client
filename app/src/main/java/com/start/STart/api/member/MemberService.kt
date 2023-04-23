@@ -1,11 +1,13 @@
 package com.start.STart.api.member
 
 import com.start.STart.api.ApiResponse
+import com.start.STart.api.member.request.ResetPasswordWithLoginBody
 import com.start.STart.api.member.request.ResetPasswordWithoutLoginRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
@@ -36,5 +38,16 @@ interface MemberService {
     @PATCH("member/password")
     suspend fun resetPasswordWithoutLogin(
         @Body request: ResetPasswordWithoutLoginRequest
+    ): Response<ApiResponse>
+
+    // 로그인된 유저 비밀번호 재설정
+    @PATCH("member/login/password")
+    suspend fun resetPasswordWithLogin(
+        @Body body: ResetPasswordWithLoginBody
+    ): Response<ApiResponse>
+
+    @DELETE("member")
+    suspend fun deleteMember(
+
     ): Response<ApiResponse>
 }
