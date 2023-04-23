@@ -2,11 +2,13 @@ package com.start.STart.ui.home.festival.maps
 
 import android.content.Context
 import android.graphics.Color
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
+import com.start.STart.R
 import com.start.STart.ui.home.festival.StampData
 import com.start.STart.util.dp2px
 
@@ -40,8 +42,8 @@ data class MarkerModel(
             .radius(50.0)
             .clickable(true)
             .strokeWidth(context.dp2px(2f))
-            .strokeColor(Color.parseColor("#979797"))
-            .fillColor(Color.argb(51, 111 ,111, 111))
+            .strokeColor(ContextCompat.getColor(context, R.color.dream_navy))
+            .fillColor(Color.argb(51, 124 ,135, 242))
 
         circle = googleMap.addCircle(circleOptions).apply {
             isVisible = false
