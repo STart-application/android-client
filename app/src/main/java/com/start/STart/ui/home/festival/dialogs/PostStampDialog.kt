@@ -1,5 +1,6 @@
-package com.start.STart.ui.home.festival
+package com.start.STart.ui.home.festival.dialogs
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.JsonParser
 import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogPostStampBinding
+import com.start.STart.ui.home.festival.FestivalViewModel
+import com.start.STart.ui.home.festival.StampData
+import com.start.STart.util.contains
 import com.start.STart.util.gson
 import com.start.STart.util.showErrorToast
 
@@ -26,12 +30,23 @@ class PostStampDialog: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        binding.composeView.setContent { Cloudy(radius = 10, allowAccumulate = { true }){ } }
+        initBackground()
 
         binding.btnStamp.setOnClickListener {
             viewModel.postStamp(stampData!!.name)
         }
         initLiveDataObservers()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initBackground() {
+        binding.composeView.setContent { Cloudy(radius = 10, allowAccumulate = { true }){} }
+        binding.dim.setOnTouchListener { view, motionEvent ->
+            if(!binding.cardView.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
+                dismiss()
+            }
+            true
+        }
     }
 
     private fun initLiveDataObservers() {
@@ -42,14 +57,7 @@ class PostStampDialog: DialogFragment() {
                 showErrorToast(requireContext(), it.message!!)
             }
         }
-    }
 
-    fun setData(stampData: StampData) {
-        this.stampData = stampData
-    }
-
-    override fun onStart() {
-        super.onStart()
         viewModel.loadStampResult.observe(this) {
             if(it.isSuccessful) {
                 val jsonData = JsonParser.parseString(gson.toJson((it.data as List<*>).get(0))).asJsonObject
@@ -67,6 +75,17 @@ class PostStampDialog: DialogFragment() {
             }
         }
     }
+
+    fun setData(stampData: StampData) {
+        this.stampData = stampData
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadStamp()
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

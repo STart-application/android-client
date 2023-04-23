@@ -1,7 +1,5 @@
 package com.start.STart.ui.splash
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.content.IntentSender.SendIntentException
 import android.os.Bundle
@@ -60,9 +58,11 @@ class SplashActivity : AppCompatActivity() {
                     PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, loadMemberTask.await().data as MemberData)
                     activity = HomeActivity::class.java
                 } else {
+                    PreferenceManager.remove(Constants.KEY_MEMBER_DATA)
                     activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
                 }
             } else {
+                PreferenceManager.remove(Constants.KEY_MEMBER_DATA)
                 activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
             }
 

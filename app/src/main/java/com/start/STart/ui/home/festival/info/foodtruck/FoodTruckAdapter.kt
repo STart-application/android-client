@@ -1,6 +1,5 @@
 package com.start.STart.ui.home.festival.info.foodtruck
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,6 @@ import com.start.STart.databinding.ItemFoodtruckBinding
 
 class FoodTruckAdapter: RecyclerView.Adapter<FoodTruckAdapter.FoodTruckViewHolder>() {
     var list: MutableList<FoodTruck> = mutableListOf()
-
 
     fun addItem(foodTruck: List<FoodTruck>) {
         for(i in foodTruck.indices) {
@@ -27,11 +25,11 @@ class FoodTruckAdapter: RecyclerView.Adapter<FoodTruckAdapter.FoodTruckViewHolde
         }
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodTruckViewHolder {
         val binding = ItemFoodtruckBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FoodTruckViewHolder(
-            binding
-        )
+        return FoodTruckViewHolder(binding)
     }
 
     override fun getItemCount() = list.size

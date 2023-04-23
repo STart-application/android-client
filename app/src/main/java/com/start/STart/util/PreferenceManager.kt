@@ -68,6 +68,12 @@ object PreferenceManager {
             .apply()
     }
 
+    fun remove(key: String) {
+        pref.edit()
+            .remove(key)
+            .apply()
+    }
+
     suspend fun getBoolean(key: String): Boolean {
         return pref.getBoolean(key, false)
     }

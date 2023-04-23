@@ -1,17 +1,18 @@
-package com.start.STart.ui.home.festival
+package com.start.STart.ui.home.festival.dialogs
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.JsonParser
+import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogStampStatusBinding
+import com.start.STart.ui.home.festival.FestivalViewModel
+import com.start.STart.ui.home.festival.StampData
 import com.start.STart.util.*
 
 class StampStatusDialog : DialogFragment() {
@@ -26,6 +27,8 @@ class StampStatusDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initBackground()
+
         val stampImageViewList = listOf(
             binding.stampBungeobang,
             binding.stampPhoto,
@@ -33,18 +36,6 @@ class StampStatusDialog : DialogFragment() {
             binding.stampYard,
             binding.stampStage,
         )
-
-        binding.cardView.setOnTouchListener { view, motionEvent ->
-            motionEvent.action == MotionEvent.ACTION_DOWN
-        }
-
-        binding.root.setOnClickListener {
-            if(binding.cardView.contains(it.x.toInt(), it.y.toInt())){
-                return@setOnClickListener
-            }
-
-            dismiss()
-        }
 
         viewModel.loadStampResult.observe(this) {
             if(it.isSuccessful) {
@@ -68,19 +59,20 @@ class StampStatusDialog : DialogFragment() {
         }
     }
 
-    fun load() {
-        binding.cardView.visibility = View.VISIBLE
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initBackground() {
+        binding.composeView.setContent { Cloudy(radius = 10, allowAccumulate = { true }){} }
+        binding.dim.setOnTouchListener { view, motionEvent ->
+            if(!binding.cardView.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
+                dismiss()
+            }
+            true
+        }
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.loadStamp()
-        (requireActivity() as FestivalActivity).showBlur()
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        (requireActivity() as FestivalActivity).hideCompose()
     }
 
     override fun onCreateView(

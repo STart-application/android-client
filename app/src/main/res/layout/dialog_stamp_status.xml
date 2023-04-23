@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/dream_purple_background">
 
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/dim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dream_dialog_background" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="320dp"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="invisible"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
-        tools:visibility="visible">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,7 +35,7 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/text_title"
                 style="@style/Theme.Dream.Typeface_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,10 +50,10 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="36dp"
-                app:layout_constraintEnd_toStartOf="@+id/stamp_game"
+                app:layout_constraintEnd_toStartOf="@id/stamp_game"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/stamp_bungeobang"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintStart_toEndOf="@id/stamp_bungeobang"
+                app:layout_constraintTop_toBottomOf="@id/text_title"
                 app:srcCompat="@drawable/stamp_photo" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -96,13 +109,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:layout_marginTop="34dp"
                 android:gravity="center_horizontal"
-                android:text="5개의 도장을 모두 모으면\n 자동으로 응모가 완료됩니다."
+                android:text="5개의 도장을 모두 모은 후\n상품 교환소에 가서 복권을 받고\n상품을 수령하세요!"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stamp_yard" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

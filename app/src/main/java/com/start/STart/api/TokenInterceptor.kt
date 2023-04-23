@@ -87,14 +87,15 @@ class TokenInterceptor : Interceptor {
                 ApiClient.enableToken(newAccessToken)
                 return ResultModel(true, data = newAccessToken)
             } else {
-                val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                if(errorBody.errorCode == ApiError.ST010.name) { // 만료된 Refresh 토큰
-                    runBlocking(Dispatchers.Main) {
-                        val context = MyApp.getAppContext()
-                        context.startActivity(Intent(context, LoginOrSkipActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        })
-                    }
+                //val errorBody = ApiClient.parseBody(res.errorBody()?.string())
+                // 무조건 로그아웃
+                ApiClient.disableToken()
+                runBlocking(Dispatchers.Main) {
+                    PreferenceManager.clear()
+                    val context = MyApp.getAppContext()
+                    context.startActivity(Intent(context, LoginOrSkipActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
                 }
             }
         } catch (e: IOException) {

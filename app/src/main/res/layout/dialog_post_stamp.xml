@@ -14,7 +14,7 @@
         android:id="@+id/dim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="@color/dream_dialog_background" />
+        android:background="@color/dream_dialog_background" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.festival
+package com.start.STart.ui.home.festival.dialogs
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -27,7 +27,7 @@ class PhotoZoneDialog: DialogFragment() {
         initBackground()
 
         binding.photoZone.adapter = photoZoneAdapter
-        loadPhotoZone()
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -39,6 +39,11 @@ class PhotoZoneDialog: DialogFragment() {
             }
             true
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        loadPhotoZone()
     }
 
     override fun onCreateView(

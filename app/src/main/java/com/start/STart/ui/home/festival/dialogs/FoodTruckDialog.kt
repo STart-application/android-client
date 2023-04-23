@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.festival
+package com.start.STart.ui.home.festival.dialogs
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -31,6 +31,10 @@ class FoodTruckDialog: DialogFragment() {
 
         binding.foodLake.adapter = foodTruckAdapter
         binding.foodGround.adapter = foodTruck2Adapter
+    }
+
+    override fun onStart() {
+        super.onStart()
         loadFoodTruck()
     }
 
@@ -70,6 +74,7 @@ class FoodTruckDialog: DialogFragment() {
 
                         foodTruckAdapter.notifyDataSetChanged()
                         foodTruck2Adapter.notifyDataSetChanged()
+
                     }
                 }
 

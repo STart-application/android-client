@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
@@ -24,9 +23,13 @@ import com.google.android.gms.maps.model.*
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-import com.skydoves.cloudy.Cloudy
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
+import com.start.STart.ui.home.festival.dialogs.FestivalIntroDialog
+import com.start.STart.ui.home.festival.dialogs.FoodTruckDialog
+import com.start.STart.ui.home.festival.dialogs.PhotoZoneDialog
+import com.start.STart.ui.home.festival.dialogs.PostStampDialog
+import com.start.STart.ui.home.festival.dialogs.StampStatusDialog
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import com.start.STart.ui.home.festival.maps.MarkerModel
 import com.start.STart.util.getBitmapFromVectorDrawable
@@ -59,10 +62,10 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val markerList = mutableListOf<MarkerModel>()
 
-    private val stampDialog by lazy { StampStatusDialog()}
-    private val photoZoneDialog by lazy { PhotoZoneDialog()}
-    private val foodTruckDialog by lazy { FoodTruckDialog()}
-    private val postStampDialog by lazy { PostStampDialog()}
+    private val stampDialog by lazy { StampStatusDialog() }
+    private val photoZoneDialog by lazy { PhotoZoneDialog() }
+    private val foodTruckDialog by lazy { FoodTruckDialog() }
+    private val postStampDialog by lazy { PostStampDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,27 +86,6 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         withContext(Dispatchers.Main) {
             FestivalIntroDialog().show(supportFragmentManager, ".FestivalInfoDialog")
         }
-    }
-    
-    fun showBlur() {
-        binding.composeView.setContent {
-            var radius by remember { mutableStateOf(0) }
-            LaunchedEffect(Unit) {
-                radius = 20
-                (supportFragmentManager.findFragmentByTag(".FestivalInfoDialog") as FestivalIntroDialog?)?.load()
-                (supportFragmentManager.findFragmentByTag(".StampDialog") as StampStatusDialog?)?.load()
-                binding.composeView.visibility = View.VISIBLE
-            }
-            Cloudy(radius = radius) {
-
-            }
-        }
-
-    }
-
-    fun hideCompose() {
-        binding.composeView.visibility = View.GONE
-        binding.composeView.setContent{ }
     }
 
     private fun initMenu() {
