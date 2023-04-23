@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.rent
+package com.start.STart.ui.home.rent.home
 
 import android.content.res.Resources
 import android.graphics.Rect

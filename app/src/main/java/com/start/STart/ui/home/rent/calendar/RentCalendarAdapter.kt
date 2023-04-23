@@ -1,15 +1,17 @@
 package com.start.STart.ui.home.rent.calendar
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
 import com.start.STart.databinding.ItemRentCalendarBinding
 import java.util.Calendar
 
-class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendarViewHolder>() {
+class RentCalendarAdapter(val onDateSelectedListener: OnDataSelectedListener): RecyclerView.Adapter<RentCalendarAdapter.RentCalendarViewHolder>() {
+
+    var calendarMonth: Int = 0
 
     // 선택된 날짜
     var userSelectedIndex = -1
@@ -31,10 +33,28 @@ class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendar
 
     override fun onBindViewHolder(holder: RentCalendarViewHolder, position: Int) {
         val item = list[position]
-        Log.d(null, "onBindViewHolder: 호출")
+
+        val context = holder.binding.root.context
 
         holder.binding.let {
-            it.textDate.text = item.date.get(Calendar.DATE).toString()
+            // 날짜
+            val date = item.date.get(Calendar.DATE)
+            val dayOfWeek = item.date.get(Calendar.DAY_OF_WEEK)
+            val today = Calendar.getInstance()
+            val textColor = when {
+                // 오늘
+                item.date.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
+                    item.date.get(Calendar.DATE) == today.get(Calendar.DATE) -> R.color.dream_purple
+
+                item.date.get(Calendar.MONTH) != calendarMonth -> R.color.text_caption
+                dayOfWeek == Calendar.SATURDAY -> R.color.dream_blue
+                dayOfWeek == Calendar.SUNDAY -> R.color.dream_red
+                else -> R.color.black
+            }
+            it.textDate.text = if (item.date.get(Calendar.MONTH) != calendarMonth) "0" else date.toString()
+            it.textDate.setTextColor(ContextCompat.getColor(context, textColor))
+
+            // 프로그래스바
             if(item.total == 0 || item.count == 0) {
                 it.progressbar.visibility = View.INVISIBLE
             } else {
@@ -44,15 +64,19 @@ class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendar
                 it.progressbar.progress = percent
             }
 
+            // 선택된 날짜
             if(position == userSelectedIndex) {
-                it.root.setBackgroundResource(R.color.dream_purple)
+                it.root.setBackgroundResource(R.drawable.background_calendar_data_selected)
             } else {
                 it.root.background = null
             }
         }
 
         holder.itemView.setOnClickListener {
-            setSelectedIndex(position)
+            if(item.date.get(Calendar.MONTH) == calendarMonth) {
+                setSelectedIndex(position)
+                onDateSelectedListener.onClick(item)
+            }
         }
     }
 
@@ -62,5 +86,9 @@ class RentCalendarAdapter: RecyclerView.Adapter<RentCalendarAdapter.RentCalendar
 
         notifyItemChanged(previousIndex)
         notifyItemChanged(userSelectedIndex)
+    }
+
+    interface OnDataSelectedListener {
+        fun onClick(rentDateItem: RentDateItem)
     }
 }

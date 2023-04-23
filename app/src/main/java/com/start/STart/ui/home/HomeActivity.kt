@@ -26,7 +26,7 @@ import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.ui.home.pay.PaymentActivity
-import com.start.STart.ui.home.rent.RentHomeActivity
+import com.start.STart.ui.home.rent.home.RentHomeActivity
 import com.start.STart.ui.home.setting.SettingActivity
 import com.start.STart.ui.theme.DreamTheme
 import com.start.STart.util.Constants

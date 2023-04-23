@@ -1,22 +1,14 @@
 package com.start.STart.ui.home.rent.calendar
 
-import android.graphics.Rect
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.start.STart.R
 import com.start.STart.api.rent.response.RentData
 import com.start.STart.databinding.FragmentMonthBinding
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.temporal.TemporalAdjusters
-import java.util.*
+import com.start.STart.ui.home.rent.util.getDateList
+import java.util.Calendar
 
-class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
+class RentViewPagerAdapter(val onDateSelectedListener: RentCalendarAdapter.OnDataSelectedListener):  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
 
     var currentCalendar: Calendar = Calendar.getInstance()
 
@@ -24,7 +16,7 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
     val baseIndex = (maxIndex / 2)
 
     inner class RentViewPagerViewHolder(val binding: FragmentMonthBinding): RecyclerView.ViewHolder(binding.root) {
-        val calendarAdapter = RentCalendarAdapter()
+        val calendarAdapter = RentCalendarAdapter(onDateSelectedListener)
 
         init {
             initCalendarRecyclerView()
@@ -35,29 +27,11 @@ class RentViewPagerAdapter:  RecyclerView.Adapter<RentViewPagerAdapter.RentViewP
         }
 
         fun updateCalendar(calendar: Calendar) {
+            calendarAdapter.calendarMonth = calendar.get(Calendar.MONTH)
             calendarAdapter.list = getDateList(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1)
             binding.root.requestLayout()
         }
 
-
-        private fun getDateList(year: Int, month: Int, day: Int = 1): List<RentDateItem> {
-            val realStartDate = LocalDate.of(year, month, day)
-            val startDate = realStartDate
-                .with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
-            val endDate = realStartDate.with(TemporalAdjusters.lastDayOfMonth())
-                .with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY))
-            val dateList = mutableListOf<RentDateItem>()
-            var currentDate = startDate
-
-            while (!currentDate.isAfter(endDate)) {
-                val calendar = Calendar.getInstance()
-                calendar.set(currentDate.year, currentDate.monthValue - 1, currentDate.dayOfMonth)
-                dateList.add(RentDateItem(calendar, 0, 0))
-                currentDate = currentDate.plusDays(1)
-            }
-
-            return dateList
-        }
     }
 
     fun update(list: List<RentData>) {

@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.rent
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.start.STart.api.ApiClient
 import com.start.STart.api.rent.response.RentData
 import com.start.STart.api.rent.response.RentItemCount
 import com.start.STart.model.ResultModel
+import com.start.STart.util.AppException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -27,11 +29,29 @@ class RentCalendarViewModel: ViewModel() {
 
             if (rentDateList.await() != null && itemTotalCount.await() != null) {
 
-                val group = rentDateList.await()?.groupBy {
-                    it.startTime
+                val dateToAccountMap = mutableMapOf<LocalDate, Int>()
+
+                rentDateList.await()!!.forEach { rent ->
+
+                    val startDate = LocalDate.parse(rent.startTime)
+                    val endDate = LocalDate.parse(rent.endTime)
+                    var date = startDate
+
+                    while (!date.isAfter(endDate)) {
+
+                        if (dateToAccountMap.containsKey(date)) {
+                            dateToAccountMap[date] = dateToAccountMap[date]!! + rent.account
+                        } else {
+                             dateToAccountMap[date] = rent.account
+                        }
+
+                        date = date.plusDays(1)
+                    }
                 }
 
-                _loadCalendarResult.postValue(Pair(viewPagerIndex, ResultModel(true, data = group)))
+                Log.d(null, "loadCalendar: $dateToAccountMap")
+
+                _loadCalendarResult.postValue(Pair(viewPagerIndex, ResultModel(true, data = dateToAccountMap)))
 
             } else {
                 _loadCalendarResult.postValue(Pair(viewPagerIndex, ResultModel(false)))
@@ -57,15 +77,22 @@ class RentCalendarViewModel: ViewModel() {
         return null
     }
 
+    val loadItemCountResult: MutableLiveData<ResultModel> = MutableLiveData()
+
     private suspend fun loadItemCount(category: String) : Int? {
         try {
             val res = ApiClient.rentService.getItemCount(category)
             if(res.isSuccessful) {
                 val rentItemCount = res.body()?.parseData(RentItemCount::class.java)
+                loadItemCountResult.postValue(ResultModel(true, data = rentItemCount?.count))
                 return rentItemCount?.count
+            } else {
+                val errorBody = ApiClient.parseBody(res.errorBody()?.string())
+                loadItemCountResult.postValue(ResultModel(false, errorBody.message))
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            loadItemCountResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
         return 0
     }

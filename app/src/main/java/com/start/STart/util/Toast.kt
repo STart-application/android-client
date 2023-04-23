@@ -9,7 +9,7 @@ import es.dmoral.toasty.Toasty
 fun showSuccessToast(context: Context, message: String?) {
     Toasty.custom(
         context,
-        message?:"요청이 정상적으로 처리되었습니다.",
+        message?:"요청이 성공적으로 처리되었습니다.",
         ContextCompat.getDrawable(context, es.dmoral.toasty.R.drawable.ic_check_white_24dp),
         ContextCompat.getColor(context, R.color.dream_green),
         ContextCompat.getColor(context, R.color.white),

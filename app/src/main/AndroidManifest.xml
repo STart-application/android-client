@@ -86,7 +86,7 @@
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:theme="@style/Theme.Dream.ActionBar" />
         <activity
-            android:name=".ui.home.rent.RentHomeActivity"
+            android:name=".ui.home.rent.home.RentHomeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

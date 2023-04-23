@@ -1,15 +1,16 @@
-package com.start.STart.ui.home.rent
+package com.start.STart.ui.home.rent.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityRentHomeBinding
+import com.start.STart.ui.home.rent.RentItem
 import com.start.STart.ui.home.rent.myrent.MyRentActivity
 import com.start.STart.util.IndentLeadingMarginSpan
 import com.start.STart.util.dp2px
@@ -54,16 +55,7 @@ class RentHomeActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         binding.rvRentItem.adapter = rentItemAdapter.apply {
-            list = listOf(
-                RentItem.MAT,
-                RentItem.SIMPLE_TABLE,
-                RentItem.TABLE,
-                RentItem.AMP,
-                RentItem.CANOPY,
-                RentItem.WIRE,
-                RentItem.CART,
-                RentItem.CHAIR,
-            )
+            list = RentItem.values().toList()
         }
         binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(6f).toInt()))
     }

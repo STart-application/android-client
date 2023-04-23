@@ -1,25 +1,29 @@
 package com.start.STart.ui.home.rent.myrent
 
 import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.start.STart.R
 import com.start.STart.api.rent.response.MyRentData
 import com.start.STart.databinding.ActivityMyRentBinding
 import com.start.STart.util.dp2px
+import com.start.STart.util.showErrorToast
 
 class MyRentActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMyRentBinding.inflate(layoutInflater) }
+    private val viewModel: MyRentViewModel by viewModels()
     private val myRentAdapter by lazy { MyRentAdapter() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-            initToolbar()
+        initToolbar()
         initRecyclerView()
+        initLoadMyRentDataLiveData()
 
+        viewModel.loadMyRent()
     }
 
     private fun initToolbar() {
@@ -28,18 +32,7 @@ class MyRentActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        binding.myRentRecyclerView.adapter = myRentAdapter.apply {
-            list = listOf(
-                MyRentData(0, 1, "취미", "CONFIRM", "CHAIR", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 1, "취미", "DONE", "CART", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 3, "취미", "DENY", "CANOPY", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 1, "취미", "WAIT", "MAT", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 5, "취미", "RENT", "TABLE", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 1, "취미", "CONFIRM", "SIMPLE_TABLE", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 7, "취미", "DENY", "WIRE", "2023-05-22", "2024-07-23", "", ""),
-                MyRentData(0, 1, "취미", "WAIT", "AMP", "2023-05-22", "2024-07-23", "", ""),
-            )
-        }
+        binding.myRentRecyclerView.adapter = myRentAdapter
         binding.myRentRecyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
@@ -56,5 +49,18 @@ class MyRentActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun initLoadMyRentDataLiveData() {
+        viewModel.loadMyRentResult.observe(this) { result ->
+            if(result.isSuccessful) {
+                myRentAdapter.list = (result.data as List<MyRentData>).sortedByDescending { it.rentId }
+                binding.myRentRecyclerView.visibility = View.VISIBLE
+                binding.layoutEmpty.visibility = View.GONE
+            } else {
+                binding.textInfo.text = "잠시 후 다시 시도해주세요."
+                showErrorToast(this, result.message!!)
+            }
+        }
     }
 }

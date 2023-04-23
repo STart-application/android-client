@@ -26,13 +26,91 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_round_10">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_title"
+                    android:layout_width="80dp"
+                    android:layout_height="120dp"
+                    android:layout_marginVertical="24dp"
+                    android:layout_marginStart="17dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:background="@color/dream_gray" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/text_item_title"
+                    style="@style/Theme.Dream.Typeface_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toEndOf="@id/card_title"
+                    app:layout_constraintTop_toTopOf="@id/card_title"
+                    tools:text="품목명" />
+
+                <TextView
+                    android:id="@+id/text_max_count"
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:text="총 수량"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/text_item_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_item_title" />
+
+                <TextView
+                    android:id="@+id/text_max_count_value"
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toEndOf="@id/text_purpose"
+                    app:layout_constraintTop_toTopOf="@id/text_max_count"
+                    tools:text="00개" />
+
+                <TextView
+                    android:id="@+id/text_purpose"
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="사용 목적"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/text_max_count"
+                    app:layout_constraintTop_toBottomOf="@id/text_max_count" />
+
+                <TextView
+                    android:id="@+id/text_purpose_value"
+                    style="@style/Theme.Dream.Typeface_Caption"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/text_max_count_value"
+                    app:layout_constraintTop_toTopOf="@id/text_purpose"
+                    tools:text="간이 테이블로 사용할 있습니다. 간이간이 테간이 테이블로 사용할 있습니다. 간이 테이블로 사용할 ㅅ ㅜ있이블로 사용할 있습니다. 간이 테이블로 사용할 ㅅ ㅜ있 테이블로 사용할 ㅅ ㅜ있습니다." />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
@@ -44,15 +122,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <androidx.appcompat.widget.AppCompatImageView
+                        <FrameLayout
                             android:id="@+id/btn_previous_month"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:background="@drawable/ripple_dream_icon"
                             android:layout_marginStart="29dp"
                             app:layout_constraintBottom_toBottomOf="@id/text_month_title"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/text_month_title"
-                            app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                            app:layout_constraintTop_toTopOf="@+id/text_month_title">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                        </FrameLayout>
+
 
                         <TextView
                             android:id="@+id/text_month_title"
@@ -66,26 +152,34 @@
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="00월 예약 현황" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
+                        <FrameLayout
                             android:id="@+id/btn_next_month"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:background="@drawable/ripple_dream_icon"
                             android:layout_marginEnd="29dp"
-                            android:rotation="180"
                             app:layout_constraintBottom_toBottomOf="@id/text_month_title"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/text_month_title"
-                            app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                            app:layout_constraintTop_toTopOf="@+id/text_month_title">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:rotation="180"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+
+                        </FrameLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_constraintVertical_bias="1"
                             android:paddingBottom="6dp"
                             app:layout_constraintBottom_toTopOf="@id/monthViewPager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/text_month_title">
+                            app:layout_constraintTop_toBottomOf="@+id/text_month_title"
+                            app:layout_constraintVertical_bias="1">
 
                             <TextView
                                 style="@style/Theme.Dream.Typeface_Caption"
@@ -93,8 +187,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textColor="@color/dream_red"
-                                android:text="일" />
+                                android:text="일"
+                                android:textColor="@color/dream_red" />
 
                             <TextView
                                 style="@style/Theme.Dream.Typeface_Caption"
@@ -142,6 +236,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:textColor="@color/dream_blue"
                                 android:text="토" />
                         </LinearLayout>
 

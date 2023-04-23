@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/dream_purple_background"
     android:orientation="vertical"
-    tools:context=".ui.home.rent.RentHomeActivity">
+    tools:context=".ui.home.rent.home.RentHomeActivity">
 
     <include
         android:id="@+id/toolbar"
