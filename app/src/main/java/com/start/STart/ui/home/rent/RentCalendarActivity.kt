@@ -2,6 +2,7 @@ package com.start.STart.ui.home.rent
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -82,7 +83,9 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
         }
 
         binding.btnRent.setOnClickListener {
-            startActivity(Intent(this, RentActivity::class.java))
+            startActivity(Intent(this, RentActivity::class.java).apply {
+                putExtra(RentItem.KEY_RENT_ITEM_TYPE, rentItem as Parcelable)
+            })
         }
     }
 
