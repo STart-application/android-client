@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.rent
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ import com.start.STart.util.AppException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
 
 class RentCalendarViewModel: ViewModel() {
 
@@ -27,11 +29,29 @@ class RentCalendarViewModel: ViewModel() {
 
             if (rentDateList.await() != null && itemTotalCount.await() != null) {
 
-                val group = rentDateList.await()?.groupBy {
-                    it.startTime
+                val dateToAccountMap = mutableMapOf<LocalDate, Int>()
+
+                rentDateList.await()!!.forEach { rent ->
+
+                    val startDate = LocalDate.parse(rent.startTime)
+                    val endDate = LocalDate.parse(rent.endTime)
+                    var date = startDate
+
+                    while (!date.isAfter(endDate)) {
+
+                        if (dateToAccountMap.containsKey(date)) {
+                            dateToAccountMap[date] = dateToAccountMap[date]!! + rent.account
+                        } else {
+                             dateToAccountMap[date] = rent.account
+                        }
+
+                        date = date.plusDays(1)
+                    }
                 }
 
-                _loadCalendarResult.postValue(Pair(viewPagerIndex, ResultModel(true, data = group)))
+                Log.d(null, "loadCalendar: $dateToAccountMap")
+
+                _loadCalendarResult.postValue(Pair(viewPagerIndex, ResultModel(true, data = dateToAccountMap)))
 
             } else {
                 _loadCalendarResult.postValue(Pair(viewPagerIndex, ResultModel(false)))

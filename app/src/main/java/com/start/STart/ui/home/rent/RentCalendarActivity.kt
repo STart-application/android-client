@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.start.STart.R
-import com.start.STart.api.rent.response.RentData
 import com.start.STart.databinding.ActivityRentCalendarBinding
 import com.start.STart.ui.home.rent.calendar.RentViewPagerAdapter
 import com.start.STart.util.DateFormatter
 import com.start.STart.util.getParcelableExtra
+import org.threeten.bp.LocalDate
 import java.util.*
 
 class RentCalendarActivity : AppCompatActivity() {
@@ -107,30 +107,31 @@ class RentCalendarActivity : AppCompatActivity() {
             val resultModel = pair.second
 
             if(resultModel.isSuccessful) {
-                val rentDataMap = resultModel.data as Map<String, List<RentData>>?
+                val rentDataMap = resultModel.data as Map<LocalDate, Int>
 
-                if(rentDataMap?.isNotEmpty() == true) {
+                if(rentDataMap.isNotEmpty()) {
                     val viewHolder  = (binding.monthViewPager.getChildAt(0) as RecyclerView?)?.findViewHolderForAdapterPosition(viewPagerIndex) as RentViewPagerAdapter.RentViewPagerViewHolder?
 
                     viewHolder?.calendarAdapter?.list?.let { it ->
+
                         it.forEachIndexed { index, rentDateItem ->
                             val dateKey = DateFormatter.format(rentDateItem.date.time)
 
-                            val rentDataList = rentDataMap[dateKey]
+                            val rentDataList = rentDataMap[LocalDate.parse(dateKey)]
 
 
                             if (rentDataList != null) {
-                                //rentDateItem.count = rentDataList.first
+                                rentDateItem.count = rentDataList
                             } else {
                                 rentDateItem.count = 0
                             }
-                            //rentDateItem.total = rentDataList?.second ?: 0
+                            rentDateItem.total = (viewModel.loadItemCountResult.value?.data as Int)
                             viewHolder.calendarAdapter.notifyItemChanged(index)
                         }
                     }
 
                 } else {
-
+                    
                 }
                 Log.d(null, "initViewModelListeners: $rentDataMap")
             } else {
