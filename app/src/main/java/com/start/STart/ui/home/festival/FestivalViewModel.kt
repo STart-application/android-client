@@ -13,10 +13,6 @@ import java.io.IOException
 
 class FestivalViewModel: ViewModel() {
 
-    init {
-        loadStamp()
-    }
-
     val loadStampResult: MutableLiveData<ResultModel> = MutableLiveData()
 
     fun loadStamp() = viewModelScope.launch(Dispatchers.IO) {

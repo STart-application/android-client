@@ -52,7 +52,7 @@ object PreferenceManager {
 
     }
 
-    suspend fun putString(key: String, value: String) {
+    fun putString(key: String, value: String) {
         pref.edit()
             .putString(key, value)
             .apply()

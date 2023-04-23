@@ -137,7 +137,7 @@ class SettingActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             })
-            finish()
+            //finish()
         }
     }
     private fun initViewModelListeners() {

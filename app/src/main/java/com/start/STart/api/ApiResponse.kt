@@ -10,9 +10,6 @@ data class ApiResponse(
     val errorCode: String?,
     val data: List<*>? = null,
 ) {
-    fun getErrorMessage(): String {
-        return "$errorCode: $message"
-    }
 
     fun <T : Any> parseData(cls: Class<T>): T {
         return gson.fromJson(gson.toJson(data?.get(0)), cls)

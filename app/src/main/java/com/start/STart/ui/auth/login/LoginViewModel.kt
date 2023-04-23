@@ -1,18 +1,19 @@
 package com.start.STart.ui.auth.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
-import com.start.STart.api.ApiResponse
-import com.start.STart.api.TokenInterceptor
 import com.start.STart.api.auth.request.LoginRequest
 import com.start.STart.api.auth.response.TokenData
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.model.ResultModel
-import com.start.STart.util.*
+import com.start.STart.util.AppException
+import com.start.STart.util.Constants
+import com.start.STart.util.MemberDataHelper
+import com.start.STart.util.PreferenceManager
+import com.start.STart.util.TokenHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,7 +27,6 @@ class LoginViewModel : ViewModel() {
             val res = ApiClient.authService.login(LoginRequest(studentId, password))
             if(res.isSuccessful) {
                 val tokenData = res.body()?.parseData(TokenData::class.java)
-                Log.d(null, "login: $tokenData")
                 tokenData?.let {
                     PreferenceManager.putString(Constants.KEY_REFRESH_TOKEN, it.refreshToken!!)
                     PreferenceManager.putString(Constants.KEY_ACCESS_TOKEN, it.accessToken!!)
@@ -38,12 +38,11 @@ class LoginViewModel : ViewModel() {
                     _loginResult.postValue(ResultModel(false, "로그인 실패"))
                 }
             } else {
-                val body = gson.fromJson(res.errorBody()?.string(), ApiResponse::class.java)
-                _loginResult.postValue(ResultModel(false, body.getErrorMessage()))
+                val body = ApiClient.parseBody(res.errorBody()?.string())
+                _loginResult.postValue(ResultModel(false, body.message))
             }
         } catch(e: Exception) {
-            e.printStackTrace()
-            _loginResult.postValue(ResultModel(false, e.message))
+            _loginResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
     }
     private val _loadMemberResult: MutableLiveData<ResultModel> = MutableLiveData()

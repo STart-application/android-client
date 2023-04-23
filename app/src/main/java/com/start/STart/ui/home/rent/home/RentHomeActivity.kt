@@ -2,7 +2,6 @@ package com.start.STart.ui.home.rent.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,6 @@ import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityRentHomeBinding
 import com.start.STart.ui.home.rent.RentItem
 import com.start.STart.ui.home.rent.myrent.MyRentActivity
-import com.start.STart.util.IndentLeadingMarginSpan
 import com.start.STart.util.dp2px
 import com.start.STart.util.getCollegeByDepartment
 
@@ -33,11 +31,6 @@ class RentHomeActivity : AppCompatActivity() {
     private fun initView() {
         initToolbar()
         initRecyclerView()
-
-        // TODO: 줄마다 약간의 간격 다름 (보류)
-        binding.textDescription.text = SpannableStringBuilder(resources.getString(R.string.rent_description)).apply {
-            setSpan(IndentLeadingMarginSpan(), 0, length, 0)
-        }
 
         binding.btnMyRent.setOnClickListener {
             startActivity(Intent(this, MyRentActivity::class.java))
