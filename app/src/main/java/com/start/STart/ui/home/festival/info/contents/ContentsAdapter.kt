@@ -17,7 +17,6 @@ class ContentsAdapter: RecyclerView.Adapter<ContentsAdapter.ContentsViewHolder>(
 
     inner class ContentsViewHolder(val binding: ItemFestivalContentsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(boothEnum: BoothEnum) {
-            // TODO: 부스 정해진 기획 내용 받아야 함
             binding.textTitle.text = boothEnum.boothName
             binding.textPeriodValue.text = boothEnum.locationNPeriod
             binding.textDescriptionValue.text = boothEnum.description

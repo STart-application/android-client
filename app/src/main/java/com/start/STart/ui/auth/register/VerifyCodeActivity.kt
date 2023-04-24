@@ -2,14 +2,10 @@ package com.start.STart.ui.auth.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
-import com.skydoves.balloon.ArrowOrientation
-import com.skydoves.balloon.Balloon
-import com.start.STart.R
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateSmsBinding
 import com.start.STart.util.AppRegex
@@ -17,13 +13,13 @@ import com.start.STart.util.Constants
 import com.start.STart.util.formatTimerMilliseconds
 import com.start.STart.util.getParcelableExtra
 import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import org.threeten.bp.LocalDateTime
-import kotlin.concurrent.timer
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -71,7 +67,6 @@ class VerifyCodeActivity : AppCompatActivity() {
         }
 
         binding.btnValidate.setOnClickListener {
-            // TODO: 코드 유효성 검사 및 전송 번호 저장
             val phone = Regex(AppRegex.PHONE_VALIDATE).replace(binding.inputPhone.text.toString(), "01$1-$2-$3")
             val code = binding.inputCode.text.toString()
 

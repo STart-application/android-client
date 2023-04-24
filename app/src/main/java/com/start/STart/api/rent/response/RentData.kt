@@ -9,7 +9,7 @@ data class RentData(
     val itemCategory: String,
     val startTime: String,
     val endTime: String,
-    val rentItemList: String?, // TODO: 이건 뭘까?
+    val rentItemList: String?,
     val createdAt: String,
     val updatedAt: String,
 )

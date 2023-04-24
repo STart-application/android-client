@@ -1,20 +1,20 @@
 package com.start.STart.ui.home.setting.suggest
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
 import com.start.STart.R
 import com.start.STart.api.suggestion.request.SuggestRequest
 import com.start.STart.databinding.ActivitySuggestBinding
-import com.start.STart.util.AppException
 import com.start.STart.util.getPart
 import com.start.STart.util.px2dp
-import es.dmoral.toasty.Toasty
+import com.start.STart.util.showErrorToast
+import com.start.STart.util.showSuccessToast
 
 class SuggestActivity : AppCompatActivity() {
 
@@ -108,12 +108,11 @@ class SuggestActivity : AppCompatActivity() {
 
     private fun initViewModelListeners() {
         viewModel.suggestionResult.observe(this) {
-            // TODO: 토스트 메세지 수정
             if(it.isSuccessful) {
-                Toasty.success(this, "성공적으로 전달하였습니다!", 10000).show()
+                showSuccessToast(this, "성공적으로 전달하였습니다!")
                 finish()
             } else {
-                Toasty.success(this, AppException.UNEXPECTED.title, 10000).show()
+                showErrorToast(this, it.message)
             }
         }
     }

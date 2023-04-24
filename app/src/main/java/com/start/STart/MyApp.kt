@@ -25,7 +25,6 @@ class MyApp: Application() {
         // 시간 관련 유틸
         AndroidThreeTen.init(this)
 
-        // TODO: Hilt 라이브러리를 이용한 의존성 주입 (시간남으면 공부하고 적용)
         PreferenceManager.init(applicationContext)
         context = applicationContext
     }

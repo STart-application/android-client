@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
 import com.start.STart.api.suggestion.request.SuggestRequest
 import com.start.STart.model.ResultModel
+import com.start.STart.util.AppException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -30,10 +31,10 @@ class SuggestViewModel: ViewModel() {
                 _suggestionResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                _suggestionResult.postValue(ResultModel(false))
+                _suggestionResult.postValue(ResultModel(false, errorBody.message))
             }
         } catch (e: Exception) {
-            _suggestionResult.postValue(ResultModel(false))
+            _suggestionResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
         }
     }
 }
