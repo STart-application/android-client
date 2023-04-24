@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="320dp"
-        android:layout_height="350dp"
+        android:layout_height="370dp"
         android:layout_gravity="center"
         android:visibility="invisible"
         app:cardCornerRadius="10dp"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:gravity="center_horizontal"
-                android:text="5개의 도장을 모두 모으면\n 자동으로 응모가 완료됩니다."
+                android:text="5개의 도장을 모두 모은 후\n상품 교환소에 가서 복권을 \n 받고 상품을 수령하세요!"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

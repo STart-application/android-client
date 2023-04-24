@@ -1,7 +1,9 @@
 package com.start.STart.ui.home.setting
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,7 @@ import com.start.STart.ui.home.setting.suggest.SuggestActivity
 import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
 import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
+import java.io.File
 
 class SettingActivity : AppCompatActivity() {
 
@@ -74,6 +77,28 @@ class SettingActivity : AppCompatActivity() {
         binding.textErrorSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ERROR)}
         binding.textEtcSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ETC)}
 
+
+        /*
+        binding.textPrivacyPolicy.setOnClickListener{
+            val intent = Intent(Intent.ACTION_DEFAULT)
+            val file = File("android.resource://com.start.STart/${R.raw.sc_privacy}")
+            if(file.exists()) {
+                val uri = Uri.fromFile(file)
+                intent.data = uri
+                startActivity(intent)
+            }
+        }
+
+        binding.textTermsOfService.setOnClickListener {
+            val pdfUri = Uri.parse("android.resource://com.start.STart/${R.raw.sc_service}")
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(pdfUri, "application")
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            Log.d("tag", "service")
+        }
+
+         */
         binding.textPrivacyPolicy.setOnClickListener { openCustomTab(resources.getString(R.string.link_privacy_policy)) }
         binding.textTermsOfService.setOnClickListener { openCustomTab(resources.getString(R.string.link_terms_of_service)) }
         binding.textOpenSourceLicense.setOnClickListener {

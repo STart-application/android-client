@@ -96,7 +96,7 @@
                         style="@style/Theme.Dream.Typeface_Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="위치 / 요금 / 축제 일정" />
+                        android:text="축제 일정 / 위치 / 설명" />
 
                 </LinearLayout>
 
@@ -190,7 +190,7 @@
                         style="@style/Theme.Dream.Typeface_Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="푸드트럭 위치 / 업체" />
+                        android:text="푸드트럭 위치 / 종류" />
 
                 </LinearLayout>
 
@@ -237,7 +237,7 @@
                         style="@style/Theme.Dream.Typeface_Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="포토존 위치" />
+                        android:text="포토존 위치 / 사진" />
 
                 </LinearLayout>
 
