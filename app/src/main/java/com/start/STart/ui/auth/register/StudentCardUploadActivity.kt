@@ -16,6 +16,7 @@ import com.start.STart.BuildConfig
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentCardBinding
 import com.start.STart.ui.auth.register.dialogs.SelectPhotoDialog
+import com.start.STart.util.AppException
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
 import com.start.STart.util.getPart
@@ -111,10 +112,14 @@ class StudentCardUploadActivity : AppCompatActivity() {
             binding.progressbar.visibility = View.VISIBLE
             binding.btnNext.isEnabled = false
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                val part = getPart(applicationContext, studentCardUri)
-                viewModel.register(registerData, part)
-            }
+            register()
+        }
+    }
+
+    private fun register() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val part = getPart(applicationContext, studentCardUri)
+            viewModel.register(registerData, part)
         }
     }
 
@@ -123,6 +128,9 @@ class StudentCardUploadActivity : AppCompatActivity() {
             if (result.isSuccessful) {
                 startActivity(Intent(this, RegisterCompleteActivity::class.java))
             } else {
+                if(result.exception == AppException.TIMEOUT) {
+                    register()
+                }
                 Toasty.error(this, result.message!!).show()
             }
 

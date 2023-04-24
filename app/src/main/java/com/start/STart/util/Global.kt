@@ -92,7 +92,7 @@ fun uriToFile(context: Context, uri: Uri): File {
     //val name = getFileNameFromUri(context, uri!!)
 
     val fileName = when(context.contentResolver.getType(uri)) {
-        "image/png" -> { "cache_image.png" }
+        //"image/png" -> { "cache_image.png" }
         else -> { "cache_image.jpg" }
     }
 

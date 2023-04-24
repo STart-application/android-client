@@ -1,7 +1,7 @@
 package com.start.STart.ui.home.setting.updatehistory
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.start.STart.databinding.ActivityUpdateHistoryBinding
 
@@ -39,7 +39,7 @@ class UpdateHistoryActivity : AppCompatActivity() {
                     "상시사업 현황이 제대로 보이지 않는 문제 수정"
                 )),
                 // TODO: 업데이트 기록 추가
-                UpdateHistory("1.1.0", "2023.05.??", listOf(
+                UpdateHistory("1.1.0", "2023.05.06", listOf(
                     "Dream 총학생회 어플리케이션 업데이트"
                 )),
             )
