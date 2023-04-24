@@ -33,12 +33,15 @@
         </provider>
         <activity
             android:name=".ui.home.festival.info.FestivalInfoActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.home.rent.myrent.MyRentActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.home.event.DetailVoteActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -46,6 +49,7 @@
         </activity>
         <activity
             android:name=".ui.home.event.VoteActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -53,6 +57,7 @@
         </activity>
         <activity
             android:name=".ui.home.event.EscapeActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -60,6 +65,7 @@
         </activity>
         <activity
             android:name=".ui.home.pay.PaymentActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -67,6 +73,7 @@
         </activity>
         <activity
             android:name=".ui.home.event.DetailEventActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -78,12 +85,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.rent.RentCalendarActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream.ActionBar" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Dream.ActionBar" />
         <activity
             android:name=".ui.home.rent.home.RentHomeActivity"
