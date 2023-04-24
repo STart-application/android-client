@@ -1,4 +1,4 @@
-package com.start.STart.ui.auth.register
+package com.start.STart.ui.auth.register.dialogs
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogSelectPhotoBinding
+import com.start.STart.ui.auth.register.StudentCardUploadActivity
+import com.start.STart.ui.auth.register.StudentCardUploadViewModel
 import com.start.STart.util.contains
 
 class SelectPhotoDialog: DialogFragment() {

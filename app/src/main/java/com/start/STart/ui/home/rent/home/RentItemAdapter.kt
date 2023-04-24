@@ -18,7 +18,7 @@ class RentItemAdapter : RecyclerView.Adapter<RentItemAdapter.RentItemViewHolder>
     inner class RentItemViewHolder(val binding: ItemRentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: RentItem) {
             binding.textItemName.text = item.category
-            binding.imageItem.setImageResource(item.drawable)
+            binding.imageItem.setImageResource(item.iconDrawable)
 
             binding.root.setOnClickListener {
                 val context = binding.root.context

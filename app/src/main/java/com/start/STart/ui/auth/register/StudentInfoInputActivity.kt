@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentInfoBinding
+import com.start.STart.ui.auth.register.dialogs.SelectCollegeOrDepartmentDialog
 import com.start.STart.util.Constants
 import com.start.STart.util.InputTextWater
 import es.dmoral.toasty.Toasty

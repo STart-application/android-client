@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.start.STart.BuildConfig
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidateStudentCardBinding
+import com.start.STart.ui.auth.register.dialogs.SelectPhotoDialog
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
 import com.start.STart.util.getPart

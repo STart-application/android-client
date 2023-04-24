@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.start.STart.R
 import com.start.STart.databinding.ActivityRentCalendarBinding
 import com.start.STart.ui.home.rent.calendar.RentCalendarAdapter
 import com.start.STart.ui.home.rent.calendar.RentDateItem
@@ -38,8 +37,8 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
         binding.textItemTitle.text = rentItem.category
         binding.textPurposeValue.text = rentItem.purpose
         Glide.with(this)
-            .load(getString(R.string.url_polar_bear))
-            .centerCrop()
+            .load(rentItem.realDrawable)
+            .centerInside()
             .into(binding.imageTitle)
 
         initToolbar()
