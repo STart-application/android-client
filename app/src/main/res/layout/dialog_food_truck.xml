@@ -49,6 +49,7 @@
                 android:layout_height="340dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
+                android:fillViewport="true"
                 android:overScrollMode="never"
                 android:scrollbars="none">
 
@@ -68,15 +69,13 @@
                         android:text="붕어방"
                         android:textColor="@color/dream_purple" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <LinearLayout
                         android:id="@+id/food_lake"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginBottom="14dp"
-                        android:nestedScrollingEnabled="false"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_foodtruck" />
+                        android:orientation="vertical" />
 
 
                     <View
@@ -95,21 +94,14 @@
                         android:text="운동장"
                         android:textColor="@color/dream_purple" />
 
-                    <FrameLayout
+
+                    <LinearLayout
+                        android:id="@+id/food_ground"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginBottom="14dp"
-                        android:touchscreenBlocksFocus="true">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/food_ground"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_foodtruck" />
-                    </FrameLayout>
+                        android:orientation="vertical" />
 
 
                 </LinearLayout>
