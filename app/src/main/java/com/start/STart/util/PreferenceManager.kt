@@ -62,7 +62,7 @@ object PreferenceManager {
         return pref.getString(key, "") ?: ""
     }
 
-    suspend fun putBoolean(key: String, value: Boolean) {
+    fun putBoolean(key: String, value: Boolean) {
         pref.edit()
             .putBoolean(key, value)
             .apply()
@@ -74,11 +74,11 @@ object PreferenceManager {
             .apply()
     }
 
-    suspend fun getBoolean(key: String): Boolean {
+    fun getBoolean(key: String): Boolean {
         return pref.getBoolean(key, false)
     }
 
-    suspend fun clear() {
+    fun clear() {
         pref.edit()
             .clear()
             .apply()

@@ -17,6 +17,7 @@ import com.start.STart.api.banner.QuestionModel
 import com.start.STart.api.banner.UserStatusModel
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityEscapeBinding
+import com.start.STart.ui.home.PhotoViewDialog
 import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
 import retrofit2.Call
@@ -29,6 +30,8 @@ class EscapeActivity : AppCompatActivity() {
     val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
     var roomId = 0
     var list = mutableListOf<Question>()
+
+    private val photoViewDialog by lazy { PhotoViewDialog() }
 
     lateinit var requestBody: AnswerRequest
 
@@ -58,6 +61,11 @@ class EscapeActivity : AppCompatActivity() {
 
         }
 
+        binding.questionImage.setOnClickListener {
+            if(!photoViewDialog.isAdded) {
+                photoViewDialog.show(supportFragmentManager, null)
+            }
+        }
     }
 
     private fun initToolbar() {
@@ -190,4 +198,8 @@ class EscapeActivity : AppCompatActivity() {
         }
     }
 
+    fun setImage() {
+        val question = list[roomId]
+        photoViewDialog.setImage(question.imageUrl)
+    }
 }

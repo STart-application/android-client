@@ -26,7 +26,7 @@ object TokenHelper {
             val res = ApiClient.authService.verifyAccessToken("Bearer $accessToken")
             if(res.isSuccessful) {
                 Log.d(TAG, "verifyToken: 토큰 인증 성공")
-                ApiClient.enableToken(accessToken)
+                ApiClient.enableToken()
                 return true
             } else {
                 Log.d(TAG, "verifyToken: 토큰 인증 실패")

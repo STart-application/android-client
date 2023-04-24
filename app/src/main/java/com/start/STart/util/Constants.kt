@@ -4,6 +4,7 @@ object Constants {
     // Flags
     const val SIGN_IN = "no_sign_in"
     const val FLAG_RESET_PASSWORD = "flag_reset_password"
+    const val FLAG_TOKEN_ENABLED = "flag_token_enabled"
 
     // Extra Data
     const val KEY_REGISTER_DATA = "key_register_data"

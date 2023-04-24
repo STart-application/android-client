@@ -19,28 +19,25 @@ class TokenInterceptor : Interceptor {
         const val TAG = ".TokenInterceptor"
     }
 
-    var isInterceptorEnabled = false
-    private var token: String? = null
-
-    fun enableToken(token: String) {
-        isInterceptorEnabled = true
-        this.token = token
-        Log.d(".TokenInterceptor", "enableToken: ${token}")
+    fun enableToken() {
+        PreferenceManager.putBoolean(Constants.FLAG_TOKEN_ENABLED, true)
     }
 
     fun disableToken() {
-        isInterceptorEnabled = false
-        token = null
+        PreferenceManager.putBoolean(Constants.FLAG_TOKEN_ENABLED, true)
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        Log.d(TAG, "intercept: 토큰 활성화 여부 $isInterceptorEnabled")
+        val isInterceptorEnabled = PreferenceManager.getBoolean(Constants.FLAG_TOKEN_ENABLED)
         if (!isInterceptorEnabled) {
             return chain.proceed(chain.request())
         }
+
+        val token = PreferenceManager.getString(Constants.KEY_ACCESS_TOKEN)
+
         val original = chain.request()
         var request = original.newBuilder()
-            .header(Constants.KEY_AUTHORIZATION, "Bearer ${token!!}")
+            .header(Constants.KEY_AUTHORIZATION, "Bearer ${token}")
             .method(original.method, original.body)
             .build()
         Log.d(TAG, "intercept: $token")
@@ -53,7 +50,7 @@ class TokenInterceptor : Interceptor {
 
         if(body.errorCode == ApiError.ST011.name) {
             Log.d(TAG, "intercept: 토큰 만료료 인한 재요청 시작")
-            val result = runBlocking { issueAccessToken(token!!) }
+            val result = runBlocking { issueAccessToken(token) }
 
             if(result.isSuccessful) {
                 Log.d(TAG, "intercept: 토큰 만료료 인한 재요청 성공")
@@ -84,7 +81,7 @@ class TokenInterceptor : Interceptor {
             if(res.isSuccessful) {
                 val newAccessToken = res.body()?.parseData(TokenData::class.java)?.accessToken!!
                 PreferenceManager.putString(Constants.KEY_ACCESS_TOKEN, newAccessToken)
-                ApiClient.enableToken(newAccessToken)
+                ApiClient.enableToken()
                 return ResultModel(true, data = newAccessToken)
             } else {
                 //val errorBody = ApiClient.parseBody(res.errorBody()?.string())

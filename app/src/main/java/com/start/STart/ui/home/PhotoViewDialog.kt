@@ -1,7 +1,6 @@
 package com.start.STart.ui.home
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -15,6 +14,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.start.STart.api.banner.BannerModel
 import com.start.STart.databinding.DialogPhotoViewBinding
+import com.start.STart.ui.home.event.EscapeActivity
 import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.util.contains
 
@@ -22,6 +22,9 @@ class PhotoViewDialog : DialogFragment() {
 
     private var _binding: DialogPhotoViewBinding? = null
     private val binding get() = _binding!!
+
+    private var onCancel: View.OnClickListener? = null
+    private lateinit var onConfirm: View.OnClickListener
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,8 +42,21 @@ class PhotoViewDialog : DialogFragment() {
     fun setImage(bannerModel: BannerModel) {
         Glide.with(binding.root)
             .asBitmap()
-            .load(bannerModel.imageUrl?:bannerModel.imageDrawable)
-            .into(object: CustomTarget<Bitmap>() {
+            .load(bannerModel.imageUrl ?: bannerModel.imageDrawable)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    binding.photoView2.setImage(ImageSource.bitmap(resource))
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+            })
+    }
+    fun setImage(url: String) {
+        Glide.with(binding.root)
+            .asBitmap()
+            .load(url)
+            .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     binding.photoView2.setImage(ImageSource.bitmap(resource))
                 }
@@ -54,16 +70,14 @@ class PhotoViewDialog : DialogFragment() {
         binding.photoView2.setImage(ImageSource.resource(resourceId))
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-    }
-
     override fun onStart() {
         super.onStart()
         if(activity is HomeActivity) {
             (activity as HomeActivity).setImage()
         } else if(activity is InfoActivity) {
             (activity as InfoActivity).setImage()
+        } else if (activity is EscapeActivity) {
+            (activity as EscapeActivity).setImage()
         }
     }
 
