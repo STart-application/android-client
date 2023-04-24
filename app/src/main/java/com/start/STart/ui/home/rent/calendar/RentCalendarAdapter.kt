@@ -80,12 +80,16 @@ class RentCalendarAdapter(val onDateSelectedListener: OnDataSelectedListener): R
         }
     }
 
-    private fun setSelectedIndex(index: Int) {
+   fun setSelectedIndex(index: Int) {
         val previousIndex = userSelectedIndex
         userSelectedIndex = index
 
         notifyItemChanged(previousIndex)
         notifyItemChanged(userSelectedIndex)
+    }
+
+    fun updateSelectedIndex() {
+        onDateSelectedListener.onClick(list[userSelectedIndex])
     }
 
     interface OnDataSelectedListener {

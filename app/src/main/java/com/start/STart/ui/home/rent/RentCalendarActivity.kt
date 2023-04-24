@@ -47,6 +47,11 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
         initViewModelListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+        updateCalendar()
+    }
+
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "상시사업 예약"
         binding.toolbar.btnBack.setOnClickListener { finish() }
@@ -71,6 +76,7 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
             override fun onPageScrollStateChanged(state: Int) {
                 super.onPageScrollStateChanged(state)
                 if(state == ViewPager2.SCROLL_STATE_IDLE) {
+                    updateSelectedData()
                     updateCalendar()
                 }
             }
@@ -147,7 +153,27 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
     }
 
     override fun onClick(rentDateItem: RentDateItem) {
-        binding.textSelectedDate.text = "선택한 날짜: ${rentDateItem.date.get(Calendar.DATE)}일"
-        binding.textValidCount.text = "${rentDateItem.total - rentDateItem.count}개 대여 가능"
+        setBottomData(rentDateItem.date.get(Calendar.DATE), rentDateItem.total - rentDateItem.count)
+    }
+
+    private fun setBottomData(date: Int? = null, count: Int) {
+        binding.textSelectedDate.text = "선택한 날짜: ${date}일"
+        binding.textValidCount.text = "${count}개 대여 가능"
+    }
+
+    private fun updateSelectedData() {
+        val viewHolder  = (binding.monthViewPager.getChildAt(0) as RecyclerView?)?.findViewHolderForAdapterPosition(binding.monthViewPager.currentItem) as RentViewPagerAdapter.RentViewPagerViewHolder?
+        val adapter = viewHolder?.calendarAdapter
+        val list = adapter?.list
+
+        if(adapter?.userSelectedIndex != -1) {
+            val item = list?.get(adapter.userSelectedIndex)
+            if(item != null) {
+                onClick(item)
+                return Unit
+            }
+        }
+        binding.textSelectedDate.text = ""
+        binding.textValidCount.text = ""
     }
 }
