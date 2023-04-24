@@ -72,15 +72,22 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
     }
 
     fun setImage() {
-        photoView.setImage(sliderAdapter.list[binding.slider.currentItem].imageUrl)
+        photoView.setImage(sliderAdapter.list[binding.slider.currentItem])
     }
 
     private fun initLiveDataObservers() {
+        val replaceList = listOf(BannerModel("대체 이미지", null, 1, false, R.drawable.logo_empty))
+
         viewModel.loadBannerResult.observe(this) {
             if(it.isSuccessful) {
-                sliderAdapter.list = it.data as List<BannerModel>
+                val list = it.data as List<BannerModel>
+                sliderAdapter.list = list.run {
+                    ifEmpty { replaceList }
+                }
+
             } else {
-                // TODO 요청 실패 이미지 추가
+                sliderAdapter.list =  replaceList
+
             }
             binding.progressbarBanner.visibility = View.INVISIBLE
         }

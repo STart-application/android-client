@@ -9,10 +9,12 @@ import androidx.core.content.ContextCompat
 import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityRentHomeBinding
+import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.ui.home.rent.RentItem
 import com.start.STart.ui.home.rent.myrent.MyRentActivity
 import com.start.STart.util.dp2px
 import com.start.STart.util.getCollegeByDepartment
+import com.start.STart.util.getMember
 
 class RentHomeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRentHomeBinding.inflate(layoutInflater) }
@@ -23,20 +25,34 @@ class RentHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initView()
+        initData()
+        initToolbar()
+        initButton()
 
-        viewModel.loadMemberData()
+        initRecyclerView()
     }
 
-    private fun initView() {
-        initToolbar()
-        initRecyclerView()
+    private fun initData() {
+        val member = getMember()
+        if(member != null) {
+            bindMemberData(member)
+        } else {
+            enableNotLogin()
+        }
+    }
 
+    private fun initButton() {
         binding.btnMyRent.setOnClickListener {
-            startActivity(Intent(this, MyRentActivity::class.java))
+            if(getMember() != null) {
+                startActivity(Intent(this, MyRentActivity::class.java))
+            }
         }
 
-        initViewModelListeners()
+        binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this, LoginOrSkipActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            })
+        }
     }
 
     private fun initToolbar() {
@@ -51,16 +67,6 @@ class RentHomeActivity : AppCompatActivity() {
             list = RentItem.values().toList()
         }
         binding.rvRentItem.addItemDecoration(RentItemDecoration(spacing = dp2px(6f).toInt()))
-    }
-
-    private fun initViewModelListeners() {
-        viewModel.memberData.observe(this) {
-            if(it.isSuccessful) {
-                bindMemberData(it.data as MemberData)
-            } else {
-                enableNotLogin()
-            }
-        }
     }
 
     private fun enableNotLogin() {

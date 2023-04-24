@@ -15,7 +15,9 @@ import com.start.STart.ui.home.rent.calendar.RentCalendarAdapter
 import com.start.STart.ui.home.rent.calendar.RentDateItem
 import com.start.STart.ui.home.rent.calendar.RentViewPagerAdapter
 import com.start.STart.util.DateFormatter
+import com.start.STart.util.getMember
 import com.start.STart.util.getParcelableExtra
+import es.dmoral.toasty.Toasty
 import org.threeten.bp.LocalDate
 import java.util.*
 
@@ -83,9 +85,13 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
         }
 
         binding.btnRent.setOnClickListener {
-            startActivity(Intent(this, RentActivity::class.java).apply {
-                putExtra(RentItem.KEY_RENT_ITEM_TYPE, rentItem as Parcelable)
-            })
+            if(getMember() != null) {
+                startActivity(Intent(this, RentActivity::class.java).apply {
+                    putExtra(RentItem.KEY_RENT_ITEM_TYPE, rentItem as Parcelable)
+                })
+            } else {
+                Toasty.info(this, "로그인이 필요한 기능입니다.").show()
+            }
         }
     }
 
@@ -115,29 +121,23 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
             if(resultModel.isSuccessful) {
                 val rentDataMap = resultModel.data as Map<LocalDate, Int>
 
-                if(rentDataMap.isNotEmpty()) {
-                    val viewHolder  = (binding.monthViewPager.getChildAt(0) as RecyclerView?)?.findViewHolderForAdapterPosition(viewPagerIndex) as RentViewPagerAdapter.RentViewPagerViewHolder?
+                val viewHolder  = (binding.monthViewPager.getChildAt(0) as RecyclerView?)?.findViewHolderForAdapterPosition(viewPagerIndex) as RentViewPagerAdapter.RentViewPagerViewHolder?
 
-                    viewHolder?.calendarAdapter?.list?.let { it ->
+                viewHolder?.calendarAdapter?.list?.let { it ->
+                    it.forEachIndexed { index, rentDateItem ->
+                        val dateKey = DateFormatter.format(rentDateItem.date.time)
 
-                        it.forEachIndexed { index, rentDateItem ->
-                            val dateKey = DateFormatter.format(rentDateItem.date.time)
-
-                            val rentDataList = rentDataMap[LocalDate.parse(dateKey)]
+                        val rentDataList = rentDataMap[LocalDate.parse(dateKey)]
 
 
-                            if (rentDataList != null) {
-                                rentDateItem.count = rentDataList
-                            } else {
-                                rentDateItem.count = 0
-                            }
-                            rentDateItem.total = (viewModel.loadItemCountResult.value?.data as Int)
-                            viewHolder.calendarAdapter.notifyItemChanged(index)
+                        if (rentDataList != null) {
+                            rentDateItem.count = rentDataList
+                        } else {
+                            rentDateItem.count = 0
                         }
+                        rentDateItem.total = (viewModel.loadItemCountResult.value?.data as Int)
+                        viewHolder.calendarAdapter.notifyItemChanged(index)
                     }
-
-                } else {
-
                 }
                 Log.d(null, "initViewModelListeners: $rentDataMap")
             } else {

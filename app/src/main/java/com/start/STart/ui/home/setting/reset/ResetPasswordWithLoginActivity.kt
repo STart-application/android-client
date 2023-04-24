@@ -36,6 +36,10 @@ class ResetPasswordWithLoginActivity : AppCompatActivity() {
     }
 
     private fun initRestPasswordLogic() {
+        binding.inputOriginalPassword.addTextChangedListener {
+            updateButtonEnabled()
+        }
+
         // 비밀번호 입력 검증
         binding.inputPassword.addTextChangedListener {
             checkPassword()

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.davemorrissey.labs.subscaleview.ImageSource
+import com.start.STart.api.banner.BannerModel
 import com.start.STart.databinding.DialogPhotoViewBinding
 import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.util.contains
@@ -35,18 +36,16 @@ class PhotoViewDialog : DialogFragment() {
         }
     }
 
-    fun setImage(url: String) {
+    fun setImage(bannerModel: BannerModel) {
         Glide.with(binding.root)
             .asBitmap()
-            .load(url)
+            .load(bannerModel.imageUrl?:bannerModel.imageDrawable)
             .into(object: CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     binding.photoView2.setImage(ImageSource.bitmap(resource))
-
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
-
                 }
             })
     }

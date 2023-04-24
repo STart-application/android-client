@@ -17,7 +17,8 @@ class SliderAdapter(val listener: OnItemClickListener) : RecyclerView.Adapter<Sl
     inner class SliderViewHolder(var binding: ItemSliderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(bannerModel: BannerModel){
             Glide.with(binding.root)
-                .load(bannerModel.imageUrl)
+                .load(bannerModel.imageUrl?:bannerModel.imageDrawable)
+                .centerInside()
                 .into(binding.imageView)
 
             binding.root.setOnClickListener { listener.onClick() }

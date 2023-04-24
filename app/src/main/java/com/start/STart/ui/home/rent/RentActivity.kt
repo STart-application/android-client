@@ -37,13 +37,23 @@ class RentActivity : AppCompatActivity() {
         binding.textItemName.text = rentItem.category
         binding.textCaution.text = rentItem.caution
 
+        initToolbar()
         initRentListeners()
         initPostRentResultLiveData()
     }
 
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "상시사업 예약"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
+    }
+
     private fun initRentListeners() {
         binding.btnSetPeriod.setOnClickListener {
-            datePicker.show(supportFragmentManager, null)
+            if(!datePicker.isAdded) datePicker.show(supportFragmentManager, null)
+        }
+
+        binding.inputPeriod.setOnClickListener {
+            if(!datePicker.isAdded) datePicker.show(supportFragmentManager, null)
         }
 
         datePicker.addOnPositiveButtonClickListener { pair ->

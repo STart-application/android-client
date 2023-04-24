@@ -9,14 +9,13 @@ import android.os.Build
 import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
 import com.google.gson.Gson
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
 import com.start.STart.R
+import com.start.STart.api.member.response.MemberData
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -140,7 +139,9 @@ fun View.contains(x: Int, y: Int): Boolean {
     return x in l..r && y in t..b
 }
 
-
+fun getMember(): MemberData? {
+    return PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+}
 
 
 

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,6 +32,7 @@ import com.start.STart.ui.home.festival.dialogs.StampStatusDialog
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import com.start.STart.ui.home.festival.maps.MarkerModel
 import com.start.STart.util.getBitmapFromVectorDrawable
+import com.start.STart.util.getMember
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -93,9 +93,12 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(Intent(this, FestivalInfoActivity::class.java))
         }
         binding.menu2.setOnClickListener {
-            if(!stampDialog.isAdded) {
-                stampDialog.show(supportFragmentManager, ".StampDialog")
+            if(getMember() != null) {
+                if(!stampDialog.isAdded) stampDialog.show(supportFragmentManager, ".StampDialog")
+            } else {
+                Toasty.info(this, "로그인이 필요한 기능입니다.").show()
             }
+
         }
         binding.menu3.setOnClickListener {
             if(!foodTruckDialog.isAdded) {
@@ -255,34 +258,16 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onCancel() {  }
 
             override fun onFinish() {
-                if(!postStampDialog.isAdded) {
-                    postStampDialog.setData(stampData)
-                    postStampDialog.show(supportFragmentManager, ".PostStampDialog")
+                if(getMember() != null) {
+                    if(!postStampDialog.isAdded) {
+                        postStampDialog.setData(stampData)
+                        postStampDialog.show(supportFragmentManager, ".PostStampDialog")
+                    }
+                } else {
+                    Toasty.info(this@FestivalActivity, "로그인이 필요한 기능입니다.").show()
                 }
+
             }
         })
-    }
-
-    private fun checkInCircle(myLatLng: LatLng, circle: Circle? = null, circleOptions: CircleOptions? = null): Boolean {
-
-        /// 원의 중심과 반지름
-        val circleCenter = circle?.center ?: circleOptions?.center
-        val circleRadius = circle?.radius ?: circleOptions?.radius
-
-        val circleLatLng = LatLng(circleCenter!!.latitude , circleCenter.longitude)
-
-        // 결과를 담을 변수
-        val distance = FloatArray(1)
-
-        // 거리 측정
-        Location.distanceBetween(
-            circleLatLng.latitude ,
-            circleLatLng.longitude,
-            myLatLng.latitude,
-            myLatLng.longitude,
-            distance
-        )
-
-        return distance[0] <= circleRadius!!
     }
 }

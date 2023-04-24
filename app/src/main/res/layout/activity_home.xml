@@ -14,8 +14,8 @@
 
     <FrameLayout
         android:id="@+id/layout_banner"
-        android:layout_width="254dp"
-        android:layout_height="254dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         app:layout_constraintBottom_toTopOf="@+id/compose_menu"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,16 +23,17 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="254dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"
+            android:layout_height="254dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="0dp">
+            app:cardElevation="2dp">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/slider"
                 android:layout_width="254dp"
                 android:layout_height="254dp"
-                android:background="@color/text_caption"
                 android:orientation="horizontal" />
 
         </androidx.cardview.widget.CardView>
