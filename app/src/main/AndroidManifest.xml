@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -22,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -31,6 +33,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
             android:name=".ui.home.festival.info.FestivalInfoActivity"
             android:screenOrientation="portrait"
@@ -201,8 +204,8 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Dream.Starting"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Dream.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
