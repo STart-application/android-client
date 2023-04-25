@@ -2,42 +2,39 @@ package com.start.STart.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.ActivityLoginOrSkipBinding
+import com.start.STart.ui.home.HomeActivity
+import com.start.STart.util.Constants
+import com.start.STart.util.PreferenceManager
 
 class LoginOrSkipActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginOrSkipBinding.inflate(layoutInflater) }
 
+    private val confirmNoSignInDialog by lazy { ConfirmNoSignInDialog() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.composeView.setContent {
-            Cloudy(radius = 10){
 
-            }
-        }
-
-        initViewListeners()
-    }
-    fun hideCompose() {
-        binding.composeView.visibility = View.GONE
+        initButton()
     }
 
-    private fun initViewListeners() {
+    private fun initButton() {
         binding.btnSignIn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        binding.btnNoSignIn.setOnClickListener {
-            binding.composeView.visibility = View.VISIBLE
-            showNoSignInDialog()
-        }
-    }
 
-    private fun showNoSignInDialog() {
-        val dialogFragment = ConfirmNoSignInDialog()
-        dialogFragment.show(supportFragmentManager, "ConfirmNoSignInDialog")
+        binding.btnNoSignIn.setOnClickListener {
+            if(!confirmNoSignInDialog.isAdded) {
+                confirmNoSignInDialog.setData(onConfirm = {
+                    PreferenceManager.putBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN, true)
+                    startActivity(Intent(this, HomeActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+                })
+                confirmNoSignInDialog.show(supportFragmentManager, null)
+            }
+        }
     }
 }
