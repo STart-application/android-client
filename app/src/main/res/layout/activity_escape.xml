@@ -18,10 +18,12 @@
         android:layout_height="match_parent"
         android:layout_marginTop="44dp"
         android:background="@color/dream_purple_background"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0">
 
@@ -82,6 +84,8 @@
                 app:layout_constraintVertical_bias="0.0">
 
                 <ScrollView
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center">
