@@ -48,7 +48,7 @@
                 android:layout_width="55dp"
                 android:layout_height="67dp"
                 android:layout_marginTop="11dp"
-                android:src="@drawable/mascot"
+                android:src="@drawable/dream_mascot"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />

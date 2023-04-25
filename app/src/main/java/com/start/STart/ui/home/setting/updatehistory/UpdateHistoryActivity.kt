@@ -12,18 +12,13 @@ class UpdateHistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initView()
-        initViewListeners()
-    }
-
-    private fun initView() {
         initRecyclerView()
+        initToolbar()
     }
 
-    private fun initViewListeners() {
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "업데이트 내역"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initRecyclerView() {

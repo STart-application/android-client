@@ -136,7 +136,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                                app:srcCompat="@drawable/rent_calendar_move_icon" />
                         </FrameLayout>
 
 
@@ -167,7 +167,7 @@
                                 android:layout_height="wrap_content"
                                 android:rotation="180"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                                app:srcCompat="@drawable/rent_calendar_move_icon" />
 
                         </FrameLayout>
 

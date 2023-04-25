@@ -22,7 +22,7 @@
         android:indeterminate="false"
         android:max="100"
         android:progressBackgroundTint="#D9D9D9"
-        android:progressDrawable="@drawable/progress_rent"
+        android:progressDrawable="@drawable/rent_calendar_progress"
         android:progressTint="@color/dream_purple" />
 
 </FrameLayout>

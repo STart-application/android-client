@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_calendar_move_rectangle"
+                app:srcCompat="@drawable/rent_calendar_move_icon"
                 app:tint="@color/white" />
 
         </FrameLayout>
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:rotation="180"
-                app:srcCompat="@drawable/ic_calendar_move_rectangle"
+                app:srcCompat="@drawable/rent_calendar_move_icon"
                 app:tint="@color/white" />
 
         </FrameLayout>

@@ -44,31 +44,25 @@
 
             <TextView
                 android:id="@+id/text_student_id"
+                style="@style/Theme.Dream.Typeface_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginBottom="11dp"
-                android:fontFamily="@font/pretendard_bold"
                 android:text="@string/student_id"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_student_id"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/text_password"
+                style="@style/Theme.Dream.Typeface_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dream_layout_margin_horizontal"
                 android:layout_marginBottom="11dp"
-                android:fontFamily="@font/pretendard_bold"
                 android:text="@string/password"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/layout_input_password"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/text_password_caption"
@@ -99,7 +93,6 @@
                     android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:fontFamily="@font/pretendard_regular"
                     android:hint="@string/hint_student_id"
                     android:imeOptions="actionNext"
                     android:inputType="number"
@@ -128,7 +121,6 @@
                     android:layout_marginHorizontal="@dimen/dream_input_margin_horizontal"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:fontFamily="@font/pretendard_regular"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -152,8 +144,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:textColor="@color/dream_red"
                 android:gravity="center_horizontal"
+                android:textColor="@color/dream_red"
                 app:layout_constraintBottom_toTopOf="@+id/text_student_id"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +168,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
-                android:fontFamily="@font/pretendard_regular"
                 android:text="@string/reset_password"
                 android:textColor="@color/text_caption"
                 app:layout_constraintStart_toStartOf="@id/btn_login"

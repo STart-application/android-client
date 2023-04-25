@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:scaleType="centerInside"
-                        app:srcCompat="@drawable/balloon_festival_intro_dialog" />
+                        app:srcCompat="@drawable/fetival_intro_balloon" />
 
                     <TextView
                         style="@style/Theme.Dream.Typeface_Title"

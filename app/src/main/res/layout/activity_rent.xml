@@ -154,7 +154,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_minus" />
+                            app:srcCompat="@drawable/rent_minus" />
 
                     </FrameLayout>
 
@@ -186,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            app:srcCompat="@drawable/ic_plus" />
+                            app:srcCompat="@drawable/rent_plus" />
 
                     </FrameLayout>
 

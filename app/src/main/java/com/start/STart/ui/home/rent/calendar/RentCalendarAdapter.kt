@@ -66,7 +66,7 @@ class RentCalendarAdapter(val onDateSelectedListener: OnDataSelectedListener): R
 
             // 선택된 날짜
             if(position == userSelectedIndex) {
-                it.root.setBackgroundResource(R.drawable.background_calendar_data_selected)
+                it.root.setBackgroundResource(R.drawable.rent_calendar_data_selected)
             } else {
                 it.root.background = null
             }
