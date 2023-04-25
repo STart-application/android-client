@@ -88,7 +88,7 @@ class PostStampDialog: DialogFragment() {
         viewModel.loadStampResult.observe(this) {
             if(it.isSuccessful) {
                 val jsonData = JsonParser.parseString(gson.toJson((it.data as List<*>).get(0))).asJsonObject
-                val isStamped = jsonData.get(stampData!!.name).asBoolean
+                val isStamped = jsonData.get(stampData!!.name)?.asBoolean?:false
 
                 binding.imageStamp.setImageResource(if(isStamped) stampData!!.drawable_e else stampData!!.drawable)
                 binding.btnStamp.apply {

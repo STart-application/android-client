@@ -11,7 +11,6 @@ import com.start.STart.util.Constants
 import com.start.STart.util.TIMER_ENDED
 import com.start.STart.util.formatTimerMilliseconds
 import com.start.STart.util.showErrorToast
-import com.start.STart.util.showRightBalloon
 import com.start.STart.util.showSuccessToast
 
 class ResetPasswordAuthActivity : AppCompatActivity() {

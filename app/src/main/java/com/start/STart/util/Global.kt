@@ -16,9 +16,6 @@ import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.exifinterface.media.ExifInterface
 import com.google.gson.Gson
-import com.skydoves.balloon.ArrowOrientation
-import com.skydoves.balloon.Balloon
-import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -41,26 +38,6 @@ inline fun <reified T : Parcelable> Intent.getParcelableExtra(key: String): T? {
     } else {
         this.getParcelableExtra<T>(key)
     }
-}
-
-fun View.showRightBalloon(message: String?) {
-    Balloon.Builder(this.context)
-        .setText(message.toString())
-        .setPadding(8)
-        .setBackgroundColor(resources.getColor(R.color.dream_purple))
-        .setArrowOrientation(ArrowOrientation.START)
-        .setArrowPosition(0.5f)
-        .build()
-        .showAlignRight(this)
-}
-
-fun View.showTopBalloon(message: String?) {
-    Balloon.Builder(this.context)
-        .setText(message.toString())
-        .setPadding(8)
-        .setBackgroundColor(resources.getColor(R.color.dream_purple))
-        .build()
-        .showAlignTop(this)
 }
 
 fun Context.openCustomTab(url: String) {
