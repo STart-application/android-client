@@ -5,7 +5,6 @@ import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiError
 import com.start.STart.api.auth.response.TokenData
 
-// TODO: 에러 따로 처리해서 유저에게 알려줘야 함
 object TokenHelper {
 
     const val TAG = ".TokenHelper"

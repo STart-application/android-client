@@ -23,8 +23,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 
 val gson = Gson()
@@ -56,17 +54,6 @@ fun Context.px2dp(px: Float): Float {
     val resources: Resources = this.resources
     val metrics: DisplayMetrics = resources.displayMetrics
     return px / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-}
-
-
-fun <T : Any> T.toHashMap(): HashMap<String, Any?> {
-    val hashMap = HashMap<String, Any?>()
-    val properties = this::class.memberProperties
-    for (property in properties) {
-        property.isAccessible = true
-        hashMap[property.name] = property.getter.call(this)
-    }
-    return hashMap
 }
 
 fun uriToFile(context: Context, uri: Uri): File {

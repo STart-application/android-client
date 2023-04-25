@@ -70,6 +70,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_goneMarginStart="@dimen/dream_layout_margin_horizontal" />
 
+            <TextView
+                android:id="@+id/text_password_caption"
+                style="@style/Theme.Dream.Typeface_Caption"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/text_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_password"
+                tools:text="@string/password_format_fail" />
+
             <LinearLayout
                 android:id="@+id/layout_input_student_id"
                 android:layout_width="0dp"

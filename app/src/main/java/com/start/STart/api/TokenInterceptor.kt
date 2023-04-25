@@ -1,6 +1,7 @@
 package com.start.STart.api
 
 import android.content.Intent
+import android.util.Log
 import com.start.STart.MyApp
 import com.start.STart.api.auth.response.TokenData
 import com.start.STart.model.ResultModel
@@ -85,6 +86,7 @@ class TokenInterceptor : Interceptor {
     }
 
     private fun logout() {
+        Log.d(null, "로그아웃")
         PreferenceManager.clear()
         runBlocking(Dispatchers.Main) {
             val context = MyApp.getAppContext()
