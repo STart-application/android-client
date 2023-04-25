@@ -48,10 +48,10 @@ object ApiClient {
     val stampService: StampService = retrofit.create(StampService::class.java)
 
 
-    fun enableToken() { // TokenHelper에서만 호출
+    fun enableToken() {
         tokenInterceptor.enableToken()
     }
-    fun disableToken() { // TokenHelper에서만 호출
+    fun disableToken() {
         tokenInterceptor.disableToken()
     }
 
