@@ -37,7 +37,6 @@ class PostStampDialog: DialogFragment() {
 
 
     var stampData: StampData? = null
-    var isInCircle: Boolean = false
 
     private val viewModel: FestivalViewModel by lazy {
         ViewModelProvider(requireActivity()).get(FestivalViewModel::class.java)
@@ -96,7 +95,6 @@ class PostStampDialog: DialogFragment() {
                     isEnabled = !isStamped
                 }
             } else {
-                viewModel.loadStamp()
                 showErrorToast(requireContext(), "잠시 후 다시 시도해 주세요.")
                 dismiss()
             }

@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
+import com.start.STart.BuildConfig
 import com.start.STart.R
 import com.start.STart.api.banner.BannerModel
 import com.start.STart.api.member.response.MemberData
@@ -145,7 +146,14 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                         startActivity(Intent(applicationContext, RentHomeActivity::class.java))
                     }
                     MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5) {
-                        if(viewModel.festivalEnabledResult.value?.isSuccessful?:false) {
+                        val isOpened = viewModel.festivalEnabledResult.value?.isSuccessful
+                        if(BuildConfig.DEBUG) {
+                            startActivity(Intent(applicationContext, FestivalActivity::class.java))
+                            Toasty.info(applicationContext, "[디버그] 축제 상태 $isOpened").show()
+                            return@MenuItem
+                        }
+
+                        if(viewModel.festivalEnabledResult.value?.isSuccessful == true) {
                             startActivity(Intent(applicationContext, FestivalActivity::class.java))
                         } else {
                             Toasty.info(applicationContext, "축제 기간이 아닙니다!").show()

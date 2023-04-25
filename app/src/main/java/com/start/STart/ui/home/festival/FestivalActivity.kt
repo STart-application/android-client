@@ -2,14 +2,10 @@ package com.start.STart.ui.home.festival
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -30,6 +26,7 @@ import com.start.STart.ui.home.festival.dialogs.PostStampDialog
 import com.start.STart.ui.home.festival.dialogs.StampStatusDialog
 import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import com.start.STart.ui.home.festival.maps.MarkerModel
+import com.start.STart.util.PermissionHelper
 import com.start.STart.util.getBitmapFromVectorDrawable
 import com.start.STart.util.getMember
 import es.dmoral.toasty.Toasty
@@ -43,32 +40,15 @@ import kotlin.coroutines.suspendCoroutine
 
 class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    companion object {
-        const val REQUEST_CIRCLE = "circle"
-        const val REQUEST_CURRENT_LOCATION = "current"
-    }
-
     private val binding by lazy { ActivityFestivalBinding.inflate(layoutInflater) }
 
     private lateinit var fusedLocationProvider: FusedLocationProviderClient
 
-    private lateinit var stampData: StampData
-    private var permissionState = ""
-    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-        if(result.all { it.value }) {
-            Log.d(null, ": $permissionState")
-            when(permissionState) {
-                REQUEST_CIRCLE -> {
-                    openStampDialog()
-                }
-                REQUEST_CURRENT_LOCATION -> {
-                    setCurrentPosition()
-                }
-            }
-        } else {
-            Toasty.info(this, "위치권한을 거부하였습니다.").show()
-        }
-    }
+    private val permissionHelper = PermissionHelper(this)
+    private val locationPermissions = arrayOf(
+        android.Manifest.permission.ACCESS_COARSE_LOCATION,
+        android.Manifest.permission.ACCESS_FINE_LOCATION,
+    )
 
     private lateinit var googleMap: GoogleMap
     private lateinit var clusterManager: ClusterManager<MarkerModel>
@@ -83,6 +63,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
 
         (supportFragmentManager.findFragmentById(R.id.fragmentMap) as SupportMapFragment)
@@ -97,7 +78,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun showIntroDialog() = lifecycleScope.launch(Dispatchers.Default) {
         delay(500)
         withContext(Dispatchers.Main) {
-            FestivalIntroDialog().show(supportFragmentManager, ".FestivalInfoDialog")
+            FestivalIntroDialog().show(supportFragmentManager, null)
         }
     }
 
@@ -145,12 +126,11 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         binding.locationBtn.setOnClickListener {
-            permissionState = REQUEST_CURRENT_LOCATION
-            requestPermission(object: PermissionListener {
-                override fun onGrant() {
+            permissionHelper.checkAndRequestPermissions(locationPermissions,
+                grantedCallback = {
                     setCurrentPosition()
                 }
-            })
+            )
         }
     }
 
@@ -169,27 +149,13 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
         googleMap.setOnCircleClickListener { circle ->
             if(circle.isVisible) {
-                permissionState = REQUEST_CIRCLE
-                stampData = markerList.first { it.circle == circle }.stampData
-                requestPermission(object: PermissionListener {
-                    override fun onGrant() {
-                        openStampDialog()
+                permissionHelper.checkAndRequestPermissions(locationPermissions,
+                    grantedCallback = {
+                        openStampDialog(markerList.first { it.circle == circle }.stampData)
                     }
-                })
+                )
             }
         }
-    }
-
-    private fun requestPermission(listener: PermissionListener) {
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED
-            || ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
-            listener.onGrant()
-            Log.d(null, "requestPermission: 권한 허용된 상태")
-            return
-        }
-        permissionLauncher.launch(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
     }
 
     @SuppressLint("MissingPermission")
@@ -252,13 +218,11 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         clusterManager.setOnClusterItemClickListener {
-            permissionState = REQUEST_CIRCLE
-            stampData = it.stampData
-            requestPermission(object: PermissionListener {
-                override fun onGrant() {
-                    openStampDialog()
+            permissionHelper.checkAndRequestPermissions(locationPermissions,
+                grantedCallback = {
+                    openStampDialog(it.stampData)
                 }
-            })
+            )
             true
         }
         googleMap.setOnCameraIdleListener(clusterManager)
@@ -280,7 +244,7 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         googleMap.animateCamera(cameraUpdate, 300, callback)
     }
 
-    private fun openStampDialog() {
+    private fun openStampDialog(stampData: StampData) {
         moveCamera(stampData.latLng, object: GoogleMap.CancelableCallback {
             override fun onCancel() {  }
 
@@ -296,9 +260,5 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
 
             }
         })
-    }
-
-    interface PermissionListener {
-        fun onGrant()
     }
 }
