@@ -42,18 +42,18 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="81dp"
                     android:layout_height="97dp"
-                    android:src="@drawable/dream_mascot"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/dream_mascot" />
 
                 <TextView
                     android:id="@+id/noEventText"
                     style="@style/Theme.Dream.Typeface_Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="29dp"
                     android:text="진행 중인 이벤트가 없습니다."
-                    android:textColor="@color/dream_purple"
-                    android:layout_gravity="center_horizontal"/>
+                    android:textColor="@color/dream_purple" />
 
             </LinearLayout>
 
@@ -63,6 +63,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:overScrollMode="never"
+                android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/item_event" />

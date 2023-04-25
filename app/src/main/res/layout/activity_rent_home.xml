@@ -128,7 +128,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
                 android:overScrollMode="never"
                 android:paddingHorizontal="@dimen/dream_layout_margin_horizontal"
                 android:scrollbars="none"

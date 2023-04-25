@@ -100,10 +100,11 @@
                     android:id="@+id/rvList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:overScrollMode="never"
                     android:paddingVertical="26dp"
+                    android:scrollbars="none"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_list"
-                    android:overScrollMode="never"/>
+                    tools:listitem="@layout/item_list" />
             </androidx.cardview.widget.CardView>
 
 
