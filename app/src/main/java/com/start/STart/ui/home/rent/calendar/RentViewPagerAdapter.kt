@@ -2,10 +2,13 @@ package com.start.STart.ui.home.rent.calendar
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.start.STart.R
 import com.start.STart.api.rent.response.RentData
 import com.start.STart.databinding.FragmentMonthBinding
 import com.start.STart.ui.home.rent.util.getDateList
+import com.start.STart.util.dp2px
 import java.util.Calendar
 
 class RentViewPagerAdapter(val onDateSelectedListener: RentCalendarAdapter.OnDateSelectedListener):  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
@@ -23,7 +26,7 @@ class RentViewPagerAdapter(val onDateSelectedListener: RentCalendarAdapter.OnDat
         }
         private fun initCalendarRecyclerView() {
             binding.calenderRecyclerView.adapter = calendarAdapter
-            //binding.calenderRecyclerView.addItemDecoration(GridDividerItemDecoration(, ContextCompat.getColor(binding.root.context, R.color.dream_gray_light)))
+            binding.calenderRecyclerView.addItemDecoration(GridDividerItemDecoration(binding.root.context.dp2px(1f).toInt(), ContextCompat.getColor(binding.root.context, R.color.dream_gray)))
         }
 
         fun updateCalendar(calendar: Calendar) {

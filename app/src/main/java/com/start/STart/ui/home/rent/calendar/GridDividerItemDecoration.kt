@@ -1,6 +1,8 @@
 package com.start.STart.ui.home.rent.calendar
 
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,24 +22,18 @@ class GridDividerItemDecoration(
 
         val position = parent.getChildAdapterPosition(view)
         val spanCount = (parent.layoutManager as GridLayoutManager).spanCount
+        val itemCount = parent.adapter?.itemCount?:0
 
-        // View가 RecyclerView의 첫 번째 행인 경우
-        if (position < spanCount) {
-            outRect.top = dividerSize
-        }
-        outRect.bottom = dividerSize
-        // View가 RecyclerView의 마지막 열인 경우
-        if ((position + 1) % spanCount == 0) {
-            outRect.right = dividerSize
-        } else {
-            outRect.right = dividerSize / 2
-        }
-        // View가 RecyclerView의 첫 번째 열인 경우
-        if (position % spanCount == 0) {
-            outRect.left = dividerSize
-        } else {
-            outRect.left = dividerSize / 2
-        }
+        val isTopRow = position < spanCount
+        val isBottomRow = position >= itemCount - spanCount
+        val isLeftColumn = position % spanCount == 0
+        val isRightColumn = (position + 1) % spanCount == 0
+
+        outRect.top = if (isTopRow) dividerSize else dividerSize / 2
+        outRect.bottom = if (isBottomRow) 0 else dividerSize / 2
+        outRect.left = if (isLeftColumn) 0 else dividerSize / 2
+        outRect.right = if (isRightColumn) 0 else dividerSize / 2
+
     }
 
     override fun onDraw(
@@ -46,28 +42,19 @@ class GridDividerItemDecoration(
         state: RecyclerView.State
     ) {
         val layoutManager = parent.layoutManager as GridLayoutManager
+        val itemCount = parent.adapter?.itemCount?:0
 
         for (i in 0 until parent.childCount) {
             val view = parent.getChildAt(i)
             val position = parent.getChildAdapterPosition(view)
             val spanCount = layoutManager.spanCount
+
             val column = position % spanCount
 
-            // View가 RecyclerView의 첫 번째 행이 아닌 경우
-            if (position >= spanCount) {
-                // top divider 그리기
-                drawTopDivider(c, view, layoutManager, column)
-            }
-            // bottom divider 그리기
+            drawTopDivider(c, view, layoutManager, column)
             drawBottomDivider(c, view, layoutManager, column)
-
-            // View가 RecyclerView의 마지막 열이 아닌 경우
-            if ((position + 1) % spanCount != 0) {
-                // right divider 그리기
-                drawRightDivider(c, view, layoutManager, column)
-            }
-            // left divider 그리기
             drawLeftDivider(c, view, layoutManager, column)
+            drawRightDivider(c, view, layoutManager, column)
         }
     }
 
@@ -139,18 +126,6 @@ class GridDividerItemDecoration(
         column: Int
     ) {
         val paint = Paint().apply { color = dividerColor }
-
-        // 외부 divider일 경우 실선 그리기
-        if (column == 0) {
-            c.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), paint)
-        } else {
-            // 내부 divider일 경우 점선 그리기
-            val path = Path()
-            path.moveTo(left.toFloat(), top.toFloat())
-            path.lineTo(left.toFloat(), bottom.toFloat())
-            val effect = DashPathEffect(floatArrayOf(dividerSize.toFloat(), dividerSize.toFloat()), 0f)
-            paint.pathEffect = effect
-            c.drawPath(path, paint)
-        }
+        c.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), paint)
     }
 }
