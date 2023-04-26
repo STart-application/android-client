@@ -45,7 +45,7 @@ class TokenInterceptor : Interceptor {
 
         val body = ApiClient.parseBody(response.peekBody(Long.MAX_VALUE).string())
 
-        if(body.status == 401) { // Access 토큰 관련 오류
+        if(body.status == 401 || body.errorCode == ApiError.ST002.name) { // Access 토큰 관련 오류
             val result = runBlocking { issueAccessToken(token) }
 
             if(result.isSuccessful) {
