@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.start.STart.databinding.ActivityRentCalendarBinding
+import com.start.STart.ui.home.PhotoViewDialog
 import com.start.STart.ui.home.rent.calendar.RentCalendarAdapter
 import com.start.STart.ui.home.rent.calendar.RentDateItem
 import com.start.STart.ui.home.rent.calendar.RentViewPagerAdapter
@@ -26,12 +27,21 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
 
     private val rentViewPagerAdapter by lazy { RentViewPagerAdapter(this) }
 
+    private val photoDialog by lazy { PhotoViewDialog() }
 
     private lateinit var rentItem: RentItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initItemInfo()
+
+        initToolbar()
+        initViewPager()
+        initViewModelListeners()
+    }
+
+    private fun initItemInfo() {
         rentItem = intent.getParcelableExtra(key=RentItem.KEY_RENT_ITEM_TYPE)!!
 
         binding.textItemTitle.text = rentItem.category
@@ -39,11 +49,14 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDataSele
         Glide.with(this)
             .load(rentItem.realDrawable)
             .centerInside()
-            .into(binding.imageTitle)
+            .into(binding.imageItem)
 
-        initToolbar()
-        initViewPager()
-        initViewModelListeners()
+        binding.imageItem.setOnClickListener {
+            photoDialog.setData(rentItem.realDrawable)
+            if(!photoDialog.isAdded) {
+                photoDialog.show(supportFragmentManager, null)
+            }
+        }
     }
 
     override fun onStart() {

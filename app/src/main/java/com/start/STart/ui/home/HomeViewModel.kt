@@ -14,11 +14,6 @@ import java.io.IOException
 
 class HomeViewModel: ViewModel() {
 
-    init {
-        loadBanner()
-        loadFestivalEnabled()
-    }
-
     private val _loadBannerResult: MutableLiveData<ResultModel> = MutableLiveData()
     val loadBannerResult: LiveData<ResultModel>
         get() = _loadBannerResult

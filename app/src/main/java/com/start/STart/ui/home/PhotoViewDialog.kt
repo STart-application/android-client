@@ -12,10 +12,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.davemorrissey.labs.subscaleview.ImageSource
-import com.start.STart.api.banner.BannerModel
+import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogPhotoViewBinding
-import com.start.STart.ui.home.event.EscapeActivity
-import com.start.STart.ui.home.info.InfoActivity
 import com.start.STart.util.contains
 
 class PhotoViewDialog : DialogFragment() {
@@ -23,62 +21,50 @@ class PhotoViewDialog : DialogFragment() {
     private var _binding: DialogPhotoViewBinding? = null
     private val binding get() = _binding!!
 
-    private var onCancel: View.OnClickListener? = null
-    private lateinit var onConfirm: View.OnClickListener
+    private var imageUrl: String? = null
+    private var resourceId: Int? = null
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.root.setOnClickListener {
-            if(binding.photoView2.contains(it.x.toInt(), it.y.toInt())){
-                return@setOnClickListener
-            }
+        initBackground()
+    }
 
-            dismiss()
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initBackground() {
+        binding.composeView.setContent { Cloudy(radius = 10, allowAccumulate = { true }){} }
+        binding.dim.setOnTouchListener { view, motionEvent ->
+            if(!binding.scaleImageView.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
+                dismiss()
+            }
+            true
         }
     }
 
-    fun setImage(bannerModel: BannerModel) {
-        Glide.with(binding.root)
-            .asBitmap()
-            .load(bannerModel.imageUrl ?: bannerModel.imageDrawable)
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    binding.photoView2.setImage(ImageSource.bitmap(resource))
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
-            })
-    }
-    fun setImage(url: String) {
-        Glide.with(binding.root)
-            .asBitmap()
-            .load(url)
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    binding.photoView2.setImage(ImageSource.bitmap(resource))
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                }
-            })
+    fun setData(resourceId: Int? = null) {
+        this.resourceId = resourceId
     }
 
-    fun setImage(resourceId: Int) {
-        binding.photoView2.setImage(ImageSource.resource(resourceId))
+    fun setData(url: String? = null) {
+        this.imageUrl = url
     }
 
     override fun onStart() {
         super.onStart()
-        if(activity is HomeActivity) {
-            (activity as HomeActivity).setImage()
-        } else if(activity is InfoActivity) {
-            (activity as InfoActivity).setImage()
-        } else if (activity is EscapeActivity) {
-            (activity as EscapeActivity).setImage()
-        }
+
+        val loadData = this.imageUrl?:this.resourceId
+
+        Glide.with(binding.root)
+            .asBitmap()
+            .load(loadData)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    binding.scaleImageView.setImage(ImageSource.bitmap(resource))
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) { }
+            })
+
     }
 
     override fun onCreateView(

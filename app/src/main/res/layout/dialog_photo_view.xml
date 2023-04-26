@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     android:background="@color/dream_dialog_background">
 
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/dim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@color/dream_dialog_background" />
+
     <ProgressBar
         android:id="@+id/progressbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,8 +26,8 @@
         android:layout_height="wrap_content"/>
 
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-        android:id="@+id/photoView2"
-        android:layout_width="match_parent"
+        android:id="@+id/scaleImageView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

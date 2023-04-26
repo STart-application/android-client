@@ -63,6 +63,7 @@ class EscapeActivity : AppCompatActivity() {
 
         binding.questionImage.setOnClickListener {
             if(!photoViewDialog.isAdded) {
+                photoViewDialog.setData(list[roomId].imageUrl)
                 photoViewDialog.show(supportFragmentManager, null)
             }
         }
@@ -196,10 +197,5 @@ class EscapeActivity : AppCompatActivity() {
             binding.btnNext.isEnabled = it.toString().isNotBlank()
 
         }
-    }
-
-    fun setImage() {
-        val question = list[roomId]
-        photoViewDialog.setImage(question.imageUrl)
     }
 }

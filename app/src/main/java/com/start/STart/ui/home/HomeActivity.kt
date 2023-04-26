@@ -37,12 +37,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
+class HomeActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by viewModels()
-    private val sliderAdapter by lazy { SliderAdapter(this) }
 
+    private val sliderAdapter by lazy { SliderAdapter()}
     private val photoView by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,33 +50,33 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
         setContentView(binding.root)
 
         initToolbar()
-        initLiveDataObservers()
+        initBanner()
 
-        binding.slider.offscreenPageLimit = 1
-        binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-        binding.slider.adapter = sliderAdapter
-
-        // Slider와 Indicator를 연결
-        TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
-        }.attach()
-
-        // 메뉴 컴포즈로 구성
         binding.composeMenu.setContent {
             MenuLayout()
         }
     }
 
-    override fun onClick() {
-        if(!photoView.isAdded) {
-            photoView.show(supportFragmentManager, ".PhotoView")
+    private fun initBanner() {
+        binding.slider.offscreenPageLimit = 1
+        binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        binding.slider.adapter = sliderAdapter.apply {
+            setOnItemClickListener(object:SliderAdapter.OnItemClickListener {
+                override fun onClick() {
+                    if(!photoView.isAdded) {
+                        val banner = sliderAdapter.list[binding.slider.currentItem]
+                        photoView.setData(banner.imageUrl)
+                        photoView.setData(banner.imageDrawable)
+                        photoView.show(supportFragmentManager, null)
+                    }
+                }
+            })
         }
-    }
 
-    fun setImage() {
-        photoView.setImage(sliderAdapter.list[binding.slider.currentItem])
-    }
+        // Slider와 Indicator를 연결
+        TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
+        }.attach()
 
-    private fun initLiveDataObservers() {
         val replaceList = listOf(BannerModel("대체 이미지", null, 1, false, R.drawable.logo_empty))
 
         viewModel.loadBannerResult.observe(this) {
@@ -88,10 +88,13 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
 
             } else {
                 sliderAdapter.list =  replaceList
-
             }
+
             binding.progressbarBanner.visibility = View.INVISIBLE
         }
+
+        viewModel.loadBanner()
+        viewModel.loadFestivalEnabled()
     }
 
     private fun initToolbar() {
@@ -169,7 +172,7 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
 
     @Preview
     @Composable
-    fun MenuItemPreview() {
+    fun MenuLayoutPreview() {
         MenuLayout()
     }
 }
