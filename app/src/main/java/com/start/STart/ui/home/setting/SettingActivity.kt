@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.start.STart.R
 import com.start.STart.databinding.ActivitySettingBinding
@@ -22,9 +21,6 @@ import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
 import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SettingActivity : AppCompatActivity() {
 
@@ -54,18 +50,6 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.btnLogin.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                PreferenceManager.clear()
-                withContext(Dispatchers.Main) {
-                    startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
-                    finish()
-                }
-            }
-        }
-
         binding.textResetPassword.setOnClickListener {
             startActivity(Intent(this, ResetPasswordWithLoginActivity::class.java))
         }
@@ -192,6 +176,17 @@ class SettingActivity : AppCompatActivity() {
                 it.setTextColor(ContextCompat.getColor(this, R.color.text_caption))
             }
             it.isEnabled = false
+        }
+
+        binding.btnLogin.setOnClickListener {
+            if(!confirmDialog.isAdded) {
+                confirmDialog.setData("로그인 화면으로 이동합니다.", onConfirm = {
+                    PreferenceManager.clear()
+                    startActivity(Intent(this, LoginOrSkipActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
+                }).show(supportFragmentManager, null)
+            }
         }
     }
 

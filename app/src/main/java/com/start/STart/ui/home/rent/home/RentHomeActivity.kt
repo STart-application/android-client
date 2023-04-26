@@ -12,6 +12,8 @@ import com.start.STart.databinding.ActivityRentHomeBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.ui.home.rent.RentItem
 import com.start.STart.ui.home.rent.myrent.MyRentActivity
+import com.start.STart.ui.home.setting.ConfirmDialog
+import com.start.STart.util.PreferenceManager
 import com.start.STart.util.dp2px
 import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.getMember
@@ -21,6 +23,9 @@ class RentHomeActivity : AppCompatActivity() {
     private val viewModel: RentHomeViewModel by viewModels()
 
     private val rentItemAdapter by lazy { RentItemAdapter() }
+
+    private val loginConfirmDialog by lazy { ConfirmDialog() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -47,12 +52,6 @@ class RentHomeActivity : AppCompatActivity() {
                 startActivity(Intent(this, MyRentActivity::class.java))
             }
         }
-
-        binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, LoginOrSkipActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            })
-        }
     }
 
     private fun initToolbar() {
@@ -77,6 +76,18 @@ class RentHomeActivity : AppCompatActivity() {
         binding.btnMyRent.backgroundTintList = ContextCompat.getColorStateList(this, R.color.dream_gray_d9)
         binding.btnMyRent.setTextColor(ContextCompat.getColor(this, R.color.text_caption))
         binding.btnMyRent.isEnabled = false
+
+        binding.btnLogin.setOnClickListener {
+
+            if(!loginConfirmDialog.isAdded) {
+                loginConfirmDialog.setData("로그인 화면으로 이동합니다.", onConfirm = {
+                    PreferenceManager.clear()
+                    startActivity(Intent(this, LoginOrSkipActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
+                }).show(supportFragmentManager, null)
+            }
+        }
     }
 
     private fun bindMemberData(memberData: MemberData) {
