@@ -20,7 +20,7 @@ class SettingViewModel: ViewModel() {
         get() = _memberData
 
     fun loadMemberData() = viewModelScope.launch(Dispatchers.IO) {
-        val data = PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+        val data = PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA)
         _memberData.postValue(data)
     }
 

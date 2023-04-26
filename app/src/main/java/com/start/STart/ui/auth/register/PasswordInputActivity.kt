@@ -7,8 +7,6 @@ import androidx.core.widget.addTextChangedListener
 import com.start.STart.R
 import com.start.STart.api.member.request.RegisterData
 import com.start.STart.databinding.ActivityValidatePasswordBinding
-import com.start.STart.ui.auth.util.setFailText
-import com.start.STart.ui.auth.util.setSuccessText
 import com.start.STart.util.*
 
 class PasswordInputActivity : AppCompatActivity() {

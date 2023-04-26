@@ -8,7 +8,7 @@ import com.start.STart.databinding.FragmentMonthBinding
 import com.start.STart.ui.home.rent.util.getDateList
 import java.util.Calendar
 
-class RentViewPagerAdapter(val onDateSelectedListener: RentCalendarAdapter.OnDataSelectedListener):  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
+class RentViewPagerAdapter(val onDateSelectedListener: RentCalendarAdapter.OnDateSelectedListener):  RecyclerView.Adapter<RentViewPagerAdapter.RentViewPagerViewHolder>(){
 
     var currentCalendar: Calendar = Calendar.getInstance()
 

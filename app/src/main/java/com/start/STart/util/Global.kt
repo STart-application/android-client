@@ -13,10 +13,11 @@ import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.exifinterface.media.ExifInterface
 import com.google.gson.Gson
-import com.start.STart.api.member.response.MemberData
+import com.start.STart.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -174,9 +175,13 @@ fun View.contains(x: Int, y: Int): Boolean {
     return x in l..r && y in t..b
 }
 
-fun getMember(): MemberData? {
-    return PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+fun TextView.setSuccessText(text: String) {
+    this.text = text
+    this.setTextColor(resources.getColor(R.color.dream_purple))
 }
 
-
+fun TextView.setFailText(text: String) {
+    this.text = text
+    this.setTextColor(resources.getColor(R.color.dream_red))
+}
 

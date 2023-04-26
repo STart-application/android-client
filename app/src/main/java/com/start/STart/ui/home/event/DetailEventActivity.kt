@@ -10,7 +10,12 @@ import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.api.banner.Event
 import com.start.STart.databinding.ActivityDetailEventBinding
+import com.start.STart.ui.auth.util.AuthenticationUtil
+import com.start.STart.ui.home.event.esape.EscapeActivity
+import com.start.STart.ui.home.event.vote.VoteActivity
+import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
+import com.start.STart.util.showErrorToast
 
 class DetailEventActivity : AppCompatActivity() {
 
@@ -54,7 +59,7 @@ class DetailEventActivity : AppCompatActivity() {
             "PROCEEDING" -> {
                 binding.button.backgroundTintList = ColorStateList.valueOf(purple)
                 when(event.eventId) {
-                    999, 998 -> {
+                    Constants.EVENT_CODE_VOTE, Constants.EVENT_CODE_ESCAPE -> {
                         binding.button.text = "참여하기"
                     }
 
@@ -68,7 +73,7 @@ class DetailEventActivity : AppCompatActivity() {
             "BEFORE" -> {
                 binding.button.backgroundTintList = ColorStateList.valueOf(purple_ghost)
                 when(event.eventId) {
-                    999, 998 -> {
+                    Constants.EVENT_CODE_VOTE, Constants.EVENT_CODE_ESCAPE -> {
                         binding.button.text = "참여하기"
                     }
 
@@ -93,16 +98,22 @@ class DetailEventActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             when(event.eventId) {
-                // 투표
-                998 -> {
-                    startActivity(Intent(applicationContext, VoteActivity::class.java))
+                Constants.EVENT_CODE_VOTE -> {
+                    AuthenticationUtil.performActionOnLogin({
+                        startActivity(Intent(applicationContext, VoteActivity::class.java))
+                    }, failListener = {
+                        showErrorToast(this, it.loginFailMessage)
+                    })
                 }
 
-                // 방탈출
-                999 -> {
-                    val intent = Intent(applicationContext, EscapeActivity::class.java)
-                    intent.putExtra("isFirst", true)
-                    startActivity(intent)
+                Constants.EVENT_CODE_ESCAPE -> {
+                    AuthenticationUtil.performActionOnLogin({
+                        startActivity(Intent(applicationContext, EscapeActivity::class.java).apply {
+                            putExtra(Constants.EXTRA_FLAG_FIRST_ESCAPE_ROOM, true)
+                        })
+                    }, failListener = {
+                        showErrorToast(this, it.loginFailMessage)
+                    })
                 }
                 else -> {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(event.formLink)))

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.event.DetailVoteActivity">
+    tools:context=".ui.home.event.vote.DetailVoteActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -109,7 +109,7 @@
 
 
             <!-- fragment
-                android:name="com.start.STart.ui.home.event.VoteListFragment"
+                android:name="com.start.STart.ui.home.event.vote.VoteListFragment"
                 android:layout_width="285dp"
                 android:layout_height="227dp"
                 android:layout_gravity="center_horizontal"

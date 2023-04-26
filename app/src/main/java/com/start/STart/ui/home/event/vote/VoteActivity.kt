@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.event
+package com.start.STart.ui.home.event.vote
 
 import android.os.Bundle
 import android.util.Log

@@ -43,7 +43,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.home.event.DetailVoteActivity"
+            android:name=".ui.home.event.vote.DetailVoteActivity"
             android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
@@ -51,7 +51,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.home.event.VoteActivity"
+            android:name=".ui.home.event.vote.VoteActivity"
             android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
@@ -59,7 +59,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.home.event.EscapeActivity"
+            android:name=".ui.home.event.esape.EscapeActivity"
             android:screenOrientation="portrait"
             android:exported="false">
             <meta-data

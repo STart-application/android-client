@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.event
+package com.start.STart.ui.home.event.esape
 
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +27,7 @@ import retrofit2.Response
 class EscapeActivity : AppCompatActivity() {
     
     val binding by lazy { ActivityEscapeBinding.inflate(layoutInflater)}
-    val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+    val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA)
     var roomId = 0
     var list = mutableListOf<Question>()
 
@@ -43,7 +43,7 @@ class EscapeActivity : AppCompatActivity() {
 
         initToolbar()
 
-        val isFirst = intent.getBooleanExtra("isFirst", false)
+        val isFirst = intent.getBooleanExtra(Constants.EXTRA_FLAG_FIRST_ESCAPE_ROOM, false)
         Log.d("tag", isFirst.toString())
 
         if(list.isEmpty()) {

@@ -19,6 +19,7 @@ import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.start.STart.R
 import com.start.STart.databinding.ActivityFestivalBinding
+import com.start.STart.ui.auth.util.AuthenticationUtil
 import com.start.STart.ui.home.festival.dialogs.FestivalIntroDialog
 import com.start.STart.ui.home.festival.dialogs.FoodTruckDialog
 import com.start.STart.ui.home.festival.dialogs.PhotoZoneDialog
@@ -28,7 +29,6 @@ import com.start.STart.ui.home.festival.info.FestivalInfoActivity
 import com.start.STart.ui.home.festival.maps.MarkerModel
 import com.start.STart.util.PermissionHelper
 import com.start.STart.util.getBitmapFromVectorDrawable
-import com.start.STart.util.getMember
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -88,11 +88,11 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.menu2.setOnClickListener {
-            if(getMember() != null) {
+            AuthenticationUtil.performActionOnLogin({
                 if(!stampDialog.isAdded) stampDialog.show(supportFragmentManager, ".StampDialog")
-            } else {
+            }, failListener = {
                 Toasty.info(this, "로그인이 필요한 기능입니다.").show()
-            }
+            })
         }
 
         binding.menu3.setOnClickListener {
@@ -249,15 +249,14 @@ class FestivalActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onCancel() {  }
 
             override fun onFinish() {
-                if(getMember() != null) {
+                AuthenticationUtil.performActionOnLogin({
                     if(!postStampDialog.isAdded) {
                         postStampDialog.setData(stampData)
                         postStampDialog.show(supportFragmentManager, ".PostStampDialog")
                     }
-                } else {
+                }, failListener = {
                     Toasty.info(this@FestivalActivity, "로그인이 필요한 기능입니다.").show()
-                }
-
+                })
             }
         })
     }

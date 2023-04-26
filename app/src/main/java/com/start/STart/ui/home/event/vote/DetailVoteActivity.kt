@@ -1,8 +1,9 @@
-package com.start.STart.ui.home.event
+package com.start.STart.ui.home.event.vote
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.databinding.ActivityDetailVoteBinding
+import com.start.STart.ui.home.event.vote.VoteListAdapter
 
 class DetailVoteActivity : AppCompatActivity() {
     val binding by lazy {ActivityDetailVoteBinding.inflate(layoutInflater)}

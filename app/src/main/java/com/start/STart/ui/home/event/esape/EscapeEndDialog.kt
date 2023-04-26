@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.event
+package com.start.STart.ui.home.event.esape
 
 import android.app.Dialog
 import android.content.Intent
@@ -8,13 +8,10 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogEscapeEndBinding
-import com.start.STart.databinding.DialogFoodTruckBinding
+import com.start.STart.ui.home.event.EventActivity
 
 class EscapeEndDialog: DialogFragment() {
     private var _binding: DialogEscapeEndBinding? = null

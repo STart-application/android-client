@@ -8,8 +8,6 @@ import androidx.core.widget.addTextChangedListener
 import com.start.STart.R
 import com.start.STart.databinding.ActivityResetPasswordBinding
 import com.start.STart.ui.auth.login.LoginActivity
-import com.start.STart.ui.auth.util.setFailText
-import com.start.STart.ui.auth.util.setSuccessText
 import com.start.STart.util.*
 
 class ResetPasswordActivity : AppCompatActivity() {

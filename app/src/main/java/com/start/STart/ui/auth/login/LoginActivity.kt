@@ -9,11 +9,11 @@ import com.start.STart.R
 import com.start.STart.databinding.ActivityLoginBinding
 import com.start.STart.ui.auth.register.PolicyActivity
 import com.start.STart.ui.auth.reset.ResetPasswordAuthActivity
-import com.start.STart.ui.auth.util.setFailText
-import com.start.STart.ui.auth.util.setSuccessText
 import com.start.STart.ui.home.HomeActivity
 import com.start.STart.util.AppRegex
 import com.start.STart.util.Constants
+import com.start.STart.util.setFailText
+import com.start.STart.util.setSuccessText
 import com.start.STart.util.showErrorToast
 
 class LoginActivity : AppCompatActivity() {

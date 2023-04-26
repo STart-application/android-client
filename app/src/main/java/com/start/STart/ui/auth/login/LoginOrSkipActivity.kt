@@ -28,7 +28,7 @@ class LoginOrSkipActivity : AppCompatActivity() {
         binding.btnNoSignIn.setOnClickListener {
             if(!confirmNoSignInDialog.isAdded) {
                 confirmNoSignInDialog.setData(onConfirm = {
-                    PreferenceManager.putBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN, true)
+                    PreferenceManager.putBoolean(Constants.PREF_FLAG_WITHOUT_LOGIN, true)
                     startActivity(Intent(this, HomeActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     })

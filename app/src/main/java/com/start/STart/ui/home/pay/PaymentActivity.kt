@@ -33,7 +33,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun loadMember() = lifecycleScope.launch(Dispatchers.IO) {
-        val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+        val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA)
         withContext(Dispatchers.Main) {
             if(memberData != null) {
                 setMemberData(memberData)

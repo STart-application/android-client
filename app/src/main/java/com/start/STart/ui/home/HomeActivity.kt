@@ -130,7 +130,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     MenuItem(title = "자치회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
                         lifecycleScope.launch(Dispatchers.IO) {
-                            if(PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA) != null) {
+                            if(PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA) != null) {
                                 withContext(Dispatchers.Main) {
                                     startActivity(Intent(applicationContext, PaymentActivity::class.java))
                                 }
