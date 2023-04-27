@@ -66,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="2dp"
-                        android:text="축제 장소를 찾아가\n도장을 모아보세요"
+                        android:text="축제 장소를 찾아가\n도장을 모아보세요!"
                         android:textColor="@color/dream_navy" />
                 </FrameLayout>
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.api.ApiClient
+import com.start.STart.api.banner.Vote
 import com.start.STart.api.banner.VoteModel
 import com.start.STart.databinding.ActivityVoteBinding
 import retrofit2.Call
@@ -36,7 +37,7 @@ class VoteActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<VoteModel>, response: Response<VoteModel>) {
                     if(response.isSuccessful) {
                         Log.d("tag", response.body()!!.data.toString())
-                        voteAdapter.list = response.body()!!.data
+                        voteAdapter.list = response.body()!!.data as MutableList<Vote>
                         voteAdapter.notifyDataSetChanged()
 
 
