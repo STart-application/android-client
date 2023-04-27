@@ -1,14 +1,13 @@
 package com.start.STart.ui.home.event.vote
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-<<<<<<< HEAD:app/src/main/java/com/start/STart/ui/home/event/vote/VoteAdapter.kt
-=======
 import android.widget.Toast
 import androidx.core.content.ContextCompat
->>>>>>> event:app/src/main/java/com/start/STart/ui/home/event/VoteAdapter.kt
 import androidx.recyclerview.widget.RecyclerView
+import com.start.STart.R
 import com.start.STart.api.banner.Vote
 import com.start.STart.databinding.ItemVoteBinding
 
