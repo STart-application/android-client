@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.skydoves.transformationlayout.onTransformationStartContainer
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.Event
 import com.start.STart.api.banner.EventModel
@@ -22,6 +23,7 @@ class EventActivity : AppCompatActivity() {
     private val eventAdapter by lazy { EventAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationStartContainer()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 

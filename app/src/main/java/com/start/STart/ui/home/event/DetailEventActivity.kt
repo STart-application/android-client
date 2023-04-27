@@ -1,25 +1,31 @@
 package com.start.STart.ui.home.event
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.skydoves.transformationlayout.TransformationAppCompatActivity
+import com.skydoves.transformationlayout.TransformationCompat
+import com.skydoves.transformationlayout.TransformationLayout
 import com.start.STart.R
 import com.start.STart.api.banner.Event
 import com.start.STart.databinding.ActivityDetailEventBinding
 import com.start.STart.ui.auth.util.AuthenticationUtil
+import com.start.STart.ui.home.PhotoViewDialog
 import com.start.STart.ui.home.event.esape.EscapeActivity
 import com.start.STart.ui.home.event.vote.VoteActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
+import com.start.STart.util.openCustomTab
 import com.start.STart.util.showErrorToast
 
-class DetailEventActivity : AppCompatActivity() {
+class DetailEventActivity : TransformationAppCompatActivity() {
 
     private val binding by lazy { ActivityDetailEventBinding.inflate(layoutInflater) }
+
+    private val photoViewDialog by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +47,13 @@ class DetailEventActivity : AppCompatActivity() {
     private fun initView(event: Event) {
 
 
-        Glide.with(binding.cardImage.context)
+        Glide.with(this)
             .load(event.imageUrl)
             .into(binding.cardImage)
+
+        binding.cardImage.setOnClickListener {
+            photoViewDialog.show(this, url = event.imageUrl)
+        }
 
         val grayColor = ContextCompat.getColor(this, R.color.text_caption)
         val eventStatus = EventStatus.valueOf(event.eventStatus)
@@ -88,10 +98,22 @@ class DetailEventActivity : AppCompatActivity() {
                     }
 
                     it.setOnClickListener {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(event.formLink)))
+                        openCustomTab(event.formLink)
                     }
                 }
             }
+        }
+    }
+
+    companion object {
+        fun startActivity(
+            context: Context,
+            transformationLayout: TransformationLayout,
+            event: Event
+        ) {
+            val intent = Intent(context, DetailEventActivity::class.java)
+            intent.putExtra("event", event)
+            TransformationCompat.startActivity(transformationLayout, intent)
         }
     }
 }
