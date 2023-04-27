@@ -3,13 +3,17 @@ package com.start.STart.ui.home.event.vote
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+<<<<<<< HEAD:app/src/main/java/com/start/STart/ui/home/event/vote/VoteAdapter.kt
+=======
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+>>>>>>> event:app/src/main/java/com/start/STart/ui/home/event/VoteAdapter.kt
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.api.banner.Vote
 import com.start.STart.databinding.ItemVoteBinding
 
 class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
-
-    var list: List<Vote> = mutableListOf()
+    var list: MutableList<Vote> = mutableListOf()
 
         set(value) {
             field = value
@@ -18,20 +22,16 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
     inner class VoteViewHolder(var binding: ItemVoteBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(vote: Vote){
             binding.title.text = vote.title
+            binding.start.text = vote.displayStartDate.subSequence(5, 7).toString() + "/" + vote.displayStartDate.subSequence(8, 10) + " " + vote.displayStartDate.subSequence(11, 16).toString()
+            binding.end.text = vote.displayEndDate.subSequence(5, 7).toString() + "/" + vote.displayEndDate.subSequence(8, 10) + " " + vote.displayEndDate.subSequence(11, 16).toString()
 
-            binding.root.setOnClickListener {
-                val context = binding.root.context
-                context.startActivity(Intent(context, DetailVoteActivity::class.java))
-            }
-
-            /*
             val purple_ghost = ContextCompat.getColor(binding.status.context, R.color.dream_purple_ghost)
             val purple = ContextCompat.getColor(binding.status.context, R.color.dream_purple)
             val gray = ContextCompat.getColor(binding.status.context, R.color.dream_gray)
             val green = ContextCompat.getColor(binding.status.context, R.color.dream_green)
 
             when(vote.status) {
-                "PROCEEDING" -> {
+                "START" -> {
                     binding.status.backgroundTintList = ColorStateList.valueOf(green)
                     binding.status.text = "투표 가능"
                 }
@@ -45,7 +45,24 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
                 }
             }
 
-             */
+            binding.root.setOnClickListener {
+                val context = binding.root.context
+                when(vote.status) {
+                    "START" -> {
+                        context.startActivity(Intent(context, DetailVoteActivity::class.java).apply {
+                            putExtra("vote", vote.votingId)
+                        })
+                    }
+                    "END" -> {
+                        Toast.makeText(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    "BEFORE" -> {
+                        Toast.makeText(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
+
         }
     }
 

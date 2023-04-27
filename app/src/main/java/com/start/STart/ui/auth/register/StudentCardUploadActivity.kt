@@ -67,7 +67,7 @@ class StudentCardUploadActivity : AppCompatActivity() {
         if(isGranted) {
             startCamera()
         } else {
-            Toasty.error(this, "카메라 궈한을 허용해주세요.").show()
+            Toasty.error(this, "카메라 권한을 허용해주세요.").show()
         }
     }
 

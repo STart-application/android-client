@@ -26,4 +26,9 @@ interface EventService {
     // 투표
     @GET("vote")
     fun loadVoteList(): Call<VoteModel>
+
+    @GET("vote/1")
+    fun loadDetailVote(
+        //@Path("votingId") votingId: Int
+    ): Call<VoteModel>
 }
