@@ -30,7 +30,7 @@ object TokenHelper {
             } else {
                 Log.d(TAG, "verifyToken: 토큰 인증 실패")
                 val errorBodyString = res.errorBody()?.string()
-                if(ApiClient.parseBody(errorBodyString).errorCode == ApiError.ST011.name) {
+                if(ApiClient.parseBody(errorBodyString)?.errorCode == ApiError.ST011.name) {
                     Log.d(TAG, "verifyToken: 토큰 재발급 시작")
                     return issueAccessToken(accessToken) // 토큰 발급
                 }

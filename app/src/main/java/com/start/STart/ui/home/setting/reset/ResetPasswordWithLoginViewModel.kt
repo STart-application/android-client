@@ -22,7 +22,7 @@ class ResetPasswordWithLoginViewModel: ViewModel() {
                 resetPasswordResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                resetPasswordResult.postValue(ResultModel(false, errorBody.message))
+                resetPasswordResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             resetPasswordResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))

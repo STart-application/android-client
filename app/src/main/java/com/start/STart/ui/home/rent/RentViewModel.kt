@@ -23,7 +23,7 @@ class RentViewModel : ViewModel() {
                 postRentResult.postValue(ResultModel(true, body?.message))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                postRentResult.postValue(ResultModel(false, errorBody.message))
+                postRentResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             postRentResult.postValue(ResultModel(false,AppException.UNEXPECTED.title))

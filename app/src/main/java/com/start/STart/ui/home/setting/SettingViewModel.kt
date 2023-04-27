@@ -32,7 +32,7 @@ class SettingViewModel: ViewModel() {
                 deleteMemberResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                deleteMemberResult.postValue(ResultModel(false, errorBody.message))
+                deleteMemberResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             deleteMemberResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))

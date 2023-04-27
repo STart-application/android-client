@@ -117,7 +117,7 @@ class RentCalendarActivity : AppCompatActivity(), RentCalendarAdapter.OnDateSele
                         } else {
                             rentDateItem.count = 0
                         }
-                        rentDateItem.total = (viewModel.loadItemCountResult.value?.data as Int)
+                        rentDateItem.total = (viewModel.loadItemCountResult.value?.data as Int?)?:0
                         viewHolder.calendarAdapter.notifyItemChanged(index)
                     }
                 }

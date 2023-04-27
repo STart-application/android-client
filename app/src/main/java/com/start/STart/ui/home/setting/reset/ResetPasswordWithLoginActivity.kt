@@ -68,7 +68,7 @@ class ResetPasswordWithLoginActivity : AppCompatActivity() {
                     putExtra(Constants.FLAG_RESET_PASSWORD, true)
                 })
             } else {
-                showErrorToast(this, it.message!!)
+                showErrorToast(this, it.message)
             }
         }
     }

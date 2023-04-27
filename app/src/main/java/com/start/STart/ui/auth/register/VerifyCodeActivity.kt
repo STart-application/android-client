@@ -12,6 +12,7 @@ import com.start.STart.util.AppRegex
 import com.start.STart.util.Constants
 import com.start.STart.util.formatTimerMilliseconds
 import com.start.STart.util.getParcelableExtra
+import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -93,9 +94,7 @@ class VerifyCodeActivity : AppCompatActivity() {
                 Toasty.success(this, "SMS가 전송되었습니다.").show()
                 startTimer()
             } else {
-                result.message?.let {
-                    Toasty.error(this, it).show()
-                }
+                showErrorToast(this, result.message)
             }
         }
 
@@ -104,7 +103,7 @@ class VerifyCodeActivity : AppCompatActivity() {
             if(result.isSuccessful) {
                 moveNext()
             } else {
-                Toasty.error(this, result.message!!).show()
+                showErrorToast(this, result.message)
             }
         }
     }

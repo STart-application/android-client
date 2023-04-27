@@ -38,7 +38,7 @@ class LoginViewModel : ViewModel() {
                 }
             } else {
                 val body = ApiClient.parseBody(res.errorBody()?.string())
-                _loginResult.postValue(ResultModel(false, body.message))
+                _loginResult.postValue(ResultModel(false, body?.message))
             }
         } catch(e: Exception) {
             _loginResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))

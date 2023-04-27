@@ -88,7 +88,7 @@ class RentCalendarViewModel: ViewModel() {
                 return rentItemCount?.count
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                loadItemCountResult.postValue(ResultModel(false, errorBody.message))
+                loadItemCountResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: Exception) {
             e.printStackTrace()

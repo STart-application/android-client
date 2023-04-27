@@ -103,7 +103,7 @@ class LineUpFragment : Fragment() {
 
                 Log.d(null, "initLiveDataObservers: $map")
             } else {
-                showErrorToast(requireContext(), result.message!!)
+                showErrorToast(requireContext(), result.message)
             }
         }
     }

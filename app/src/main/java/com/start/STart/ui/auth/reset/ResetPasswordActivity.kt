@@ -1,14 +1,18 @@
 package com.start.STart.ui.auth.reset
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.start.STart.R
 import com.start.STart.databinding.ActivityResetPasswordBinding
 import com.start.STart.ui.auth.login.LoginActivity
-import com.start.STart.util.*
+import com.start.STart.util.AppRegex
+import com.start.STart.util.Constants
+import com.start.STart.util.setFailText
+import com.start.STart.util.setSuccessText
+import com.start.STart.util.showErrorToast
 
 class ResetPasswordActivity : AppCompatActivity() {
     private val binding by lazy { ActivityResetPasswordBinding.inflate(layoutInflater) }
@@ -58,7 +62,7 @@ class ResetPasswordActivity : AppCompatActivity() {
                     putExtra(Constants.FLAG_RESET_PASSWORD, true)
                 })
             } else {
-                showErrorToast(this, it.message!!)
+                showErrorToast(this, it.message)
             }
         }
     }

@@ -21,7 +21,7 @@ class FestivalInfoViewModel: ViewModel() {
                 loadFestivalInfoResult.postValue(ResultModel(true, data = res.body()?.data))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                loadFestivalInfoResult.postValue(ResultModel(false, errorBody.message))
+                loadFestivalInfoResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             e.printStackTrace()
