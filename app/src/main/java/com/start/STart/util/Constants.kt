@@ -20,6 +20,10 @@ object Constants {
     const val KEY_STUDENT_ID = "key_student_id"
 
     // Event
+    const val EVENT_STATUS_PROCEEDING = "PROCEEDING"
+    const val EVENT_STATUS_BEFORE = "BEFORE"
+    const val EVENT_STATUS_END = "END"
+
     const val EVENT_CODE_VOTE = 998
     const val EVENT_CODE_ESCAPE = 999
 

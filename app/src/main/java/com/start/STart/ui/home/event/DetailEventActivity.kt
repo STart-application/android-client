@@ -35,93 +35,63 @@ class DetailEventActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initView(event: Event) {
-        binding.eventTitle.text = event.title
+
 
         Glide.with(binding.cardImage.context)
             .load(event.imageUrl)
             .into(binding.cardImage)
 
-        val status = event.eventStatus
+        val grayColor = ContextCompat.getColor(this, R.color.text_caption)
+        val eventStatus = EventStatus.valueOf(event.eventStatus)
 
-        val purple_ghost = ContextCompat.getColor(binding.button.context, R.color.dream_purple_ghost)
-        val purple = ContextCompat.getColor(binding.button.context, R.color.dream_purple)
-        val gray = ContextCompat.getColor(binding.button.context, R.color.text_caption)
+        binding.eventTitle.text = event.title
 
+        val primaryColor = ContextCompat.getColor(this, eventStatus.titleColor)
+        binding.eventTitle.setTextColor(primaryColor)
+        binding.divider.setBackgroundColor(primaryColor)
 
-
-        when(status) {
-            "PROCEEDING" -> {
-                binding.button.backgroundTintList = ColorStateList.valueOf(purple)
-                when(event.eventId) {
-                    Constants.EVENT_CODE_VOTE, Constants.EVENT_CODE_ESCAPE -> {
-                        binding.button.text = "참여하기"
-                    }
-
-                    else -> {
-                        binding.button.text = "신청하기"
-                    }
-                }
-                binding.eventTitle.setTextColor(purple)
-            }
-
-            "BEFORE" -> {
-                binding.button.backgroundTintList = ColorStateList.valueOf(purple_ghost)
-                when(event.eventId) {
-                    Constants.EVENT_CODE_VOTE, Constants.EVENT_CODE_ESCAPE -> {
-                        binding.button.text = "참여하기"
-                    }
-
-                    else -> {
-                        binding.button.text = "신청하기"
-                    }
-                }
-                binding.button.isEnabled = false
-
-                binding.eventTitle.setTextColor(purple_ghost)
-            }
-
-            "END" -> {
-                binding.button.backgroundTintList = ColorStateList.valueOf(gray)
-                binding.button.text ="종료된 이벤트"
-                binding.button.isEnabled = false
-
-                binding.eventTitle.setTextColor(gray)
-            }
-
-        }
-
-        binding.button.setOnClickListener {
-            when(event.eventId) {
+        binding.btnConfirm.also {
+            it.isEnabled = eventStatus.buttonEnabled
+            when (event.eventId) {
                 Constants.EVENT_CODE_VOTE -> {
-                    AuthenticationUtil.performActionOnLogin({
-                        startActivity(Intent(applicationContext, VoteActivity::class.java))
-                    }, failListener = {
-                        showErrorToast(this, it.loginFailMessage)
-                    })
-                }
-
-                Constants.EVENT_CODE_ESCAPE -> {
-                    AuthenticationUtil.performActionOnLogin({
-                        startActivity(Intent(applicationContext, EscapeActivity::class.java).apply {
-                            putExtra(Constants.EXTRA_FLAG_FIRST_ESCAPE_ROOM, true)
+                    it.text = "참여하기"
+                    it.setOnClickListener {
+                        AuthenticationUtil.performActionOnLogin({
+                            startActivity(Intent(applicationContext, VoteActivity::class.java))
+                        }, failListener = { authUtil ->
+                            showErrorToast(this, authUtil.loginFailMessage)
                         })
-                    }, failListener = {
-                        showErrorToast(this, it.loginFailMessage)
-                    })
+                    }
+                }
+                Constants.EVENT_CODE_ESCAPE -> {
+                    it.text = "참여하기"
+                    it.setOnClickListener {
+                        AuthenticationUtil.performActionOnLogin({
+                            startActivity(Intent(applicationContext, EscapeActivity::class.java).apply {
+                                putExtra(Constants.EXTRA_FLAG_FIRST_ESCAPE_ROOM, true)
+                            })
+                        }, failListener = { authUtil ->
+                            showErrorToast(this, authUtil.loginFailMessage)
+                        })
+                    }
                 }
                 else -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(event.formLink)))
+                    if (eventStatus == EventStatus.END) {
+                        it.text = "종료된 이벤트"
+                        it.backgroundTintList = ColorStateList.valueOf(grayColor)
+                    } else {
+                        it.text = "신청하기"
+                    }
+
+                    it.setOnClickListener {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(event.formLink)))
+                    }
                 }
             }
         }
-
-
     }
-
 }
