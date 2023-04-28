@@ -58,7 +58,10 @@ class ContentsFragment : Fragment() {
             if(result.isSuccessful) {
                 val boothList = (result.data as List<FestivalInfoData>)[0].boothList
                 boothList.forEach { boothData ->
-                    BoothEnum.values()[boothData.boothId - 1].congestion = boothData.congestion
+                    val booth = BoothEnum.values().getOrNull(boothData.boothId - 1)
+                    if(booth != null) {
+                        booth.congestion = boothData.congestion
+                    }
                 }
                 contentsAdapter.notifyDataSetChanged()
             }

@@ -6,13 +6,10 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.skydoves.balloon.Balloon
-import com.skydoves.balloon.BalloonAnimation
 import com.start.STart.R
 import com.start.STart.api.suggestion.request.SuggestRequest
 import com.start.STart.databinding.ActivitySuggestBinding
 import com.start.STart.util.getPart
-import com.start.STart.util.px2dp
 import com.start.STart.util.showErrorToast
 import com.start.STart.util.showSuccessToast
 
@@ -90,16 +87,7 @@ class SuggestActivity : AppCompatActivity() {
 
                 viewModel.sendSuggestion(request)
             } else {
-                Balloon.Builder(this)
-                    .setText("모든 입력칸을 채워주세요!")
-                    .setPadding(8)
-                    .setWidth(px2dp(binding.btnSend.width.toFloat()).toInt())
-                    .setBalloonAnimation(BalloonAnimation.ELASTIC)
-                    .setAutoDismissDuration(1000L)
-                    .setBackgroundColor(resources.getColor(R.color.dream_purple))
-                    .build()
-                    .showAlignTop(binding.btnSend)
-
+                showErrorToast(this, "모든 입력칸을 채워주세요!")
             }
         }
         binding.btnCancel.setOnClickListener { finish() }

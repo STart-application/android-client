@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.JsonParser
 import com.skydoves.cloudy.Cloudy
+import com.start.STart.BuildConfig
 import com.start.STart.databinding.DialogPostStampBinding
 import com.start.STart.ui.home.festival.FestivalViewModel
 import com.start.STart.ui.home.festival.StampData
@@ -37,7 +38,6 @@ class PostStampDialog: DialogFragment() {
 
 
     var stampData: StampData? = null
-    var isInCircle: Boolean = false
 
     private val viewModel: FestivalViewModel by lazy {
         ViewModelProvider(requireActivity()).get(FestivalViewModel::class.java)
@@ -54,10 +54,18 @@ class PostStampDialog: DialogFragment() {
         binding.btnStamp.setOnClickListener {
             lifecycleScope.launch {
                 val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
-                if(checkInCircle(myLatLng, centerLatLng = stampData!!.latLng, radius = 50.0)) {
+
+                val inCircle = checkInCircle(myLatLng, centerLatLng = stampData!!.latLng, radius = 50.0)
+
+                if(BuildConfig.DEBUG) {
+                    Toasty.info(requireContext(), "[디버그] 인서클 $inCircle").show()
                     viewModel.postStamp(stampData!!.name)
                 } else {
-                    Toasty.info(requireContext(), "도장 존으로 이동하여 주세요.").show()
+                    if(inCircle) {
+                        viewModel.postStamp(stampData!!.name)
+                    } else {
+                        Toasty.info(requireContext(), "도장 존으로 이동하여 주세요.").show()
+                    }
                 }
             }
 
@@ -81,14 +89,14 @@ class PostStampDialog: DialogFragment() {
             if(it.isSuccessful) {
                 viewModel.loadStamp()
             } else {
-                showErrorToast(requireContext(), it.message!!)
+                showErrorToast(requireContext(), it.message)
             }
         }
 
         viewModel.loadStampResult.observe(this) {
             if(it.isSuccessful) {
                 val jsonData = JsonParser.parseString(gson.toJson((it.data as List<*>).get(0))).asJsonObject
-                val isStamped = jsonData.get(stampData!!.name).asBoolean
+                val isStamped = jsonData.get(stampData!!.name)?.asBoolean?:false
 
                 binding.imageStamp.setImageResource(if(isStamped) stampData!!.drawable_e else stampData!!.drawable)
                 binding.btnStamp.apply {
@@ -96,7 +104,6 @@ class PostStampDialog: DialogFragment() {
                     isEnabled = !isStamped
                 }
             } else {
-                viewModel.loadStamp()
                 showErrorToast(requireContext(), "잠시 후 다시 시도해 주세요.")
                 dismiss()
             }

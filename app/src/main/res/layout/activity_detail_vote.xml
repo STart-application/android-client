@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.event.DetailVoteActivity">
+    tools:context=".ui.home.event.vote.DetailVoteActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -90,30 +90,21 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="18dp"
                 android:layout_marginBottom="31dp"
+                android:paddingVertical="26dp"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/view2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvList"
+                <LinearLayout
+                    android:id="@+id/layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingVertical="26dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_list"
-                    android:overScrollMode="never"/>
+                    android:orientation="vertical">
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-
-            <!-- fragment
-                android:name="com.start.STart.ui.home.event.VoteListFragment"
-                android:layout_width="285dp"
-                android:layout_height="227dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="18dp"
-                tools:layout="@layout/fragment_vote_list" /> -->
 
             <View
                 android:id="@+id/view2"

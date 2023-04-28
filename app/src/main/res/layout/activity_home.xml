@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="@id/layout_banner"
         app:layout_constraintStart_toStartOf="@id/layout_banner"
         app:layout_constraintTop_toBottomOf="@id/layout_banner"
-        app:tabBackground="@drawable/tab_indicator"
+        app:tabBackground="@drawable/banner_tab_indicator"
         app:tabGravity="center"
         app:tabIndicator="@null"
         app:tabPaddingEnd="9dp"

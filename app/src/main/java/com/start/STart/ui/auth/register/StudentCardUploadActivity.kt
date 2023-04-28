@@ -20,6 +20,7 @@ import com.start.STart.util.AppException
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
 import com.start.STart.util.getPart
+import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,7 +67,7 @@ class StudentCardUploadActivity : AppCompatActivity() {
         if(isGranted) {
             startCamera()
         } else {
-            Toasty.error(this, "카메라 궈한을 허용해주세요.").show()
+            Toasty.error(this, "카메라 권한을 허용해주세요.").show()
         }
     }
 
@@ -131,7 +132,7 @@ class StudentCardUploadActivity : AppCompatActivity() {
                 if(result.exception == AppException.TIMEOUT) {
                     register()
                 }
-                Toasty.error(this, result.message!!).show()
+                showErrorToast(this, result.message)
             }
 
             binding.progressbar.visibility = View.GONE

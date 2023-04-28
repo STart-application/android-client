@@ -12,6 +12,8 @@
         layout="@layout/layout_toolbar" />
 
     <ScrollView
+        android:overScrollMode="never"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -42,7 +44,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_title"
+                        android:id="@+id/image_item"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -136,7 +138,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                                app:srcCompat="@drawable/rent_calendar_move_icon" />
                         </FrameLayout>
 
 
@@ -167,7 +169,7 @@
                                 android:layout_height="wrap_content"
                                 android:rotation="180"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_calendar_move_rectangle" />
+                                app:srcCompat="@drawable/rent_calendar_move_icon" />
 
                         </FrameLayout>
 

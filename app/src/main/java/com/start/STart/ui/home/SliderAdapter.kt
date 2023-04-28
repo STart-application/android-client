@@ -4,21 +4,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.start.STart.R
 import com.start.STart.api.banner.BannerModel
 import com.start.STart.databinding.ItemSliderBinding
 
-class SliderAdapter(val listener: OnItemClickListener) : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+class SliderAdapter() : RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+
+    private lateinit var listener: OnItemClickListener
+
     var list: List<BannerModel> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     inner class SliderViewHolder(var binding: ItemSliderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(bannerModel: BannerModel){
             Glide.with(binding.root)
                 .load(bannerModel.imageUrl?:bannerModel.imageDrawable)
-                .centerInside()
+                .error(R.drawable.logo_empty)
+                .centerCrop()
                 .into(binding.imageView)
 
             binding.root.setOnClickListener { listener.onClick() }

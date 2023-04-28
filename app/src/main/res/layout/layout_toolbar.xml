@@ -24,19 +24,18 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_dream_back"
+            app:srcCompat="@drawable/toolbar_back_icon"
             app:tint="@color/white" />
     </FrameLayout>
 
 
     <TextView
+        style="@style/Theme.Dream.Typeface_Title"
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_bold"
         android:text="제목"
         android:textColor="@color/white"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_dream_setting"
+            app:srcCompat="@drawable/toolbar_setting_icon"
             app:tint="@color/white" />
     </FrameLayout>
 

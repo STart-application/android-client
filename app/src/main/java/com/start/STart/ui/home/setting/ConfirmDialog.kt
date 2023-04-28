@@ -35,10 +35,12 @@ class ConfirmDialog: DialogFragment() {
         binding.btnConfirm.setOnClickListener(onConfirm)
     }
 
-    fun setData(title: String, onCancel: OnClickListener? = null, onConfirm: OnClickListener) {
+    fun setData(title: String, onCancel: OnClickListener? = null, onConfirm: OnClickListener): ConfirmDialog {
         this.title = title
         this.onCancel = onCancel
         this.onConfirm = onConfirm
+
+        return this
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -5,7 +5,6 @@ import com.start.STart.api.ApiClient
 import com.start.STart.api.ApiError
 import com.start.STart.api.auth.response.TokenData
 
-// TODO: 에러 따로 처리해서 유저에게 알려줘야 함
 object TokenHelper {
 
     const val TAG = ".TokenHelper"
@@ -31,7 +30,7 @@ object TokenHelper {
             } else {
                 Log.d(TAG, "verifyToken: 토큰 인증 실패")
                 val errorBodyString = res.errorBody()?.string()
-                if(ApiClient.parseBody(errorBodyString).errorCode == ApiError.ST011.name) {
+                if(ApiClient.parseBody(errorBodyString)?.errorCode == ApiError.ST011.name) {
                     Log.d(TAG, "verifyToken: 토큰 재발급 시작")
                     return issueAccessToken(accessToken) // 토큰 발급
                 }

@@ -65,7 +65,7 @@ class MyRentActivity : AppCompatActivity() {
                 }
             } else {
                 binding.textInfo.text = "잠시 후 다시 시도해주세요."
-                showErrorToast(this, result.message!!)
+                showErrorToast(this, result.message)
             }
         }
     }

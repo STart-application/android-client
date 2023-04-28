@@ -10,7 +10,7 @@
     </style>
 
     <style name="Theme.Dream.CheckBox_Bold" parent="@style/Theme.Dream.CheckBox">
-        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
     </style>
 </resources>

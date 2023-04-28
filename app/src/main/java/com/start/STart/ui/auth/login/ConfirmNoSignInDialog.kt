@@ -1,65 +1,55 @@
 package com.start.STart.ui.auth.login
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.*
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
+import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogNoSignInBinding
-import com.start.STart.ui.home.HomeActivity
-import com.start.STart.util.Constants
-import com.start.STart.util.PreferenceManager
 import com.start.STart.util.contains
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ConfirmNoSignInDialog : DialogFragment() {
 
     private var _binding: DialogNoSignInBinding? = null
     private val binding get() = _binding!!
 
-    @SuppressLint("ClickableViewAccessibility")
+    private var onCancel: View.OnClickListener? = null
+    private lateinit var onConfirm: View.OnClickListener
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnConfirm.setOnClickListener {
-            lifecycleScope.launch {
-                withContext(Dispatchers.IO) {
-                    PreferenceManager.putBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN, true)
-                }
-                startActivity(Intent(context, HomeActivity::class.java))
-                activity?.finish()
+        initBackground()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initBackground() {
+        binding.composeView.setContent { Cloudy(radius = 10, allowAccumulate = { true }){} }
+        binding.dim.setOnTouchListener { view, motionEvent ->
+            if(!binding.cardView.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
+                binding.btnCancel.callOnClick()
             }
-        }
-
-        binding.cardView.setOnTouchListener { view, motionEvent ->
-            motionEvent.action == MotionEvent.ACTION_DOWN
-        }
-
-        binding.root.setOnClickListener {
-            if(binding.cardView.contains(it.x.toInt(), it.y.toInt())){
-                return@setOnClickListener
-            }
-
-            dismiss()
-        }
-
-        binding.btnCancel.setOnClickListener {
-            dismiss()
+            true
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        (requireActivity() as LoginOrSkipActivity).hideCompose()
+    override fun onStart() {
+        super.onStart()
+
+        binding.btnCancel.setOnClickListener(onCancel?: View.OnClickListener {
+            dismiss()
+        })
+        binding.btnConfirm.setOnClickListener(onConfirm)
     }
+
+    fun setData(onCancel: View.OnClickListener? = null, onConfirm: View.OnClickListener) {
+        this.onCancel = onCancel
+        this.onConfirm = onConfirm
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

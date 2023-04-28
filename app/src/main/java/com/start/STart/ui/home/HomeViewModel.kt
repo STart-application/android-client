@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.BannerModel
-import com.start.STart.api.festival.FestivalService
 import com.start.STart.model.ResultModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,16 +14,10 @@ import java.io.IOException
 
 class HomeViewModel: ViewModel() {
 
-    init {
-        loadBanner()
-        loadFestivalEnabled()
-    }
-
     private val _loadBannerResult: MutableLiveData<ResultModel> = MutableLiveData()
     val loadBannerResult: LiveData<ResultModel>
         get() = _loadBannerResult
 
-    // TODO 배너 API 대체 이미지 추가
     fun loadBanner() = viewModelScope.launch(Dispatchers.IO) {
         try {
             val res = ApiClient.bannerService.readBanner()

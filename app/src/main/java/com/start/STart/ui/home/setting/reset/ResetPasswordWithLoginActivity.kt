@@ -9,10 +9,10 @@ import com.start.STart.R
 import com.start.STart.api.member.request.ResetPasswordWithLoginBody
 import com.start.STart.databinding.ActivityResetPasswordWithLoginBinding
 import com.start.STart.ui.auth.login.LoginActivity
-import com.start.STart.ui.auth.util.setFailText
-import com.start.STart.ui.auth.util.setSuccessText
 import com.start.STart.util.AppRegex
 import com.start.STart.util.Constants
+import com.start.STart.util.setFailText
+import com.start.STart.util.setSuccessText
 import com.start.STart.util.showErrorToast
 
 class ResetPasswordWithLoginActivity : AppCompatActivity() {
@@ -68,7 +68,7 @@ class ResetPasswordWithLoginActivity : AppCompatActivity() {
                     putExtra(Constants.FLAG_RESET_PASSWORD, true)
                 })
             } else {
-                showErrorToast(this, it.message!!)
+                showErrorToast(this, it.message)
             }
         }
     }

@@ -42,17 +42,25 @@ class StampStatusDialog : DialogFragment() {
                 val jsonData = JsonParser.parseString(gson.toJson((it.data as List<*>).get(0))).asJsonObject
                 Log.d(null, "onViewCreated: $jsonData")
 
+                var stampNotMatched = false
+
                 for((idx, type) in StampData.values().withIndex()) {
-                    if(jsonData.get(type.name).asBoolean) {
+                    val isEnabled = jsonData.get(type.name)?.asBoolean?:let {
+                        stampNotMatched = true
+                        false
+                    }
+                    if(isEnabled) {
                         stampImageViewList[idx].setImageResource(type.drawable_e)
                     } else {
                         stampImageViewList[idx].setImageResource(type.drawable)
                     }
+                }
 
+                if(stampNotMatched) {
+                    showErrorToast(requireContext(), "스탬프 정보를 불러올 수 없습니다.")
                 }
 
             } else {
-                viewModel.loadStamp()
                 showErrorToast(requireContext(), "잠시 후 다시 시도해 주세요.")
                 dismiss()
             }

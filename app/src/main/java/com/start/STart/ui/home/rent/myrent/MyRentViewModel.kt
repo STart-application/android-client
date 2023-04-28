@@ -19,7 +19,7 @@ class MyRentViewModel : ViewModel() {
                 loadMyRentResult.postValue(ResultModel(true, data = res.body()?.data))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                loadMyRentResult.postValue(ResultModel(false, errorBody.message))
+                loadMyRentResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             e.printStackTrace()

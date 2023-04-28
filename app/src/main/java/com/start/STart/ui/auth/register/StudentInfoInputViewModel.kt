@@ -26,7 +26,7 @@ class StudentInfoInputViewModel : ViewModel() {
                 _verifyDuplicateResult.postValue(ResultModel(true))
             } else {
                 val body = ApiClient.parseBody(res.errorBody()?.string())
-                when (body.errorCode) {
+                when (body?.errorCode) {
                     ApiError.ST053.name -> { // 학번 중복
                         _verifyDuplicateResult.postValue(ResultModel(false, ApiError.ST053.message))
                     }
@@ -34,7 +34,7 @@ class StudentInfoInputViewModel : ViewModel() {
                         _verifyDuplicateResult.postValue(
                             ResultModel(
                                 false,
-                                "${body.errorCode}: ${body.message}"
+                                "${body?.errorCode}: ${body?.message}"
                             )
                         )
                     }

@@ -2,7 +2,6 @@ package com.start.STart.ui.home.event
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,11 +9,20 @@ import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.api.banner.Event
 import com.start.STart.databinding.ActivityDetailEventBinding
+import com.start.STart.ui.auth.util.AuthenticationUtil
+import com.start.STart.ui.home.PhotoViewDialog
+import com.start.STart.ui.home.event.escape.EscapeActivity
+import com.start.STart.ui.home.event.vote.VoteActivity
+import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
+import com.start.STart.util.openCustomTab
+import com.start.STart.util.showErrorToast
 
 class DetailEventActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityDetailEventBinding.inflate(layoutInflater) }
+
+    private val photoViewDialog by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,87 +38,67 @@ class DetailEventActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initView(event: Event) {
-        binding.eventTitle.text = event.title
 
-        Glide.with(binding.cardImage.context)
+
+        Glide.with(this)
             .load(event.imageUrl)
             .into(binding.cardImage)
 
-        val status = event.eventStatus
-
-        val purple_ghost = ContextCompat.getColor(binding.button.context, R.color.dream_purple_ghost)
-        val purple = ContextCompat.getColor(binding.button.context, R.color.dream_purple)
-        val gray = ContextCompat.getColor(binding.button.context, R.color.text_caption)
-
-
-
-        when(status) {
-            "PROCEEDING" -> {
-                binding.button.backgroundTintList = ColorStateList.valueOf(purple)
-                when(event.eventId) {
-                    999, 998 -> {
-                        binding.button.text = "참여하기"
-                    }
-
-                    else -> {
-                        binding.button.text = "신청하기"
-                    }
-                }
-                binding.eventTitle.setTextColor(purple)
-            }
-
-            "BEFORE" -> {
-                binding.button.backgroundTintList = ColorStateList.valueOf(purple_ghost)
-                when(event.eventId) {
-                    999, 998 -> {
-                        binding.button.text = "참여하기"
-                    }
-
-                    else -> {
-                        binding.button.text = "신청하기"
-                    }
-                }
-                binding.button.isEnabled = false
-
-                binding.eventTitle.setTextColor(purple_ghost)
-            }
-
-            "END" -> {
-                binding.button.backgroundTintList = ColorStateList.valueOf(gray)
-                binding.button.text ="종료된 이벤트"
-                binding.button.isEnabled = false
-
-                binding.eventTitle.setTextColor(gray)
-            }
-
+        binding.cardImage.setOnClickListener {
+            photoViewDialog.show(this, url = event.imageUrl)
         }
 
-        binding.button.setOnClickListener {
-            when(event.eventId) {
-                // 투표
-                998 -> {
-                    startActivity(Intent(applicationContext, VoteActivity::class.java))
-                }
+        val grayColor = ContextCompat.getColor(this, R.color.text_caption)
+        val eventStatus = EventStatus.valueOf(event.eventStatus)
 
-                // 방탈출
-                999 -> {
-                    val intent = Intent(applicationContext, EscapeActivity::class.java)
-                    intent.putExtra("isFirst", true)
-                    startActivity(intent)
+        binding.eventTitle.text = event.title
+
+        val primaryColor = ContextCompat.getColor(this, eventStatus.titleColor)
+        binding.eventTitle.setTextColor(primaryColor)
+        binding.divider.setBackgroundColor(primaryColor)
+
+        binding.btnConfirm.also {
+            it.isEnabled = eventStatus.buttonEnabled
+            when (event.eventId) {
+                Constants.EVENT_CODE_VOTE -> {
+                    it.text = "참여하기"
+                    it.setOnClickListener {
+                        AuthenticationUtil.performActionOnLogin({
+                            startActivity(Intent(applicationContext, VoteActivity::class.java))
+                        }, failListener = { authUtil ->
+                            showErrorToast(this, authUtil.loginFailMessage)
+                        })
+                    }
+                }
+                Constants.EVENT_CODE_ESCAPE -> {
+                    it.text = "참여하기"
+                    it.setOnClickListener {
+                        AuthenticationUtil.performActionOnLogin({
+                            startActivity(Intent(applicationContext, EscapeActivity::class.java).apply {
+                                putExtra(Constants.EXTRA_FLAG_FIRST_ESCAPE_ROOM, true)
+                            })
+                        }, failListener = { authUtil ->
+                            showErrorToast(this, authUtil.loginFailMessage)
+                        })
+                    }
                 }
                 else -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(event.formLink)))
+                    if (eventStatus == EventStatus.END) {
+                        it.text = "종료된 이벤트"
+                        it.backgroundTintList = ColorStateList.valueOf(grayColor)
+                    } else {
+                        it.text = "신청하기"
+                    }
+
+                    it.setOnClickListener {
+                        openCustomTab(event.formLink)
+                    }
                 }
             }
         }
-
-
     }
-
 }

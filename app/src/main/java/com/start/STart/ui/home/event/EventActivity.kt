@@ -1,13 +1,16 @@
 package com.start.STart.ui.home.event
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.api.ApiClient
 import com.start.STart.api.banner.Event
 import com.start.STart.api.banner.EventModel
 import com.start.STart.databinding.ActivityEventBinding
+import com.start.STart.util.dp2px
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +26,7 @@ class EventActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initToolbar()
-
-        binding.rvEvent.adapter = eventAdapter
+        initRecyclerView()
 
         loadEvent()
     }
@@ -34,6 +36,33 @@ class EventActivity : AppCompatActivity() {
         binding.toolbar.btnBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun initRecyclerView() {
+        binding.rvEvent.adapter = eventAdapter
+        binding.rvEvent.addItemDecoration(object: RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                val spanCount = 2
+                val spacing = dp2px(10f).toInt()
+
+                val position = parent.getChildAdapterPosition(view)
+                val column = position % spanCount
+
+                outRect.left = column * spacing / spanCount;
+
+                outRect.right = spacing - (column + 1) * spacing / spanCount
+
+                if (position >= spanCount) {
+                    outRect.top = spacing
+                }
+
+            }
+        })
     }
 
     private fun loadEvent() {

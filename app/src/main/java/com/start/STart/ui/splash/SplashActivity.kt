@@ -55,14 +55,14 @@ class SplashActivity : AppCompatActivity() {
             if (loginTask.await()) {
                 loadMemberTask.start()
                 if(loadMemberTask.await().isSuccessful) {
-                    PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, loadMemberTask.await().data as MemberData)
+                    PreferenceManager.saveToPreferences(Constants.PREF_KEY_MEMBER_DATA, loadMemberTask.await().data as MemberData)
                     activity = HomeActivity::class.java
                 } else {
-                    PreferenceManager.remove(Constants.KEY_MEMBER_DATA)
+                    PreferenceManager.remove(Constants.PREF_KEY_MEMBER_DATA)
                     activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
                 }
             } else {
-                PreferenceManager.remove(Constants.KEY_MEMBER_DATA)
+                PreferenceManager.remove(Constants.PREF_KEY_MEMBER_DATA)
                 activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
             }
 
@@ -140,6 +140,6 @@ class SplashActivity : AppCompatActivity() {
 
     //
     private suspend fun checkAgreeWithoutLogin(): Boolean {
-        return PreferenceManager.getBoolean(Constants.KEY_AGREE_WITHOUT_LOGIN)
+        return PreferenceManager.getBoolean(Constants.PREF_FLAG_WITHOUT_LOGIN)
     }
 }

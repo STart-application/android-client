@@ -1,19 +1,15 @@
 package com.start.STart.ui.home.setting
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.start.STart.R
-import com.start.STart.api.ApiClient
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
@@ -25,10 +21,6 @@ import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
 import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.File
 
 class SettingActivity : AppCompatActivity() {
 
@@ -43,9 +35,6 @@ class SettingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initToolbar()
-
-
-
         initViewListeners()
         initViewModelListeners()
 
@@ -58,18 +47,6 @@ class SettingActivity : AppCompatActivity() {
     }
 
     private fun initViewListeners() {
-        binding.btnLogin.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                PreferenceManager.clear()
-                withContext(Dispatchers.Main) {
-                    startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
-                    finish()
-                }
-            }
-        }
-
         binding.textResetPassword.setOnClickListener {
             startActivity(Intent(this, ResetPasswordWithLoginActivity::class.java))
         }
@@ -153,18 +130,13 @@ class SettingActivity : AppCompatActivity() {
         binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
-    private fun logout() = lifecycleScope.launch(Dispatchers.IO) {
-
-        ApiClient.disableToken()
+    private fun logout()  {
         PreferenceManager.clear()
-
-        withContext(Dispatchers.Main) {
-            startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            })
-            //finish()
-        }
+        startActivity(Intent(applicationContext, LoginOrSkipActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
     }
+
     private fun initViewModelListeners() {
         viewModel.memberData.observe(this) { memberData ->
             if(memberData != null){
@@ -201,6 +173,17 @@ class SettingActivity : AppCompatActivity() {
                 it.setTextColor(ContextCompat.getColor(this, R.color.text_caption))
             }
             it.isEnabled = false
+        }
+
+        binding.btnLogin.setOnClickListener {
+            if(!confirmDialog.isAdded) {
+                confirmDialog.setData("로그인 화면으로 이동합니다.", onConfirm = {
+                    PreferenceManager.clear()
+                    startActivity(Intent(this, LoginOrSkipActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
+                }).show(supportFragmentManager, null)
+            }
         }
     }
 

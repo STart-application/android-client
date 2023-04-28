@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
+import com.start.STart.BuildConfig
 import com.start.STart.R
 import com.start.STart.api.banner.BannerModel
 import com.start.STart.api.member.response.MemberData
@@ -36,12 +37,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
+class HomeActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by viewModels()
-    private val sliderAdapter by lazy { SliderAdapter(this) }
 
+    private val sliderAdapter by lazy { SliderAdapter()}
     private val photoView by lazy { PhotoViewDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,33 +50,33 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
         setContentView(binding.root)
 
         initToolbar()
-        initLiveDataObservers()
+        initBanner()
 
-        binding.slider.offscreenPageLimit = 1
-        binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-        binding.slider.adapter = sliderAdapter
-
-        // Slider와 Indicator를 연결
-        TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
-        }.attach()
-
-        // 메뉴 컴포즈로 구성
         binding.composeMenu.setContent {
             MenuLayout()
         }
     }
 
-    override fun onClick() {
-        if(!photoView.isAdded) {
-            photoView.show(supportFragmentManager, ".PhotoView")
+    private fun initBanner() {
+        binding.slider.offscreenPageLimit = 1
+        binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        binding.slider.adapter = sliderAdapter.apply {
+            setOnItemClickListener(object:SliderAdapter.OnItemClickListener {
+                override fun onClick() {
+                    if(!photoView.isAdded) {
+                        val banner = sliderAdapter.list[binding.slider.currentItem]
+                        photoView.setData(banner.imageUrl)
+                        photoView.setData(banner.imageDrawable)
+                        photoView.show(supportFragmentManager, null)
+                    }
+                }
+            })
         }
-    }
 
-    fun setImage() {
-        photoView.setImage(sliderAdapter.list[binding.slider.currentItem])
-    }
+        // Slider와 Indicator를 연결
+        TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
+        }.attach()
 
-    private fun initLiveDataObservers() {
         val replaceList = listOf(BannerModel("대체 이미지", null, 1, false, R.drawable.logo_empty))
 
         viewModel.loadBannerResult.observe(this) {
@@ -87,10 +88,13 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
 
             } else {
                 sliderAdapter.list =  replaceList
-
             }
+
             binding.progressbarBanner.visibility = View.INVISIBLE
         }
+
+        viewModel.loadBanner()
+        viewModel.loadFestivalEnabled()
     }
 
     private fun initToolbar() {
@@ -126,7 +130,7 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                     }
                     MenuItem(title = "자치회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
                         lifecycleScope.launch(Dispatchers.IO) {
-                            if(PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA) != null) {
+                            if(PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA) != null) {
                                 withContext(Dispatchers.Main) {
                                     startActivity(Intent(applicationContext, PaymentActivity::class.java))
                                 }
@@ -145,7 +149,14 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
                         startActivity(Intent(applicationContext, RentHomeActivity::class.java))
                     }
                     MenuItem(title = "어의 대동제", drawable = R.drawable.ic_home_menu_5) {
-                        if(viewModel.festivalEnabledResult.value?.isSuccessful?:false) {
+                        val isOpened = viewModel.festivalEnabledResult.value?.isSuccessful
+                        if(BuildConfig.DEBUG) {
+                            startActivity(Intent(applicationContext, FestivalActivity::class.java))
+                            Toasty.info(applicationContext, "[디버그] 축제 상태 $isOpened").show()
+                            return@MenuItem
+                        }
+
+                        if(viewModel.festivalEnabledResult.value?.isSuccessful == true) {
                             startActivity(Intent(applicationContext, FestivalActivity::class.java))
                         } else {
                             Toasty.info(applicationContext, "축제 기간이 아닙니다!").show()
@@ -161,7 +172,7 @@ class HomeActivity : AppCompatActivity(), SliderAdapter.OnItemClickListener {
 
     @Preview
     @Composable
-    fun MenuItemPreview() {
+    fun MenuLayoutPreview() {
         MenuLayout()
     }
 }

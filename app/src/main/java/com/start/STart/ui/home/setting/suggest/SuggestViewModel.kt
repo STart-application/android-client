@@ -31,7 +31,7 @@ class SuggestViewModel: ViewModel() {
                 _suggestionResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                _suggestionResult.postValue(ResultModel(false, errorBody.message))
+                _suggestionResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: Exception) {
             _suggestionResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.start.STart.api.ApiClient
 import com.start.STart.api.auth.request.LoginRequest
 import com.start.STart.api.auth.response.TokenData
-import com.start.STart.api.member.response.MemberData
 import com.start.STart.model.ResultModel
 import com.start.STart.util.AppException
 import com.start.STart.util.Constants
@@ -39,7 +38,7 @@ class LoginViewModel : ViewModel() {
                 }
             } else {
                 val body = ApiClient.parseBody(res.errorBody()?.string())
-                _loginResult.postValue(ResultModel(false, body.message))
+                _loginResult.postValue(ResultModel(false, body?.message))
             }
         } catch(e: Exception) {
             _loginResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))
@@ -51,7 +50,8 @@ class LoginViewModel : ViewModel() {
     fun loadMember() = viewModelScope.launch(Dispatchers.IO) {
         val result = MemberDataHelper.readMember()
         if(result.isSuccessful) {
-            PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, result.data as MemberData)
+            _loadMemberResult.postValue(result)
+        } else {
             _loadMemberResult.postValue(result)
         }
     }

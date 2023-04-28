@@ -12,6 +12,8 @@
         layout="@layout/layout_toolbar" />
 
     <ScrollView
+        android:overScrollMode="never"
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/dream_purple_background">
@@ -210,7 +212,7 @@
                                 android:id="@+id/image_instagram"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_instagram"
+                                app:srcCompat="@drawable/sns_instagram"
                                 app:tint="@color/dream_purple" />
 
                             <TextView
@@ -242,7 +244,7 @@
                                 android:id="@+id/image_youtube"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                app:srcCompat="@drawable/ic_youtube"
+                                app:srcCompat="@drawable/sns_youtube"
                                 app:tint="@color/dream_purple" />
 
                             <TextView
@@ -274,7 +276,7 @@
                                 android:id="@+id/image_kakao_talk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_kakao_talk"
+                                app:srcCompat="@drawable/sns_kakao_talk"
                                 app:tint="@color/dream_purple" />
 
                             <TextView
@@ -306,7 +308,7 @@
                                 android:id="@+id/image_home_page"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_internet"
+                                app:srcCompat="@drawable/sns_internet"
                                 app:tint="@color/dream_purple" />
 
                             <TextView
@@ -484,15 +486,14 @@
                 </LinearLayout>
 
                 <TextView
+                    style="@style/Theme.Dream.Typeface_Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/sc_dream_3"
                     android:gravity="center_horizontal"
                     android:text="Tel. 02) 970-7012"
-                    android:textColor="@color/text_caption"
-                    android:textSize="12sp" />
+                    android:textColor="@color/text_caption" />
 
                 <TextView
                     style="@style/Theme.Dream.Typeface_Caption"

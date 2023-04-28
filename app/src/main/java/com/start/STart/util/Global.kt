@@ -13,21 +13,17 @@ import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.exifinterface.media.ExifInterface
 import com.google.gson.Gson
-import com.skydoves.balloon.ArrowOrientation
-import com.skydoves.balloon.Balloon
 import com.start.STart.R
-import com.start.STart.api.member.response.MemberData
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.isAccessible
 
 
 val gson = Gson()
@@ -41,26 +37,6 @@ inline fun <reified T : Parcelable> Intent.getParcelableExtra(key: String): T? {
     } else {
         this.getParcelableExtra<T>(key)
     }
-}
-
-fun View.showRightBalloon(message: String?) {
-    Balloon.Builder(this.context)
-        .setText(message.toString())
-        .setPadding(8)
-        .setBackgroundColor(resources.getColor(R.color.dream_purple))
-        .setArrowOrientation(ArrowOrientation.START)
-        .setArrowPosition(0.5f)
-        .build()
-        .showAlignRight(this)
-}
-
-fun View.showTopBalloon(message: String?) {
-    Balloon.Builder(this.context)
-        .setText(message.toString())
-        .setPadding(8)
-        .setBackgroundColor(resources.getColor(R.color.dream_purple))
-        .build()
-        .showAlignTop(this)
 }
 
 fun Context.openCustomTab(url: String) {
@@ -79,17 +55,6 @@ fun Context.px2dp(px: Float): Float {
     val resources: Resources = this.resources
     val metrics: DisplayMetrics = resources.displayMetrics
     return px / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-}
-
-
-fun <T : Any> T.toHashMap(): HashMap<String, Any?> {
-    val hashMap = HashMap<String, Any?>()
-    val properties = this::class.memberProperties
-    for (property in properties) {
-        property.isAccessible = true
-        hashMap[property.name] = property.getter.call(this)
-    }
-    return hashMap
 }
 
 fun uriToFile(context: Context, uri: Uri): File {
@@ -210,9 +175,13 @@ fun View.contains(x: Int, y: Int): Boolean {
     return x in l..r && y in t..b
 }
 
-fun getMember(): MemberData? {
-    return PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+fun TextView.setSuccessText(text: String) {
+    this.text = text
+    this.setTextColor(resources.getColor(R.color.dream_purple))
 }
 
-
+fun TextView.setFailText(text: String) {
+    this.text = text
+    this.setTextColor(resources.getColor(R.color.dream_red))
+}
 

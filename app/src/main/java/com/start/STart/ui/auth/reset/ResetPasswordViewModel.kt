@@ -30,12 +30,12 @@ class ResetPasswordViewModel: ViewModel() {
                 _resetPasswordResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                when(errorBody.errorCode) {
+                when(errorBody?.errorCode) {
                     ApiError.ST066.name -> { // 인증 정보 불일치
-                        _resetPasswordResult.postValue(ResultModel(false, errorBody.message))
+                        _resetPasswordResult.postValue(ResultModel(false, errorBody?.message))
                     }
                     else -> {
-                        _resetPasswordResult.postValue(ResultModel(false, errorBody.message))
+                        _resetPasswordResult.postValue(ResultModel(false, errorBody?.message))
                     }
                 }
             }

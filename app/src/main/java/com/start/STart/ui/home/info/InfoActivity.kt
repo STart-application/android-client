@@ -1,9 +1,9 @@
 package com.start.STart.ui.home.info
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -75,11 +75,8 @@ class InfoActivity : AppCompatActivity() {
 
     fun showPhotoView() {
         if(!photoViewDialog.isAdded) {
-            photoViewDialog.show(supportFragmentManager, ".PhotoView")
+            photoViewDialog.setData(R.drawable.organization)
+            photoViewDialog.show(supportFragmentManager, null)
         }
-    }
-
-    fun setImage() {
-        photoViewDialog.setImage(R.drawable.organization)
     }
 }

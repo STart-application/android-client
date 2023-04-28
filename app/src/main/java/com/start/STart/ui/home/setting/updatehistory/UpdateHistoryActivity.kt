@@ -12,18 +12,13 @@ class UpdateHistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initView()
-        initViewListeners()
-    }
-
-    private fun initView() {
         initRecyclerView()
+        initToolbar()
     }
 
-    private fun initViewListeners() {
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
+    private fun initToolbar() {
+        binding.toolbar.textTitle.text = "업데이트 내역"
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun initRecyclerView() {
@@ -39,8 +34,9 @@ class UpdateHistoryActivity : AppCompatActivity() {
                     "상시사업 현황이 제대로 보이지 않는 문제 수정"
                 )),
                 // TODO: 업데이트 기록 추가
-                UpdateHistory("1.1.0", "2023.05.06", listOf(
-                    "Dream 총학생회 어플리케이션 업데이트"
+                UpdateHistory("1.1.1", "2023.05.06", listOf(
+                    "Dream 총학생회 어플리케이션 업데이트",
+                    "UI/UI 개선 및 버그 수정"
                 )),
             )
         }
