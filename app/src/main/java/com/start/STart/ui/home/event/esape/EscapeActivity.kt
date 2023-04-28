@@ -15,26 +15,25 @@ import com.start.STart.api.banner.AnswerResponse
 import com.start.STart.api.banner.Question
 import com.start.STart.api.banner.QuestionModel
 import com.start.STart.api.banner.UserStatusModel
-import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityEscapeBinding
 import com.start.STart.ui.home.PhotoViewDialog
 import com.start.STart.util.Constants
-import com.start.STart.util.PreferenceManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class EscapeActivity : AppCompatActivity() {
     
-    val binding by lazy { ActivityEscapeBinding.inflate(layoutInflater)}
-    val memberData = PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA)
+    private val binding by lazy { ActivityEscapeBinding.inflate(layoutInflater) }
+
     var roomId = 0
     var list = mutableListOf<Question>()
 
-    private val photoViewDialog by lazy { PhotoViewDialog() }
+
 
     lateinit var requestBody: AnswerRequest
 
+    private val photoViewDialog by lazy { PhotoViewDialog() }
     private val escapeEndDialog by lazy { EscapeEndDialog() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +51,13 @@ class EscapeActivity : AppCompatActivity() {
             loadStatus()
         }
 
-
         binding.btnNext.setOnClickListener {
-
-            requestBody = AnswerRequest(memberData!!.studentNo, roomId+1, binding.answer.text.toString())
-            Log.d("tag", requestBody.toString())
+            requestBody = AnswerRequest(roomId + 1, binding.answer.text.toString())
             loadAnswer(requestBody)
-
         }
 
         binding.questionImage.setOnClickListener {
-            if(!photoViewDialog.isAdded) {
-                photoViewDialog.setData(list[roomId].imageUrl)
-                photoViewDialog.show(supportFragmentManager, null)
-            }
+            photoViewDialog.show(this, url = list[roomId].imageUrl)
         }
     }
 

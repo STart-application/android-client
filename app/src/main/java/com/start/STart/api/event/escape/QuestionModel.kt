@@ -26,7 +26,6 @@ data class UserStatus(
 
 // 정답 제출
 data class AnswerRequest(
-    val studentNo: String,
     val roomId: Int,
     val answer: String
 )

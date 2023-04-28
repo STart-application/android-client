@@ -4,7 +4,7 @@ import android.util.Log
 import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
 import com.start.STart.api.banner.BannerService
-import com.start.STart.api.banner.EventService
+import com.start.STart.api.event.EventService
 import com.start.STart.api.festival.FestivalService
 import com.start.STart.api.member.MemberService
 import com.start.STart.api.rent.RentService
