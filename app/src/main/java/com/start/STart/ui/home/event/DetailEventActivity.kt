@@ -11,7 +11,7 @@ import com.start.STart.api.banner.Event
 import com.start.STart.databinding.ActivityDetailEventBinding
 import com.start.STart.ui.auth.util.AuthenticationUtil
 import com.start.STart.ui.home.PhotoViewDialog
-import com.start.STart.ui.home.event.esape.EscapeActivity
+import com.start.STart.ui.home.event.escape.EscapeActivity
 import com.start.STart.ui.home.event.vote.VoteActivity
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra

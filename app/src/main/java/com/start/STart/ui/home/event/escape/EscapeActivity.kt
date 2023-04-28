@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.event.esape
+package com.start.STart.ui.home.event.escape
 
 import android.os.Bundle
 import android.util.Log
