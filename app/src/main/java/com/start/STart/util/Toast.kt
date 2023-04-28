@@ -19,10 +19,10 @@ fun showSuccessToast(context: Context, message: String?) {
     ).show()
 }
 
-fun showErrorToast(context: Context, message: String?) {
+fun showErrorToast(context: Context, message: String? = null) {
     Toasty.custom(
         context,
-        message?:"오류가 발생하였습니다.",
+        message?:"잠시 후 다시 시도하여 주세요.",
         ContextCompat.getDrawable(context, es.dmoral.toasty.R.drawable.ic_clear_white_24dp),
         ContextCompat.getColor(context, R.color.dream_red),
         ContextCompat.getColor(context, R.color.white),

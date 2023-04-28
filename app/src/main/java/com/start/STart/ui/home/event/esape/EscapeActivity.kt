@@ -1,6 +1,5 @@
 package com.start.STart.ui.home.event.esape
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,7 +16,7 @@ import com.start.STart.api.banner.QuestionModel
 import com.start.STart.api.banner.UserStatusModel
 import com.start.STart.databinding.ActivityEscapeBinding
 import com.start.STart.ui.home.PhotoViewDialog
-import com.start.STart.util.Constants
+import com.start.STart.util.showErrorToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,72 +24,65 @@ import retrofit2.Response
 class EscapeActivity : AppCompatActivity() {
     
     private val binding by lazy { ActivityEscapeBinding.inflate(layoutInflater) }
-
-    var roomId = 0
-    var list = mutableListOf<Question>()
-
-
-
-    lateinit var requestBody: AnswerRequest
-
     private val photoViewDialog by lazy { PhotoViewDialog() }
     private val escapeEndDialog by lazy { EscapeEndDialog() }
+
+    private var escapedRoomIdx = 0
+    private var questionList = mutableListOf<Question>()
+
+    private val isCleared
+        get() = escapedRoomIdx == questionList.size
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         initToolbar()
 
-        val isFirst = intent.getBooleanExtra(Constants.EXTRA_FLAG_FIRST_ESCAPE_ROOM, false)
-        Log.d("tag", isFirst.toString())
-
-        if(list.isEmpty()) {
+        if(questionList.isEmpty()) {
             loadQuestion()
-        }else {
-            loadStatus()
+        }
+
+        binding.inputAnswer.addTextChangedListener {
+            binding.btnNext.isEnabled = it.toString().isNotBlank()
         }
 
         binding.btnNext.setOnClickListener {
-            requestBody = AnswerRequest(roomId + 1, binding.answer.text.toString())
-            loadAnswer(requestBody)
+            val answer = binding.inputAnswer.text.toString()
+            loadAnswer(AnswerRequest(
+                escapedRoomIdx + 1,
+                answer
+            ))
         }
 
         binding.questionImage.setOnClickListener {
-            photoViewDialog.show(this, url = list[roomId].imageUrl)
+            photoViewDialog.show(this, url = questionList[escapedRoomIdx].imageUrl)
         }
     }
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun loadQuestion() {
         ApiClient.eventService.loadQuestion()
             .enqueue(object : Callback<QuestionModel> {
+
                 override fun onResponse(call: Call<QuestionModel>, response: Response<QuestionModel>) {
                     if(response.isSuccessful) {
-                        val body = response?.body()
+                        val questionModel = response.body()
 
-                        val size = body?.data?.size
-
-                        for(i in 0 until size!!) {
-                            val tmp = Question(body?.data[i].roomId, body?.data[i].imageUrl)
-                            list.add(tmp)
+                        questionModel?.data?.forEach {
+                            questionList.add(it)
                         }
-
-                        Log.d("tag", list.toString())
-                        Log.d("tag", "list 크기 : " + list.size)
-
                         loadStatus()
+                    } else {
+                        showErrorToast(this@EscapeActivity, "문제를 불러올 수 없습니다.")
                     }
                 }
 
                 override fun onFailure(call: Call<QuestionModel>, t: Throwable) {
-                    Log.d("tag", t.message.toString())
+                    showErrorToast(this@EscapeActivity, "문제를 불러올 수 없습니다.")
                 }
             })
 
@@ -99,22 +91,20 @@ class EscapeActivity : AppCompatActivity() {
     private fun loadStatus() {
         ApiClient.eventService.loadStatus()
             .enqueue(object : Callback<UserStatusModel> {
+
                 override fun onResponse(call: Call<UserStatusModel>, response: Response<UserStatusModel>) {
                     if(response.isSuccessful) {
-                        roomId = response.body()?.data?.get(0)!!.roomId
-                        Log.d("tag", "위치 : $roomId")
 
-                        if(roomId == 8) {
+                        escapedRoomIdx = response.body()?.data?.get(0)!!.roomId
+
+                        if(isCleared) {
                             binding.btnNext.text = "제출완료"
                             binding.btnNext.isEnabled = false
 
-                            if(!escapeEndDialog.isAdded) {
-                                escapeEndDialog.show(supportFragmentManager, ".EscapeEndDialog")
-                            }
+                            escapeEndDialog.show(this@EscapeActivity)
                         } else {
-                            setView()
+                            updateUI()
                         }
-
                     }
                 }
 
@@ -128,66 +118,47 @@ class EscapeActivity : AppCompatActivity() {
     private fun loadAnswer(request: AnswerRequest) {
         ApiClient.eventService.loadAnswer(request)
             .enqueue(object : Callback<AnswerResponse> {
+
                 override fun onResponse(call: Call<AnswerResponse>, response: Response<AnswerResponse>) {
                     if(response.isSuccessful) {
-
-                        val body = response.body()?.data?.get(0)
-                        Log.d("tag", body?.answer.toString())
-
-                        // 정답
-                        if(body?.answer!!) {
-                            if(roomId >=7) {
-                                if(!escapeEndDialog.isAdded) {
-                                    escapeEndDialog.show(supportFragmentManager, ".EscapeEndDialog")
-                                }
-
-
-                            } else {
-                                roomId++
-                                startActivity(Intent(applicationContext, EscapeActivity::class.java).apply {
-                                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                    intent.putExtra("isFirst", false)
-                                })
-                            }
+                        val data = response.body()?.data?.get(0)
+                        if(data?.answer == true) {
+                            loadStatus()
                         } else {
-                            // 정답 아닐 때
-                            binding.chk.visibility = View.VISIBLE
+                            binding.textFail.visibility = View.VISIBLE
                         }
-
-
+                    } else {
+                        showErrorToast(this@EscapeActivity)
                     }
                 }
 
                 override fun onFailure(call: Call<AnswerResponse>, t: Throwable) {
-                    Log.d("tag", "answer 오류 : " + t.message.toString())
+                    showErrorToast(this@EscapeActivity)
                 }
             })
 
     }
 
-    private fun setView() {
-        Log.d("tag", "load Status List : " + list.size)
-        Log.d("tag", "load Status 위치 : "+roomId)
-        binding.progressText.text = "총 8문제 중 " + (roomId + 1) + "문제"
+    private val isLastQuestion
+        get() = escapedRoomIdx == questionList.size - 1
 
-        Glide.with(binding.questionImage.context)
-            .load(list[roomId].imageUrl)
-            .centerCrop()
+    private fun updateUI() {
+        binding.progressText.text = "총 ${questionList.size}문제 중 " + (escapedRoomIdx + 1) + "문제"
+        binding.inputAnswer.setText("")
+        binding.textFail.visibility = View.INVISIBLE
+
+        Glide.with(this)
+            .load(questionList[escapedRoomIdx].imageUrl)
             .into(binding.questionImage)
 
-        binding.progressBar.max = 8
-        binding.progressBar.progress = (roomId + 1)
+        binding.progressBar.max = questionList.size
+        binding.progressBar.progress = (escapedRoomIdx + 1)
 
-        if(roomId == 7) {
+        if (isLastQuestion) {
             binding.btnNext.text = "제출하기"
             binding.progressBar.progress = 0
-            binding.progressBar.progressDrawable = ContextCompat.getDrawable(this, R.drawable.background_progress_full)
-        }
-
-
-        binding.answer.addTextChangedListener {
-            binding.btnNext.isEnabled = it.toString().isNotBlank()
-
+            binding.progressBar.progressDrawable =
+                ContextCompat.getDrawable(this, R.drawable.background_progress_full)
         }
     }
 }
