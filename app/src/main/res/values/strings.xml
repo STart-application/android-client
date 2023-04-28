@@ -67,6 +67,7 @@
     <string name="youtube">유튜브</string>
     <string name="kakao_talk">카카오톡</string>
     <string name="home_page">홈페이지</string>
+    <string name="file_provider_authority" translatable="false">myfileprovider</string>
 
     <!-- 상시사업 -->
     <string name="rent_description">1. 대여 물품이 파손되었을 시, 수리 비용의 80%를 대여인(또는 대여 기구) 측에서 비용하고 나머지 20%는 총학생회 자치회비에서 부담한다. \n2. 파손에 대해 수리가 불가하다고 판단될 시, 대여인(또는 대여 기구)에서 같은 제품 또는 그에 걸맞는 비용을 부담하여야 한다.</string>
@@ -87,7 +88,7 @@
 
     <string name="frag7">\n특별기구\n</string>
     <string name="frag8">학생인권위원회\n교내에서 일어는 다양한 인권 관련 사건에 대해 학생들의 의견을 대표하고, 학생들의 인권 의식 향상을 위해 노력하는 단체이다. 학생인권위원회의 활동에 필요한 제반 사항은 학생인권위원회의 자치회칙에 따른다.\n\n총졸업준비위원회\n총출업준비위원회는 졸업과 사회진출에 관한 업무를 관할하는 상설특별기구이며 회원이 될 자격은 본회의 각과 졸업준비위원장과 졸업이 가능한 본회의 회원으로 구성한다.</string>
-    
+
     <string name="url_polar_bear">"https://cdn.pixabay.com/photo/2023/03/06/13/57/polar-bear-7833514_1280.jpg"</string>
 
 </resources>
