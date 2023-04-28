@@ -1,14 +1,11 @@
 package com.start.STart.ui.home.event
 
-import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.skydoves.transformationlayout.TransformationAppCompatActivity
-import com.skydoves.transformationlayout.TransformationCompat
-import com.skydoves.transformationlayout.TransformationLayout
 import com.start.STart.R
 import com.start.STart.api.banner.Event
 import com.start.STart.databinding.ActivityDetailEventBinding
@@ -21,7 +18,7 @@ import com.start.STart.util.getParcelableExtra
 import com.start.STart.util.openCustomTab
 import com.start.STart.util.showErrorToast
 
-class DetailEventActivity : TransformationAppCompatActivity() {
+class DetailEventActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityDetailEventBinding.inflate(layoutInflater) }
 
@@ -102,18 +99,6 @@ class DetailEventActivity : TransformationAppCompatActivity() {
                     }
                 }
             }
-        }
-    }
-
-    companion object {
-        fun startActivity(
-            context: Context,
-            transformationLayout: TransformationLayout,
-            event: Event
-        ) {
-            val intent = Intent(context, DetailEventActivity::class.java)
-            intent.putExtra("event", event)
-            TransformationCompat.startActivity(transformationLayout, intent)
         }
     }
 }

@@ -2,7 +2,6 @@ package com.start.STart.ui.home.event
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -17,8 +16,6 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
         set(value) {
             field = value
         }
-
-    private var previousTime = SystemClock.elapsedRealtime()
 
     inner class EventViewHolder(var binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event){
@@ -60,11 +57,9 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
             }
 
             binding.root.setOnClickListener {
-                val now = SystemClock.elapsedRealtime()
-                if (now - previousTime >= binding.transformLayout.duration) {
-                    DetailEventActivity.startActivity(it.context, binding.transformLayout, event)
-                    previousTime = now
-                }
+                it.context.startActivity(Intent(it.context, DetailEventActivity::class.java).apply {
+                    putExtra("event", event)
+                })
             }
         }
     }
