@@ -13,9 +13,12 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:text="투표항목"
-        style="@style/Theme.Dream.Typeface_Body_1"
+        style="@style/Theme.Dream.Typeface_Body_1_Bold"
+        android:textColor="@color/dream_purple"
         android:paddingStart="7dp"
         android:layout_marginEnd="7dp"
-        android:button="@drawable/button_radio" />
+        android:button="@drawable/button_radio"
+        android:checked="true"
+        android:enabled="false" />
 
 </LinearLayout>

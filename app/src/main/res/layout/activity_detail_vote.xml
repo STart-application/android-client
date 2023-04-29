@@ -101,7 +101,10 @@
                     android:id="@+id/layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingVertical="28dp"
+                    android:paddingStart="26dp"
                     android:orientation="vertical">
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

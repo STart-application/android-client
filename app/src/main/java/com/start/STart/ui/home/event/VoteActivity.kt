@@ -1,5 +1,6 @@
 package com.start.STart.ui.home.event
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,10 @@ class VoteActivity : AppCompatActivity() {
         binding.rvEvent.adapter = voteAdapter
         initToolbar()
         loadVote()
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     private fun initToolbar() {
