@@ -1,13 +1,13 @@
-package com.start.STart.ui.home.event.esape
+package com.start.STart.ui.home.event.escape
 
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.skydoves.cloudy.Cloudy
 import com.start.STart.databinding.DialogEscapeEndBinding
@@ -34,6 +34,12 @@ class EscapeEndDialog: DialogFragment() {
 
     }
 
+    fun show(activity: AppCompatActivity) {
+        if(!isAdded) {
+            super.show(activity.supportFragmentManager, null)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,7 +64,6 @@ class EscapeEndDialog: DialogFragment() {
             }
             false
         }
-        Log.d("tag", "onCreateDialog")
         return dialog
     }
 

@@ -1,5 +1,11 @@
-package com.start.STart.api.banner
+package com.start.STart.api.event
 
+import com.start.STart.api.banner.AnswerRequest
+import com.start.STart.api.banner.AnswerResponse
+import com.start.STart.api.banner.EventModel
+import com.start.STart.api.banner.QuestionModel
+import com.start.STart.api.banner.UserStatusModel
+import com.start.STart.api.banner.VoteModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,4 +32,9 @@ interface EventService {
     // 투표
     @GET("vote")
     fun loadVoteList(): Call<VoteModel>
+
+    @GET("vote/{votingId}")
+    fun loadDetailVote(
+        @Path("votingId") votingId: Int
+    ): Call<VoteModel>
 }

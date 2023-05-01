@@ -36,48 +36,55 @@
 
         <activity
             android:name=".ui.home.festival.info.FestivalInfoActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.rent.myrent.MyRentActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.event.vote.DetailVoteActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.home.event.vote.VoteActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.home.event.esape.EscapeActivity"
+            android:name=".ui.home.event.escape.EscapeActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.home.pay.PaymentActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ui.home.event.DetailEventActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -85,52 +92,64 @@
         <activity
             android:name=".ui.home.rent.RentActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.rent.RentCalendarActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream.ActionBar" />
+            android:theme="@style/Theme.Dream.ActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream.ActionBar" />
+            android:theme="@style/Theme.Dream.ActionBar"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.rent.home.RentHomeActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.setting.suggest.SuggestActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.reset.ResetPasswordActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.reset.ResetPasswordAuthActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.setting.reset.ResetPasswordWithLoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.setting.devinfo.DevInfoActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.home.setting.updatehistory.UpdateHistoryActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream" />
+            android:theme="@style/Theme.Dream"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.login.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -139,7 +158,8 @@
             android:name=".ui.auth.login.LoginOrSkipActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream.LightStatusBar">
+            android:theme="@style/Theme.Dream.LightStatusBar"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -147,7 +167,8 @@
         <activity
             android:name=".ui.auth.register.PolicyActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -155,7 +176,8 @@
         <activity
             android:name=".ui.auth.register.StudentInfoInputActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -163,7 +185,8 @@
         <activity
             android:name=".ui.auth.register.PasswordInputActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -171,7 +194,8 @@
         <activity
             android:name=".ui.auth.register.VerifyCodeActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -179,7 +203,8 @@
         <activity
             android:name=".ui.auth.register.StudentCardUploadActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -188,7 +213,8 @@
             android:name=".ui.auth.register.RegisterCompleteActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream.Background">
+            android:theme="@style/Theme.Dream.Background"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -196,7 +222,8 @@
         <activity
             android:name=".ui.home.info.InfoActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -205,7 +232,8 @@
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream.Starting">
+            android:theme="@style/Theme.Dream.Starting"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -219,7 +247,8 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -227,7 +256,8 @@
         <activity
             android:name=".ui.home.event.EventActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -235,7 +265,8 @@
         <activity
             android:name=".ui.home.festival.FestivalActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -244,7 +275,8 @@
             android:name=".ui.home.setting.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Dream">
+            android:theme="@style/Theme.Dream"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -65,6 +66,14 @@ class PhotoViewDialog : DialogFragment() {
                 override fun onLoadCleared(placeholder: Drawable?) { }
             })
 
+    }
+
+    fun show(activity: AppCompatActivity, tag: String? = null, resourceId: Int? = null, url: String? = null) {
+        if(!isAdded) {
+            this.resourceId = resourceId
+            this.imageUrl = url
+            super.show(activity.supportFragmentManager, tag)
+        }
     }
 
     override fun onCreateView(
