@@ -23,11 +23,11 @@ class VoteActivity : AppCompatActivity() {
 
         binding.rvEvent.adapter = voteAdapter
         initToolbar()
-        loadVote()
     }
 
-    override fun onBackPressed() {
-        finish()
+    override fun onStart() {
+        super.onStart()
+        loadVote()
     }
 
     private fun initToolbar() {

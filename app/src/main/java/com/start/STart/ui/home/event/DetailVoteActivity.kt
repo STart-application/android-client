@@ -1,6 +1,5 @@
 package com.start.STart.ui.home.event
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
@@ -59,11 +58,6 @@ class DetailVoteActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
         binding.toolbar.btnBack.setOnClickListener {
@@ -89,9 +83,6 @@ class DetailVoteActivity : AppCompatActivity() {
 
                         for(i in 0 until size) {
                             addItem(body.voteOptionList[i], binding.layout)
-
-                            Log.d("tag", "isEmpty: $i")
-
                         }
                     }
 
@@ -140,14 +131,15 @@ class DetailVoteActivity : AppCompatActivity() {
             .enqueue(object : Callback<VoteModel> {
                 override fun onResponse(call: Call<VoteModel>, response: Response<VoteModel>) {
                     if(response.isSuccessful) {
-                        Log.d("tag", "postVote : ${response.body()?.message}")
                         binding.layout.removeAllViews()
 
                         setViewFin()
 
                     }
                     else {
-                        //Toast.makeText(applicationContext, response.message().toString(), Toast.LENGTH_SHORT).show()
+                        val errorBody = ApiClient.parseBody(response.errorBody()?.string())
+                        Log.d("tag", "${errorBody.message}")
+                        Toast.makeText(applicationContext, errorBody.message, Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -194,12 +186,9 @@ class DetailVoteActivity : AppCompatActivity() {
                                 itemFin2Binding.item.text = body.voteOptionList[i].optionTitle
                                 itemFin2Binding.item.id = body.voteOptionList[i].votingOptionId
                                 binding.layout.addView(itemFin2Binding.root)
-
-                                Log.d("tag", "not empty-if: $i, ")
-
                             } else {
                                 addItem2(body.voteOptionList[i], binding.layout)
-                                Log.d("tag", "not empty-else: $i")
+
                             }
                         }
                     }

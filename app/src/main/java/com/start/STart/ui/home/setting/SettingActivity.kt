@@ -217,10 +217,8 @@ class SettingActivity : AppCompatActivity() {
                 out = FileOutputStream(cacheFile)
                 copyFile(in1, out)
                 in1.close()
-                in1 = null
                 out.flush()
                 out.close()
-                out = null
             }
         } catch (e: IOException) {
             e.printStackTrace()
