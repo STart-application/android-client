@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.content.FileProvider
 import com.start.STart.R
 import com.start.STart.databinding.ActivityPolicyBinding
 import com.start.STart.util.openCustomTab
+import java.io.*
 
 class PolicyActivity : AppCompatActivity() {
     private val binding by lazy { ActivityPolicyBinding.inflate(layoutInflater) }
@@ -35,11 +37,13 @@ class PolicyActivity : AppCompatActivity() {
 
     private fun initPolicyCustomTab() {
         binding.textMorePrivacy.setOnClickListener {
-            openCustomTab(resources.getString(R.string.link_privacy_policy))
+            //openCustomTab(resources.getString(R.string.link_privacy_policy))
+            openPdf("sc_privacy.pdf")
         }
 
         binding.textMoreService.setOnClickListener {
-            openCustomTab(resources.getString(R.string.link_terms_of_service))
+            //openCustomTab(resources.getString(R.string.link_terms_of_service))
+            openPdf("sc_service.pdf")
         }
     }
 
@@ -74,4 +78,53 @@ class PolicyActivity : AppCompatActivity() {
         binding.checkAll.isChecked = isChecked
         checkBoxList.forEach { it.isChecked = isChecked }
     }
+
+    private fun openPdf(fileName: String) {
+        copyFileFromAssets(fileName)
+        val file = File("$filesDir/$fileName")
+
+        var uri = FileProvider.getUriForFile(this, getString(R.string.file_provider_authority), file)
+
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(uri, "application/pdf")
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun copyFileFromAssets(fileName: String) {
+        val assetManager = this.assets
+
+        val cacheFile = File("$filesDir/$fileName")
+        var in1: InputStream? = null
+        var out: OutputStream? = null
+        try {
+            if (cacheFile.exists()) {
+                return
+            } else {
+                in1 = assetManager.open(fileName)
+                out = FileOutputStream(cacheFile)
+                copyFile(in1, out)
+                in1.close()
+                out.flush()
+                out.close()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun copyFile(in1: InputStream, out: OutputStream) {
+        val buffer = ByteArray(1024)
+        var read: Int
+        while (in1.read(buffer).also { read = it } != -1) {
+            out.write(buffer, 0, read)
+        }
+    }
+
 }

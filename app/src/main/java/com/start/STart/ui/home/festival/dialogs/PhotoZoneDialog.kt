@@ -7,10 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.cloudy.Cloudy
+import com.start.STart.R
 import com.start.STart.api.ApiClient
+import com.start.STart.api.banner.BannerModel
 import com.start.STart.api.festival.response.PhotoZoneModel
 import com.start.STart.databinding.DialogPhotoZoneBinding
+import com.start.STart.ui.home.SliderAdapter
 import com.start.STart.ui.home.festival.info.photozone.PhotoZoneAdapter
 import com.start.STart.util.contains
 import retrofit2.Call
@@ -26,7 +31,15 @@ class PhotoZoneDialog: DialogFragment() {
         
         initBackground()
 
-        binding.photoZone.adapter = photoZoneAdapter
+        binding.slider.offscreenPageLimit = 1
+        binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        binding.slider.adapter = photoZoneAdapter
+/*
+        // Slider와 Indicator를 연결
+        TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
+        }.attach()
+
+ */
 
     }
 
@@ -66,7 +79,6 @@ class PhotoZoneDialog: DialogFragment() {
                 override fun onResponse(call: Call<PhotoZoneModel>, response: Response<PhotoZoneModel>) {
                     if(response.isSuccessful) {
 
-                        val size = response.body()?.data?.get(0)?.photoList?.size
                         photoZoneAdapter.list = response.body()!!.data[0].photoList
                         photoZoneAdapter.notifyDataSetChanged()
                     }

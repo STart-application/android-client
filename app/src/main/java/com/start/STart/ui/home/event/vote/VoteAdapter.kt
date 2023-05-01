@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
-import com.start.STart.api.banner.Vote
+import com.start.STart.api.event.vote.Vote
 import com.start.STart.databinding.ItemVoteBinding
 
 class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
@@ -31,8 +31,14 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
 
             when(vote.status) {
                 "START" -> {
-                    binding.status.backgroundTintList = ColorStateList.valueOf(green)
-                    binding.status.text = "투표 가능"
+                    if(vote.userSelectedOptionIds.isEmpty()) {
+                        binding.status.backgroundTintList = ColorStateList.valueOf(green)
+                        binding.status.text = "투표 가능"
+                    } else {
+                        binding.status.backgroundTintList = ColorStateList.valueOf(purple)
+                        binding.status.text = "투표 완료"
+                    }
+
                 }
                 "END" -> {
                     binding.status.backgroundTintList = ColorStateList.valueOf(gray)
@@ -50,6 +56,11 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
                     "START" -> {
                         context.startActivity(Intent(context, DetailVoteActivity::class.java).apply {
                             putExtra("vote", vote.votingId)
+                            if(vote.userSelectedOptionIds.isEmpty())
+                                putExtra("vote1", true)
+                            else
+                                putExtra("vote1", false)
+
                         })
                     }
                     "END" -> {

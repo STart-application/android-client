@@ -45,7 +45,29 @@
                 android:text="포토존" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:background="@drawable/background_round_10">
+
+
+            </androidx.viewpager2.widget.ViewPager2>
+
+            <!--com.google.android.material.tabs.TabLayout
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/dream_purple_background"
+                app:tabGravity="center"
+                app:tabBackground="@drawable/banner_tab_indicator"
+                app:tabMode="fixed"
+                android:layout_marginBottom="20dp"/-->
+
+            <!--androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/photoZone"
                 style="@style/Theme.Dream.Typeface_Body_1"
                 android:layout_width="match_parent"
@@ -57,7 +79,7 @@
                 android:overScrollMode="never"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_photozone" />
+                tools:listitem="@layout/item_photozone" /-->
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

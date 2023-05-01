@@ -1,4 +1,4 @@
-package com.start.STart.api.banner
+package com.start.STart.api.event.vote
 
 data class VoteModel(
     val status: Int,
@@ -15,11 +15,17 @@ data class Vote(
     val maxSelect: Int,
     val displayStartDate: String,
     val displayEndDate: String,
-    val voteOptionList: List<VoteOption>
+    val voteOptionList: List<VoteOption>,
+    val userSelectedOptionIds: List<Int>
 )
 
 data class VoteOption(
     val votingOptionId: Int,
     val optionTitle: String,
     val status: String
+)
+
+data class VoteRequest(
+    var votingId: Int,
+    var votingOptionIds: MutableList<Int>
 )

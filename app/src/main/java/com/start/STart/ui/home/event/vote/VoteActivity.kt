@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.api.ApiClient
-import com.start.STart.api.banner.Vote
-import com.start.STart.api.banner.VoteModel
+import com.start.STart.api.event.vote.Vote
+import com.start.STart.api.event.vote.VoteModel
 import com.start.STart.databinding.ActivityVoteBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,6 +22,10 @@ class VoteActivity : AppCompatActivity() {
 
         binding.rvEvent.adapter = voteAdapter
         initToolbar()
+    }
+
+    override fun onStart() {
+        super.onStart()
         loadVote()
     }
 

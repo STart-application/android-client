@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.children
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.start.STart.R
@@ -21,6 +22,8 @@ import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
 import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
+import java.io.*
+
 
 class SettingActivity : AppCompatActivity() {
 
@@ -58,40 +61,26 @@ class SettingActivity : AppCompatActivity() {
             startActivity(Intent(this, DevInfoActivity::class.java))
         }
         // SNS 연결
-        binding.layoutInstagram.setOnClickListener { openCustomTab(resources.getString(R.string.link_instagram)) }
-        binding.layoutHomePage.setOnClickListener { openCustomTab(resources.getString(R.string.link_st_home)) }
-        binding.layoutYoutube.setOnClickListener { openCustomTab(resources.getString(R.string.link_youtube)) }
-        binding.layoutKakaoTalk.setOnClickListener { openCustomTab(resources.getString(R.string.link_kakao_talk)) }
+        binding.layoutInstagram.setOnClickListener { openCustomTab(resources.getString(com.start.STart.R.string.link_instagram)) }
+        binding.layoutHomePage.setOnClickListener { openCustomTab(resources.getString(com.start.STart.R.string.link_st_home)) }
+        binding.layoutYoutube.setOnClickListener { openCustomTab(resources.getString(com.start.STart.R.string.link_youtube)) }
+        binding.layoutKakaoTalk.setOnClickListener { openCustomTab(resources.getString(com.start.STart.R.string.link_kakao_talk)) }
 
         // 제안사항
         binding.textFeatureSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_FEATURE)}
         binding.textErrorSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ERROR)}
         binding.textEtcSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ETC)}
 
-
-        /*
-        binding.textPrivacyPolicy.setOnClickListener{
-            val intent = Intent(Intent.ACTION_DEFAULT)
-            val file = File("android.resource://com.start.STart/${R.raw.sc_privacy}")
-            if(file.exists()) {
-                val uri = Uri.fromFile(file)
-                intent.data = uri
-                startActivity(intent)
-            }
+        binding.textPrivacyPolicy.setOnClickListener {
+            openPdf("sc_privacy.pdf")
         }
 
         binding.textTermsOfService.setOnClickListener {
-            val pdfUri = Uri.parse("android.resource://com.start.STart/${R.raw.sc_service}")
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndType(pdfUri, "application")
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            Log.d("tag", "service")
+            openPdf("sc_service.pdf")
         }
 
-         */
-        binding.textPrivacyPolicy.setOnClickListener { openCustomTab(resources.getString(R.string.link_privacy_policy)) }
-        binding.textTermsOfService.setOnClickListener { openCustomTab(resources.getString(R.string.link_terms_of_service)) }
+        //binding.textPrivacyPolicy.setOnClickListener { openCustomTab(resources.getString(R.string.link_privacy_policy)) }
+        //binding.textTermsOfService.setOnClickListener { openCustomTab(resources.getString(R.string.link_terms_of_service)) }
         binding.textOpenSourceLicense.setOnClickListener {
             OssLicensesMenuActivity.setActivityTitle("오픈소스 라이선스")
             startActivity(Intent(this, OssLicensesMenuActivity::class.java))
@@ -170,7 +159,7 @@ class SettingActivity : AppCompatActivity() {
         //binding.layoutAuthManagement.alpha = 0.7f
         binding.layoutAuthManagement.children.forEach {
             if(it is TextView) {
-                it.setTextColor(ContextCompat.getColor(this, R.color.text_caption))
+                it.setTextColor(ContextCompat.getColor(this, com.start.STart.R.color.text_caption))
             }
             it.isEnabled = false
         }
@@ -192,4 +181,53 @@ class SettingActivity : AppCompatActivity() {
             putExtra(SuggestActivity.KEY_TYPE_SUGGEST, type)
         })
     }
+
+    private fun openPdf(fileName: String) {
+        copyFileFromAssets(fileName)
+        val file = File("$filesDir/$fileName")
+
+        var uri =FileProvider.getUriForFile(this, getString(R.string.file_provider_authority), file)
+
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(uri, "application/pdf")
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun copyFileFromAssets(fileName: String) {
+        val assetManager = this.assets
+
+        val cacheFile = File("$filesDir/$fileName")
+        var in1: InputStream? = null
+        var out: OutputStream? = null
+        try {
+            if (cacheFile.exists()) {
+                return
+            } else {
+                in1 = assetManager.open(fileName)
+                out = FileOutputStream(cacheFile)
+                copyFile(in1, out)
+                in1.close()
+                out.flush()
+                out.close()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun copyFile(in1: InputStream, out: OutputStream) {
+        val buffer = ByteArray(1024)
+        var read: Int
+        while (in1.read(buffer).also { read = it } != -1) {
+            out.write(buffer, 0, read)
+        }
+    }
+
 }
