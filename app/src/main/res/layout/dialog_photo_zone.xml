@@ -57,7 +57,7 @@
 
             </androidx.viewpager2.widget.ViewPager2>
 
-            <!--com.google.android.material.tabs.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -65,21 +65,9 @@
                 app:tabGravity="center"
                 app:tabBackground="@drawable/banner_tab_indicator"
                 app:tabMode="fixed"
-                android:layout_marginBottom="20dp"/-->
+                app:tabIndicator="@null"
+                android:layout_marginBottom="20dp"/>
 
-            <!--androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/photoZone"
-                style="@style/Theme.Dream.Typeface_Body_1"
-                android:layout_width="match_parent"
-                android:layout_height="340dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/background_round_10"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_photozone" /-->
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
