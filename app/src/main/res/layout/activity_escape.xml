@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.event.EscapeActivity">
+    tools:context=".ui.home.event.escape.EscapeActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -77,18 +77,18 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="30dp"
-                app:layout_constraintBottom_toTopOf="@+id/answer"
+                app:layout_constraintBottom_toTopOf="@+id/input_answer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/progressBar"
                 app:layout_constraintVertical_bias="0.0">
 
                 <ScrollView
-                    android:overScrollMode="never"
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/questionImage"
@@ -103,29 +103,29 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/answer"
-                style="@style/Theme.Dream.Typeface_Caption"
+                android:id="@+id/input_answer"
+                style="@style/Theme.Dream.Typeface_Body_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="28dp"
                 android:background="@drawable/background_round_10"
                 android:hint="정답을 입력하세요."
+                android:inputType="text"
+                android:maxLines="1"
                 android:paddingVertical="11dp"
                 android:paddingStart="21dp"
-                android:textSize="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnNext"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/chk"
+                android:id="@+id/text_fail"
                 style="@style/Theme.Dream.Typeface_Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="정답이 아닙니다."
                 android:textColor="@color/dream_red"
-
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@+id/btnNext"
                 app:layout_constraintEnd_toEndOf="parent"

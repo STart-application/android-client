@@ -20,7 +20,7 @@ class SettingViewModel: ViewModel() {
         get() = _memberData
 
     fun loadMemberData() = viewModelScope.launch(Dispatchers.IO) {
-        val data = PreferenceManager.loadFromPreferences<MemberData>(Constants.KEY_MEMBER_DATA)
+        val data = PreferenceManager.loadFromPreferences<MemberData>(Constants.PREF_KEY_MEMBER_DATA)
         _memberData.postValue(data)
     }
 
@@ -32,7 +32,7 @@ class SettingViewModel: ViewModel() {
                 deleteMemberResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                deleteMemberResult.postValue(ResultModel(false, errorBody.message))
+                deleteMemberResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             deleteMemberResult.postValue(ResultModel(false, AppException.UNEXPECTED.title))

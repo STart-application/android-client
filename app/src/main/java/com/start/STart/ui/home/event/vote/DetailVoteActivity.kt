@@ -1,4 +1,4 @@
-package com.start.STart.ui.home.event
+package com.start.STart.ui.home.event.vote
 
 import android.content.res.ColorStateList
 import android.os.Build
@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.start.STart.R
 import com.start.STart.api.ApiClient
-import com.start.STart.api.banner.VoteModel
-import com.start.STart.api.banner.VoteOption
-import com.start.STart.api.banner.VoteRequest
+import com.start.STart.api.event.vote.VoteModel
+import com.start.STart.api.event.vote.VoteOption
+import com.start.STart.api.event.vote.VoteRequest
 import com.start.STart.databinding.ActivityDetailVoteBinding
 import com.start.STart.databinding.ItemVoteFin2Binding
 import com.start.STart.databinding.ItemVoteFinBinding
@@ -60,9 +60,7 @@ class DetailVoteActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.toolbar.textTitle.text = "이벤트 참여"
-        binding.toolbar.btnBack.setOnClickListener {
-            finish()
-        }
+        binding.toolbar.btnBack.setOnClickListener { finish() }
     }
 
     private fun loadDetailVote(votingId: Int) {
@@ -138,8 +136,8 @@ class DetailVoteActivity : AppCompatActivity() {
                     }
                     else {
                         val errorBody = ApiClient.parseBody(response.errorBody()?.string())
-                        Log.d("tag", "${errorBody.message}")
-                        Toast.makeText(applicationContext, errorBody.message, Toast.LENGTH_SHORT).show()
+                        Log.d("tag", "${errorBody?.message}")
+                        Toast.makeText(applicationContext, errorBody?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -203,5 +201,4 @@ class DetailVoteActivity : AppCompatActivity() {
         val ghost = ContextCompat.getColor(binding.button.context, R.color.dream_purple_ghost)
         binding.button.backgroundTintList = ColorStateList.valueOf(ghost)
     }
-
 }

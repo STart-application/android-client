@@ -41,10 +41,10 @@ class StudentCardUploadViewModel: ViewModel() {
                 _registerResult.postValue(ResultModel(true))
             } else {
                 val body = ApiClient.parseBody(res.errorBody()?.string())
-                if(timeOutCnt == 1 && body.errorCode == ApiError.ST053.name) {
+                if(timeOutCnt == 1 && body?.errorCode == ApiError.ST053.name) {
                     _registerResult.postValue(ResultModel(true))
                 } else {
-                    _registerResult.postValue(ResultModel(false, body.message))
+                    _registerResult.postValue(ResultModel(false, body?.message))
                 }
             }
         } catch (e: SocketTimeoutException) {

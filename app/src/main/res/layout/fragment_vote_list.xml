@@ -8,7 +8,7 @@
     android:overScrollMode="never"
     android:scrollbars="none"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context=".ui.home.event.VoteListFragment"
-    tools:listitem="@layout/item_vote_list">
+    tools:context=".ui.home.event.vote.VoteListFragment"
+    tools:listitem="@layout/item_list">
 
 </androidx.recyclerview.widget.RecyclerView>

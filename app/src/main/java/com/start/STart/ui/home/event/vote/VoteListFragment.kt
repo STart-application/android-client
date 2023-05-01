@@ -1,13 +1,12 @@
-package com.start.STart.ui.home.event
+package com.start.STart.ui.home.event.vote
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.start.STart.R
 import com.start.STart.databinding.FragmentVoteListBinding
+import com.start.STart.ui.home.event.vote.VoteAdapter
 
 class VoteListFragment : Fragment() {
 

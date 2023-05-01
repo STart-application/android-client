@@ -10,13 +10,13 @@ import com.start.STart.R
 import com.start.STart.api.member.response.MemberData
 import com.start.STart.databinding.ActivityRentHomeBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
+import com.start.STart.ui.auth.util.AuthenticationUtil
 import com.start.STart.ui.home.rent.RentItem
 import com.start.STart.ui.home.rent.myrent.MyRentActivity
 import com.start.STart.ui.home.setting.ConfirmDialog
 import com.start.STart.util.PreferenceManager
 import com.start.STart.util.dp2px
 import com.start.STart.util.getCollegeByDepartment
-import com.start.STart.util.getMember
 
 class RentHomeActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRentHomeBinding.inflate(layoutInflater) }
@@ -38,19 +38,18 @@ class RentHomeActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        val member = getMember()
-        if(member != null) {
-            bindMemberData(member)
-        } else {
+        AuthenticationUtil.performActionOnLogin({
+            bindMemberData(it.loggedInMemberData)
+        }, failListener = {
             enableNotLogin()
-        }
+        })
     }
 
     private fun initButton() {
         binding.btnMyRent.setOnClickListener {
-            if(getMember() != null) {
+            AuthenticationUtil.performActionOnLogin({
                 startActivity(Intent(this, MyRentActivity::class.java))
-            }
+            })
         }
     }
 
@@ -90,13 +89,15 @@ class RentHomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindMemberData(memberData: MemberData) {
+    private fun bindMemberData(memberData: MemberData?) {
         binding.layoutProfile.visibility = View.VISIBLE
         binding.layoutLogin.visibility = View.GONE
 
-        binding.textName.text= memberData.name
-        binding.textStudentId.text = memberData.studentNo
-        binding.textDepartment.text = memberData.department
-        binding.textCollege.text = getCollegeByDepartment(memberData.department)
+        memberData?.let {
+            binding.textName.text= it.name
+            binding.textStudentId.text = it.studentNo
+            binding.textDepartment.text = it.department
+            binding.textCollege.text = getCollegeByDepartment(it.department)
+        }
     }
 }

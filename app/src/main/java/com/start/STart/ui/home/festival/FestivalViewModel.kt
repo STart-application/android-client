@@ -22,7 +22,7 @@ class FestivalViewModel: ViewModel() {
                 loadStampResult.postValue(ResultModel(true, data = res.body()?.data))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                loadStampResult.postValue(ResultModel(false, errorBody.message))
+                loadStampResult.postValue(ResultModel(false, errorBody?.message))
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -39,7 +39,7 @@ class FestivalViewModel: ViewModel() {
                 postStampResult.postValue(ResultModel(true))
             } else {
                 val errorBody = ApiClient.parseBody(res.errorBody()?.string())
-                postStampResult.postValue(ResultModel(false, message = errorBody.message, errorCode = errorBody.errorCode))
+                postStampResult.postValue(ResultModel(false, message = errorBody?.message, errorCode = errorBody?.errorCode))
             }
         } catch (e: IOException) {
             postStampResult.postValue(ResultModel(false, message = AppException.UNEXPECTED.title))

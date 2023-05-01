@@ -10,7 +10,7 @@ object MemberDataHelper {
             val res = ApiClient.memberService.readMember()
             if(res.isSuccessful) {
                 val result = res.body()?.parseData(MemberData::class.java)
-                PreferenceManager.saveToPreferences(Constants.KEY_MEMBER_DATA, result)
+                PreferenceManager.saveToPreferences(Constants.PREF_KEY_MEMBER_DATA, result)
                 return ResultModel(true, data = result)
             } else {
                 return ResultModel(false, res.errorBody()?.string())

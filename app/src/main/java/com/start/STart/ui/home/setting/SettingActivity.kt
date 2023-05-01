@@ -38,9 +38,6 @@ class SettingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initToolbar()
-
-
-
         initViewListeners()
         initViewModelListeners()
 

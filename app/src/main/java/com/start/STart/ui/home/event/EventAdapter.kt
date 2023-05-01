@@ -13,11 +13,9 @@ import com.start.STart.databinding.ItemEventBinding
 
 class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
     var list: MutableList<Event> = mutableListOf()
-
         set(value) {
             field = value
         }
-
 
     inner class EventViewHolder(var binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event){
@@ -59,8 +57,7 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
             }
 
             binding.root.setOnClickListener {
-                val context = binding.root.context
-                context.startActivity(Intent(context, DetailEventActivity::class.java).apply {
+                it.context.startActivity(Intent(it.context, DetailEventActivity::class.java).apply {
                     putExtra("event", event)
                 })
             }

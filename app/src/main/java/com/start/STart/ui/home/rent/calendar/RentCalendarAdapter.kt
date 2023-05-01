@@ -9,7 +9,7 @@ import com.start.STart.R
 import com.start.STart.databinding.ItemRentCalendarBinding
 import java.util.Calendar
 
-class RentCalendarAdapter(val onDateSelectedListener: OnDataSelectedListener): RecyclerView.Adapter<RentCalendarAdapter.RentCalendarViewHolder>() {
+class RentCalendarAdapter(val onDateSelectedListener: OnDateSelectedListener): RecyclerView.Adapter<RentCalendarAdapter.RentCalendarViewHolder>() {
 
     var calendarMonth: Int = 0
 
@@ -92,7 +92,7 @@ class RentCalendarAdapter(val onDateSelectedListener: OnDataSelectedListener): R
         onDateSelectedListener.onClick(list[userSelectedIndex])
     }
 
-    interface OnDataSelectedListener {
+    interface OnDateSelectedListener {
         fun onClick(rentDateItem: RentDateItem)
     }
 }

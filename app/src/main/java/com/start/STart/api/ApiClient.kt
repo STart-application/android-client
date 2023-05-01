@@ -4,7 +4,7 @@ import android.util.Log
 import com.start.STart.BuildConfig
 import com.start.STart.api.auth.AuthService
 import com.start.STart.api.banner.BannerService
-import com.start.STart.api.banner.EventService
+import com.start.STart.api.event.EventService
 import com.start.STart.api.festival.FestivalService
 import com.start.STart.api.member.MemberService
 import com.start.STart.api.rent.RentService
@@ -55,9 +55,14 @@ object ApiClient {
         tokenInterceptor.disableToken()
     }
 
-    fun parseBody(errorBodyString: String?): ApiResponse {
-        val body = gson.fromJson(errorBodyString, ApiResponse::class.java)
-        return body
+    fun parseBody(errorBodyString: String?): ApiResponse? {
+        try {
+            val body = gson.fromJson(errorBodyString, ApiResponse::class.java)
+            return body
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
 

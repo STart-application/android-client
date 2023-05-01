@@ -1,5 +1,12 @@
-package com.start.STart.api.banner
+package com.start.STart.api.event
 
+import com.start.STart.api.banner.EventModel
+import com.start.STart.api.event.vote.AnswerRequest
+import com.start.STart.api.event.vote.AnswerResponse
+import com.start.STart.api.event.vote.QuestionModel
+import com.start.STart.api.event.vote.UserStatusModel
+import com.start.STart.api.event.vote.VoteModel
+import com.start.STart.api.event.vote.VoteRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -1,4 +1,4 @@
-package com.start.STart.api.banner
+package com.start.STart.api.event.vote
 
 // 8문제 조회
 data class QuestionModel(
@@ -26,7 +26,6 @@ data class UserStatus(
 
 // 정답 제출
 data class AnswerRequest(
-    val studentNo: String,
     val roomId: Int,
     val answer: String
 )

@@ -1,9 +1,9 @@
 package com.start.STart.ui.auth.reset
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.start.STart.R
 import com.start.STart.databinding.ActivityResetAuthBinding
@@ -81,7 +81,7 @@ class ResetPasswordAuthActivity : AppCompatActivity() {
                 showSuccessToast(this, getString(R.string.auth_sms_success))
             } else {
                 viewModel.stopTimer()
-                showErrorToast(this, it.message!!)
+                showErrorToast(this, it.message)
             }
         }
 
@@ -102,7 +102,7 @@ class ResetPasswordAuthActivity : AppCompatActivity() {
                     putExtra(Constants.KEY_STUDENT_ID, sentStudentId)
                 })
             } else {
-                showErrorToast(this, it.message!!)
+                showErrorToast(this, it.message)
             }
         }
     }

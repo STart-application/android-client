@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.JsonParser
 import com.skydoves.cloudy.Cloudy
+import com.start.STart.BuildConfig
 import com.start.STart.databinding.DialogPostStampBinding
 import com.start.STart.ui.home.festival.FestivalViewModel
 import com.start.STart.ui.home.festival.StampData
@@ -53,10 +54,18 @@ class PostStampDialog: DialogFragment() {
         binding.btnStamp.setOnClickListener {
             lifecycleScope.launch {
                 val myLatLng = withContext(Dispatchers.IO) { getMyLocation() }
-                if(checkInCircle(myLatLng, centerLatLng = stampData!!.latLng, radius = 50.0)) {
+
+                val inCircle = checkInCircle(myLatLng, centerLatLng = stampData!!.latLng, radius = 50.0)
+
+                if(BuildConfig.DEBUG) {
+                    Toasty.info(requireContext(), "[디버그] 인서클 $inCircle").show()
                     viewModel.postStamp(stampData!!.name)
                 } else {
-                    Toasty.info(requireContext(), "도장 존으로 이동하여 주세요.").show()
+                    if(inCircle) {
+                        viewModel.postStamp(stampData!!.name)
+                    } else {
+                        Toasty.info(requireContext(), "도장 존으로 이동하여 주세요.").show()
+                    }
                 }
             }
 
@@ -80,7 +89,7 @@ class PostStampDialog: DialogFragment() {
             if(it.isSuccessful) {
                 viewModel.loadStamp()
             } else {
-                showErrorToast(requireContext(), it.message!!)
+                showErrorToast(requireContext(), it.message)
             }
         }
 

@@ -20,6 +20,7 @@ import com.start.STart.util.AppException
 import com.start.STart.util.Constants
 import com.start.STart.util.getParcelableExtra
 import com.start.STart.util.getPart
+import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -131,7 +132,7 @@ class StudentCardUploadActivity : AppCompatActivity() {
                 if(result.exception == AppException.TIMEOUT) {
                     register()
                 }
-                Toasty.error(this, result.message!!).show()
+                showErrorToast(this, result.message)
             }
 
             binding.progressbar.visibility = View.GONE

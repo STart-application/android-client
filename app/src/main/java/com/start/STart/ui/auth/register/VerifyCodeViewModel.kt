@@ -34,11 +34,11 @@ class VerifyCodeViewModel: ViewModel() {
                 _sendCodeResult.postValue(ResultModel(true))
             } else {
                 val body = ApiClient.parseBody(res.errorBody()?.string())
-                when(body.errorCode) {
+                when(body?.errorCode) {
                     ApiError.ST064.name -> _sendCodeResult.postValue(ResultModel(false, ApiError.ST064.message))
                     else -> {
                         // TODO: 예외 처리
-                        _sendCodeResult.postValue(ResultModel(false, body.message))
+                        _sendCodeResult.postValue(ResultModel(false, body?.message))
                     }
                 }
             }

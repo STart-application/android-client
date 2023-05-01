@@ -1,4 +1,4 @@
-package com.start.STart.api.banner
+package com.start.STart.api.event.vote
 
 data class VoteModel(
     val status: Int,
