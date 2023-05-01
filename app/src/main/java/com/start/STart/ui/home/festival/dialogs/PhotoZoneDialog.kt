@@ -34,12 +34,9 @@ class PhotoZoneDialog: DialogFragment() {
         binding.slider.offscreenPageLimit = 1
         binding.slider.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         binding.slider.adapter = photoZoneAdapter
-/*
-        // Slider와 Indicator를 연결
+
         TabLayoutMediator(binding.indicator, binding.slider) { _, _ ->
         }.attach()
-
- */
 
     }
 
