@@ -108,7 +108,6 @@ class SettingActivity : AppCompatActivity() {
                         }
                     }, onCancel = {
                         deleteMemberClickCnt = 0
-                        confirmDialog.dismiss()
                     }
                 )
                 confirmDialog.show(supportFragmentManager, null)
