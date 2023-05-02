@@ -1,6 +1,7 @@
 package com.start.STart.ui.home.setting
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,9 +30,9 @@ class ConfirmDialog: DialogFragment() {
         super.onStart()
 
         binding.textTitle.text = title
-        binding.btnCancel.setOnClickListener(onCancel?: OnClickListener {
+        binding.btnCancel.setOnClickListener {
             dismiss()
-        })
+        }
         binding.btnConfirm.setOnClickListener(onConfirm)
     }
 
@@ -48,12 +49,15 @@ class ConfirmDialog: DialogFragment() {
         binding.composeView.setContent { Cloudy(radius = 10, allowAccumulate = { true }){} }
         binding.dim.setOnTouchListener { view, motionEvent ->
             if(!binding.cardView.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
-                (onCancel?: OnClickListener {
-                    dismiss()
-                }).onClick(binding.btnCancel)
+                dismiss()
             }
             true
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        onCancel?.onClick(binding.btnCancel)
     }
 
     override fun onCreateView(

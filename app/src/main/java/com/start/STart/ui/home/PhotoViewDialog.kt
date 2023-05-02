@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -68,7 +68,7 @@ class PhotoViewDialog : DialogFragment() {
 
     }
 
-    fun show(activity: AppCompatActivity, tag: String? = null, resourceId: Int? = null, url: String? = null) {
+    fun show(activity: FragmentActivity, tag: String? = null, resourceId: Int? = null, url: String? = null) {
         if(!isAdded) {
             this.resourceId = resourceId
             this.imageUrl = url

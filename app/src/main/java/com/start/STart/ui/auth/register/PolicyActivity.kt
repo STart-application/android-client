@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatCheckBox
-import com.start.STart.R
 import com.start.STart.databinding.ActivityPolicyBinding
-import com.start.STart.util.openCustomTab
+import com.start.STart.util.Constants
+import com.start.STart.util.openPdf
 
 class PolicyActivity : AppCompatActivity() {
     private val binding by lazy { ActivityPolicyBinding.inflate(layoutInflater) }
@@ -35,11 +35,13 @@ class PolicyActivity : AppCompatActivity() {
 
     private fun initPolicyCustomTab() {
         binding.textMorePrivacy.setOnClickListener {
-            openCustomTab(resources.getString(R.string.link_privacy_policy))
+            //openCustomTab(resources.getString(R.string.link_privacy_policy))
+            openPdf(Constants.PDF_PRIVACY)
         }
 
         binding.textMoreService.setOnClickListener {
-            openCustomTab(resources.getString(R.string.link_terms_of_service))
+            //openCustomTab(resources.getString(R.string.link_terms_of_service))
+            openPdf(Constants.PDF_SERVICE)
         }
     }
 

@@ -27,6 +27,10 @@ object Constants {
     const val EVENT_CODE_VOTE = 998
     const val EVENT_CODE_ESCAPE = 999
 
+    // PDF : 업데이트 시 이름 변경할 것!
+    const val PDF_PRIVACY = "sc_privacy_v1.pdf"
+    const val PDF_SERVICE = "sc_service_v1.pdf"
+
     // API: *변경 금지*
     const val KEY_API_STUDENT_NO = "studentNo"
     const val KEY_API_PASSWORD = "appPassword"

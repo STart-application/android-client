@@ -9,11 +9,11 @@ import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.start.STart.R
 import com.start.STart.api.ApiClient
-import com.start.STart.api.banner.AnswerRequest
-import com.start.STart.api.banner.AnswerResponse
-import com.start.STart.api.banner.Question
-import com.start.STart.api.banner.QuestionModel
-import com.start.STart.api.banner.UserStatusModel
+import com.start.STart.api.event.vote.AnswerRequest
+import com.start.STart.api.event.vote.AnswerResponse
+import com.start.STart.api.event.vote.Question
+import com.start.STart.api.event.vote.QuestionModel
+import com.start.STart.api.event.vote.UserStatusModel
 import com.start.STart.databinding.ActivityEscapeBinding
 import com.start.STart.ui.home.PhotoViewDialog
 import com.start.STart.util.showErrorToast
@@ -48,10 +48,12 @@ class EscapeActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             val answer = binding.inputAnswer.text.toString()
-            loadAnswer(AnswerRequest(
+            loadAnswer(
+                AnswerRequest(
                 escapedRoomIdx + 1,
                 answer
-            ))
+            )
+            )
         }
 
         binding.questionImage.setOnClickListener {

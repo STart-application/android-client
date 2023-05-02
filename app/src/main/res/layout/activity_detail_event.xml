@@ -27,7 +27,7 @@
             <LinearLayout
                 android:id="@+id/content"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="22dp"
                 android:layout_marginBottom="20dp"
@@ -57,15 +57,15 @@
                     android:layout_marginTop="14dp"
                     android:background="@color/dream_purple" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/cardImage"
-                        android:layout_width="match_parent"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="23dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/cardImage"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             </LinearLayout>
 

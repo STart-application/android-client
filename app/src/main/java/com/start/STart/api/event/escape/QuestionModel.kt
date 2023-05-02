@@ -1,4 +1,4 @@
-package com.start.STart.api.banner
+package com.start.STart.api.event.vote
 
 // 8문제 조회
 data class QuestionModel(

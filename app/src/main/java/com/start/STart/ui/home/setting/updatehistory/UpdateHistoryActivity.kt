@@ -39,6 +39,9 @@ class UpdateHistoryActivity : AppCompatActivity() {
                 UpdateHistory("1.1.1", "2023.05.06", listOf(
                     "UI/UX 개선 및 버그 수정"
                 )),
+                UpdateHistory("1.2.0", "2023.05.06", listOf(
+                    "투표 기능 추가"
+                )),
             )
         }
 

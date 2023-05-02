@@ -62,11 +62,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initInputListeners() {
         binding.inputStudentId.addTextChangedListener {
-            checkPassword()
+            //checkPassword()
             updateButton()
         }
         binding.inputPassword.addTextChangedListener {
-            checkPassword()
+            //checkPassword()
             updateButton()
         }
     }
@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun updateButton() {
-        binding.btnLogin.isEnabled = binding.inputStudentId.text.toString().isNotBlank() && isPasswordValid
+        binding.btnLogin.isEnabled = binding.inputStudentId.text.toString().isNotBlank() //  && isPasswordValid
     }
 
     private fun initViewModelListeners() {
