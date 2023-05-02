@@ -63,6 +63,7 @@
                 android:layout_height="10dp"
                 android:background="@color/dream_purple_background"
                 app:tabGravity="center"
+                app:tabRippleColor="@null"
                 app:tabBackground="@drawable/banner_tab_indicator"
                 app:tabMode="fixed"
                 app:tabIndicator="@null"
