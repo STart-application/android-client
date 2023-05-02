@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.start.STart.R
@@ -68,15 +70,15 @@ class DetailVoteActivity : AppCompatActivity() {
             .enqueue(object : Callback<VoteModel> {
                 override fun onResponse(call: Call<VoteModel>, response: Response<VoteModel>) {
                     if(response.isSuccessful) {
-                        val body = response?.body()?.data?.get(0)
+                        val body = response.body()?.data?.get(0)
 
                         binding.title.text = body?.title
                         binding.text.text = body?.description
 
                         val size = body?.voteOptionList?.size!!
 
-                        max = body?.maxSelect!!
-                        min = body?.minSelect!!
+                        max = body.maxSelect!!
+                        min = body.minSelect!!
                         count = 0
 
                         for(i in 0 until size) {
