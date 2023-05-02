@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
 import com.start.STart.api.event.vote.Vote
 import com.start.STart.databinding.ItemVoteBinding
+import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
 
 class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
-    var list: MutableList<Vote> = mutableListOf()
-
+    var list: List<Vote> = listOf()
         set(value) {
             field = value
         }
@@ -56,7 +56,9 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
                 when(vote.status) {
                     "START" -> {
                         context.startActivity(Intent(context, DetailVoteActivity::class.java).apply {
-                            putExtra("vote", vote.votingId)
+                            putExtra("vote", vote)
+
+
                             if(vote.userSelectedOptionIds.isEmpty())
                                 putExtra("vote1", true)
                             else
@@ -69,6 +71,9 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
                     }
                     "BEFORE" -> {
                         Toasty.info(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        showErrorToast(binding.root.context)
                     }
                 }
 

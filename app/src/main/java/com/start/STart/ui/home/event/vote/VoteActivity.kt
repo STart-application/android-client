@@ -1,12 +1,11 @@
 package com.start.STart.ui.home.event.vote
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.start.STart.api.ApiClient
-import com.start.STart.api.event.vote.Vote
 import com.start.STart.api.event.vote.VoteModel
 import com.start.STart.databinding.ActivityVoteBinding
+import com.start.STart.util.showErrorToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,16 +39,16 @@ class VoteActivity : AppCompatActivity() {
             .enqueue(object : Callback<VoteModel> {
                 override fun onResponse(call: Call<VoteModel>, response: Response<VoteModel>) {
                     if(response.isSuccessful) {
-                        Log.d("tag", response.body()!!.data.toString())
-                        voteAdapter.list = response.body()!!.data as MutableList<Vote>
-                        voteAdapter.notifyDataSetChanged()
-
-
+                        val list = response.body()?.data
+                        list?.let {
+                            voteAdapter.list = it
+                            voteAdapter.notifyDataSetChanged()
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<VoteModel>, t: Throwable) {
-                    Log.d("tag", t.message.toString())
+                    showErrorToast(this@VoteActivity)
                 }
             })
     }

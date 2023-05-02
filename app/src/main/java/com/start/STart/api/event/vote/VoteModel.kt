@@ -1,11 +1,16 @@
 package com.start.STart.api.event.vote
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class VoteModel(
     val status: Int,
     val message: String? = null,
     val data: List<Vote>
 )
 
+
+@Parcelize
 data class Vote(
     val votingId: Int,
     val title: String,
@@ -17,13 +22,14 @@ data class Vote(
     val displayEndDate: String,
     val voteOptionList: List<VoteOption>,
     val userSelectedOptionIds: List<Int>
-)
+): Parcelable
 
+@Parcelize
 data class VoteOption(
     val votingOptionId: Int,
     val optionTitle: String,
     val status: String
-)
+): Parcelable
 
 data class VoteRequest(
     var votingId: Int,
