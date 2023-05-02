@@ -20,6 +20,8 @@ import com.start.STart.databinding.ActivityDetailVoteBinding
 import com.start.STart.databinding.ItemVoteFin2Binding
 import com.start.STart.databinding.ItemVoteFinBinding
 import com.start.STart.databinding.ItemVoteListBinding
+import com.start.STart.util.showErrorToast
+import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,7 +54,7 @@ class DetailVoteActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener {
             if(binding.button.text == "투표완료") {
-                Toast.makeText(applicationContext, "투표 완료", Toast.LENGTH_SHORT).show()
+                Toasty.success(applicationContext, "투표 완료", Toast.LENGTH_SHORT).show()
             } else {
                 postVote(VoteRequest(request?.votingId!!, request?.votingOptionIds!!))
             }
@@ -106,7 +108,7 @@ class DetailVoteActivity : AppCompatActivity() {
             }
 
             if(count > max) {
-                Toast.makeText(applicationContext, "정해진 개수보다 많이 선택했습니다", Toast.LENGTH_SHORT).show()
+                Toasty.info(applicationContext, "정해진 개수보다 많이 선택했습니다", Toast.LENGTH_SHORT).show()
                 checkBox.isChecked = false
                 count--
                 request?.votingOptionIds?.remove(checkBox.id)
@@ -132,14 +134,11 @@ class DetailVoteActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<VoteModel>, response: Response<VoteModel>) {
                     if(response.isSuccessful) {
                         binding.layout.removeAllViews()
-
                         setViewFin()
-
-                    }
-                    else {
+                    } else {
                         val errorBody = ApiClient.parseBody(response.errorBody()?.string())
                         Log.d("tag", "${errorBody?.message}")
-                        Toast.makeText(applicationContext, errorBody?.message, Toast.LENGTH_SHORT).show()
+                        showErrorToast(this@DetailVoteActivity, errorBody?.message)
                     }
                 }
 

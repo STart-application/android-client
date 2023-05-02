@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.start.STart.R
 import com.start.STart.api.event.vote.Vote
 import com.start.STart.databinding.ItemVoteBinding
+import es.dmoral.toasty.Toasty
 
 class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
     var list: MutableList<Vote> = mutableListOf()
@@ -64,10 +65,10 @@ class VoteAdapter : RecyclerView.Adapter<VoteAdapter.VoteViewHolder>() {
                         })
                     }
                     "END" -> {
-                        Toast.makeText(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
+                        Toasty.info(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
                     }
                     "BEFORE" -> {
-                        Toast.makeText(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
+                        Toasty.info(context, "투표 가능한 시간이 아닙니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
