@@ -11,7 +11,7 @@ import com.start.STart.ui.home.festival.info.photozone.PhotoZoneAdapter.PhotoZon
 
 class PhotoZoneAdapter: RecyclerView.Adapter<PhotoZoneViewHolder>() {
 
-    private lateinit var listener: OnItemClickListener
+    lateinit var listener: (String) -> Unit
 
     var list: List<PhotoZone> = listOf()
         set(value) {
@@ -19,11 +19,7 @@ class PhotoZoneAdapter: RecyclerView.Adapter<PhotoZoneViewHolder>() {
             notifyDataSetChanged()
         }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
-
-        inner class PhotoZoneViewHolder(val binding: ItemPhotozoneBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class PhotoZoneViewHolder(val binding: ItemPhotozoneBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(photoZone: PhotoZone) {
 
             binding.location.text = photoZone.photoName
@@ -35,7 +31,9 @@ class PhotoZoneAdapter: RecyclerView.Adapter<PhotoZoneViewHolder>() {
                 .centerCrop()
                 .into(binding.image)
 
-            binding.root.setOnClickListener { listener.onClick() }
+            binding.image.setOnClickListener {
+                listener.invoke(photoZone.photoImageUrl)
+            }
         }
     }
 
@@ -48,10 +46,6 @@ class PhotoZoneAdapter: RecyclerView.Adapter<PhotoZoneViewHolder>() {
 
     override fun onBindViewHolder(holder: PhotoZoneViewHolder, position: Int) {
         holder.bind(list[position])
-    }
-
-    interface OnItemClickListener {
-        fun onClick()
     }
 }
 
