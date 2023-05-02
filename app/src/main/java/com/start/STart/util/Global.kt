@@ -194,6 +194,7 @@ fun Context.openPdf(fileName: String) {
 
     val intent = Intent(Intent.ACTION_VIEW).also {
         it.setDataAndType(uri, "application/pdf")
+        it.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
     }
 
     try {
@@ -209,7 +210,7 @@ fun assetToUri(context: Context, fileName: String): Uri? {
     try {
         if (!file.exists()) { // 파일이 이미 존재할 경우 복사하지 않음
             val outputStream = FileOutputStream(file)
-            context.assets.open(fileName).use { input ->
+            context.resources.assets.open(fileName).use { input ->
                 outputStream.use { output ->
                     input.copyTo(output)
                 }
@@ -218,6 +219,7 @@ fun assetToUri(context: Context, fileName: String): Uri? {
         return FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.provider", file)
     } catch (e: IOException) {
         e.printStackTrace()
+        file.delete()
         showErrorToast(context)
     }
     return null
