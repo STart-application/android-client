@@ -7,26 +7,21 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.core.view.children
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import com.start.STart.BuildConfig
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
 import com.start.STart.ui.home.setting.reset.ResetPasswordWithLoginActivity
 import com.start.STart.ui.home.setting.suggest.SuggestActivity
 import com.start.STart.ui.home.setting.updatehistory.UpdateHistoryActivity
+import com.start.STart.util.Constants
 import com.start.STart.util.PreferenceManager
 import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
+import com.start.STart.util.openPdf
 import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 
 
 class SettingActivity : AppCompatActivity() {
@@ -76,11 +71,11 @@ class SettingActivity : AppCompatActivity() {
         binding.textEtcSuggest.setOnClickListener { startSuggestActivity(SuggestActivity.TYPE_ETC)}
 
         binding.textPrivacyPolicy.setOnClickListener {
-            openPdf("sc_privacy.pdf")
+            openPdf(Constants.PDF_PRIVACY)
         }
 
         binding.textTermsOfService.setOnClickListener {
-            openPdf("sc_service.pdf")
+            openPdf(Constants.PDF_SERVICE)
         }
 
         //binding.textPrivacyPolicy.setOnClickListener { openCustomTab(resources.getString(R.string.link_privacy_policy)) }
@@ -185,53 +180,4 @@ class SettingActivity : AppCompatActivity() {
             putExtra(SuggestActivity.KEY_TYPE_SUGGEST, type)
         })
     }
-
-    private fun openPdf(fileName: String) {
-        copyFileFromAssets(fileName)
-        val file = File("$filesDir/$fileName")
-
-        var uri =FileProvider.getUriForFile(this, "${BuildConfig.APPLICATION_ID}.provider", file)
-
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(uri, "application/pdf")
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        try {
-            startActivity(intent)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun copyFileFromAssets(fileName: String) {
-        val assetManager = this.assets
-
-        val cacheFile = File("$filesDir/$fileName")
-        var in1: InputStream? = null
-        var out: OutputStream? = null
-        try {
-            if (cacheFile.exists()) {
-                return
-            } else {
-                in1 = assetManager.open(fileName)
-                out = FileOutputStream(cacheFile)
-                copyFile(in1, out)
-                in1.close()
-                out.flush()
-                out.close()
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun copyFile(in1: InputStream, out: OutputStream) {
-        val buffer = ByteArray(1024)
-        var read: Int
-        while (in1.read(buffer).also { read = it } != -1) {
-            out.write(buffer, 0, read)
-        }
-    }
-
 }

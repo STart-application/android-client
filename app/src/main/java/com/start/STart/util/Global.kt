@@ -15,8 +15,10 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import com.google.gson.Gson
+import com.start.STart.BuildConfig
 import com.start.STart.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -24,6 +26,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 
 
 val gson = Gson()
@@ -185,3 +188,37 @@ fun TextView.setFailText(text: String) {
     this.setTextColor(resources.getColor(R.color.dream_red))
 }
 
+
+fun Context.openPdf(fileName: String) {
+    val uri = assetToUri(this, fileName) // Assets 폴더에 있는 PDF 파일을 내부 저장소로 복사
+
+    val intent = Intent(Intent.ACTION_VIEW).also {
+        it.setDataAndType(uri, "application/pdf")
+    }
+
+    try {
+        startActivity(intent)
+    } catch (e: Exception) { // 오류 상세 파악
+        e.printStackTrace()
+        showErrorToast(this)
+    }
+}
+
+fun assetToUri(context: Context, fileName: String): Uri? {
+    val file = File("${context.filesDir}/$fileName")
+    try {
+        if (!file.exists()) { // 파일이 이미 존재할 경우 복사하지 않음
+            val outputStream = FileOutputStream(file)
+            context.assets.open(fileName).use { input ->
+                outputStream.use { output ->
+                    input.copyTo(output)
+                }
+            }
+        }
+        return FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.provider", file)
+    } catch (e: IOException) {
+        e.printStackTrace()
+        showErrorToast(context)
+    }
+    return null
+}
