@@ -6,10 +6,13 @@ import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.core.content.FileProvider
-import com.start.STart.R
+import com.start.STart.BuildConfig
 import com.start.STart.databinding.ActivityPolicyBinding
-import com.start.STart.util.openCustomTab
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 
 class PolicyActivity : AppCompatActivity() {
     private val binding by lazy { ActivityPolicyBinding.inflate(layoutInflater) }
@@ -83,7 +86,7 @@ class PolicyActivity : AppCompatActivity() {
         copyFileFromAssets(fileName)
         val file = File("$filesDir/$fileName")
 
-        var uri = FileProvider.getUriForFile(this, getString(R.string.file_provider_authority), file)
+        var uri = FileProvider.getUriForFile(this, "${BuildConfig.APPLICATION_ID}.provider", file)
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(uri, "application/pdf")

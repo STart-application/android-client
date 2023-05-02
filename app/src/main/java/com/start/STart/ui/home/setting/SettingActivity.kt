@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.children
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import com.start.STart.R
+import com.start.STart.BuildConfig
 import com.start.STart.databinding.ActivitySettingBinding
 import com.start.STart.ui.auth.login.LoginOrSkipActivity
 import com.start.STart.ui.home.setting.devinfo.DevInfoActivity
@@ -22,7 +22,11 @@ import com.start.STart.util.getCollegeByDepartment
 import com.start.STart.util.openCustomTab
 import com.start.STart.util.showErrorToast
 import es.dmoral.toasty.Toasty
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 
 
 class SettingActivity : AppCompatActivity() {
@@ -186,7 +190,7 @@ class SettingActivity : AppCompatActivity() {
         copyFileFromAssets(fileName)
         val file = File("$filesDir/$fileName")
 
-        var uri =FileProvider.getUriForFile(this, getString(R.string.file_provider_authority), file)
+        var uri =FileProvider.getUriForFile(this, "${BuildConfig.APPLICATION_ID}.provider", file)
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(uri, "application/pdf")

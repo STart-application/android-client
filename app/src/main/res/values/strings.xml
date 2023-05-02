@@ -67,7 +67,6 @@
     <string name="youtube">유튜브</string>
     <string name="kakao_talk">카카오톡</string>
     <string name="home_page">홈페이지</string>
-    <string name="file_provider_authority" translatable="false">myfileprovider</string>
 
     <!-- 상시사업 -->
     <string name="rent_description">1. 대여 물품이 파손되었을 시, 수리 비용의 80%를 대여인(또는 대여 기구) 측에서 비용하고 나머지 20%는 총학생회 자치회비에서 부담한다. \n2. 파손에 대해 수리가 불가하다고 판단될 시, 대여인(또는 대여 기구)에서 같은 제품 또는 그에 걸맞는 비용을 부담하여야 한다.</string>
