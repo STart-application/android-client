@@ -20,7 +20,7 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
     inner class EventViewHolder(var binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event){
             binding.textEventName.text = event.title
-            binding.textDate.text = event.startTime.subSequence(5, 7).toString() + "/" + event.startTime.subSequence(8,10) + " ~ " + event.startTime.subSequence(5, 7).toString() + "/" + event.startTime.subSequence(8,10)
+            binding.textDate.text = event.startTime.subSequence(5, 7).toString() + "/" + event.startTime.subSequence(8,10) + " ~ " + event.endTime.subSequence(5, 7).toString() + "/" + event.endTime.subSequence(8,10)
 
             Glide.with(binding.eventImg.context)
                 .load(event.imageUrl)
