@@ -1,7 +1,7 @@
 package com.start.STart.ui.home.pay
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.start.STart.R
@@ -49,7 +49,7 @@ class PaymentActivity : AppCompatActivity() {
         binding.department.text = memberData.department
         binding.college.text = getCollegeByDepartment(memberData.department)
 
-        binding.payment.text = if(memberData.memberShip) "자치회비 납부자" else "자취회비 미납부자"
+        binding.payment.text = if(memberData.memberShip) "자치회비 납부자" else "자치회비 미납부자"
         binding.payment.setTextColor(ContextCompat.getColor(this@PaymentActivity,
             if(memberData.memberShip) R.color.dream_purple else R.color.dream_yellow)
         )
