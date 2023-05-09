@@ -5,6 +5,7 @@ import android.content.IntentSender.SendIntentException
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -37,42 +38,12 @@ class SplashActivity : AppCompatActivity() {
     private val appUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val updateCode = 99
 
+    private lateinit var splashScreen: SplashScreen
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val splashScreen = installSplashScreen()
+        splashScreen = installSplashScreen()
         setContentView(binding.root)
-
-        checkAppUpdate()
-        lifecycleScope.launch(Dispatchers.IO) {
-
-            val loginTask = async { tryLogin() }
-            val loadMemberTask = async(start = CoroutineStart.LAZY) { loadMember() }
-            val withOutLoginTask = async { checkAgreeWithoutLogin() }
-            val animationTask = launch { checkAnimation() }
-
-            var activity: Class<*>? = null
-
-            if (loginTask.await()) {
-                loadMemberTask.start()
-                if(loadMemberTask.await().isSuccessful) {
-                    PreferenceManager.saveToPreferences(Constants.PREF_KEY_MEMBER_DATA, loadMemberTask.await().data as MemberData)
-                    activity = HomeActivity::class.java
-                } else {
-                    PreferenceManager.remove(Constants.PREF_KEY_MEMBER_DATA)
-                    activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
-                }
-            } else {
-                PreferenceManager.remove(Constants.PREF_KEY_MEMBER_DATA)
-                activity = if(withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
-            }
-
-
-            animationTask.join()
-            withContext(Dispatchers.Main) {
-                startActivity(Intent(applicationContext, activity))
-                finish()
-            }
-        }
 
         splashScreen.setOnExitAnimationListener { vp ->
             binding.lottieView.enableMergePathsForKitKatAndAbove(true)
@@ -84,16 +55,76 @@ class SplashActivity : AppCompatActivity() {
                 ChronoUnit.MILLIS
             )
 
+
             binding.lottieView.postDelayed({
                 vp.view.alpha = 0f
-                vp.iconView.alpha = 0f
+                try {
+                    vp.iconView.alpha = 0f
+                } catch (e: NullPointerException) {
+                    e.printStackTrace()
+                }
                 binding.lottieView.playAnimation()
             }, delay)
         }
+
+
+        lifecycleScope.launch {
+            val updateEnabled = withContext(Dispatchers.IO) { checkAppUpdate() }
+            if(!updateEnabled) {
+                startMainTask()
+            }
+        }
     }
 
+    private fun startMainTask() = lifecycleScope.launch(Dispatchers.IO) {
+        val loginTask = async { tryLogin() }
+        val loadMemberTask = async(start = CoroutineStart.LAZY) { loadMember() }
+        val withOutLoginTask = async { checkAgreeWithoutLogin() }
+        val animationTask = launch { checkAnimation() }
+
+        var activity: Class<*>? = null
+
+        if (loginTask.await()) {
+            Log.d(null, "startMainTask: 로그인 성공")
+            loadMemberTask.start()
+            if (loadMemberTask.await().isSuccessful) {
+                PreferenceManager.saveToPreferences(
+                    Constants.PREF_KEY_MEMBER_DATA,
+                    loadMemberTask.await().data as MemberData
+                )
+                activity = HomeActivity::class.java
+            } else {
+                PreferenceManager.remove(Constants.PREF_KEY_MEMBER_DATA)
+                activity =
+                    if (withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
+            }
+        } else {
+            Log.d(null, "startMainTask: 로그인 실패")
+            PreferenceManager.remove(Constants.PREF_KEY_MEMBER_DATA)
+            activity =
+                if (withOutLoginTask.await()) HomeActivity::class.java else LoginOrSkipActivity::class.java
+        }
+
+        Log.d(null, "startMainTask: 모든 작업 끝")
+        animationTask.join()
+        Log.d(null, "startMainTask: 애니메이션 작업 끝")
+        withContext(Dispatchers.Main) {
+            Log.d(null, "startMainTask: 액티비티 시작")
+            startActivity(Intent(applicationContext, activity))
+            finish()
+        }
+    }
+
+
+
+
     private suspend fun checkAnimation() = suspendCoroutine<Unit> { continuation ->
+        if(!binding.lottieView.isAnimating) {
+            continuation.resume(Unit)
+            return@suspendCoroutine
+        }
         binding.lottieView.addAnimatorUpdateListener { animation ->
+            Log.d(null, "checkAnimation: ${animation.animatedValue}")
             if (animation.animatedValue as Float >= 0.6f) {
                 binding.lottieView.removeAllUpdateListeners()
                 continuation.resume(Unit)
@@ -101,32 +132,33 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkAppUpdate() {
-        appUpdateManager.appUpdateInfo.addOnCompleteListener {
-            if(it.isSuccessful) {
-                if(it.result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && it.result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(it.result, AppUpdateType.IMMEDIATE, this, updateCode)
-                        Log.d(null, "checkAppUpdate: 업데이트 시작")
-                    } catch (e: SendIntentException) {
-                        e.printStackTrace()
-                    }
-                } else {
-                    Log.d(null, "checkAppUpdate: 업데이트 없음")
+    private suspend fun checkAppUpdate() = suspendCoroutine { continuation ->
+        appUpdateManager.appUpdateInfo.addOnSuccessListener {
+            if(it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && it.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(it, AppUpdateType.IMMEDIATE, this, updateCode)
+                    continuation.resume(true)
+                } catch (e: SendIntentException) {
+                    e.printStackTrace()
+                    continuation.resume(false)
                 }
             } else {
-                Log.d(null, "checkAppUpdate: ${it.exception}")
+                Log.d(null, "checkAppUpdate: 업데이트 없음")
+                continuation.resume(false)
             }
+        }.addOnFailureListener {
+            it.printStackTrace()
+            continuation.resume(false)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == updateCode && resultCode != RESULT_OK) {
-            Log.d(null, "onActivityResult: 성공")
-        } else {
-            Log.d(null, "onActivityResult: 실패")
+        if(requestCode == updateCode) {
+            Log.d(null, "onActivityResult: $updateCode")
+            startMainTask()
         }
+
     }
 
     private suspend fun tryLogin(): Boolean {

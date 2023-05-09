@@ -33,33 +33,34 @@ class StudentCardUploadActivity : AppCompatActivity() {
     private val selectPhotoDialog by lazy { SelectPhotoDialog() }
 
     private lateinit var registerData: RegisterData
-    private lateinit var cacheUri: Uri
-    private lateinit var studentCardUri: Uri
+    private var cacheUri: Uri? = null
+    private var studentCardUri: Uri? = null
 
     val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
+            studentCardUri = it
             Glide.with(this)
                 .load(it)
-                .centerCrop()
+                .fitCenter()
                 .into(binding.inputStudentCard)
-            studentCardUri = it
             binding.btnNext.isEnabled = true
         }
     }
 
     private val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccessful ->
-        if(isSuccessful) {
+        if (isSuccessful) {
             studentCardUri = cacheUri
-            studentCardUri.let {
-                Glide.with(this)
-                    .load(it)
-                    .centerCrop()
-                    .into(binding.inputStudentCard)
-                studentCardUri = it
-                binding.btnNext.isEnabled = true
+            if (studentCardUri != null) {
+                studentCardUri.let {
+                    Glide.with(this)
+                        .load(it)
+                        .fitCenter()
+                        .into(binding.inputStudentCard)
+                    binding.btnNext.isEnabled = true
+                }
+            } else {
+                showErrorToast(this)
             }
-        } else {
-
         }
     }
 
