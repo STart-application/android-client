@@ -10,13 +10,15 @@ plugins {
 android {
     namespace 'com.start.STart'
     compileSdk 33
+    //compileSdkPreview "UpsideDownCake"
 
     defaultConfig {
         applicationId "com.start.STart"
         minSdk 21
         targetSdk 33
-        versionCode 14
-        versionName "1.2.1"
+        //targetSdkPreview "UpsideDownCake"
+        versionCode 15
+        versionName "1.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -110,7 +112,7 @@ dependencies {
     implementation 'com.github.vipulasri:timelineview:1.1.5'
 
     implementation 'com.google.android.play:core-ktx:1.8.1'
-    implementation "androidx.core:core-splashscreen:1.1.0-alpha01"
+    implementation "androidx.core:core-splashscreen:1.0.0"
 
     implementation "com.airbnb.android:lottie:6.0.0"
 }

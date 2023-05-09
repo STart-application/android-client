@@ -42,7 +42,7 @@ class UpdateHistoryActivity : AppCompatActivity() {
                 UpdateHistory("1.2.0", "2023.05.06", listOf(
                     "투표 기능 추가"
                 )),
-                UpdateHistory("1.2.1", "2023.05.07", listOf(
+                UpdateHistory("1.2.1-1.2.2", "2023.05.10", listOf(
                     "버그 수정"
                 )),
             )
