@@ -6,7 +6,9 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.start.STart.util.PreferenceManager
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MyApp: Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")

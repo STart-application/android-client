@@ -1,22 +1,23 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.android.gms.oss-licenses-plugin'
+    id 'com.google.devtools.ksp'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
     namespace 'com.start.STart'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.start.STart"
         minSdk 21
-        targetSdk 33
-        versionCode 13
-        versionName "1.2.0"
+        targetSdk 34
+        versionCode 15
+        versionName "1.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -78,8 +79,11 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+
+    // Room Database
     implementation 'androidx.room:room-ktx:2.5.0'
-    kapt 'androidx.room:room-compiler:2.5.0'
+    ksp 'androidx.room:room-compiler:2.5.0'
+
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha05'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
@@ -113,4 +117,7 @@ dependencies {
     implementation "androidx.core:core-splashscreen:1.0.0"
 
     implementation "com.airbnb.android:lottie:6.0.0"
+
+    implementation 'com.google.dagger:hilt-android:2.48.1'
+    ksp 'com.google.dagger:hilt-android-compiler:2.48.1'
 }
