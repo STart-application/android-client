@@ -26,6 +26,7 @@ import com.start.STart.databinding.ActivityHomeBinding
 import com.start.STart.ui.home.event.EventActivity
 import com.start.STart.ui.home.festival.FestivalActivity
 import com.start.STart.ui.home.info.InfoActivity
+import com.start.STart.ui.home.partnership.PartnershipActivity
 import com.start.STart.ui.home.pay.PaymentActivity
 import com.start.STart.ui.home.rent.home.RentHomeActivity
 import com.start.STart.ui.home.setting.SettingActivity
@@ -126,7 +127,7 @@ class HomeActivity : AppCompatActivity() {
                         startActivity(Intent(applicationContext, InfoActivity::class.java))
                     }
                     MenuItem(title = "제휴사업", drawable = R.drawable.ic_home_menu_2) {
-                        Toasty.info(applicationContext, "준비중입니다!").show()
+                        startActivity(Intent(applicationContext, PartnershipActivity::class.java))
                     }
                     MenuItem(title = "자치회비\n납부 확인", drawable = R.drawable.ic_home_menu_3, topEndRadius = 20.dp,) {
                         lifecycleScope.launch(Dispatchers.IO) {

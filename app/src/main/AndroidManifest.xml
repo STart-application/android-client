@@ -23,6 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dream"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.home.partnership.PartnershipListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.partnership.PartnershipActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
