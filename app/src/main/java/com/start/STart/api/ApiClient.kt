@@ -7,6 +7,7 @@ import com.start.STart.api.banner.BannerService
 import com.start.STart.api.event.EventService
 import com.start.STart.api.festival.FestivalService
 import com.start.STart.api.member.MemberService
+import com.start.STart.api.partner.PartnerService
 import com.start.STart.api.rent.RentService
 import com.start.STart.api.stamp.StampService
 import com.start.STart.api.suggestion.SuggestionService
@@ -30,9 +31,8 @@ object ApiClient {
         .build()
 
      private val retrofit: Retrofit by lazy {
-        Log.d("Retrofit", "${BuildConfig.DEV_SERVER_URL}")
         Retrofit.Builder()
-            .baseUrl(BuildConfig.DEV_SERVER_URL) // 주소 끝에 반드시 슬래시 / 로 끝나야 함
+            .baseUrl(BuildConfig.API_URL) // 주소 끝에 반드시 슬래시 / 로 끝나야 함
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
@@ -46,6 +46,7 @@ object ApiClient {
     val festivalService: FestivalService = retrofit.create(FestivalService::class.java)
     val eventService: EventService = retrofit.create(EventService::class.java)
     val stampService: StampService = retrofit.create(StampService::class.java)
+    val partnerService: PartnerService = retrofit.create(PartnerService::class.java)
 
 
     fun enableToken() {

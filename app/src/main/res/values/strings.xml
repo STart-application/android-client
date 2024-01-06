@@ -89,5 +89,7 @@
     <string name="frag8">학생인권위원회\n교내에서 일어는 다양한 인권 관련 사건에 대해 학생들의 의견을 대표하고, 학생들의 인권 의식 향상을 위해 노력하는 단체이다. 학생인권위원회의 활동에 필요한 제반 사항은 학생인권위원회의 자치회칙에 따른다.\n\n총졸업준비위원회\n총출업준비위원회는 졸업과 사회진출에 관한 업무를 관할하는 상설특별기구이며 회원이 될 자격은 본회의 각과 졸업준비위원장과 졸업이 가능한 본회의 회원으로 구성한다.</string>
 
     <string name="url_polar_bear">"https://cdn.pixabay.com/photo/2023/03/06/13/57/polar-bear-7833514_1280.jpg"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

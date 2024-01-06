@@ -49,7 +49,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.2'
+        kotlinCompilerExtensionVersion '1.5.3'
     }
     packagingOptions {
         resources {
@@ -81,8 +81,8 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
     // Room Database
-    implementation 'androidx.room:room-ktx:2.5.0'
-    ksp 'androidx.room:room-compiler:2.5.0'
+    implementation 'androidx.room:room-ktx:2.6.0'
+    ksp 'androidx.room:room-compiler:2.6.0'
 
     implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha05'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
