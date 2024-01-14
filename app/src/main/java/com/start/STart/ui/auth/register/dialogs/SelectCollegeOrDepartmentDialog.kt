@@ -45,8 +45,6 @@ class SelectCollegeOrDepartmentDialog: DialogFragment() {
         }
 
         binding.dim.setOnTouchListener { view, motionEvent ->
-            Log.d(null, "onViewCreated: ${motionEvent.rawX} ${motionEvent.rawY}")
-            Log.d(null, "onViewCreated: ${binding.cardView.height}")
             if(!binding.cardView.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
                 dismiss()
             }

@@ -24,7 +24,9 @@
         android:theme="@style/Theme.Dream"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.home.partnership.PartnerMapActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.home.partnership.PartnershipActivity"
             android:exported="false" />
